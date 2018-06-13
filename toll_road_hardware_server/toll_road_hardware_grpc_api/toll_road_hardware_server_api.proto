@@ -1,0 +1,92 @@
+syntax = "proto3";
+package toll_road_hardware_grpc_api;
+
+//protoc -I fenix_inception_internal_grpc_server_service_protocol --go_out=plugins=grpc:fenix_inception_internal_grpc_server_service_protocol fenix_inception_internal_grpc_server_service_protocol/fenix_inception_internal_grpc_server_service_protocol.proto
+//protoc -I toll_road_hardware_grpc_api --go_out=plugins=grpc:toll_road_hardware_grpc_api toll_road_hardware_grpc_api/toll_road_hardware_server_api.proto
+
+// Parameter used for Empty inputs
+message EmptyParameter {
+}
+
+// Ack/Nack- Response message with comment
+message AckNackResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+}
+
+// The Client register service definition.
+// ***********************
+service TollHardware {
+
+    //Check that the gate servo is working
+    rpc CheckTollGateServo (Enviroment) returns (AckNackResponse) {
+    }
+
+    //Check that Distance sensor is working
+    rpc CheckTollDistanceSensor (Enviroment) returns (AckNackResponse) {
+    }
+
+    //Check that E-ink display is working
+    rpc CheckTollEInkDisplay (Enviroment) returns (AckNackResponse) {
+    }
+
+    //Open or Close the the Toll Gate
+    rpc OpenCloseTollGateServo (TollGateServoMessage) returns (AckNackResponse) {
+    }
+
+    //Use the Distance Sensor
+    rpc UseDistanceSensor (DistanceSensorMessage) returns (AckNackResponse) {
+    }
+
+    //Send Message to E-Ink display
+    rpc UseEInkDisplay (EInkDisplayMessage) returns (AckNackResponse) {
+    }
+
+}
+
+
+enum TestOrProdEnviroment {
+    Test = 0;
+    Production = 1;
+}
+
+enum TollGateCommand {
+    OPEN = 0;
+    CLOSE = 1;
+}
+
+message Enviroment {
+    TestOrProdEnviroment TestOrProduction = 1;
+}
+
+
+message TollGateServoMessage {
+    TestOrProdEnviroment tollGateServoEnviroment = 1;
+    TollGateCommand tollGateCommand = 2;
+}
+
+
+enum DistanceSensorCommand {
+    OBJECT_FOUND = 0;
+    OBJECT_NOT_FOUND = 1;
+    SIGNAL_WHEN_OBJECT_ENTERS = 2;
+    SIGNAL_WHEN_OBJECT_LEAVES = 3;
+}
+
+message DistanceSensorMessage {
+    TestOrProdEnviroment distanceSensorEnviroment = 1;
+    DistanceSensorCommand distanceSensorCommand = 2;
+}
+
+enum EInkMessageType {
+    MESSAGE_TEXT = 0;
+    MESSSAGE_QR = 1;
+    MESSAGE_PICTURE = 2;
+}
+message EInkDisplayMessage {
+    TestOrProdEnviroment eInkDisplayEnviroment = 1;
+    EInkMessageType messageType = 2;
+    string message = 3;
+    string picture = 4;
+}
+

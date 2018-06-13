@@ -1,0 +1,45 @@
+syntax = "proto3";
+package toll_road_grpc_api;
+
+//protoc -I toll_road_grpc_api --go_out=plugins=grpc:toll_road_grpc_api toll_road_grpc_api/toll_road_api.proto
+
+// Parameter used for Empty inputs
+message EmptyParameter {
+}
+
+// Ack/Nack- Response message with comment
+message AckNackResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+}
+
+message PaymentRequestMessage {
+    bool acknack = 1; // True=Ack, False=Nack
+    string PaymentRequest = 2;
+    string returnMessage = 3;
+}
+
+// The Client register service definition.
+// ***********************
+service TollRoadServer {
+
+    //Taxi ask for PaymentRequest
+    rpc GetPaymentRequest (Enviroment) returns (PaymentRequestMessage) {
+    }
+
+
+}
+
+
+enum TestOrProdEnviroment {
+    Test = 0;
+    Production = 1;
+}
+
+
+message Enviroment {
+    TestOrProdEnviroment TestOrProduction = 1;
+}
+
+
+
