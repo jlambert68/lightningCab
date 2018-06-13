@@ -4,17 +4,19 @@ import (
 	"context"
 	"fmt"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/lightningnetwork/lnd/lnrpc"
-	"github.com/lightningnetwork/lnd/macaroons"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"gopkg.in/macaroon.v2"
+	//"gopkg.in/macaroon.v2"
+	"gopkg.in/macaroon.v1"
 	"io/ioutil"
 	"os/user"
 	"path"
+	"github.com/lightningnetwork/lnd/macaroons"
+	"github.com/lightningnetwork/lnd/lnrpc"
 )
 
-func main() {
+func lightningServer() {
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Cannot get current user:", err)

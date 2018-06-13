@@ -221,15 +221,9 @@
   packages = ["."]
   revision = "ab101776739ee61baab9bc50e4b33b5aeb3ac843"
 
-[[projects]]
-  name = "gopkg.in/macaroon.v2"
-  packages = ["."]
-  revision = "bed2a428da6e56d950bed5b41fcbae3141e5b0d0"
-  version = "v2.0.0"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "86bb2e75327149f17dbcf1a4ad8e115686059596fd618da7b1e151b8c92e059a"
+  inputs-digest = "5c8491f997302da2bf731cfc29d2915f812d9abcf31667ac07a54746bae258f5"
   solver-name = "gps-cdcl"
   solver-version = 1
