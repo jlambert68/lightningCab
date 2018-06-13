@@ -20,6 +20,8 @@ import (
 
 	"github.com/btcsuite/btcd/rpcclient"
 	"strconv"
+
+	"jlambert/lightningCab/toll_road_server/lightningServer"
 )
 
 type Toll struct {
@@ -945,11 +947,12 @@ func main() {
 	useEnv = tollGateHW_api.TestOrProdEnviroment_Test
 	//testTollRoadCycle()
 
+	//Initiate Lightning
+	lightningServer.LndServer()
+
 	// Set up the Private Toll Road State Machine
 	initiateTollRoad()
 
-	//Initiate Lightning
-	//LndServer()
 
 	// Set system in wait mode for externa input, Taxi and payment ...
 	c := make(chan os.Signal, 2)
