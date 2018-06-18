@@ -6,7 +6,7 @@ import (
 	"github.com/markdaws/simple-state-machine"
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
-	mylog "log"
+	//log "log"
 	tollGateHW_api "jlambert/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
 	tollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
 
@@ -21,6 +21,8 @@ import (
 	"github.com/btcsuite/btcd/rpcclient"
 	"strconv"
 
+	//"github.com/op/go-logging"
+	"log"
 	"jlambert/lightningCab/toll_road_server/lightningServer"
 )
 
@@ -78,7 +80,7 @@ func initiateTollRoad() {
 
 	err := validateBitcoind()
 	if err != nil {
-		mylog.Println("Couldn't check Bitcoind, exiting system!")
+		log.Println("Couldn't check Bitcoind, exiting system!")
 		os.Exit(0)
 	}
 	toll.TollChecksLightning()
@@ -130,129 +132,129 @@ func NewTollRoad(title string) *Toll {
 	cfg := tollRoadStateMachine.Configure(StateTollRoadInit)
 	cfg.Permit(TriggerTollChecksBitcoin, StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** *** Entering 'StateTollRoadInit' ") })
+	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateTollRoadInit' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateTollRoadInit' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateTollRoadInit' ")
+		log.Println("")
 	})
 
 	// Configure States: StateBitcoinIsCheckedAndOK
 	cfg = tollRoadStateMachine.Configure(StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerTollChecksLightning, StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
+		log.Println("")
 	})
 
 	// Configure States: StateLigtningIsCheckedAndOK
 	cfg = tollRoadStateMachine.Configure(StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerTollChecksHardware, StateHardwareIsCheckedAndOK)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateLigtningIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
+		log.Println("")
 	})
 
 	// Configure States: StateHardwareIsCheckedAndOK
 	cfg = tollRoadStateMachine.Configure(StateHardwareIsCheckedAndOK)
 	cfg.Permit(TriggerSetHardwareInFirstTimeReadyMode, StateHardwareIsInFirsteTimeReadyMode)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateHardwareIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateHardwareIsCheckedAndOK' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateHardwareIsCheckedAndOK' ")
+		log.Println("")
 	})
 
 	// Configure States: StateHardwareIsInFirsteTimeReadyMode
 	cfg = tollRoadStateMachine.Configure(StateHardwareIsInFirsteTimeReadyMode)
 	cfg.Permit(TriggerTollIsReadyAndEntersWaitState, StateTollIsWaitingForTaxi)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
+		log.Println("")
 	})
 
 	// Configure States: StateTollIsWaitingForTaxi
 	cfg = tollRoadStateMachine.Configure(StateTollIsWaitingForTaxi)
 	cfg.Permit(TriggerTaxiRequestsPaymentRequest, StatePaymentRequestIsCreatedAndSent)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateTollIsWaitingForTaxi' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateTollIsWaitingForTaxi' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateTollIsWaitingForTaxi' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateTollIsWaitingForTaxi' ")
+		log.Println("")
 	})
 
 	/*	// Configure States: StateTaxiHasConnected
 		cfg = tollRoadStateMachine.Configure(StateTaxiHasConnected)
 		cfg.Permit(TriggerTaxiRequestsPaymentRequest, StatePaymentRequestIsCreatedAndSent)
 		cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-		cfg.OnEnter(func() { mylog.Println("*** Entering 'StateTaxiHasConnected' ") })
+		cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiHasConnected' ") })
 		cfg.OnExit(func() {
-			mylog.Println("*** Exiting 'StateTaxiHasConnected' ")
-			mylog.Println("")
+			log.Println("*** Exiting 'StateTaxiHasConnected' ")
+			log.Println("")
 		})*/
 
 	// Configure States: StatePaymentRequestIsCreatedAndSent
 	cfg = tollRoadStateMachine.Configure(StatePaymentRequestIsCreatedAndSent)
 	cfg.Permit(TriggerTaxiPaysPaymentRequest, StatePaymentRequestIsPaid)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StatePaymentRequestIsCreatedAndSent' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StatePaymentRequestIsCreatedAndSent' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StatePaymentRequestIsCreatedAndSent' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StatePaymentRequestIsCreatedAndSent' ")
+		log.Println("")
 	})
 
 	/*	// Configure States: StateWaitingForPayment
 		cfg = tollRoadStateMachine.Configure(StateWaitingForPayment)
 		cfg.Permit(TriggerTaxiPaysPaymentRequest, StatePaymentRequestIsPaid)
 		cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-		cfg.OnEnter(func() { mylog.Println("*** Entering 'StateWaitingForPayment' ") })
+		cfg.OnEnter(func() { log.Println("*** Entering 'StateWaitingForPayment' ") })
 		cfg.OnExit(func() {
-			mylog.Println("*** Exiting 'StateWaitingForPayment' ")
-			mylog.Println("")
+			log.Println("*** Exiting 'StateWaitingForPayment' ")
+			log.Println("")
 		})*/
 
 	// Configure States: StatePaymentRequestIsPaid
 	cfg = tollRoadStateMachine.Configure(StatePaymentRequestIsPaid)
 	cfg.Permit(TriggerTollValidatesThatPaymentIsOK, StateThanksAndOpenTollDone)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StatePaymentRequestIsPaid' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StatePaymentRequestIsPaid' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StatePaymentRequestIsPaid' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StatePaymentRequestIsPaid' ")
+		log.Println("")
 	})
 
 	// Configure States: StateThanksAndOpenTollDone
 	cfg = tollRoadStateMachine.Configure(StateThanksAndOpenTollDone)
 	cfg.Permit(TriggerTaxiLeavesToll, StateClosedTollAndResetedHardware)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateThanksAndOpenTollDone' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateThanksAndOpenTollDone' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateThanksAndOpenTollDone' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateThanksAndOpenTollDone' ")
+		log.Println("")
 	})
 
 	// Configure States: StateClosedTollAndResetedHardware
 	cfg = tollRoadStateMachine.Configure(StateClosedTollAndResetedHardware)
 	cfg.Permit(TriggerTollIsReadyAndEntersWaitState, StateTollIsWaitingForTaxi)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateClosedTollAndResetedHardware' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateClosedTollAndResetedHardware' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateClosedTollAndResetedHardware' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateClosedTollAndResetedHardware' ")
+		log.Println("")
 	})
 
 	// Configure States: StateTollIsInErrorMode
 	cfg = tollRoadStateMachine.Configure(StateTollIsInErrorMode)
 
-	cfg.OnEnter(func() { mylog.Println("*** Entering 'StateTollIsInErrorMode' ") })
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateTollIsInErrorMode' ") })
 	cfg.OnExit(func() {
-		mylog.Println("*** Exiting 'StateTollIsInErrorMode' ")
-		mylog.Println("")
+		log.Println("*** Exiting 'StateTollIsInErrorMode' ")
+		log.Println("")
 	})
 
 	toll.TollRoadStateMachine = tollRoadStateMachine
@@ -261,27 +263,27 @@ func NewTollRoad(title string) *Toll {
 }
 
 // ******************************************************************************
-// Log Errors for Triggers and States
+// log Errors for Triggers and States
 func logTriggerStateError(spaceCount int, currentState ssm.State, trigger ssm.Trigger, err error) {
 
 	spaces := strings.Repeat("  ", spaceCount)
-	mylog.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
+	log.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
 }
 
 // ******************************************************************************
-// Log Errors for Triggers and States
+// log Errors for Triggers and States
 func logMessagesWithOutError(spaceCount int, message string) {
 
 	spaces := strings.Repeat("  ", spaceCount)
-	mylog.Println(spaces, message)
+	log.Println(spaces, message)
 }
 
 // ******************************************************************************
-// Log Errors for Triggers and States
+// log Errors for Triggers and States
 func logMessagesWithError(spaceCount int, message string, err error) {
 
 	spaces := strings.Repeat("  ", spaceCount)
-	mylog.Println(spaces, message, err)
+	log.Println(spaces, message, err)
 }
 
 // ******************************************************************************
@@ -780,7 +782,7 @@ func validateBitcoind() (err error) {
 			Pass:         "jlambert97531",
 		}, nil)
 		if err != nil {
-			mylog.Fatalf("error creating new btc client: %v", err)
+			log.Fatalf("error creating new btc client: %v", err)
 		}
 
 		// Wait for Blockchain to Sync
@@ -824,7 +826,7 @@ func validateBitcoind() (err error) {
 // Taxi request PaymentRequest
 func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environment *tollGate_api.Enviroment) (*tollGate_api.PaymentRequestMessage, error) {
 
-	mylog.Println("Incoming: 'GetPaymentRequest'")
+	log.Println("Incoming: 'GetPaymentRequest'")
 	fmt.Println("sleeping...for 3 seconds")
 	time.Sleep(3 * time.Second)
 
@@ -842,14 +844,14 @@ func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environme
 
 		case tollGate_api.TestOrProdEnviroment_Test:
 			// Simulate send payment request to Taxi
-			mylog.Println("Simulate Test of Taxi ask for PaymentRequest:")
+			log.Println("Create Payment Request to Taxi:")
 			acknack = true
-			returnMessage = "Simulated Payment Request Created"
+			returnMessage = "Payment Request Created"
 			paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
 
 		case tollGate_api.TestOrProdEnviroment_Production:
 			// Send payment request to Taxi
-			mylog.Println("Create Payment Request to Taxi:")
+			log.Println("Create Payment Request to Taxi:")
 			// Create Payment Request
 			acknack = true
 			returnMessage = "Payment Request Created"
@@ -867,6 +869,8 @@ func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environme
 			acknack = false
 			returnMessage = "There was a problem when creating payment request"
 			paymentReqest = ""
+		} else {
+			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 10)
 		}
 
 	} else {
@@ -891,19 +895,21 @@ func cleanup() {
 		cleanupProcessed = true
 
 		// Cleanup before close down application
-		mylog.Println("Clean up and shut down servers")
+		log.Println("Clean up and shut down servers")
 
-		mylog.Println("Gracefull stop for: registerTollRoadServer")
+		log.Println("Gracefull stop for: registerTollRoadServer")
 		registerTollRoadServer.GracefulStop()
 
-		mylog.Println("Close net.Listing: %v", localServerEngineLocalPort)
+		log.Println("Close net.Listing: %v", localServerEngineLocalPort)
 		lis.Close()
 
-		//mylog.Println("Close DB_session: %v", DB_session)
+		//log.Println("Close DB_session: %v", DB_session)
 		//DB_session.Close()
 		remoteServerConnection.Close()
 	}
 }
+
+//var log = logging.MustGetLogger("")
 
 func main() {
 
@@ -911,14 +917,16 @@ func main() {
 
 	defer cleanup()
 
+	//initLog()
+
 	// *********************
 	// Set up connection to Toll Gate Hardware Server
 	remoteServerConnection, err = grpc.Dial(address_to_dial, grpc.WithInsecure())
 	if err != nil {
-		mylog.Println("did not connect to Toll Gate Hardware Server on address: ", address_to_dial, "error message", err)
+		log.Println("did not connect to Toll Gate Hardware Server on address: ", address_to_dial, "error message", err)
 		os.Exit(0)
 	} else {
-		mylog.Println("gRPC connection OK to Toll Gate Hardware Server, address: ", address_to_dial)
+		log.Println("gRPC connection OK to Toll Gate Hardware Server, address: ", address_to_dial)
 		// Creates a new Clients
 		testClient = tollGateHW_api.NewTollHardwareClient(remoteServerConnection)
 
@@ -926,19 +934,19 @@ func main() {
 
 	// *********************
 	// Start Toll Gate Server for Incomming Taxi connectionss
-	mylog.Println("Toll Gate Hardware Server started")
-	mylog.Println("Start listening on: %v", localServerEngineLocalPort)
+	log.Println("Toll Gate Hardware Server started")
+	log.Println("Start listening on: %v", localServerEngineLocalPort)
 	lis, err = net.Listen("tcp", localServerEngineLocalPort)
 	if err != nil {
-		mylog.Fatalf("failed to listen: %v", err)
+		log.Fatalf("failed to listen: %v", err)
 	}
 
 	// Creates a new RegisterClient gRPC server
 	go func() {
-		mylog.Println("Starting Toll Gate Hardware Server")
+		log.Println("Starting Toll Gate Hardware Server")
 		registerTollRoadServer = grpc.NewServer()
 		tollGate_api.RegisterTollRoadServerServer(registerTollRoadServer, &tollGateServiceServer{})
-		mylog.Println("registerTollRoadServer for Toll Gate started")
+		log.Println("registerTollRoadServer for Toll Gate started")
 		registerTollRoadServer.Serve(lis)
 	}()
 	// *********************
@@ -948,7 +956,10 @@ func main() {
 	//testTollRoadCycle()
 
 	//Initiate Lightning
-	lightningServer.LndServer()
+	//lightningServer.InitLndServerConnection()
+	//lightningServer.RetrieveGetInfo()
+	go lightningServer.LigtningMainService()
+
 
 	// Set up the Private Toll Road State Machine
 	initiateTollRoad()

@@ -66,6 +66,12 @@
   version = "v1.1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/donovanhide/eventsource"
+  packages = ["."]
+  revision = "3ed64d21fb0b6bd8b49bcfec08f3004daee8723d"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "jsonpb",
@@ -86,6 +92,12 @@
   revision = "f2862b476edcef83412c7af8687c9cd8e4097c0f"
 
 [[projects]]
+  name = "github.com/jessevdk/go-flags"
+  packages = ["."]
+  revision = "c6ca198ec95c841fdb89fc0de7496fed11ab854e"
+  version = "v1.4.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/juju/loggo"
   packages = ["."]
@@ -97,8 +109,8 @@
     "lnrpc",
     "macaroons"
   ]
-  revision = "7cf5ebe2650b6798182e10be198c7ffc1f1d6e19"
-  version = "v0.4.2-beta"
+  revision = "6fa93a78c18180a3bc77116b749b3c5e279d5a33"
+  version = "v0.4.1-beta"
 
 [[projects]]
   branch = "master"
@@ -107,12 +119,24 @@
   revision = "a7b249c6862c5232dfc8fabb0180b690d7c53959"
 
 [[projects]]
+  name = "github.com/michael1011/lightningtip"
+  packages = ["backends"]
+  revision = "6cc1219a5f493afe8fa4854cb3785c89e693972b"
+  version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/op/go-logging"
+  packages = ["."]
+  revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
+  version = "v1"
+
+[[projects]]
   name = "github.com/roasbeef/btcwallet"
   packages = [
     "internal/zero",
     "snacl"
   ]
-  revision = "ccd48bb4720f2baeaa795cac81264f6ced2da4c7"
+  revision = "45445d1b09670109410174cb01fab0b133e3a904"
 
 [[projects]]
   branch = "master"
@@ -225,6 +249,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "86bb2e75327149f17dbcf1a4ad8e115686059596fd618da7b1e151b8c92e059a"
+  inputs-digest = "8cbec99664f5edf45ff06db7c52faa13b36a52bc96fa66c71b6f4b387e72e651"
   solver-name = "gps-cdcl"
   solver-version = 1
