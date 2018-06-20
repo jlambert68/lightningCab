@@ -66,6 +66,15 @@ type errorResponse struct {
 	Error string
 }
 
+type TaxiPaysToll func(check bool) (err error) //, eventSrv *eventsource.Server)
+
+type BackendLayer1 interface {
+	Connect() error
+}
+
+var callbackToToll TaxiPaysToll
+
+
 func InitLndServerConnection() {
 
 	initLog()
@@ -113,7 +122,8 @@ func InitLndServerConnection() {
 	lndClient = lndrpc.NewLightningClient(conn)
 }
 
-func LigtningMainService() {
+func LigtningMainService(cbTT TaxiPaysToll) {
+	callbackToToll = cbTT
 
 	var err error
 
@@ -183,6 +193,9 @@ func publishInvoiceSettled(invoice string) { //, eventSrv *eventsource.Server) {
 
 			pendingInvoices = append(pendingInvoices[:index], pendingInvoices[index+1:]...)
 
+			//Callback to previous layer to change state
+			_ = callbackToToll(false)
+
 			break
 		}
 
@@ -233,7 +246,7 @@ func invoiceSettledHandler(writer http.ResponseWriter, request *http.Request) {
 */
 func CreateInvoice(message string, amount int64, expire int64) (newInvoice PendingInvoice, err error) {
 
-	var errorMessage string = ""
+	var errorMessage string = "Amount is zero"
 
 	if amount != 0 {
 		invoice, err := backend.GetInvoice(message, amount, expire)
@@ -266,12 +279,13 @@ func CreateInvoice(message string, amount int64, expire int64) (newInvoice Pendi
 
 		} else {
 			errorMessage = "Failed to create invoice"
+			newInvoice = PendingInvoice{"", "", time.Now()}
 		}
 
 	}
 
 	log.Error(errorMessage)
-	return err
+	return newInvoice, err
 }
 
 /*

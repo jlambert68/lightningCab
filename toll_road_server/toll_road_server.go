@@ -66,7 +66,7 @@ func testTollRoadCycle() {
 	//toll.TaxiConnects()
 	toll.TaxiRequestsPaymentRequest(false)
 	//toll.TollSendsPaymentRequestToTaxi()
-	toll.TaxiPaysPaymentRequest()
+	toll.TaxiPaysPaymentRequest(false)
 	toll.TollValidatesThatPaymentIsOK()
 	toll.TaxiLeavesToll()
 	toll.TollIsReadyAndEntersWaitState()
@@ -222,7 +222,10 @@ func NewTollRoad(title string) *Toll {
 	cfg = tollRoadStateMachine.Configure(StatePaymentRequestIsPaid)
 	cfg.Permit(TriggerTollValidatesThatPaymentIsOK, StateThanksAndOpenTollDone)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StatePaymentRequestIsPaid' ") })
+	cfg.OnEnter(func() {
+		log.Println("*** Entering 'StatePaymentRequestIsPaid' ")
+		_ = toll.TollRoadStateMachine.Fire(TriggerTollValidatesThatPaymentIsOK.Key, nil)
+	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StatePaymentRequestIsPaid' ")
 		log.Println("")
@@ -232,7 +235,11 @@ func NewTollRoad(title string) *Toll {
 	cfg = tollRoadStateMachine.Configure(StateThanksAndOpenTollDone)
 	cfg.Permit(TriggerTaxiLeavesToll, StateClosedTollAndResetedHardware)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateThanksAndOpenTollDone' ") })
+	cfg.OnEnter(func() {
+		log.Println("*** Entering 'StateThanksAndOpenTollDone' ")
+		_ = toll.TollRoadStateMachine.Fire(TriggerTaxiLeavesToll.Key, nil)
+	})
+
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateThanksAndOpenTollDone' ")
 		log.Println("")
@@ -242,7 +249,11 @@ func NewTollRoad(title string) *Toll {
 	cfg = tollRoadStateMachine.Configure(StateClosedTollAndResetedHardware)
 	cfg.Permit(TriggerTollIsReadyAndEntersWaitState, StateTollIsWaitingForTaxi)
 	cfg.Permit(TriggerTollEndsInErrorMode, StateTollIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateClosedTollAndResetedHardware' ") })
+	cfg.OnEnter(func() {
+		log.Println("*** Entering 'StateClosedTollAndResetedHardware' ")
+		toll.SetHardwareInReadyMode()
+		_ = toll.TollRoadStateMachine.Fire(TriggerTollIsReadyAndEntersWaitState.Key, nil)
+	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateClosedTollAndResetedHardware' ")
 		log.Println("")
@@ -528,6 +539,7 @@ func (toll *Toll) SetHardwareInFirstTimeReadyMode() {
 			}
 		}()
 
+
 		go func() {
 			// Check Distance Sensor that no object is infront of the sensor
 
@@ -547,7 +559,7 @@ func (toll *Toll) SetHardwareInFirstTimeReadyMode() {
 					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says OK, there are no objects infront of sensor")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says E-Ink Display is NOT OK")
+					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says distace sensor is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
@@ -683,33 +695,242 @@ func (toll *Toll) TollSendsPaymentRequestToTaxi() {
 // ******************************************************************************
 // Taxi pays paymentrequest
 
-func (toll *Toll) TaxiPaysPaymentRequest() {
+func taxiPaysToll(check bool) (err error) {
+	err = toll.TaxiPaysPaymentRequest(check)
+	return err
+}
+
+func (toll *Toll) TaxiPaysPaymentRequest(check bool) (err error) {
 	var currentTrigger ssm.Trigger
 
 	currentTrigger = TriggerTaxiPaysPaymentRequest
 
-	err := toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
-	if err != nil {
-		logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
+	switch check {
 
+	case true:
+		// Do a check if state machine is in correct state for triggering event
+		if toll.TollRoadStateMachine.CanFire(currentTrigger.Key) == true {
+			err = nil
+
+		} else {
+
+			err = toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+		}
+
+	case false:
+		// Execute Trigger
+		err = toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
+
+		}
 	}
+
+	return err
 
 }
 
 // ******************************************************************************
 
 // ******************************************************************************
-// Taxi checks that payment is OK
+// Taxi checks that payment is OK and set hardware in correct mode
 func (toll *Toll) TollValidatesThatPaymentIsOK() {
+
+	var err error
+	var wg sync.WaitGroup
 	var currentTrigger ssm.Trigger
 
 	currentTrigger = TriggerTollValidatesThatPaymentIsOK
 
-	err := toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
-	if err != nil {
+	err = toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+
+	switch  err.(type) {
+	case nil:
+
+		//Wait for all 3 goroutines
+		wg.Add(3)
+
+		go func() {
+			// CLose Servo-Gate
+			defer wg.Done()
+
+			tollGateMessage := &tollGateHW_api.TollGateServoMessage{useEnv, tollGateHW_api.TollGateCommand_OPEN}
+			resp, err := testClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
+
+			if err != nil {
+				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
+				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
+				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+				err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+			} else {
+
+				if resp.GetAcknack() == true {
+					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Gate is Open")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+				} else {
+					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+					//Set system in Error State due to malfunctioning hardware
+					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+					err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+
+				}
+			}
+		}()
+
+		go func() {
+			// Send Thanks to E-Ink display
+
+			defer wg.Done()
+
+			eInkDisplayMessage := &tollGateHW_api.EInkDisplayMessage{useEnv, tollGateHW_api.EInkMessageType_MESSAGE_TEXT, "Thanks!", ""}
+			resp, err := testClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
+
+			if err != nil {
+				logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
+				//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
+				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+				err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+			} else {
+
+				if resp.GetAcknack() == true {
+					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display message received")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+				} else {
+					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+					//Set system in Error State due to malfunctioning hardware
+					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+					err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+
+				}
+			}
+		}()
+
+		go func() {
+			// Check Distance Sensor that no object is infront of the sensor
+
+			defer wg.Done()
+
+			distanceSensorMessage := &tollGateHW_api.DistanceSensorMessage{useEnv, tollGateHW_api.DistanceSensorCommand_SIGNAL_WHEN_OBJECT_LEAVES}
+			resp, err := testClient.UseDistanceSensor(context.Background(), distanceSensorMessage)
+
+			if err != nil {
+				logMessagesWithError(4, "Could not send 'UseDistanceSensor' to address: "+address_to_dial+". Error Message:", err)
+				//Set system in Error State due no connection to hardware server for 'CheckTollDistanceSensor'
+				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+				err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+			} else {
+
+				if resp.GetAcknack() == true {
+					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says OK, the objects has left")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+					// Signal that taxi has left the toll gate
+					toll.TaxiLeavesToll()
+
+				} else {
+					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says E-ditance sensor is NOT OK")
+					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+					//Set system in Error State due to malfunctioning hardware
+					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+					err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+
+				}
+
+			}
+		}()
+
+		wg.Wait()
+
+	default:
+		// Error triggering new state
 		logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
 
 	}
+
+
+}
+
+// ******************************************************************************
+// Set the hardware in ready mode
+func (toll *Toll) SetHardwareInReadyMode() {
+
+	var wg sync.WaitGroup
+
+	//Wait for all 31 goroutines
+	wg.Add(1)
+
+	go func() {
+		// CLose Servo-Gate
+		defer wg.Done()
+
+		time.Sleep(5 * time.Second)
+
+		tollGateMessage := &tollGateHW_api.TollGateServoMessage{useEnv, tollGateHW_api.TollGateCommand_CLOSE}
+		resp, err := testClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
+
+		if err != nil {
+			logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
+			//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
+			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+			err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+		} else {
+
+			if resp.GetAcknack() == true {
+				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Gate is Closed")
+				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+			} else {
+				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
+				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+				//Set system in Error State due to malfunctioning hardware
+				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+				err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+
+			}
+		}
+	}()
+
+	wg.Wait()
+
+	//Wait for all 1 goroutines
+	wg.Add(1)
+
+	go func() {
+		// Send QR Code of ip to E-Ink display
+
+		defer wg.Done()
+
+		eInkDisplayMessage := &tollGateHW_api.EInkDisplayMessage{useEnv, tollGateHW_api.EInkMessageType_MESSSAGE_QR, "127.0.0.1", ""}
+		resp, err := testClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
+
+		if err != nil {
+			logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
+			//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
+			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+			err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+		} else {
+
+			if resp.GetAcknack() == true {
+				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display message received")
+				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+			} else {
+				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
+				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+				//Set system in Error State due to malfunctioning hardware
+				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+				err = toll.TollRoadStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+
+			}
+		}
+	}()
+
+	wg.Wait()
 
 }
 
@@ -845,17 +1066,39 @@ func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environme
 		case tollGate_api.TestOrProdEnviroment_Test:
 			// Simulate send payment request to Taxi
 			log.Println("Create Payment Request to Taxi:")
-			acknack = true
-			returnMessage = "Payment Request Created"
-			paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
+			//acknack = true
+			//returnMessage = "Payment Request Created"
+			//paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
+
+			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			if err != nil || invoice.Invoice == "" {
+				acknack = false
+				returnMessage = "There was a problem when creating payment request"
+				paymentReqest = ""
+			} else {
+				acknack = true
+				returnMessage = "Payment Request Created"
+				paymentReqest = invoice.Invoice
+			}
 
 		case tollGate_api.TestOrProdEnviroment_Production:
 			// Send payment request to Taxi
 			log.Println("Create Payment Request to Taxi:")
 			// Create Payment Request
-			acknack = true
-			returnMessage = "Payment Request Created"
-			paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
+			//acknack = true
+			//returnMessage = "Payment Request Created"
+			//paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
+
+			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			if err != nil || invoice.Invoice == "" {
+				acknack = false
+				returnMessage = "There was a problem when creating payment request"
+				paymentReqest = ""
+			} else {
+				acknack = true
+				returnMessage = "Payment Request Created"
+				paymentReqest = invoice.Invoice
+			}
 
 		default:
 			logMessagesWithOutError(4, "Unknown incomming enviroment: "+environment.TestOrProduction.String())
@@ -870,7 +1113,12 @@ func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environme
 			returnMessage = "There was a problem when creating payment request"
 			paymentReqest = ""
 		} else {
-			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 10)
+			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			if err != nil || invoice.Invoice == "" {
+				acknack = false
+				returnMessage = "There was a problem when creating payment request"
+				paymentReqest = ""
+			}
 		}
 
 	} else {
@@ -958,7 +1206,8 @@ func main() {
 	//Initiate Lightning
 	//lightningServer.InitLndServerConnection()
 	//lightningServer.RetrieveGetInfo()
-	go lightningServer.LigtningMainService()
+
+	go lightningServer.LigtningMainService(taxiPaysToll)
 
 
 	// Set up the Private Toll Road State Machine

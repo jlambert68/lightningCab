@@ -66,12 +66,6 @@
   version = "v1.1.0"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/donovanhide/eventsource"
-  packages = ["."]
-  revision = "3ed64d21fb0b6bd8b49bcfec08f3004daee8723d"
-
-[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "jsonpb",
@@ -249,6 +243,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8cbec99664f5edf45ff06db7c52faa13b36a52bc96fa66c71b6f4b387e72e651"
+  inputs-digest = "7454ac066ea315b6ecd0e4d55e439b4fdc235aa8d371af7fc8efdde3a354e170"
   solver-name = "gps-cdcl"
   solver-version = 1

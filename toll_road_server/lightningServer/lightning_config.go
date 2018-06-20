@@ -13,12 +13,12 @@ import (
 )
 
 const (
-	defaultConfigFile = "lightningTip.conf"
+	defaultConfigFile = "lightningServer.conf"
 
 	defaultDataDir = "toll_road_server"
 
 	defaultLogFile  = "toll_road_server.log"
-	defaultLogLevel = "info"
+	defaultLogLevel = "debug" //"info"
 
 	defaultRESTHost    = "127.0.0.1:8081" //0.0.0.0:8081"
 	defaultTLSCertFile = ""
