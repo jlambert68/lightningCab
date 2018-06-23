@@ -75,10 +75,12 @@ func testTollRoadCycle() {
 }
 
 func initiateTollRoad() {
+	var err error
+	err = nil
 	toll = NewTollRoad("Private road")
 	//toll.RestartTollSystem()
 
-	err := validateBitcoind()
+	err = validateBitcoind()
 	if err != nil {
 		log.Println("Couldn't check Bitcoind, exiting system!")
 		os.Exit(0)

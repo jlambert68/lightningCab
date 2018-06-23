@@ -28,7 +28,7 @@ const (
 
 	defaultTipExpiry = 3600
 
-	defaultLndGRPCHost  = "localhost:10009"
+	defaultLndGRPCHost  = "localhost:10001" //"localhost:10009"
 	defaultLndCertFile  = "tls.cert"
 	defaultMacaroonFile = "admin.macaroon"
 )
@@ -57,6 +57,17 @@ var cfg config
 var backend backends.Backend
 
 func initConfig() {
+
+	var macaroonDir string
+
+	if defaultLndGRPCHost == "localhost:10009" {
+		// Standard LND
+		macaroonDir = getDefaultLndDir()
+	} else {
+		//Simnet
+		macaroonDir = getHardcodedMacaroonDir()
+	}
+
 	cfg = config{
 		ConfigFile: path.Join(getDefaultDataDir(), defaultConfigFile),
 
@@ -76,7 +87,7 @@ func initConfig() {
 		LND: &backends.LND{
 			GRPCHost:     defaultLndGRPCHost,
 			CertFile:     path.Join(getDefaultLndDir(), defaultLndCertFile),
-			MacaroonFile: path.Join(getDefaultLndDir(), defaultMacaroonFile),
+			MacaroonFile: path.Join(macaroonDir, defaultMacaroonFile),
 		},
 	}
 
@@ -174,6 +185,13 @@ func getDefaultLndDir() (dir string) {
 	default:
 		dir = path.Join(homeDir, ".lnd")
 	}
+
+	return dir
+}
+
+func getHardcodedMacaroonDir() (dir string) {
+	homeDir := getHomeDir()
+	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/toll/data")
 
 	return dir
 }
