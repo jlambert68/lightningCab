@@ -65,7 +65,7 @@ func initConfig() {
 		macaroonDir = getDefaultLndDir()
 	} else {
 		//Simnet
-		macaroonDir = getHardcodedMacaroonDir()
+		macaroonDir = getHardcodedMacaroonDirForSimnet()
 	}
 
 	cfg = config{
@@ -189,7 +189,7 @@ func getDefaultLndDir() (dir string) {
 	return dir
 }
 
-func getHardcodedMacaroonDir() (dir string) {
+func getHardcodedMacaroonDirForSimnet() (dir string) {
 	homeDir := getHomeDir()
 	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/toll/data")
 

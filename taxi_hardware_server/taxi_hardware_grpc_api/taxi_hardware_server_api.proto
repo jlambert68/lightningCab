@@ -1,0 +1,68 @@
+syntax = "proto3";
+package taxi_hardware_grpc_api;
+
+//protoc -I taxi_hardware_grpc_api --go_out=plugins=grpc:taxi_hardware_grpc_api taxi_hardware_grpc_api/taxi_hardware_server_api.proto
+
+// Parameter used for Empty inputs
+message EmptyParameter {
+}
+
+// Ack/Nack- Response message with comment
+message AckNackResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+}
+
+// The Client register service definition.
+// ***********************
+service TaxiHardware {
+
+    //Check that the Power Consumption Sensor is working
+    rpc CheckPowerSensor (Enviroment) returns (AckNackResponse) {
+    }
+
+    //Check that the Power cutter is working
+    rpc CheckPowerCutter (Enviroment) returns (AckNackResponse) {
+    }
+
+    // Returns a stream with
+    rpc MessasurePowerConsumption (Enviroment) returns (stream PowerStatus) {
+    }
+
+
+}
+
+
+enum TestOrProdEnviroment {
+    Test = 0;
+    Production = 1;
+}
+
+enum PowerCutterCommand {
+    HavePower = 0;
+    CutPower = 1;
+}
+
+message Enviroment {
+    TestOrProdEnviroment TestOrProduction = 1;
+}
+
+
+message PowerCutterMessage {
+    TestOrProdEnviroment tollGateServoEnviroment = 1;
+    PowerCutterCommand powerCutterCommand = 2;
+}
+
+message messasurePowerCommand {
+    TestOrProdEnviroment tollGateServoEnviroment = 1;
+    int32 intervall = 2; // Messasure intervall in milliseconds
+}
+
+message PowerStatus {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int32 speed = 3; //0-100%
+    int32 acceleration = 4; //0-100%
+    int64 timestamp = 5;
+}
+

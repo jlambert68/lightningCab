@@ -24,6 +24,7 @@ import (
 	//"github.com/op/go-logging"
 	"log"
 	"jlambert/lightningCab/toll_road_server/lightningServer"
+	"jlambert/lightningCab/common_config"
 )
 
 type Toll struct {
@@ -37,14 +38,14 @@ var (
 	remoteServerConnection *grpc.ClientConn
 	testClient             tollGateHW_api.TollHardwareClient
 
-	address_to_dial string                     = "127.0.0.1:50650"
+	address_to_dial string                     = common_config.GrpcTollHardwareServer_address + common_config.GrpcTollHardwareServer_port //"127.0.0.1:50650"
 	useEnv                                     = tollGateHW_api.TestOrProdEnviroment_Test
 	useEnvironment  *tollGateHW_api.Enviroment = &tollGateHW_api.Enviroment{TestOrProduction: useEnv}
 )
 
 // Global connection constants
 const (
-	localServerEngineLocalPort = ":50651"
+	localServerEngineLocalPort = common_config.GrpcTollServer_port //":50651"
 )
 
 var (

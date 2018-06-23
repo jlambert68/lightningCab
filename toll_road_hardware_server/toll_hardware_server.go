@@ -11,11 +11,12 @@ import (
 	"syscall"
 	"time"
 	tollGateHW_api "jlambert/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
+	"jlambert/lightningCab/common_config"
 )
 
 // Global connection constants
 const (
-	localServerEngineLocalPort = ":50650"
+	localServerEngineLocalPort = common_config.GrpcTollHardwareServer_port //":50650"
 )
 
 // Constants used for Db-objects to save

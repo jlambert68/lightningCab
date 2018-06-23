@@ -9,13 +9,14 @@ import (
 	"os"
 	taxoTotollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
 	"bufio"
+	"jlambert/lightningCab/common_config"
 )
 
 var (
 	remoteServerConnection *grpc.ClientConn
 	testClient             taxoTotollGate_api.TollRoadServerClient
 
-	address_to_dial string                         = "127.0.0.1:50651"
+	address_to_dial string                         = common_config.GrpcTollServer_port //"127.0.0.1:50651"
 	useEnv                                         = taxoTotollGate_api.TestOrProdEnviroment_Test
 	useEnvironment  *taxoTotollGate_api.Enviroment = &taxoTotollGate_api.Enviroment{TestOrProduction: useEnv}
 )
