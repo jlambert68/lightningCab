@@ -1,0 +1,62 @@
+syntax = "proto3";
+package taxi_grpc_api;
+
+//protoc -I taxi_grpc_api --go_out=plugins=grpc:taxi_grpc_api taxi_grpc_api/taxi_api.proto
+
+// Parameter used for Empty inputs
+message EmptyParameter {
+}
+
+// Ack/Nack- Response message with comment
+message AckNackResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+}
+
+// The Client register service definition.
+// ***********************
+service Taxi {
+
+    //Ask taxi for Price
+    rpc AskTaxiForPrice (Enviroment) returns (Price) {
+    }
+
+    //Accept price from Taxi
+    rpc AcceptPrice (Enviroment) returns (AckNackResponse) {
+    }
+
+    // Returns a stream of PaymentRequests to Customer
+    rpc PaymentRequestStream (Enviroment) returns (stream PaymentRequest) {
+    }
+
+
+}
+
+
+enum TestOrProdEnviroment {
+    Test = 0;
+    Production = 1;
+}
+
+enum PriceUnit {
+    SatoshiPerSecond = 0;
+    SatoshiPerMilliSecond = 1;
+}
+
+message Enviroment {
+    TestOrProdEnviroment TestOrProduction = 1;
+}
+
+message PaymentRequest {
+    string lightningPaymentRequest = 1;
+}
+
+message Price {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int32 speed = 3;
+    int32 acceleration = 4;
+    int32 time = 5;
+    PriceUnit priceunit = 6;
+}
+
