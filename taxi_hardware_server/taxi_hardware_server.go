@@ -1,4 +1,4 @@
-package taxi_hardware_server
+package main
 
 import (
 	"log"
@@ -29,9 +29,9 @@ const (
 )*/
 
 // Variables holding all clients for gRPC-connection
-var (
-	hardwareStateMachineClient taxiHW_api.TaxiHardwareClient
-)
+//var (
+//	hardwareStateMachineClient taxiHW_api.TaxiHardwareClient
+//)
 
 var (
 	registerTaxiHardwareServer *grpc.Server
