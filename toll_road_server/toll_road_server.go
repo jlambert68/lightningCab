@@ -611,9 +611,9 @@ func (toll *Toll) TaxiConnects() {
 
 	currentTrigger = TriggerTaxiConnects
 
-	err := toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+	err := toll.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
-		logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
+		logTriggerStateError(4, toll.TaxiStateMachine.State(), currentTrigger, err)
 
 	}
 
@@ -665,9 +665,9 @@ func (toll *Toll) TaxiReRequestsPaymentRequest() {
 
 	currentTrigger = TriggerTaxiReRequestsPaymentRequest
 
-	err := toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+	err := toll.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
-		logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
+		logTriggerStateError(4, toll.TaxiStateMachine.State(), currentTrigger, err)
 
 	}
 
@@ -685,9 +685,9 @@ func (toll *Toll) TollSendsPaymentRequestToTaxi() {
 
 	currentTrigger = TriggerTollSendsPaymentRequestToTaxi
 
-	err := toll.TollRoadStateMachine.Fire(currentTrigger.Key, nil)
+	err := toll.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
-		logTriggerStateError(4, toll.TollRoadStateMachine.State(), currentTrigger, err)
+		logTriggerStateError(4, toll.TaxiStateMachine.State(), currentTrigger, err)
 
 	}
 
