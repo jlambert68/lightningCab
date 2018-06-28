@@ -1,0 +1,40 @@
+syntax = "proto3";
+package taxi_hardware_grpc_stream_api;
+
+//protoc -I taxi_hardware_grpc_stream_api --go_out=plugins=grpc:taxi_hardware_grpc_stream_api taxi_hardware_grpc_stream_api/taxi_hardware_server_stream_api.proto
+
+// The Client register service definition.
+// ***********************
+service TaxiStreamHardware {
+
+    // Returns a stream with
+    rpc MessasurePowerConsumption (MessasurePowerMessage) returns (stream PowerStatusResponse) {
+    }
+
+
+}
+
+
+enum TestOrProdEnviroment {
+    Test = 0;
+    Production = 1;
+}
+
+message Enviroment {
+    TestOrProdEnviroment TestOrProduction = 1;
+}
+
+
+message MessasurePowerMessage {
+    TestOrProdEnviroment tollGateServoEnviroment = 1;
+    int32 intervall = 2; // Messasure intervall in milliseconds
+}
+
+message PowerStatusResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int32 speed = 3; //0-100%
+    int32 acceleration = 4; //0-100%
+    int64 timestamp = 5;
+}
+

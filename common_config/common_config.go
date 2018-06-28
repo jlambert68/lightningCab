@@ -13,3 +13,6 @@ const GrpcTaxiServer_port = ":50563"
 
 const GrpcTaxiHardwareServer_address = "127.0.0.1"
 const GrpcTaxiHardwareServer_port = ":50652"
+
+const GrpcTaxiHardwareStreamServer_address = "127.0.0.1"
+const GrpcTaxiHardwareStreamServer_port = ":50654"

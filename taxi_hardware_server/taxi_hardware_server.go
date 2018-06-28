@@ -95,38 +95,52 @@ func (s *taxiHardwareServer) CheckPowerCutter(ctx context.Context, environment *
 
 }
 
-func (s *taxiHardwareServer) MessasurePowerConsumption(environment *taxiHW_api.Enviroment, stream taxiHW_api.TaxiHardware_MessasurePowerConsumptionServer) (err error) {
+func (s *taxiHardwareServer) CutPower(ctx context.Context, powerCutterMessage *taxiHW_api.PowerCutterMessage) (*taxiHW_api.AckNackResponse, error) {
 	log.Printf("Incoming: 'CheckPowerCutter'")
 
-	var powerConsumption taxiHW_api.PowerStatus
+	var acknack bool
+	var returnMessage string
 
-	err = nil
+	// Check if to Simulate or not
+	switch powerCutterMessage.TollGateServoEnviroment {
 
-	powerConsumption.Acknack = true
-	powerConsumption.Comments = "Stadard return message"
-	powerConsumption.Speed = 0
-	powerConsumption.Acceleration = 33
-	now := time.Now()
-	powerConsumption.Timestamp = now.UnixNano()
+	case taxiHW_api.TestOrProdEnviroment_Test:
 
-	for {
-		if err := stream.Send(&powerConsumption); err != nil {
-			return err
-			log.Printf("Error when streaming back: 'MessasurePowerConsumption'")
-			break
+		switch powerCutterMessage.PowerCutterCommand {
+
+		case taxiHW_api.PowerCutterCommand_CutPower:
+			log.Printf("Simulate that Power Cutter 'Cuts' power:")
+			acknack = true
+			returnMessage = "A simulated Test of that Power Cutter 'Cuts' power"
+
+		case taxiHW_api.PowerCutterCommand_HavePower:
+			log.Printf("Simulate that Power Cutter 'Have' power:")
+			acknack = true
+			returnMessage = "A simulated Test of that Power Cutter 'Have' power"
 		}
 
-		time.Sleep(1 * time.Second)
+	case taxiHW_api.TestOrProdEnviroment_Production:
+		// Use Test Taxi hardware
 
-		powerConsumption.Speed = powerConsumption.Speed + 1
-		if powerConsumption.Speed > 100 {
-			powerConsumption.Speed = 0
+		switch powerCutterMessage.PowerCutterCommand {
+
+		case taxiHW_api.PowerCutterCommand_CutPower:
+			log.Printf("Execute Hardware Power Cutter 'Cuts' power:")
+			acknack = true
+			returnMessage = "Execute Hardware that Power Cutter 'Cuts' power"
+
+		case taxiHW_api.PowerCutterCommand_HavePower:
+			log.Printf("Execute Hardware Power Cutter 'Have' power:")
+			acknack = true
+			returnMessage = "Execute Hardware that Power Cutter 'Have' power"
 		}
-		now := time.Now()
-		powerConsumption.Timestamp = now.UnixNano()
 	}
-	return nil
+
+	return &taxiHW_api.AckNackResponse{Acknack: acknack, Comments: returnMessage}, nil
+
 }
+
+
 
 // Used for only process cleanup once
 var cleanupProcessed bool = false

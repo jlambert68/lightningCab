@@ -36,16 +36,16 @@ var taxi *Taxi
 
 var (
 	remoteServerConnection *grpc.ClientConn
-	testClient             taxiHW_api.TollHardwareClient
+	testClient             taxiHW_api.TaxiHardwareClient
 
-	address_to_dial string                 = common_config.GrpcTollHardwareServer_address + common_config.GrpcTollHardwareServer_port //"127.0.0.1:50650"
+	address_to_dial string                 = common_config.GrpcTaxiHardwareServer_address + common_config.GrpcTaxiHardwareServer_port
 	useEnv                                 = taxiHW_api.TestOrProdEnviroment_Test
 	useEnvironment  *taxiHW_api.Enviroment = &taxiHW_api.Enviroment{TestOrProduction: useEnv}
 )
 
 // Global connection constants
 const (
-	localServerEngineLocalPort = common_config.GrpcTollServer_port //":50651"
+	localServerEngineLocalPort = common_config.GrpcTaxiServer_port
 )
 
 var (
@@ -54,14 +54,14 @@ var (
 )
 
 // Server used for register clients Name, Ip and Por and Clients Test Enviroments and Clients Test Commandst
-type tollGateServiceServer struct{}
+type taxiServiceServer struct{}
 
 func testTaxiCycle() {
 
-	taxi = NewTollRoad("Test Taxi Road cycle")
+	taxi = NewTaxi("Test Taxi Road cycle")
 	//taxi.RestartTollSystem()
 	taxi.TollChecksLightning()
-	taxi.TollChecksHardware()
+	taxi.TaxiChecksHardware()
 	taxi.SetHardwareInFirstTimeReadyMode()
 	taxi.TollIsReadyAndEntersWaitState()
 	//taxi.TaxiConnects()
@@ -78,7 +78,7 @@ func testTaxiCycle() {
 func initiateTaxi() {
 	var err error
 	err = nil
-	taxi = NewTollRoad("Private road")
+	taxi = NewTaxi("MyTaxi")
 	//taxi.RestartTollSystem()
 
 	err = validateBitcoind()
@@ -87,7 +87,7 @@ func initiateTaxi() {
 		os.Exit(0)
 	}
 	taxi.TollChecksLightning()
-	taxi.TollChecksHardware()
+	taxi.TaxiChecksHardware()
 	taxi.SetHardwareInFirstTimeReadyMode()
 	taxi.TollIsReadyAndEntersWaitState()
 }
@@ -101,7 +101,7 @@ var (
 	StateHardwareIsInFirsteTimeReadyMode = ssm.State{Name: "StateHardwareIsInFirsteTimeReadyMode"}
 	StateTaxisWaitingForCustomer         = ssm.State{Name: "StateTaxisWaitingForCustomer"}
 	StateCustomerHasConnected            = ssm.State{Name: "StateCustomerHasConnected"}
-	StateTaxiHasAcceptedPrice            = ssm.State{Name: "StateTaxiHasAcceptedPrice"}
+	StateCustomerHasAcceptedPrice        = ssm.State{Name: "StateCustomerHasAcceptedPrice"}
 	StateTaxiIsReadyToDrive              = ssm.State{Name: "StateTaxiIsReadyToDrive"}
 	StateTaxiIsWaitingForPayment         = ssm.State{Name: "StateTaxiIsWaitingForPayment"}
 	StateCustomerStoppedPaying           = ssm.State{Name: "StateCustomerStoppedPaying"}
@@ -109,14 +109,13 @@ var (
 	StateTaxiIsReadyForNewCustomer       = ssm.State{Name: "StateTaxiIsReadyForNewCustomer"}
 	StateTaxiIsInErrorMode               = ssm.State{Name: "StateTaxiIsInErrorMode"}
 
-
 	// Create Triggers
-	TriggerRestartTollSystem                   = ssm.Trigger{Key: "TriggerRestartTollSystem"}
-	TriggerTollChecksBitcoin                   = ssm.Trigger{Key: "TriggerTollChecksBitcoin"}
-	TriggerTollChecksLightning                 = ssm.Trigger{Key: "TriggerTollChecksHardware"}
-	TriggerTollChecksHardware                  = ssm.Trigger{Key: "TriggerTollChecksHardware"}
+	TriggerRestartTaxiSystem                   = ssm.Trigger{Key: "TriggerRestartTaxiSystem"}
+	TriggerTaxiChecksBitcoin                   = ssm.Trigger{Key: "TriggerTaxiChecksBitcoin"}
+	TriggerTaxiChecksLightning                 = ssm.Trigger{Key: "TriggerTaxiChecksHardware"}
+	TriggerTaxiChecksHardware                  = ssm.Trigger{Key: "TriggerTaxiChecksHardware"}
 	TriggerSetHardwareInFirstTimeReadyMode     = ssm.Trigger{Key: "TriggerSetHardwareInFirstTimeReadyMode"}
-	TriggerTollIsReadyAndEntersWaitState       = ssm.Trigger{Key: "TriggerTollIsReadyAndEntersWaitState"}
+	TriggerTaxiIsReadyAndEntersWaitState       = ssm.Trigger{Key: "TriggerTaxiIsReadyAndEntersWaitState"}
 	TriggerCustomerConnects                    = ssm.Trigger{Key: "TriggerCustomerConnects"}
 	TriggerCustomerAcceptsPrice                = ssm.Trigger{Key: "TriggerCustomerAcceptsPrice"}
 	TriggerTaxiSetsHardwareInDriveMode         = ssm.Trigger{Key: "TriggerTaxiSetsHardwareInDriveMode"}
@@ -124,21 +123,20 @@ var (
 	TriggerCustomerPaysPaymentRequest          = ssm.Trigger{Key: "TriggerCustomerPaysPaymentRequest"}
 	TriggerCustomerStoppsPayingTimer           = ssm.Trigger{Key: "TriggerCustomerStoppsPayingTimer"}
 	TriggerCustomerLeavesTaxi                  = ssm.Trigger{Key: "TriggerCustomerLeavesTaxi"}
-	TriggerCustomerPaysPaymentRequest          = ssm.Trigger{Key: "TriggerCustomerPaysPaymentRequest"}
-	TriggerCustomerLeavesTaxi                  = ssm.Trigger{Key: "TriggerCustomerLeavesTaxi"}
-	TriggerTollEndsInErrorMode                 = ssm.Trigger{Key: "TriggerTollEndsInErrorMode"}
+	TriggerTaxiResetsHardware                  = ssm.Trigger{Key: "TriggerCustomerLeavesTaxi"}
+	TriggerTaxiEndsInErrorMode                 = ssm.Trigger{Key: "TriggerTaxiEndsInErrorMode"}
 )
 
 func NewTaxi(title string) *Taxi {
 
 	taxi := &Taxi{Title: title}
 	// Create State machine
-	taxiRoadStateMachine := ssm.NewStateMachine(StateTaxiInit)
+	taxiStateMachine := ssm.NewStateMachine(StateTaxiInit)
 
 	// Configure States: StateTaxiInit
-	cfg := taxiRoadStateMachine.Configure(StateTaxiInit)
-	cfg.Permit(TriggerTollChecksBitcoin, StateBitcoinIsCheckedAndOK)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg := taxiStateMachine.Configure(StateTaxiInit)
+	cfg.Permit(TriggerTaxiChecksBitcoin, StateBitcoinIsCheckedAndOK)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateTaxiInit' ") })
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateTaxiInit' ")
@@ -146,9 +144,9 @@ func NewTaxi(title string) *Taxi {
 	})
 
 	// Configure States: StateBitcoinIsCheckedAndOK
-	cfg = taxiRoadStateMachine.Configure(StateBitcoinIsCheckedAndOK)
-	cfg.Permit(TriggerTollChecksLightning, StateLigtningIsCheckedAndOK)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg = taxiStateMachine.Configure(StateBitcoinIsCheckedAndOK)
+	cfg.Permit(TriggerTaxiChecksLightning, StateLigtningIsCheckedAndOK)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
@@ -156,9 +154,9 @@ func NewTaxi(title string) *Taxi {
 	})
 
 	// Configure States: StateLigtningIsCheckedAndOK
-	cfg = taxiRoadStateMachine.Configure(StateLigtningIsCheckedAndOK)
-	cfg.Permit(TriggerTollChecksHardware, StateHardwareIsCheckedAndOK)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg = taxiStateMachine.Configure(StateLigtningIsCheckedAndOK)
+	cfg.Permit(TriggerTaxiChecksHardware, StateHardwareIsCheckedAndOK)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
@@ -166,9 +164,9 @@ func NewTaxi(title string) *Taxi {
 	})
 
 	// Configure States: StateHardwareIsCheckedAndOK
-	cfg = taxiRoadStateMachine.Configure(StateHardwareIsCheckedAndOK)
+	cfg = taxiStateMachine.Configure(StateHardwareIsCheckedAndOK)
 	cfg.Permit(TriggerSetHardwareInFirstTimeReadyMode, StateHardwareIsInFirsteTimeReadyMode)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsCheckedAndOK' ") })
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateHardwareIsCheckedAndOK' ")
@@ -176,98 +174,110 @@ func NewTaxi(title string) *Taxi {
 	})
 
 	// Configure States: StateHardwareIsInFirsteTimeReadyMode
-	cfg = taxiRoadStateMachine.Configure(StateHardwareIsInFirsteTimeReadyMode)
-	cfg.Permit(TriggerTollIsReadyAndEntersWaitState, StateTollIsWaitingForTaxi)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg = taxiStateMachine.Configure(StateHardwareIsInFirsteTimeReadyMode)
+	cfg.Permit(TriggerTaxiIsReadyAndEntersWaitState, StateTaxisWaitingForCustomer)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ") })
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
 		log.Println("")
 	})
 
-	// Configure States: StateTollIsWaitingForTaxi
-	cfg = taxiRoadStateMachine.Configure(StateTollIsWaitingForTaxi)
-	cfg.Permit(TriggerTaxiRequestsPaymentRequest, StatePaymentRequestIsCreatedAndSent)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTollIsWaitingForTaxi' ") })
+	// Configure States: StateTaxisWaitingForCustomer
+	cfg = taxiStateMachine.Configure(StateTaxisWaitingForCustomer)
+	cfg.Permit(TriggerCustomerConnects, StateCustomerHasConnected)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxisWaitingForCustomer' ") })
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTollIsWaitingForTaxi' ")
+		log.Println("*** Exiting 'StateTaxisWaitingForCustomer' ")
 		log.Println("")
 	})
 
-	/*	// Configure States: StateTaxiHasConnected
-		cfg = taxiRoadStateMachine.Configure(StateTaxiHasConnected)
-		cfg.Permit(TriggerTaxiRequestsPaymentRequest, StatePaymentRequestIsCreatedAndSent)
-		cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
-		cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiHasConnected' ") })
+	// Configure States: StateCustomerHasConnected
+	cfg = taxiStateMachine.Configure(StateCustomerHasConnected)
+	cfg.Permit(TriggerCustomerAcceptsPrice, StateCustomerHasAcceptedPrice)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerHasConnected' ") })
 		cfg.OnExit(func() {
-			log.Println("*** Exiting 'StateTaxiHasConnected' ")
+			log.Println("*** Exiting 'StateCustomerHasConnected' ")
 			log.Println("")
-		})*/
+		})
 
-	// Configure States: StatePaymentRequestIsCreatedAndSent
-	cfg = taxiRoadStateMachine.Configure(StatePaymentRequestIsCreatedAndSent)
-	cfg.Permit(TriggerTaxiPaysPaymentRequest, StatePaymentRequestIsPaid)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StatePaymentRequestIsCreatedAndSent' ") })
+	// Configure States: StateCustomerHasAcceptedPrice
+	cfg = taxiStateMachine.Configure(StateCustomerHasAcceptedPrice)
+	cfg.Permit(TriggerTaxiSetsHardwareInDriveMode, StateTaxiIsReadyToDrive)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerHasAcceptedPrice' ") })
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StatePaymentRequestIsCreatedAndSent' ")
+		log.Println("*** Exiting 'StateCustomerHasAcceptedPrice' ")
 		log.Println("")
 	})
 
-	/*	// Configure States: StateWaitingForPayment
-		cfg = taxiRoadStateMachine.Configure(StateWaitingForPayment)
-		cfg.Permit(TriggerTaxiPaysPaymentRequest, StatePaymentRequestIsPaid)
-		cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
-		cfg.OnEnter(func() { log.Println("*** Entering 'StateWaitingForPayment' ") })
+	// Configure States: StateTaxiIsReadyToDrive
+	cfg = taxiStateMachine.Configure(StateTaxiIsReadyToDrive)
+	cfg.Permit(TriggerTaxiStreamsPaymentRequestToCustomer, StateTaxiIsWaitingForPayment)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsReadyToDrive' ") })
+	cfg.OnExit(func() {
+		log.Println("*** Exiting 'StateTaxiIsReadyToDrive' ")
+		log.Println("")
+	})
+
+	// Configure States: StateTaxiIsWaitingForPayment
+	cfg = taxiStateMachine.Configure(StateTaxiIsWaitingForPayment)
+	cfg.Permit(TriggerCustomerPaysPaymentRequest, StateTaxiIsReadyToDrive)
+	cfg.Permit(TriggerCustomerStoppsPayingTimer, StateCustomerStoppedPaying)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
+	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsWaitingForPayment' ") })
 		cfg.OnExit(func() {
-			log.Println("*** Exiting 'StateWaitingForPayment' ")
+			log.Println("*** Exiting 'StateTaxiIsWaitingForPayment' ")
 			log.Println("")
-		})*/
+		})
 
-	// Configure States: StatePaymentRequestIsPaid
-	cfg = taxiRoadStateMachine.Configure(StatePaymentRequestIsPaid)
-	cfg.Permit(TriggerTollValidatesThatPaymentIsOK, StateThanksAndOpenTollDone)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	// Configure States: StateCustomerStoppedPaying
+	cfg = taxiStateMachine.Configure(StateCustomerStoppedPaying)
+	cfg.Permit(TriggerCustomerPaysPaymentRequest, StateTaxiIsReadyToDrive)
+	cfg.Permit(TriggerCustomerLeavesTaxi, StateCustomerLeftTaxi)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StatePaymentRequestIsPaid' ")
-		_ = taxi.TaxiStateMachine.Fire(TriggerTollValidatesThatPaymentIsOK.Key, nil)
+		log.Println("*** Entering 'StateCustomerStoppedPaying' ")
+		//_ = taxi.TaxiStateMachine.Fire(TriggerTollValidatesThatPaymentIsOK.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StatePaymentRequestIsPaid' ")
+		log.Println("*** Exiting 'StateCustomerStoppedPaying' ")
 		log.Println("")
 	})
 
-	// Configure States: StateThanksAndOpenTollDone
-	cfg = taxiRoadStateMachine.Configure(StateThanksAndOpenTollDone)
-	cfg.Permit(TriggerTaxiLeavesToll, StateClosedTollAndResetedHardware)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	// Configure States: StateCustomerLeftTaxi
+	cfg = taxiStateMachine.Configure(StateCustomerLeftTaxi)
+	cfg.Permit(TriggerTaxiResetsHardware, StateTaxiIsReadyForNewCustomer)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateThanksAndOpenTollDone' ")
-		_ = taxi.TaxiStateMachine.Fire(TriggerTaxiLeavesToll.Key, nil)
+		log.Println("*** Entering 'StateCustomerLeftTaxi' ")
+		//_ = taxi.TaxiStateMachine.Fire(TriggerTaxiLeavesToll.Key, nil)
 	})
 
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateThanksAndOpenTollDone' ")
+		log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
 		log.Println("")
 	})
 
-	// Configure States: StateClosedTollAndResetedHardware
-	cfg = taxiRoadStateMachine.Configure(StateClosedTollAndResetedHardware)
-	cfg.Permit(TriggerTollIsReadyAndEntersWaitState, StateTollIsWaitingForTaxi)
-	cfg.Permit(TriggerTollEndsInErrorMode, StateTaxiIsInErrorMode)
+	// Configure States: StateTaxiIsReadyForNewCustomer
+	cfg = taxiStateMachine.Configure(StateTaxiIsReadyForNewCustomer)
+	cfg.Permit(TriggerTaxiIsReadyAndEntersWaitState, StateTaxisWaitingForCustomer)
+	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateClosedTollAndResetedHardware' ")
+		log.Println("*** Entering 'StateTaxiIsReadyForNewCustomer' ")
 		taxi.SetHardwareInReadyMode()
-		_ = taxi.TaxiStateMachine.Fire(TriggerTollIsReadyAndEntersWaitState.Key, nil)
+		//_ = taxi.TaxiStateMachine.Fire(TriggerTaxiIsReadyAndEntersWaitState.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateClosedTollAndResetedHardware' ")
+		log.Println("*** Exiting 'StateTaxiIsReadyForNewCustomer' ")
 		log.Println("")
 	})
 
 	// Configure States: StateTaxiIsInErrorMode
-	cfg = taxiRoadStateMachine.Configure(StateTaxiIsInErrorMode)
+	cfg = taxiStateMachine.Configure(StateTaxiIsInErrorMode)
 
 	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsInErrorMode' ") })
 	cfg.OnExit(func() {
@@ -275,7 +285,7 @@ func NewTaxi(title string) *Taxi {
 		log.Println("")
 	})
 
-	taxi.TaxiStateMachine = taxiRoadStateMachine
+	taxi.TaxiStateMachine = taxiStateMachine
 
 	return taxi
 }
@@ -310,7 +320,7 @@ func (taxi *Taxi) TollCheckBitcoin(check bool) (err error) {
 
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTollChecksBitcoin
+	currentTrigger = TriggerTaxiChecksBitcoin
 
 	switch check {
 
@@ -343,7 +353,7 @@ func (taxi *Taxi) TollChecksLightning() {
 
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTollChecksLightning
+	currentTrigger = TriggerTaxiChecksLightning
 
 	err := taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
@@ -356,103 +366,74 @@ func (taxi *Taxi) TollChecksLightning() {
 
 // ******************************************************************************
 // Check all hardware connected to the taxi
-func (taxi *Taxi) TollChecksHardware() {
+func (taxi *Taxi) TaxiChecksHardware() {
 
 	var err error
 	var wg sync.WaitGroup
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTollChecksHardware
+	currentTrigger = TriggerTaxiChecksHardware
 
 	err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	switch  err.(type) {
 	case nil:
 
 		//Wait for all 3 goroutines
-		wg.Add(3)
+		wg.Add(2)
 
 		go func() {
-			// Check Servo
+			// Check Power Sensor
 			defer wg.Done()
 
 			time.Sleep(5 * time.Second)
-			resp, err := testClient.CheckTollGateServo(context.Background(), useEnvironment)
+			resp, err := testClient.CheckPowerSensor(context.Background(), useEnvironment)
 			if err != nil {
-				logMessagesWithError(4, "Could not send 'CheckTollGateServo' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
+				logMessagesWithError(4, "Could not send 'CheckPowerSensor' to address: "+address_to_dial+". Error Message:", err)
+				//Set system in Error State due no connection to hardware server for 'CheckPowerSensor'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'CheckTollGateServo' on address "+address_to_dial+" says Servo is OK")
+					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+address_to_dial+" says Power Sensor is OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'CheckTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
+					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+address_to_dial+" says Power Sensor is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
 			}
 		}()
 
 		go func() {
-			// Check E-Ink Display
+			// Check Power Cutter
 
 			defer wg.Done()
 
-			resp, err := testClient.CheckTollEInkDisplay(context.Background(), useEnvironment)
+			resp, err := testClient.CheckPowerCutter(context.Background(), useEnvironment)
 			if err != nil {
-				logMessagesWithError(4, "Could not send 'CheckTollEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
+				logMessagesWithError(4, "Could not send 'CheckPowerCutter' to address: "+address_to_dial+". Error Message:", err)
+				//Set system in Error State due no connection to hardware server for 'CheckPowerCutter'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'CheckTollEInkDisplay' on address "+address_to_dial+" says E-Ink Display is OK")
+					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+address_to_dial+" says Power Cutter is OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'CheckTollEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
+					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+address_to_dial+" says Power Cutter is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
-			}
-		}()
-
-		go func() {
-			// Check Distance Sensor
-
-			defer wg.Done()
-
-			resp, err := testClient.CheckTollDistanceSensor(context.Background(), useEnvironment)
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'CheckTollDistanceSensor' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollDistanceSensor'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'CheckTollDistanceSensor' on address "+address_to_dial+" says E-Ink Display is OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'CheckTollDistanceSensor' on address "+address_to_dial+" says E-Ink Display is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-
-				}
-
 			}
 		}()
 
@@ -482,23 +463,23 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 	switch  err.(type) {
 	case nil:
 
-		//Wait for all 3 goroutines
-		wg.Add(3)
+		//Wait for all 1 goroutine
+		wg.Add(1)
 
 		go func() {
-			// CLose Servo-Gate
+			// Cut Power
 			defer wg.Done()
 
 			time.Sleep(5 * time.Second)
 
-			tollGateMessage := &taxiHW_api.TollGateServoMessage{useEnv, taxiHW_api.TollGateCommand_CLOSE}
-			resp, err := testClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
+			PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
+			resp, err := testClient.CutPower(context.Background(), PowerCutterMessage)
 
 			if err != nil {
 				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
@@ -510,72 +491,12 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
 			}
 		}()
 
-		go func() {
-			// Send QR Code of ip to E-Ink display
-
-			defer wg.Done()
-
-			eInkDisplayMessage := &taxiHW_api.EInkDisplayMessage{useEnv, taxiHW_api.EInkMessageType_MESSSAGE_QR, "127.0.0.1", ""}
-			resp, err := testClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
-
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display message received")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-
-				}
-			}
-		}()
-
-		go func() {
-			// Check Distance Sensor that no object is infront of the sensor
-
-			defer wg.Done()
-
-			distanceSensorMessage := &taxiHW_api.DistanceSensorMessage{useEnv, taxiHW_api.DistanceSensorCommand_OBJECT_NOT_FOUND}
-			resp, err := testClient.UseDistanceSensor(context.Background(), distanceSensorMessage)
-
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'UseDistanceSensor' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollDistanceSensor'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says OK, there are no objects infront of sensor")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says distace sensor is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
-
-				}
-
-			}
-		}()
 
 		wg.Wait()
 
@@ -591,10 +512,10 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 
 // ******************************************************************************
 // Taxi enters Wait State
-func (toll *Taxi) TollIsReadyAndEntersWaitState() {
+func (taxi *Taxi) TollIsReadyAndEntersWaitState() {
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTollIsReadyAndEntersWaitState
+	currentTrigger = TriggerTaxiIsReadyAndEntersWaitState
 
 	err := taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
@@ -607,30 +528,79 @@ func (toll *Taxi) TollIsReadyAndEntersWaitState() {
 // ******************************************************************************
 
 // ******************************************************************************
-/*
-// Taxi connects to the taxi
-func (taxi *Taxi) TaxiConnects() {
-	var currentTrigger  ssm.Trigger
 
-	currentTrigger = TriggerTaxiConnects
+// Customer connects to the taxi
+func (taxi *Taxi) CustomerConnects(check bool) (err error) {
+	var currentTrigger ssm.Trigger
 
-	err := taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
-	if err != nil {
-		logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
+	currentTrigger = TriggerCustomerConnects
 
+	switch check {
+
+	case true:
+		// Do a check if state machine is in correct state for triggering event
+		if taxi.TaxiStateMachine.CanFire(currentTrigger.Key) == true {
+			err = nil
+
+		} else {
+
+			err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		}
+
+	case false:
+		// Execute Trigger
+		err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
+
+		}
 	}
 
+	return err
+
 }
-*/
+
+// ******************************************************************************
+// Customer Accepts Price
+func (taxi *Taxi) CustomerAcceptsPrice(check bool) (err error) {
+
+	var currentTrigger ssm.Trigger
+
+	currentTrigger = TriggerCustomerAcceptsPrice
+
+	switch check {
+
+	case true:
+		// Do a check if state machine is in correct state for triggering event
+		if taxi.TaxiStateMachine.CanFire(currentTrigger.Key) == true {
+			err = nil
+
+		} else {
+
+			err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		}
+
+	case false:
+		// Execute Trigger
+		err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
+
+		}
+	}
+
+	return err
+
+}
 // ******************************************************************************
 
 // ******************************************************************************
 // Taxi requests a payment request
 
-func (toll *Taxi) TaxiRequestsPaymentRequest(check bool) (err error) {
+func (taxi *Taxi) TaxiRequestsPaymentRequest(check bool) (err error) {
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTaxiRequestsPaymentRequest
+	currentTrigger = TriggerTaxiStreamsPaymentRequestToCustomer
 
 	switch check {
 
@@ -706,7 +676,7 @@ func taxiPaysToll(check bool) (err error) {
 	return err
 }
 
-func (toll *Taxi) TaxiPaysPaymentRequest(check bool) (err error) {
+func (taxi *Taxi) TaxiPaysPaymentRequest(check bool) (err error) {
 	var currentTrigger ssm.Trigger
 
 	currentTrigger = TriggerTaxiPaysPaymentRequest
@@ -740,7 +710,7 @@ func (toll *Taxi) TaxiPaysPaymentRequest(check bool) (err error) {
 
 // ******************************************************************************
 // Taxi checks that payment is OK and set hardware in correct mode
-func (toll *Taxi) TollValidatesThatPaymentIsOK() {
+func (taxi *Taxi) TollValidatesThatPaymentIsOK() {
 
 	var err error
 	var wg sync.WaitGroup
@@ -767,7 +737,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
@@ -779,7 +749,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
 			}
@@ -797,7 +767,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 				logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
@@ -809,7 +779,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
 			}
@@ -827,7 +797,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 				logMessagesWithError(4, "Could not send 'UseDistanceSensor' to address: "+address_to_dial+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckTollDistanceSensor'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
@@ -843,7 +813,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 
 					//Set system in Error State due to malfunctioning hardware
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 				}
 
@@ -862,7 +832,7 @@ func (toll *Taxi) TollValidatesThatPaymentIsOK() {
 
 // ******************************************************************************
 // Set the hardware in ready mode
-func (toll *Taxi) SetHardwareInReadyMode() {
+func (taxi *Taxi) SetHardwareInReadyMode() {
 
 	var wg sync.WaitGroup
 
@@ -882,7 +852,7 @@ func (toll *Taxi) SetHardwareInReadyMode() {
 			logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
 			//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
 			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-			err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+			err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 		} else {
 
 			if resp.GetAcknack() == true {
@@ -894,7 +864,7 @@ func (toll *Taxi) SetHardwareInReadyMode() {
 
 				//Set system in Error State due to malfunctioning hardware
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 			}
 		}
@@ -917,7 +887,7 @@ func (toll *Taxi) SetHardwareInReadyMode() {
 			logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
 			//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
 			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-			err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+			err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 		} else {
 
 			if resp.GetAcknack() == true {
@@ -929,7 +899,7 @@ func (toll *Taxi) SetHardwareInReadyMode() {
 
 				//Set system in Error State due to malfunctioning hardware
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTollEndsInErrorMode.Key, nil)
+				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 
 			}
 		}
@@ -944,7 +914,7 @@ func (toll *Taxi) SetHardwareInReadyMode() {
 // ******************************************************************************
 // Taxi leaves taxi
 
-func (toll *Taxi) TaxiLeavesToll() {
+func (taxi *Taxi) TaxiLeavesToll() {
 	var currentTrigger ssm.Trigger
 
 	currentTrigger = TriggerTaxiLeavesToll
@@ -962,10 +932,10 @@ func (toll *Taxi) TaxiLeavesToll() {
 // ******************************************************************************
 // Restarts the system when Triggered
 
-func (toll *Taxi) RestartTollSystem() {
+func (taxi *Taxi) RestartTollSystem() {
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerRestartTollSystem
+	currentTrigger = TriggerRestartTaxiSystem
 
 	err := taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
@@ -978,10 +948,10 @@ func (toll *Taxi) RestartTollSystem() {
 // ******************************************************************************
 // Send System to Error State
 
-func (toll *Taxi) SendTollIntoErrorState() {
+func (taxi *Taxi) SendTollIntoErrorState() {
 	var currentTrigger ssm.Trigger
 
-	currentTrigger = TriggerTollEndsInErrorMode
+	currentTrigger = TriggerTaxiEndsInErrorMode
 
 	err := taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 	if err != nil {
@@ -1049,12 +1019,11 @@ func validateBitcoind() (err error) {
 	return err
 }
 
-// Taxi request PaymentRequest
-func (s *tollGateServiceServer) GetPaymentRequest(ctx context.Context, environment *taxi_api.Enviroment) (*taxi_api.PaymentRequestMessage, error) {
+// Taxi gererates a PaymentRequest
+func GeneratePaymentRequest(ctx context.Context, environment *taxi_api.Enviroment) (*taxi_api.PaymentRequestMessage, error) {
 
 	log.Println("Incoming: 'GetPaymentRequest'")
-	fmt.Println("sleeping...for 3 seconds")
-	time.Sleep(3 * time.Second)
+
 
 	var acknack bool
 	var returnMessage string
@@ -1198,7 +1167,7 @@ func main() {
 	go func() {
 		log.Println("Starting Taxi Gate Hardware Server")
 		registerTaxiServer = grpc.NewServer()
-		taxi_api.RegisterTollRoadServerServer(registerTaxiServer, &tollGateServiceServer{})
+		taxi_api.RegisterTollRoadServerServer(registerTaxiServer, &taxiServiceServer{})
 		log.Println("registerTaxiServer for Taxi Gate started")
 		registerTaxiServer.Serve(lis)
 	}()

@@ -40,7 +40,11 @@ enum TestOrProdEnviroment {
 
 enum PriceUnit {
     SatoshiPerSecond = 0;
-    SatoshiPerMilliSecond = 1;
+}
+
+enum TimeUnit {
+    SecondsBetweenPaymentmentRequests = 0;
+    MilliSecondsBetweenPaymentmentRequests = 1;
 }
 
 message Enviroment {
@@ -57,6 +61,8 @@ message Price {
     int32 speed = 3;
     int32 acceleration = 4;
     int32 time = 5;
-    PriceUnit priceunit = 6;
+    TimeUnit timeunit = 6;
+    int32 paymentRequestInterval = 7;
+    PriceUnit priceunit = 8;
 }
 
