@@ -7,7 +7,9 @@ import (
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
 	//log "log"
-	taxiHW_api "jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
+	taxiHW_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server/taxi_hardware_grpc_api"                      //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
+	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api" //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
+
 	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
 
 	"time"
@@ -23,7 +25,7 @@ import (
 
 	//"github.com/op/go-logging"
 	"log"
-	"jlambert/lightningCab/taxi_server/lightningServer"
+	"jlambert/lightningCab/taxi_server/lightningConnection"
 	"jlambert/lightningCab/common_config"
 )
 
@@ -35,17 +37,28 @@ type Taxi struct {
 var taxi *Taxi
 
 var (
-	remoteServerConnection *grpc.ClientConn
-	testClient             taxiHW_api.TaxiHardwareClient
+	remoteTaxiHWServerConnection *grpc.ClientConn
+	taxiHWClient                 taxiHW_api.TaxiHardwareClient
 
-	address_to_dial string                 = common_config.GrpcTaxiHardwareServer_address + common_config.GrpcTaxiHardwareServer_port
-	useEnv                                 = taxiHW_api.TestOrProdEnviroment_Test
-	useEnvironment  *taxiHW_api.Enviroment = &taxiHW_api.Enviroment{TestOrProduction: useEnv}
+	remoteTaxiHWStreamServerConnection *grpc.ClientConn
+	taxiHWStreamClient                 taxiHW_api.TaxiHardwareClient
+
+	addressToDialToTaxiHWServer       string = common_config.GrpcTaxiHardwareServer_address + common_config.GrpcTaxiHardwareServer_port
+	addressToDialToTaxiHWStreamServer string = common_config.GrpcTaxiHardwareStreamServer_address + common_config.GrpcTaxiHardwareStreamServer_port
+
+	//HW
+	useEnv                                        = taxiHW_api.TestOrProdEnviroment_Test
+	useHardwareEnvironment *taxiHW_api.Enviroment = &taxiHW_api.Enviroment{TestOrProduction: useEnv}
+
+	//HW-Stream
+	useEnv_stream                                                  = taxiHW_stream_api.TestOrProdEnviroment_Test
+	messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage = &taxiHW_stream_api.MessasurePowerMessage{useEnv_stream, 1000}
+
 )
 
 // Global connection constants
 const (
-	localServerEngineLocalPort = common_config.GrpcTaxiServer_port
+	localTaxiServerEngineLocalPort = common_config.GrpcTaxiServer_port
 )
 
 var (
@@ -386,19 +399,19 @@ func (taxi *Taxi) TaxiChecksHardware() {
 			defer wg.Done()
 
 			time.Sleep(5 * time.Second)
-			resp, err := testClient.CheckPowerSensor(context.Background(), useEnvironment)
+			resp, err := taxiHWClient.CheckPowerSensor(context.Background(), useHardwareEnvironment)
 			if err != nil {
-				logMessagesWithError(4, "Could not send 'CheckPowerSensor' to address: "+address_to_dial+". Error Message:", err)
+				logMessagesWithError(4, "Could not send 'CheckPowerSensor' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckPowerSensor'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+address_to_dial+" says Power Sensor is OK")
+					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+addressToDialToTaxiHWServer+" says Power Sensor is OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+address_to_dial+" says Power Sensor is NOT OK")
+					logMessagesWithOutError(4, "'CheckPowerSensor' on address "+addressToDialToTaxiHWServer+" says Power Sensor is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
@@ -414,19 +427,19 @@ func (taxi *Taxi) TaxiChecksHardware() {
 
 			defer wg.Done()
 
-			resp, err := testClient.CheckPowerCutter(context.Background(), useEnvironment)
+			resp, err := taxiHWClient.CheckPowerCutter(context.Background(), useHardwareEnvironment)
 			if err != nil {
-				logMessagesWithError(4, "Could not send 'CheckPowerCutter' to address: "+address_to_dial+". Error Message:", err)
+				logMessagesWithError(4, "Could not send 'CheckPowerCutter' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckPowerCutter'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+address_to_dial+" says Power Cutter is OK")
+					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+addressToDialToTaxiHWServer+" says Power Cutter is OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+address_to_dial+" says Power Cutter is NOT OK")
+					logMessagesWithOutError(4, "'CheckPowerCutter' on address "+addressToDialToTaxiHWServer+" says Power Cutter is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
@@ -473,20 +486,20 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 			time.Sleep(5 * time.Second)
 
 			PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
-			resp, err := testClient.CutPower(context.Background(), PowerCutterMessage)
+			resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
 
 			if err != nil {
-				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
+				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
 				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
 				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 			} else {
 
 				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Gate is Closed")
+					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+addressToDialToTaxiHWServer+" says Gate is Closed")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 				} else {
-					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
+					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+addressToDialToTaxiHWServer+" says Servo is NOT OK")
 					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 					//Set system in Error State due to malfunctioning hardware
@@ -726,100 +739,6 @@ func (taxi *Taxi) TollValidatesThatPaymentIsOK() {
 		//Wait for all 3 goroutines
 		wg.Add(3)
 
-		go func() {
-			// CLose Servo-Gate
-			defer wg.Done()
-
-			tollGateMessage := &taxiHW_api.TollGateServoMessage{useEnv, taxiHW_api.TollGateCommand_OPEN}
-			resp, err := testClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
-
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Gate is Open")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-
-				}
-			}
-		}()
-
-		go func() {
-			// Send Thanks to E-Ink display
-
-			defer wg.Done()
-
-			eInkDisplayMessage := &taxiHW_api.EInkDisplayMessage{useEnv, taxiHW_api.EInkMessageType_MESSAGE_TEXT, "Thanks!", ""}
-			resp, err := testClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
-
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display message received")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-
-				}
-			}
-		}()
-
-		go func() {
-			// Check Distance Sensor that no object is infront of the sensor
-
-			defer wg.Done()
-
-			distanceSensorMessage := &taxiHW_api.DistanceSensorMessage{useEnv, taxiHW_api.DistanceSensorCommand_SIGNAL_WHEN_OBJECT_LEAVES}
-			resp, err := testClient.UseDistanceSensor(context.Background(), distanceSensorMessage)
-
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'UseDistanceSensor' to address: "+address_to_dial+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'CheckTollDistanceSensor'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-			} else {
-
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says OK, the objects has left")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					// Signal that taxi has left the taxi gate
-					taxi.TaxiLeavesToll()
-
-				} else {
-					logMessagesWithOutError(4, "'UseDistanceSensor' on address "+address_to_dial+" says E-ditance sensor is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-					//Set system in Error State due to malfunctioning hardware
-					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-
-				}
-
-			}
-		}()
-
 		wg.Wait()
 
 	default:
@@ -846,20 +765,20 @@ func (taxi *Taxi) SetHardwareInReadyMode() {
 		time.Sleep(5 * time.Second)
 
 		tollGateMessage := &taxiHW_api.TollGateServoMessage{useEnv, taxiHW_api.TollGateCommand_CLOSE}
-		resp, err := testClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
+		resp, err := taxiHWClient.OpenCloseTollGateServo(context.Background(), tollGateMessage)
 
 		if err != nil {
-			logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+address_to_dial+". Error Message:", err)
+			logMessagesWithError(4, "Could not send 'OpenCloseTollGateServo' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
 			//Set system in Error State due no connection to hardware server for 'CheckTollGateServo'
 			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 			err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 		} else {
 
 			if resp.GetAcknack() == true {
-				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Gate is Closed")
+				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+addressToDialToTaxiHWServer+" says Gate is Closed")
 				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 			} else {
-				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+address_to_dial+" says Servo is NOT OK")
+				logMessagesWithOutError(4, "'OpenCloseTollGateServo' on address "+addressToDialToTaxiHWServer+" says Servo is NOT OK")
 				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 				//Set system in Error State due to malfunctioning hardware
@@ -881,20 +800,20 @@ func (taxi *Taxi) SetHardwareInReadyMode() {
 		defer wg.Done()
 
 		eInkDisplayMessage := &taxiHW_api.EInkDisplayMessage{useEnv, taxiHW_api.EInkMessageType_MESSSAGE_QR, "127.0.0.1", ""}
-		resp, err := testClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
+		resp, err := taxiHWClient.UseEInkDisplay(context.Background(), eInkDisplayMessage)
 
 		if err != nil {
-			logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+address_to_dial+". Error Message:", err)
+			logMessagesWithError(4, "Could not send 'UseEInkDisplay' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
 			//Set system in Error State due no connection to hardware server for 'CheckTollEInkDisplay'
 			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 			err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
 		} else {
 
 			if resp.GetAcknack() == true {
-				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display message received")
+				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+addressToDialToTaxiHWServer+" says E-Ink Display message received")
 				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 			} else {
-				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+address_to_dial+" says E-Ink Display is NOT OK")
+				logMessagesWithOutError(4, "'UseEInkDisplay' on address "+addressToDialToTaxiHWServer+" says E-Ink Display is NOT OK")
 				logMessagesWithOutError(4, "Response Message: "+resp.Comments)
 
 				//Set system in Error State due to malfunctioning hardware
@@ -1044,7 +963,7 @@ func GeneratePaymentRequest(ctx context.Context, environment *taxi_api.Enviromen
 			//returnMessage = "Payment Request Created"
 			//paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
 
-			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", 100, 180)
 			if err != nil || invoice.Invoice == "" {
 				acknack = false
 				returnMessage = "There was a problem when creating payment request"
@@ -1063,7 +982,7 @@ func GeneratePaymentRequest(ctx context.Context, environment *taxi_api.Enviromen
 			//returnMessage = "Payment Request Created"
 			//paymentReqest = "kjdfhksdjfhlskdjfhlasdkjfhsldkjfhksdfjhlkdsjfhdskjfhskdjfhsk"
 
-			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", 100, 180)
 			if err != nil || invoice.Invoice == "" {
 				acknack = false
 				returnMessage = "There was a problem when creating payment request"
@@ -1087,7 +1006,7 @@ func GeneratePaymentRequest(ctx context.Context, environment *taxi_api.Enviromen
 			returnMessage = "There was a problem when creating payment request"
 			paymentReqest = ""
 		} else {
-			invoice, err := lightningServer.CreateInvoice("Payment Request for Taxi", 100, 180)
+			invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", 100, 180)
 			if err != nil || invoice.Invoice == "" {
 				acknack = false
 				returnMessage = "There was a problem when creating payment request"
@@ -1122,12 +1041,13 @@ func cleanup() {
 		log.Println("Gracefull stop for: registerTaxiServer")
 		registerTaxiServer.GracefulStop()
 
-		log.Println("Close net.Listing: %v", localServerEngineLocalPort)
+		log.Println("Close net.Listing: %v", localTaxiServerEngineLocalPort)
 		lis.Close()
 
 		//log.Println("Close DB_session: %v", DB_session)
 		//DB_session.Close()
-		remoteServerConnection.Close()
+		remoteTaxiHWServerConnection.Close()
+		remoteTaxiHWStreamServerConnection.Close()
 	}
 }
 
@@ -1142,32 +1062,45 @@ func main() {
 	//initLog()
 
 	// *********************
-	// Set up connection to Taxi Gate Hardware Server
-	remoteServerConnection, err = grpc.Dial(address_to_dial, grpc.WithInsecure())
+	// Set up connection to Taxi Hardware Server
+	remoteTaxiHWServerConnection, err = grpc.Dial(addressToDialToTaxiHWServer, grpc.WithInsecure())
 	if err != nil {
-		log.Println("did not connect to Taxi Gate Hardware Server on address: ", address_to_dial, "error message", err)
+		log.Println("did not connect to Taxi Hardware Server on address: ", addressToDialToTaxiHWServer, "error message", err)
 		os.Exit(0)
 	} else {
-		log.Println("gRPC connection OK to Taxi Gate Hardware Server, address: ", address_to_dial)
+		log.Println("gRPC connection OK to Taxi  Hardware Server, address: ", addressToDialToTaxiHWServer)
 		// Creates a new Clients
-		testClient = taxiHW_api.NewTollHardwareClient(remoteServerConnection)
+		taxiHWClient = taxiHW_api.NewTaxiHardwareClient(remoteTaxiHWServerConnection)
 
 	}
 
 	// *********************
-	// Start Taxi Gate Server for Incomming Taxi connectionss
-	log.Println("Taxi Gate Hardware Server started")
-	log.Println("Start listening on: %v", localServerEngineLocalPort)
-	lis, err = net.Listen("tcp", localServerEngineLocalPort)
+	// Set up connection to Taxi Hardware Stream Server
+	remoteTaxiHWStreamServerConnection, err = grpc.Dial(addressToDialToTaxiHWStreamServer, grpc.WithInsecure())
+	if err != nil {
+		log.Println("did not connect to Taxi Hardware Stream Server on address: ", addressToDialToTaxiHWStreamServer, "error message", err)
+		os.Exit(0)
+	} else {
+		log.Println("gRPC connection OK to Taxi Hardware Stream Server, address: ", addressToDialToTaxiHWStreamServer)
+		// Creates a new Clients
+		taxiHWClient = taxiHW_api.NewTaxiHardwareClient(remoteTaxiHWServerConnection)
+
+	}
+
+	// *********************
+	// Start Taxi Server for Incomming Customer connectionss
+	log.Println("Taxi Customer Server started")
+	log.Println("Start listening on: %v", localTaxiServerEngineLocalPort)
+	lis, err = net.Listen("tcp", localTaxiServerEngineLocalPort)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
 	// Creates a new RegisterClient gRPC server
 	go func() {
-		log.Println("Starting Taxi Gate Hardware Server")
+		log.Println("Starting Taxi Customer Server")
 		registerTaxiServer = grpc.NewServer()
-		taxi_api.RegisterTollRoadServerServer(registerTaxiServer, &taxiServiceServer{})
+		taxi_api.RegisterTaxiServer(registerTaxiServer, &taxiServiceServer{})
 		log.Println("registerTaxiServer for Taxi Gate started")
 		registerTaxiServer.Serve(lis)
 	}()
@@ -1178,10 +1111,10 @@ func main() {
 	//testTaxiCycle()
 
 	//Initiate Lightning
-	//lightningServer.InitLndServerConnection()
-	//lightningServer.RetrieveGetInfo()
+	//lightningConnection.InitLndServerConnection()
+	//lightningConnection.RetrieveGetInfo()
 
-	go lightningServer.LigtningMainService(taxiPaysToll)
+	go lightningConnection.LigtningMainService(taxiPaysToll)
 
 	// Set up the Private Taxi Road State Machine
 	initiateTaxi()

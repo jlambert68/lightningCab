@@ -136,8 +136,24 @@ func (s *taxiServiceServer) AcceptPrice(ctx context.Context, environment *taxi_a
 	return &taxi_api.AckNackResponse{acknack, returnMessage}, nil
 }
 
-func (s *taxiServiceServer) PaymentRequestStream(ctx context.Context, environment *taxi_api.Enviroment) (*taxi_api.AckNackResponse, error) {
+func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment, stream taxi_api.Taxi_PaymentRequestStreamServer) (err error) {
+	log.Printf("Incoming: 'PaymentRequestStream'")
 
-	PaymentRequestStream(Enviroment)
-	returns(stream
-	PaymentRequest)
+	err = nil
+	paymentRequestResponse := &taxi_api.PaymentRequest{
+		""}
+
+	for {
+		if err := stream.Send(paymentRequestResponse); err != nil {
+			return err
+			log.Printf("Error when streaming back: 'MessasurePowerConsumption'")
+			break
+		}
+
+		time.Sleep(1 * time.Second)
+
+		getPaymentRequest
+	}
+	return nil
+}
+

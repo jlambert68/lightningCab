@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	defaultConfigFile = "lightningServer.conf"
+	defaultConfigFile = "lightningConnection.conf"
 
 	defaultDataDir = "toll_road_server"
 

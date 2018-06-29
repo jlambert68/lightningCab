@@ -12,7 +12,7 @@ import (
 	"net"
 	//"golang.org/x/net/context"
 
-	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api"
+	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api"
 )
 
 // Global connection constants

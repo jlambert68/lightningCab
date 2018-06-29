@@ -1,4 +1,4 @@
-package lightningServer
+package lightningConnection
 
 import (
 	"path"
@@ -13,11 +13,11 @@ import (
 )
 
 const (
-	defaultConfigFile = "lightningServer.conf"
+	defaultConfigFile = "lightningConnection.conf"
 
-	defaultDataDir = "toll_road_server"
+	defaultDataDir = "taxi_server"
 
-	defaultLogFile  = "toll_road_server.log"
+	defaultLogFile  = "taxi_server.log"
 	defaultLogLevel = "debug" //"info"
 
 	defaultRESTHost    = "127.0.0.1:8081" //0.0.0.0:8081"
@@ -28,7 +28,7 @@ const (
 
 	defaultTipExpiry = 3600
 
-	defaultLndGRPCHost  = "localhost:10001" //"localhost:10009"
+	defaultLndGRPCHost  = "localhost:10002" //"localhost:10009"
 	defaultLndCertFile  = "tls.cert"
 	defaultMacaroonFile = "admin.macaroon"
 )
@@ -191,7 +191,7 @@ func getDefaultLndDir() (dir string) {
 
 func getHardcodedMacaroonDirForSimnet() (dir string) {
 	homeDir := getHomeDir()
-	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/toll/data")
+	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/taxi/data")
 
 	return dir
 }

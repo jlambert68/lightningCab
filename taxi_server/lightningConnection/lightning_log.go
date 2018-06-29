@@ -1,4 +1,4 @@
-package lightningServer
+package lightningConnection
 
 import (
 	"github.com/op/go-logging"

@@ -1,4 +1,4 @@
-package lightningServer
+package lightningConnection
 
 import (
 	"context"
@@ -192,7 +192,7 @@ func publishInvoiceSettled(invoice string) { //, eventSrv *eventsource.Server) {
 
 			pendingInvoices = append(pendingInvoices[:index], pendingInvoices[index+1:]...)
 
-			//Callback to previous layer to change state
+			//Callback to previous layer to inform that Invoice is paid
 			_ = callbackToToll(false)
 
 			break

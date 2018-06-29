@@ -1207,8 +1207,8 @@ func main() {
 	//testTollRoadCycle()
 
 	//Initiate Lightning
-	//lightningServer.InitLndServerConnection()
-	//lightningServer.RetrieveGetInfo()
+	//lightningConnection.InitLndServerConnection()
+	//lightningConnection.RetrieveGetInfo()
 
 	go lightningServer.LigtningMainService(taxiPaysToll)
 
