@@ -7,6 +7,7 @@ import (
 	//"google.golang.org/grpc"
 	"golang.org/x/net/context"
 	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
+	"jlambert/lightningCab/common_config"
 )
 
 /*
@@ -144,15 +145,20 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 		""}
 
 	for {
+		paymentRequestResponse.LightningPaymentRequest, err = generateInvoice()
 		if err := stream.Send(paymentRequestResponse); err != nil {
 			return err
-			log.Printf("Error when streaming back: 'MessasurePowerConsumption'")
+			log.Printf("Error when streaming back: 'PaymentRequestStream'")
 			break
 		}
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(common_config.MilliSecondsBetweenPaymentRequest * time.Millisecond)
+		if paymentRequestIsPaid == false {
+			log.Printf("PaymentRequest not paid in time. Stop Taxi and wait for payment")
+			//Stop Stream for a while and send state machine in wait mode
+			taxi.PaymentsStopsComing(false)
+		}
 
-		getPaymentRequest
 	}
 	return nil
 }

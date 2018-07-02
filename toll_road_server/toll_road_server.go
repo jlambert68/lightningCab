@@ -59,7 +59,7 @@ type tollGateServiceServer struct{}
 func testTollRoadCycle() {
 
 	toll = NewTollRoad("Test Toll Road cycle")
-	//toll.RestartTollSystem()
+	//toll.RestartToaxiSystem()
 	toll.TollChecksLightning()
 	toll.TollChecksHardware()
 	toll.SetHardwareInFirstTimeReadyMode()
@@ -79,7 +79,7 @@ func initiateTollRoad() {
 	var err error
 	err = nil
 	toll = NewTollRoad("Private road")
-	//toll.RestartTollSystem()
+	//toll.RestartToaxiSystem()
 
 	err = validateBitcoind()
 	if err != nil {
