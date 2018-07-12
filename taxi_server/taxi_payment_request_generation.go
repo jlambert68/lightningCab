@@ -4,7 +4,6 @@ import (
 	"jlambert/lightningCab/taxi_server/lightningConnection"
 	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api" //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
 	"log"
-	"time"
 	"io"
 	"golang.org/x/net/context"
 	"math"
@@ -69,10 +68,11 @@ func calculateInvoiceAmount() {
 }
 
 func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage) {
-	log.Printf("Starting Engine Powerdata stream %v", messasurePowerMessage)
+	log.Println("Starting Engine Powerdata stream %v", messasurePowerMessage)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	ctx := context.Background()
+	//	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+	//	defer cancel()
 
 	stream, err := client.MessasurePowerConsumption(ctx, messasurePowerMessage)
 	if err != nil {
@@ -81,7 +81,8 @@ func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, m
 	for {
 		powerMessaurement, err := stream.Recv()
 		if err == io.EOF {
-			log.Println("HMMM, skumt borde inte slutat här när vi tar emot EngineStream, borde avsluta Taxi-server")
+			log.Println("HMMM, skumt borde inte slutat h" +
+				"är när vi tar emot EngineStream, borde avsluta Taxi-server")
 			break
 		}
 		if err != nil {

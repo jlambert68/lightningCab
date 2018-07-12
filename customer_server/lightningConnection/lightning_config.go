@@ -4,7 +4,7 @@ import (
 	"path"
 	"os/user"
 	"runtime"
-	"jlambert/lightningCab/taxi_server/lightningConnection/backends"
+	"jlambert/lightningCab/customer_server/lightningConnection/backends"
 	"github.com/jessevdk/go-flags"
 	"github.com/op/go-logging"
 	"strings"
@@ -15,9 +15,9 @@ import (
 const (
 	defaultConfigFile = "lightningConnection.conf"
 
-	defaultDataDir = "taxi_server"
+	defaultDataDir = "customer_server"
 
-	defaultLogFile  = "taxi_server.log"
+	defaultLogFile  = "customer_server.log"
 	defaultLogLevel = "debug" //"info"
 
 	defaultRESTHost    = "127.0.0.1:8081" //0.0.0.0:8081"
@@ -28,7 +28,7 @@ const (
 
 	defaultTipExpiry = 3600
 
-	defaultLndGRPCHost  = "localhost:10002" //"localhost:10009"
+	defaultLndGRPCHost  = "localhost:10003" //"localhost:10009"
 	defaultLndCertFile  = "tls.cert"
 	defaultMacaroonFile = "admin.macaroon"
 )
@@ -191,7 +191,7 @@ func getDefaultLndDir() (dir string) {
 
 func getHardcodedMacaroonDirForSimnet() (dir string) {
 	homeDir := getHomeDir()
-	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/taxi/data")
+	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/customer/data")
 
 	return dir
 }

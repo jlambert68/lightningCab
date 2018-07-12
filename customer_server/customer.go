@@ -15,6 +15,7 @@ import (
 	"strconv"
 	"time"
 	"io"
+	"jlambert/lightningCab/customer_server/lightningConnection"
 )
 
 var (
@@ -106,6 +107,7 @@ func acceptPrice() {
 // Simulate a Customer recieves paymentRequest Stream
 func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_api.Enviroment) {
 	log.Printf("Starting Taxi PaymentRequest stream %v", enviroment)
+	var invoices []string
 
 	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
@@ -124,8 +126,11 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 			log.Fatalf("Problem when streaming from Taxi invoice Stream:", client, err)
 		}
 		//Customer Pays Invoice
-		payInvoice(invoice)
-
+		invoices[0] = invoice.LightningPaymentRequest
+		err = lightningConnection.PayReceivedInvoicesFromTaxi(invoices)
+		if err != nil {
+			log.Println("Problem when paying Invoice from Taxi: ", err)
+		}
 	}
 }
 

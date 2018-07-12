@@ -62,16 +62,19 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 			log.Printf("Error when streaming back: 'MessasurePowerConsumption'")
 			break
 		}
-
+		log.Printf("Sent the following powerdata: ", powerConsumption)
 		time.Sleep(1 * time.Second)
 
 		powerConsumption.Speed = powerConsumption.Speed + 1
 		if powerConsumption.Speed > 100 {
 			powerConsumption.Speed = 0
+			log.Println("Powerconsuption: ", powerConsumption)
 		}
 		now := time.Now()
 		powerConsumption.Timestamp = now.UnixNano()
 	}
+
+	log.Println("Leaving stream service!")
 	return nil
 }
 
