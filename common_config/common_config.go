@@ -41,8 +41,10 @@ const TimeSatoshiPerSecond = TimeSEKPerSecond / btcsek * SatoshisPerBTC
 const MilliSecondsBetweenPaymentRequest = 1000
 
 // Simnet or Testnet
-/*
+
 const UseSimnet = true
+
+/*
 const defaultLndTollGRPCHost = "localhost:10001"
 const defaultLndTaxiGRPCHost = "localhost:10002"
 const defaultLndCustomerGRPCHost = "localhost:10003"

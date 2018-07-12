@@ -789,28 +789,31 @@ func validateBitcoind() (err error) {
 			log.Fatalf("error creating new btc client: %v", err)
 		}
 
-		// Wait for Blockchain to Sync
-		for {
+		// If SimNet is used then skip this check
+		if common_config.UseSimnet == false {
+			// Wait for Blockchain to Sync
+			for {
 
-			// Get Blockchain info and verifiction status
-			blockchainInfo, _ := client.GetBlockChainInfo()
-			headers := blockchainInfo.Headers
-			blocks := blockchainInfo.Blocks
+				// Get Blockchain info and verifiction status
+				blockchainInfo, _ := client.GetBlockChainInfo()
+				headers := blockchainInfo.Headers
+				blocks := blockchainInfo.Blocks
 
-			// If not 100% sync then wait
-			if headers != blocks {
-				logMessagesWithOutError(4, "Bitcoin blockchain not synced, waiting for 30 seconds...")
-				logMessagesWithOutError(4, "Current Block"+strconv.Itoa(int(blocks))+", Headers: "+strconv.Itoa(int(headers)))
+				// If not 100% sync then wait
+				if headers != blocks {
+					logMessagesWithOutError(4, "Bitcoin blockchain not synced, waiting for 30 seconds...")
+					logMessagesWithOutError(4, "Current Block"+strconv.Itoa(int(blocks))+", Headers: "+strconv.Itoa(int(headers)))
 
-				time.Sleep(30 * time.Second)
+					time.Sleep(30 * time.Second)
 
-			} else {
+				} else {
 
-				logMessagesWithOutError(4, "Bitcoin blockchain is fully synced")
-				blockheight := blockchainInfo.Blocks
-				logMessagesWithOutError(4, "Blockheight: "+strconv.Itoa(int(blockheight)))
-				break
+					logMessagesWithOutError(4, "Bitcoin blockchain is fully synced")
+					blockheight := blockchainInfo.Blocks
+					logMessagesWithOutError(4, "Blockheight: "+strconv.Itoa(int(blockheight)))
+					break
 
+				}
 			}
 		}
 	} else {
