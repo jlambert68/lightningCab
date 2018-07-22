@@ -139,27 +139,122 @@ func (s *taxiServiceServer) AcceptPrice(ctx context.Context, environment *taxi_a
 
 func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment, stream taxi_api.Taxi_PaymentRequestStreamServer) (err error) {
 	log.Printf("Incoming: 'PaymentRequestStream'")
+	var firstTime bool = true
+	//	var firstMissedPaymentTimer time.Timer
+	//	var lastMissedPaymentTimer time.Timer
+
+	abortPaymentRequestGeneration = false
 
 	err = nil
 	paymentRequestResponse := &taxi_api.PaymentRequest{
 		""}
 
+	firstMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
+	lastMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeSecondPaymentTimeOut * time.Second)
+
 	for {
-		paymentRequestResponse.LightningPaymentRequest, err = generateInvoice()
-		if err := stream.Send(paymentRequestResponse); err != nil {
-			return err
-			log.Printf("Error when streaming back: 'PaymentRequestStream'")
+		/*// Stop waiting for paid payment requests
+		if abortPaymentRequestGeneration == true {
+			break
+		}*/
+
+		if paymentRequestIsPaid == true || firstTime == true {
+			if firstTime == true {
+				log.Printf("First time creating PaymentRequest")
+			} else {
+				log.Printf("Not first time creating PaymentRequest")
+			}
+
+			/*
+						if firstTime == false {
+							if firstMissedPaymentTimeOut == false {
+								_ = firstMissedPaymentTimer.Stop()
+							}
+
+							if lastMissedPaymentTimeOut == false {
+								_ = lastMissedPaymentTimer.Stop()
+							}
+			*/
+			//fmt.Println("Timer 'firstMissedPaymentTimer' Stopped")
+			//fmt.Println("Timer 'lastMissedPaymentTimer' Stopped")
+			//}
+
+			firstTime = false
+			firstMissedPaymentTimeOut = false
+			lastMissedPaymentTimeOut = false
+
+			paymentRequestResponse.LightningPaymentRequest, err = generateInvoice()
+			if err := stream.Send(paymentRequestResponse); err != nil {
+				return err
+				log.Printf("Error when streaming back: 'PaymentRequestStream'")
+				break
+			}
+
+			/*			if firstTime == true {
+							firstMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
+							lastMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeSecondPaymentTimeOut * time.Second)
+						} else {*/
+			firstMissedPaymentTimer.Reset(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
+			lastMissedPaymentTimer.Reset(common_config.SecondsBeforeSecondPaymentTimeOut * time.Second)
+			//}
+
+			go func() {
+				<-firstMissedPaymentTimer.C
+				fmt.Println("Timer 'firstMissedPaymentTimer' expired")
+				firstMissedPaymentTimeOut = true
+
+			}()
+			go func() {
+				<-lastMissedPaymentTimer.C
+				fmt.Println("Timer 'lastMissedPaymentTimer' expired")
+				lastMissedPaymentTimeOut = true
+				abortPaymentRequestGeneration = true
+			}()
+
+		} /*else {
+			log.Println("paymentRequestIsPaid =", paymentRequestIsPaid)
+			log.Println("firstTime =", firstTime)
+		}*/
+
+
+		time.Sleep(common_config.MilliSecondsBetweenPaymentRequest * time.Millisecond)
+
+		// First Timeout
+		if paymentRequestIsPaid == false && firstMissedPaymentTimeOut == true {
+			//Check if posible to change state
+			if taxi.PaymentsStopsComing(true) == nil {
+				log.Printf("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
+				taxi.PaymentsStopsComing(false)
+			} else {
+				log.Println("This should not happend for firstTimer")
+				log.Println("Current State", taxi.TaxiStateMachine.State())
+				//lastMissedPaymentTimer.Stop()
+				break
+			}
+			firstMissedPaymentTimeOut = false
+		}
+
+		// Second and Last Timeout
+		if paymentRequestIsPaid == false && lastMissedPaymentTimeOut == true {
+			log.Printf("PaymentRequest timedout. Get Taxi ready for new customer")
+			//Stop Stream for a while and send state machine in wait mode
+
+			//Check if posible to change state
+			if taxi.abortPaymentRequestGeneration(true) == nil {
+				log.Println("Abort Payment Request Generation and make Taxi ready for next customer")
+				taxi.abortPaymentRequestGeneration(false)
+			} else {
+				log.Println("This should not happend for lastTimer")
+				log.Println("Current State", taxi.TaxiStateMachine.State())
+				break
+			}
+			log.Println("From LastTimer Existing Generate PaymentRequests")
 			break
 		}
 
-		time.Sleep(common_config.MilliSecondsBetweenPaymentRequest * time.Millisecond)
-		if paymentRequestIsPaid == false {
-			log.Printf("PaymentRequest not paid in time. Stop Taxi and wait for payment")
-			//Stop Stream for a while and send state machine in wait mode
-			taxi.PaymentsStopsComing(false)
-		}
-
 	}
+
+	log.Println("Leaving 'func PaymentRequestStream'")
 	return nil
 }
 

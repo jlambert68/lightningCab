@@ -9,5 +9,5 @@ type Backend interface {
 	GetInvoice(description string, amount int64, expiry int64) (invoice string, err error)
 
 	// Pay an array of payment requests
-	CompletePaymentRequests(paymentRequests []string, awaitResponse bool) (error)
+	CompletePaymentRequests(paymentRequests []string, awaitResponse bool) (err error)
 }

@@ -25,6 +25,7 @@ type LND struct {
 }
 
 func (lnd *LND) Connect() error {
+	log.Info("Entering Connect() in lnd.go for Customer")
 	creds, err := credentials.NewClientTLSFromFile(lnd.CertFile, "")
 
 	if err != nil {
@@ -134,7 +135,9 @@ func (lnd *LND) SubscribeInvoices(callback PublishInvoiceSettled) error { //, ev
 	return err
 }
 
-func (lnd *LND) CompletePaymentRequests(paymentRequests []string, awaitResponse bool) error {
+func (lnd *LND) CompletePaymentRequests(paymentRequests []string, awaitResponse bool) (err error) {
+
+	fmt.Println("Entering 'CompletePaymentRequests'")
 
 	ctx, cancel := context.WithCancel(lnd.ctx)
 	defer cancel()

@@ -214,7 +214,10 @@ func NewTaxi(title string) *Taxi {
 	cfg = taxiStateMachine.Configure(StateCustomerHasAcceptedPrice)
 	cfg.Permit(TriggerTaxiSetsHardwareInDriveMode, StateTaxiIsReadyToDrive)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerHasAcceptedPrice' ") })
+	cfg.OnEnter(func() {
+		log.Println("*** Entering 'StateCustomerHasAcceptedPrice' ")
+		_ = taxi.TaxiStateMachine.Fire(TriggerTaxiSetsHardwareInDriveMode.Key, nil)
+	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateCustomerHasAcceptedPrice' ")
 		log.Println("")
@@ -248,7 +251,7 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
 		log.Println("*** Entering 'StateCustomerStoppedPaying' ")
-		//_ = taxi.TaxiStateMachine.Fire(TriggerTollValidatesThatPaymentIsOK.Key, nil)
+		_ = taxi.TaxiStateMachine.Fire(TriggerCustomerLeavesTaxi.Key, nil)
 	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateCustomerStoppedPaying' ")
@@ -261,7 +264,7 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
 		log.Println("*** Entering 'StateCustomerLeftTaxi' ")
-		//_ = taxi.TaxiStateMachine.Fire(TriggerTaxiLeavesToll.Key, nil)
+		_ = taxi.SetHardwareInNextCustomerReadyMode(false)
 	})
 
 	cfg.OnExit(func() {
@@ -275,7 +278,7 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
 		log.Println("*** Entering 'StateTaxiIsReadyForNewCustomer' ")
-		//_ = taxi.TaxiStateMachine.Fire(TriggerTaxiIsReadyAndEntersWaitState.Key, nil)
+		_ = taxi.TaxiStateMachine.Fire(TriggerTaxiIsReadyAndEntersWaitState.Key, nil)
 	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateTaxiIsReadyForNewCustomer' ")
@@ -517,62 +520,77 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 // ******************************************************************************
 
 // ******************************************************************************
-// Set the hardware in first time ready mode
-func (taxi *Taxi) SetHardwareInNextCustomerReadyMode() {
+// Set the hardware in ready mode for Next Cusotmer
+func (taxi *Taxi) SetHardwareInNextCustomerReadyMode(check bool) (err error) {
 
-	var err error
 	var wg sync.WaitGroup
 	var currentTrigger ssm.Trigger
 
 	currentTrigger = TriggerTaxiResetsHardwareForNewCustomer
 
-	err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+	switch check {
 
-	switch  err.(type) {
-	case nil:
+	case true:
+		// Do a check if state machine is in correct state for triggering event
+		if taxi.TaxiStateMachine.CanFire(currentTrigger.Key) == true {
+			err = nil
 
-		//Wait for all 1 goroutine
-		wg.Add(1)
+		} else {
 
-		go func() {
-			// Cut Power
-			defer wg.Done()
+			err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		}
 
-			time.Sleep(5 * time.Second)
+	case false:
+		// Execute Trigger
 
-			PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
-			resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
+		err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
 
-			if err != nil {
-				logMessagesWithError(4, "Could not send 'PowerCutterMessage' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
-				//Set system in Error State due no connection to hardware server for 'PowerCutterMessage'
-				logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-				err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-			} else {
+		switch  err.(type) {
+		case nil:
 
-				if resp.GetAcknack() == true {
-					logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Gate is Closed")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-				} else {
-					logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Servo is NOT OK")
-					logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+			//Wait for all 1 goroutine
+			wg.Add(1)
 
-					//Set system in Error State due to malfunctioning hardware
+			go func() {
+				// Cut Power
+				defer wg.Done()
+
+				time.Sleep(5 * time.Second)
+
+				PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
+				resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
+
+				if err != nil {
+					logMessagesWithError(4, "Could not send 'PowerCutterMessage' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
+					//Set system in Error State due no connection to hardware server for 'PowerCutterMessage'
 					logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
 					err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
+				} else {
 
+					if resp.GetAcknack() == true {
+						logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Gate is Closed")
+						logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+					} else {
+						logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Servo is NOT OK")
+						logMessagesWithOutError(4, "Response Message: "+resp.Comments)
+
+						//Set system in Error State due to malfunctioning hardware
+						logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
+						err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
+
+					}
 				}
-			}
-		}()
+			}()
 
-		wg.Wait()
+			wg.Wait()
 
-	default:
-		// Error triggering new state
-		logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
+		default:
+			// Error triggering new state
+			logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
 
+		}
 	}
-
+	return err
 }
 
 // ******************************************************************************
@@ -669,6 +687,7 @@ func (taxi *Taxi) PaymentsStopsComing(check bool) (err error) {
 
 	currentTrigger = TriggerTaxiStopsStreamsAndWaitsforPayment
 
+
 	switch check {
 
 	case true:
@@ -733,6 +752,35 @@ func (taxi *Taxi) continueStreamingPaymentRequests(check bool) (err error) {
 
 // ******************************************************************************
 
+func (taxi *Taxi) abortPaymentRequestGeneration(check bool) (err error) {
+	var currentTrigger ssm.Trigger
+
+	currentTrigger = TriggerCustomerStoppsPayingTimer
+
+	switch check {
+
+	case true:
+		// Do a check if state machine is in correct state for triggering event
+		if taxi.TaxiStateMachine.CanFire(currentTrigger.Key) == true {
+			err = nil
+
+		} else {
+
+			err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		}
+
+	case false:
+		// Execute Trigger
+		err = taxi.TaxiStateMachine.Fire(currentTrigger.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, taxi.TaxiStateMachine.State(), currentTrigger, err)
+
+		}
+	}
+
+	return err
+
+}
 
 
 // ******************************************************************************

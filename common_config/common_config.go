@@ -39,6 +39,9 @@ const MaxAccelarationSatoshiPerSecond = MaxAccelarationSEKPerSecond / btcsek * S
 const TimeSatoshiPerSecond = TimeSEKPerSecond / btcsek * SatoshisPerBTC
 
 const MilliSecondsBetweenPaymentRequest = 1000
+const SecondsBeforeFirstPaymentTimeOut = 2
+const SecondsBeforeSecondPaymentTimeOut = 10
+
 
 // Simnet or Testnet
 

@@ -126,11 +126,18 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 			log.Fatalf("Problem when streaming from Taxi invoice Stream:", client, err)
 		}
 		//Customer Pays Invoice
-		invoices[0] = invoice.LightningPaymentRequest
+		invoices = append(invoices, invoice.LightningPaymentRequest)
+		log.Println("Invoices: ", invoices)
 		err = lightningConnection.PayReceivedInvoicesFromTaxi(invoices)
 		if err != nil {
 			log.Println("Problem when paying Invoice from Taxi: ", err)
+		} else {
+			log.Println("Invoice from Taxi-Stream is paid: ", invoices)
+
+			invoices = append(invoices[:0], invoices[1:]...)
+
 		}
+
 	}
 }
 
@@ -170,15 +177,35 @@ func main() {
 
 	}
 
+	//Init Lightning
+	go lightningConnection.LigtningMainService()
+
 	fmt.Println("Enter 'askTaxiForPrice' to connect to Taxi")
 	fmt.Println("Enter 'acceptPrice' to accept price and start incoming invoice stream")
 	fmt.Println("")
+
+	var tempText string = "askTaxiForPrice"
 
 	for {
 
 		reader := bufio.NewReader(os.Stdin)
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
+
+		switch tempText {
+		case "askTaxiForPrice":
+			text = tempText
+			tempText = "acceptPrice"
+
+		case "acceptPrice":
+			text = tempText
+			tempText = "END"
+
+		default:
+			text = tempText
+			tempText = "END"
+
+		}
 
 		switch text {
 		case "askTaxiForPrice":
@@ -193,9 +220,9 @@ func main() {
 			fmt.Println("Please try again!")
 			fmt.Println("")
 
-		default:
-			fmt.Println("Unknown command, please try again!")
-			fmt.Println("")
+			//default:
+			//	fmt.Println("Unknown command, please try again!")
+			//	fmt.Println("")
 		}
 	}
 

@@ -122,8 +122,8 @@ func InitLndServerConnection() {
 	lndClient = lndrpc.NewLightningClient(conn)
 }
 
-func LigtningMainService(cbTT TaxiPaysToll) {
-	callbackToToll = cbTT
+func LigtningMainService() { //cbTT TaxiPaysToll) {
+	//callbackToToll = cbTT
 
 	var err error
 
@@ -274,7 +274,7 @@ func CreateInvoice(message string, amount int64, expire int64) (newInvoice Pendi
 
 			expiryDuration := time.Duration(expire) * time.Second
 
-			log.Info(logMessage)
+			log.Debug(logMessage)
 
 			newInvoice = PendingInvoice{
 				Invoice: invoice,

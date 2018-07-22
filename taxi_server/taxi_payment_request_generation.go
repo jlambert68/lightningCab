@@ -21,6 +21,12 @@ var lastAmountToPay int64
 var lastAmountStructure amountStructure
 var lastPowerMessaurment taxiHW_stream_api.PowerStatusResponse
 var paymentRequestIsPaid bool = false
+var abortPaymentRequestGeneration bool = false
+var firstMissedPaymentTimeOut bool = false
+var lastMissedPaymentTimeOut bool = false
+//var firstMissedPaymentTimer time.Timer
+//var lastMissedPaymentTimer time.Timer
+
 
 func generateInvoice() (string, error) {
 
