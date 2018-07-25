@@ -14,26 +14,32 @@ type amountStructure struct {
 	timestamp          int64
 	timeAmount         int64
 	speedAmount        int64
-	accelerationAMount int64
+	accelerationAmount int64
 }
 
-var lastAmountToPay int64
-var lastAmountStructure amountStructure
-var lastPowerMessaurment taxiHW_stream_api.PowerStatusResponse
+//var lastAmountToPay int64
+//var lastAmountStructure amountStructure
+//var lastPowerMessaurment taxiHW_stream_api.PowerStatusResponse
 var paymentRequestIsPaid bool = false
 var abortPaymentRequestGeneration bool = false
 var firstMissedPaymentTimeOut bool = false
 var lastMissedPaymentTimeOut bool = false
-//var firstMissedPaymentTimer time.Timer
-//var lastMissedPaymentTimer time.Timer
 
+type lastPaymentData_struct struct {
+	lastAmountToPay_satoshi int64
+	lastAmountToPay_sek     float32
+	lastPowerMessaurment    taxiHW_stream_api.PowerStatusResponse
+	lastReceivedAmountdata  amountStructure
+}
+
+var lastPaymentData lastPaymentData_struct
 
 func generateInvoice() (string, error) {
 
 	var invoice lightningConnection.PendingInvoice
 
 	paymentRequestIsPaid = false
-	invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", lastAmountToPay, 180)
+	invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", lastPaymentData.lastAmountToPay_satoshi, 180)
 	if err != nil || invoice.Invoice == "" {
 		logMessagesWithError(4, "Error when creating Invoice: ", err)
 
@@ -66,11 +72,13 @@ func customerPaysPaymentRequest(check bool) (err error) {
 }
 
 func calculateInvoiceAmount() {
-	lastAmountStructure.speedAmount = int64(math.Round(float64(lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
-	lastAmountStructure.accelerationAMount = int64(math.Round(float64(lastPowerMessaurment.GetSpeed()) * common_config.MaxAccelarationSatoshiPerSecond / 100.0))
-	lastAmountStructure.timeAmount = int64(math.Round(float64(lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
+	lastPaymentData.lastReceivedAmountdata.speedAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
+	lastPaymentData.lastReceivedAmountdata.accelerationAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.MaxAccelarationSatoshiPerSecond / 100.0))
+	lastPaymentData.lastReceivedAmountdata.timeAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
 
-	lastAmountToPay = lastAmountStructure.speedAmount + lastAmountStructure.accelerationAMount + lastAmountStructure.timeAmount
+	lastPaymentData.lastAmountToPay_satoshi = lastPaymentData.lastReceivedAmountdata.speedAmount + lastPaymentData.lastReceivedAmountdata.accelerationAmount + lastPaymentData.lastReceivedAmountdata.timeAmount
+	lastPaymentData.lastAmountToPay_sek = float32(lastPaymentData.lastAmountToPay_satoshi) * common_config.BTCSEK / common_config.SatoshisPerBTC
+
 }
 
 func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage) {
@@ -94,7 +102,7 @@ func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, m
 		if err != nil {
 			log.Fatalf("Problem when streaming from Taxi Engine Stream:", client, err)
 		}
-		lastPowerMessaurment = *powerMessaurement
+		lastPaymentData.lastPowerMessaurment = *powerMessaurement
 
 		calculateInvoiceAmount()
 

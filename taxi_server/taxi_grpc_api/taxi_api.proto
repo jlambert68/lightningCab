@@ -38,6 +38,7 @@ enum TestOrProdEnviroment {
     Production = 1;
 }
 
+
 enum PriceUnit {
     SatoshiPerSecond = 0;
 }
@@ -53,14 +54,23 @@ message Enviroment {
 
 message PaymentRequest {
     string lightningPaymentRequest = 1;
+    int64 speed_amount_satoshi = 2;
+    int64 acceleration_amount_satoshi = 3;
+    int64 time_amount_satoshi = 4;
+    float speed_amount_sek = 5;
+    float acceleration_amount_sek = 6;
+    float time_amount_sek = 7;
+    int64 total_amount_satoshi = 8;
+    float total_amount_sek = 9;
+
 }
 
 message Price {
     bool acknack = 1; // True=Ack, False=Nack
     string comments = 2; //Comments if needed
-    int32 speed = 3;
-    int32 acceleration = 4;
-    int32 time = 5;
+    int64 speed = 3;
+    int64 acceleration = 4;
+    int64 time = 5;
     TimeUnit timeunit = 6;
     int32 paymentRequestInterval = 7;
     PriceUnit priceunit = 8;

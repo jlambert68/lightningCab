@@ -147,7 +147,15 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 	err = nil
 	paymentRequestResponse := &taxi_api.PaymentRequest{
-		""}
+		"",
+		0,
+		0,
+		0,
+		0, 0,
+		0,
+		0,
+		0,
+	}
 
 	firstMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
 	lastMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeSecondPaymentTimeOut * time.Second)
@@ -183,7 +191,17 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			firstMissedPaymentTimeOut = false
 			lastMissedPaymentTimeOut = false
 
+			// Populate stream Respons
 			paymentRequestResponse.LightningPaymentRequest, err = generateInvoice()
+			paymentRequestResponse.AccelerationAmountSatoshi = lastPaymentData.lastReceivedAmountdata.accelerationAmount
+			paymentRequestResponse.SpeedAmountSatoshi = lastPaymentData.lastReceivedAmountdata.speedAmount
+			paymentRequestResponse.TimeAmountSatoshi = lastPaymentData.lastReceivedAmountdata.timeAmount
+			paymentRequestResponse.AccelerationAmountSek = float32(lastPaymentData.lastReceivedAmountdata.accelerationAmount) * common_config.BTCSEK / common_config.SatoshisPerBTC
+			paymentRequestResponse.SpeedAmountSek = float32(lastPaymentData.lastReceivedAmountdata.speedAmount) * common_config.BTCSEK / common_config.SatoshisPerBTC
+			paymentRequestResponse.TimeAmountSek = float32(lastPaymentData.lastReceivedAmountdata.timeAmount) * common_config.BTCSEK / common_config.SatoshisPerBTC
+			paymentRequestResponse.TotalAmountSatoshi = lastPaymentData.lastAmountToPay_satoshi
+			paymentRequestResponse.TotalAmountSek = lastPaymentData.lastAmountToPay_sek
+
 			if err := stream.Send(paymentRequestResponse); err != nil {
 				return err
 				log.Printf("Error when streaming back: 'PaymentRequestStream'")

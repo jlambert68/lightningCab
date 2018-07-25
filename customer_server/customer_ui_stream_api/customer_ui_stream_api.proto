@@ -1,0 +1,43 @@
+syntax = "proto3";
+package customer_ui_stream_api;
+
+//protoc -I customer_ui_stream_api --go_out=plugins=grpc:customer_ui_stream_api customer_ui_stream_api/customer_ui_stream_api.proto
+
+
+message EmptyParameter {
+}
+// The Client register service definition.
+// ***********************
+service CustomerUIPriceStream {
+
+    // Returns a stream with
+    rpc UIPriceAndStateStream (EmptyParameter) returns (stream UIPriceAndStateRespons) {
+    }
+
+
+}
+
+message RPCMethods {
+    bool AskTaxiForPrice = 1;
+    bool AcceptPrice = 2;
+    bool HaltPayments_true = 3;
+    bool HaltPayments_false = 4;
+    bool LeaveTaxi = 5;
+}
+
+
+message UIPriceAndStateRespons {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int64 speed_amount_satoshi = 3;
+    int64 acceleration_amount_satoshi = 4;
+    int64 time_amount_satoshi = 5;
+    float speed_amount_sek = 6;
+    float acceleration_amount_sek = 7;
+    float time_amount_sek = 8;
+    int64 total_amount_satoshi = 9;
+    float total_amount_sek = 10;
+    int64 timestamp = 11;
+    RPCMethods allowedRPCMethods = 12;
+}
+
