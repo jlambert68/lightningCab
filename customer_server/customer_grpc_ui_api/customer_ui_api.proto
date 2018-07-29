@@ -1,7 +1,16 @@
 syntax = "proto3";
 package customer_ui_api;
 
+// Go
 //protoc -I customer_grpc_ui_api --go_out=plugins=grpc:customer_grpc_ui_api customer_grpc_ui_api/customer_ui_api.proto
+
+//Javsscript
+// Stå i "customer_ui_api"-folder
+//1) protoc -I=. --js_out=import_style=closure,binary:. ./customer_ui_api.proto
+//2) protoc -I=. --plugin=protoc-gen-grpc-web=/home/jlambert/grpc-web/javascript/net/grpc/web/protoc-gen-grpc-web --grpc-web_out=out=echo.grpc.pb.js,mode=grpcweb:. ./echo.proto
+
+// Stå i root for grpc-web
+//3) java -jar ./closure-compiler.jar --js ./javascript --js ./net --js ./third_party/closure-library --js ./third_party/grpc/third_party/protobuf/js --entry_point=goog:proto.customer_ui_api.Customer_UIClient --dependency_mode=STRICT --js_output_file customer_ui_api.js
 
 // Parameter used for Empty inputs
 message EmptyParameter {
