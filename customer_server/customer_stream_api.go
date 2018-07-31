@@ -6,26 +6,27 @@ import (
 	"jlambert/lightningCab/customer_server/customer_ui_stream_api"
 )
 
-func (s *Customer_UIServiceStreamServer) UIPriceAndStateStream(emptyParameter *customer_ui_stream_api.EmptyParameter, stream customer_ui_stream_api.CustomerUIPriceStream_UIPriceAndStateStreamServer) (err error) {
+func (s *customerUIPriceStreamServiceServer) UIPriceAndStateStream(emptyParameter *customer_ui_stream_api.EmptyParameter, stream customer_ui_stream_api.CustomerUIPriceStream_UIPriceAndStateStreamServer) (err error) {
 	log.Printf("Incoming: 'UIPriceAndStateStream'")
 
 	err = nil
 
 	for {
 		priceAndStateRespons := &customer_ui_stream_api.UIPriceAndStateRespons{
-			true,
-			"",
-			customer.lastReceivedInvoice.SpeedAmountSatoshi,
-			customer.lastReceivedInvoice.AccelerationAmountSatoshi,
-			customer.lastReceivedInvoice.TimeAmountSatoshi,
-			customer.lastReceivedInvoice.SpeedAmountSek,
-			customer.lastReceivedInvoice.AccelerationAmountSek,
-			customer.lastReceivedInvoice.TimeAmountSek,
-			customer.lastReceivedInvoice.TotalAmountSatoshi,
-			customer.lastReceivedInvoice.TotalAmountSek,
-			time.Now().UnixNano(),
-			allowedgRPC_CustomerUI(),
+			Acknack:                   true,
+			Comments:                  "",
+			SpeedAmountSatoshi:        customer.lastReceivedInvoice.SpeedAmountSatoshi,
+			AccelerationAmountSatoshi: customer.lastReceivedInvoice.AccelerationAmountSatoshi,
+			TimeAmountSatoshi:         customer.lastReceivedInvoice.TimeAmountSatoshi,
+			SpeedAmountSek:            customer.lastReceivedInvoice.SpeedAmountSek,
+			AccelerationAmountSek:     customer.lastReceivedInvoice.AccelerationAmountSek,
+			TimeAmountSek:             customer.lastReceivedInvoice.TimeAmountSek,
+			TotalAmountSatoshi:        customer.lastReceivedInvoice.TotalAmountSatoshi,
+			TotalAmountSek:            customer.lastReceivedInvoice.TotalAmountSek,
+			Timestamp:                 time.Now().UnixNano(),
+			AllowedRPCMethods:         allowedgRPC_CustomerUI(),
 		}
+
 
 		if err := stream.Send(priceAndStateRespons); err != nil {
 			return err
@@ -49,56 +50,56 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *customer_ui_stream_api.RPCMet
 
 	case StateCustomerWaitingForCommands:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			true,
-			false,
-			false,
-			false,
-			false,
+			AskTaxiForPrice:   true,
+			AcceptPrice:       false,
+			HaltPaymentsTrue:  false,
+			HaltPaymentsFalse: false,
+			LeaveTaxi:         false,
 		}
 
 	case StateCustomerPriceHasBeenReceived:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			false,
-			true,
-			false,
-			false,
-			false,
+			AskTaxiForPrice:   false,
+			AcceptPrice:       true,
+			HaltPaymentsTrue:  false,
+			HaltPaymentsFalse: false,
+			LeaveTaxi:         false,
 		}
 
 	case StateCustomerWaitingForPaymentRequest:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			false,
-			false,
-			true,
-			false,
-			false,
+			AskTaxiForPrice:   false,
+			AcceptPrice:       false,
+			HaltPaymentsTrue:  true,
+			HaltPaymentsFalse: false,
+			LeaveTaxi:         false,
 		}
 
 	case StateCustomerPaymentRequestReceived:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			false,
-			false,
-			true,
-			false,
-			false,
+			AskTaxiForPrice:   false,
+			AcceptPrice:       false,
+			HaltPaymentsTrue:  true,
+			HaltPaymentsFalse: false,
+			LeaveTaxi:         false,
 		}
 
 	case StateCustomerHaltedPayments:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			false,
-			false,
-			false,
-			true,
-			true,
+			AskTaxiForPrice:   false,
+			AcceptPrice:       false,
+			HaltPaymentsTrue:  false,
+			HaltPaymentsFalse: true,
+			LeaveTaxi:         true,
 		}
 
 	default:
 		gRPCMethodsAllowed = &customer_ui_stream_api.RPCMethods{
-			false,
-			false,
-			false,
-			false,
-			false,
+			AskTaxiForPrice:   false,
+			AcceptPrice:       false,
+			HaltPaymentsTrue:  false,
+			HaltPaymentsFalse: false,
+			LeaveTaxi:         false,
 		}
 	}
 	return gRPCMethodsAllowed

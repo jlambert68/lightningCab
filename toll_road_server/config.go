@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/jessevdk/go-flags"
-	"github.com/michael1011/lightningtip/backends"
+	//"github.com/michael1011/lightningtip/backends"
 	"github.com/op/go-logging"
 	"os"
 	"os/user"

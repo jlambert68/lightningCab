@@ -3,6 +3,9 @@ package customer_ui_stream_api;
 
 //protoc -I customer_ui_stream_api --go_out=plugins=grpc:customer_ui_stream_api customer_ui_stream_api/customer_ui_stream_api.proto
 
+// version 3.6.0
+//~/protobuf/bin/protoc -I customer_ui_stream_api --go_out=plugins=grpc:customer_ui_stream_api customer_ui_stream_api/customer_ui_stream_api.proto
+
 
 message EmptyParameter {
 }

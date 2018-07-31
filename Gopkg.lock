@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/boltdb/bolt"
+  packages = ["."]
+  revision = "2f1ce7a837dcb8da3ec595b1dac9d0632f0f99e8"
+  version = "v1.3.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/btcsuite/btcd"
   packages = [
@@ -12,7 +18,7 @@
     "rpcclient",
     "wire"
   ]
-  revision = "86fed781132ac890ee03e906e4ecd5d6fa180c64"
+  revision = "9a2f9524024889e129a5422aca2cff73cb3eabf6"
 
 [[projects]]
   branch = "master"
@@ -28,7 +34,7 @@
     "base58",
     "bech32"
   ]
-  revision = "d4cc87b860166d00d6b5b9e0d3b3d71d6088d4d4"
+  revision = "ab6388e0c60ae4834a1f57511e20c17b5f78be4b"
 
 [[projects]]
   branch = "master"
@@ -57,7 +63,8 @@
 [[projects]]
   name = "github.com/coreos/bbolt"
   packages = ["."]
-  revision = "4f5275f4ebbf6fe7cb772de987fa96ee674460a7"
+  revision = "583e8937c61f1af6513608ccc75c97b6abdf4ff9"
+  version = "v1.3.0"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -71,10 +78,14 @@
     "jsonpb",
     "proto",
     "protoc-gen-go/descriptor",
+    "ptypes",
     "ptypes/any",
-    "ptypes/struct"
+    "ptypes/duration",
+    "ptypes/struct",
+    "ptypes/timestamp"
   ]
-  revision = "bbd03ef6da3a115852eaf24c8a1c46aeb39aa175"
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
 
 [[projects]]
   name = "github.com/grpc-ecosystem/grpc-gateway"
@@ -83,7 +94,8 @@
     "runtime/internal",
     "utilities"
   ]
-  revision = "f2862b476edcef83412c7af8687c9cd8e4097c0f"
+  revision = "92583770e3f01b09a0d3e9bdf64321d8bebd48f2"
+  version = "v1.4.1"
 
 [[projects]]
   name = "github.com/jessevdk/go-flags"
@@ -97,14 +109,15 @@
   packages = ["."]
   revision = "584905176618da46b895b176c721b02c476b6993"
 
-[[projects]]
-  name = "github.com/lightningnetwork/lnd"
+
+  [[projects]]
+    name = "github.com/lightningnetwork/lnd"
   packages = [
     "lnrpc",
     "macaroons"
   ]
-  revision = "6fa93a78c18180a3bc77116b749b3c5e279d5a33"
-  version = "v0.4.1-beta"
+    revision = "6fa93a78c18180a3bc77116b749b3c5e279d5a33"
+    version = "v0.4.1-beta"
 
 [[projects]]
   branch = "master"
@@ -113,24 +126,19 @@
   revision = "a7b249c6862c5232dfc8fabb0180b690d7c53959"
 
 [[projects]]
-  name = "github.com/michael1011/lightningtip"
-  packages = ["backends"]
-  revision = "6cc1219a5f493afe8fa4854cb3785c89e693972b"
-  version = "v1.0.0"
-
-[[projects]]
   name = "github.com/op/go-logging"
   packages = ["."]
   revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
   version = "v1"
 
 [[projects]]
+  branch = "master"
   name = "github.com/roasbeef/btcwallet"
   packages = [
     "internal/zero",
     "snacl"
   ]
-  revision = "45445d1b09670109410174cb01fab0b133e3a904"
+  revision = "30affec83c180e98761e0a7113403b6e7179c83b"
 
 [[projects]]
   branch = "master"
@@ -143,32 +151,34 @@
   name = "golang.org/x/crypto"
   packages = [
     "curve25519",
+    "internal/subtle",
     "nacl/box",
     "nacl/secretbox",
     "poly1305",
     "ripemd160",
     "salsa20/salsa"
   ]
-  revision = "8ac0e0d97ce45cd83d1d7243c060cb8461dda5e9"
+  revision = "c126467f60eb25f8f27e5a981f32a87e3965053f"
 
 [[projects]]
+  branch = "master"
   name = "golang.org/x/net"
   packages = [
     "context",
+    "http/httpguts",
     "http2",
     "http2/hpack",
     "idna",
     "internal/timeseries",
-    "lex/httplex",
     "trace"
   ]
-  revision = "ae89d30ce0c63142b652837da33d782e2b0a9b25"
+  revision = "a0f8a16cb08c06df97cbdf9c47f4731ba548c33c"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "56ede360ec1c541828fb88741b3f1049406d28f5"
+  revision = "bd9dbc187b6e1dacfdd2722a87e83093c2d7bd6e"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -192,39 +202,60 @@
   version = "v0.3.0"
 
 [[projects]]
+  branch = "master"
   name = "google.golang.org/genproto"
   packages = [
     "googleapis/api/annotations",
     "googleapis/rpc/status"
   ]
-  revision = "df60624c1e9b9d2973e889c7a1cff73155da81c4"
+  revision = "2a72893556e4d1f6c795a4c039314c9fa751eedb"
 
 [[projects]]
   name = "google.golang.org/grpc"
   packages = [
     ".",
+    "balancer",
+    "balancer/base",
+    "balancer/roundrobin",
     "codes",
     "connectivity",
     "credentials",
-    "grpclb/grpc_lb_v1",
+    "encoding",
+    "encoding/proto",
     "grpclog",
     "internal",
+    "internal/backoff",
+    "internal/channelz",
+    "internal/grpcrand",
     "keepalive",
     "metadata",
     "naming",
     "peer",
+    "resolver",
+    "resolver/dns",
+    "resolver/passthrough",
     "stats",
     "status",
     "tap",
     "transport"
   ]
-  revision = "b3ddf786825de56a4178401b7e174ee332173b66"
+  revision = "168a6198bcb0ef175f7dacec0b8691fc141dc9b8"
+  version = "v1.13.0"
 
 [[projects]]
   branch = "v1"
   name = "gopkg.in/errgo.v1"
   packages = ["."]
   revision = "c17903c6b19d5dedb9cfba9fa314c7fae63e554f"
+
+[[projects]]
+  branch = "v1"
+  name = "gopkg.in/macaroon-bakery.v1"
+  packages = [
+    "bakery",
+    "bakery/checkers"
+  ]
+  revision = "12b25762713bc96b9231b39dde55d8989b057c43"
 
 [[projects]]
   name = "gopkg.in/macaroon-bakery.v2"
@@ -234,15 +265,23 @@
     "bakery/internal/macaroonpb"
   ]
   revision = "94012773d2874a067572bd16d7d11ae02968b47b"
+  version = "v2.0.1"
+
+[[projects]]
+  branch = "v1"
+  name = "gopkg.in/macaroon.v1"
+  packages = ["."]
+  revision = "ab101776739ee61baab9bc50e4b33b5aeb3ac843"
 
 [[projects]]
   name = "gopkg.in/macaroon.v2"
   packages = ["."]
   revision = "bed2a428da6e56d950bed5b41fcbae3141e5b0d0"
+  version = "v2.0.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7454ac066ea315b6ecd0e4d55e439b4fdc235aa8d371af7fc8efdde3a354e170"
+  inputs-digest = "1f659f9bb369dc7e5cb2faac510ae98bdcdcdc6273e2e7aa4c49c64bc2bc2542"
   solver-name = "gps-cdcl"
   solver-version = 1

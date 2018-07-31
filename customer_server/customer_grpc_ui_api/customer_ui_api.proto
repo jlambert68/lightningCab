@@ -3,6 +3,8 @@ package customer_ui_api;
 
 // Go
 //protoc -I customer_grpc_ui_api --go_out=plugins=grpc:customer_grpc_ui_api customer_grpc_ui_api/customer_ui_api.proto
+// version 3.6.0
+//~/protobuf/bin/protoc -I customer_grpc_ui_api --go_out=plugins=grpc:customer_grpc_ui_api customer_grpc_ui_api/customer_ui_api.proto
 
 //Javsscript
 // Stå i "customer_ui_api"-folder

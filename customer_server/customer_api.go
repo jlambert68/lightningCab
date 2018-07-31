@@ -10,22 +10,22 @@ import (
 // ************************************************************************************
 // UI-customer Ask for Price
 
-func (s *Customer_UIServiceServer) AskTaxiForPrice(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.Price_UI, error) {
+func (s *customerUIServiceServer) AskTaxiForPrice(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.Price_UI, error) {
 
 	log.Println("Incoming: 'AskTaxiForPrice'")
 
 	returnMessage := &customer_ui_api.Price_UI{
-		false,
-		"",
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
-		0,
+		Acknack:                   false,
+		Comments:                  "",
+		SpeedAmountSatoshi:        0,
+		AccelerationAmountSatoshi: 0,
+		TimeAmountSatoshi:         0,
+		SpeedAmountSek:            0,
+		AccelerationAmountSek:     0,
+		TimeAmountSek:             0,
+		Timeunit:                  0,
+		PaymentRequestInterval:    0,
+		Priceunit:                 0,
 	}
 
 	// Check if State machine accepts State change
@@ -45,18 +45,32 @@ func (s *Customer_UIServiceServer) AskTaxiForPrice(ctx context.Context, emptyPar
 				logMessagesWithOutError(4, "Success in change if state: ")
 
 				returnMessage = &customer_ui_api.Price_UI{
-					true,
-					customer.lastRecievedPriceInfo.Comments,
-					customer.lastRecievedPriceInfo.GetSpeed(),
-					customer.lastRecievedPriceInfo.GetAcceleration(),
-					customer.lastRecievedPriceInfo.GetTime(),
-					float32(customer.lastRecievedPriceInfo.GetSpeed()) * common_config.BTCSEK,
-					float32(customer.lastRecievedPriceInfo.GetAcceleration()) * common_config.BTCSEK,
-					float32(customer.lastRecievedPriceInfo.GetTime()) * common_config.BTCSEK,
-					0, //customer.lastRecievedPriceInfo.Timeunit,
-					0, //customer.lastRecievedPriceInfo.PaymentRequestInterval,
-					0, //customer.lastRecievedPriceInfo.Priceunit,
+					Acknack:                   true,
+					Comments:                  customer.lastRecievedPriceInfo.Comments,
+					SpeedAmountSatoshi:        customer.lastRecievedPriceInfo.GetSpeed(),
+					AccelerationAmountSatoshi: customer.lastRecievedPriceInfo.GetAcceleration(),
+					TimeAmountSatoshi:         customer.lastRecievedPriceInfo.GetTime(),
+					SpeedAmountSek:            float32(customer.lastRecievedPriceInfo.GetSpeed()) * common_config.BTCSEK,
+					AccelerationAmountSek:     float32(customer.lastRecievedPriceInfo.GetAcceleration()) * common_config.BTCSEK,
+					TimeAmountSek:             float32(customer.lastRecievedPriceInfo.GetTime()) * common_config.BTCSEK,
+					Timeunit:                  0, //customer.lastRecievedPriceInfo.Timeunit,
+					PaymentRequestInterval:    0, //customer.lastRecievedPriceInfo.PaymentRequestInterval,
+					Priceunit:                 0, //customer.lastRecievedPriceInfo.Priceunit,
 				}
+
+				/*				returnMessage = &customer_ui_api.Price_UI{
+									true,
+									customer.lastRecievedPriceInfo.Comments,
+									customer.lastRecievedPriceInfo.GetSpeed(),
+									customer.lastRecievedPriceInfo.GetAcceleration(),
+									customer.lastRecievedPriceInfo.GetTime(),
+									float32(customer.lastRecievedPriceInfo.GetSpeed()) * common_config.BTCSEK,
+									float32(customer.lastRecievedPriceInfo.GetAcceleration()) * common_config.BTCSEK,
+									float32(customer.lastRecievedPriceInfo.GetTime()) * common_config.BTCSEK,
+									0, //customer.lastRecievedPriceInfo.Timeunit,
+									0, //customer.lastRecievedPriceInfo.PaymentRequestInterval,
+									0, //customer.lastRecievedPriceInfo.Priceunit,
+								}*/
 			}
 
 		default:
@@ -74,13 +88,13 @@ func (s *Customer_UIServiceServer) AskTaxiForPrice(ctx context.Context, emptyPar
 // ************************************************************************************
 // UI-customer accepts price
 
-func (s *Customer_UIServiceServer) AcceptPrice(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.AckNackResponse, error) {
+func (s *customerUIServiceServer) AcceptPrice(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.AckNackResponse, error) {
 
 	log.Println("Incoming: 'AcceptPrice'")
 
 	returnMessage := &customer_ui_api.AckNackResponse{
-		false,
-		"",
+		Acknack:  false,
+		Comments: "",
 	}
 
 	// Check if State machine accepts State change
@@ -100,8 +114,8 @@ func (s *Customer_UIServiceServer) AcceptPrice(ctx context.Context, emptyParamet
 				logMessagesWithOutError(4, "Success in change if state: ")
 
 				returnMessage = &customer_ui_api.AckNackResponse{
-					true,
-					customer.lastRecievedPriceAccept.Comments,
+					Acknack:  true,
+					Comments: customer.lastRecievedPriceAccept.Comments,
 				}
 			}
 
@@ -120,13 +134,13 @@ func (s *Customer_UIServiceServer) AcceptPrice(ctx context.Context, emptyParamet
 // ************************************************************************************
 // UI-customer halts payments
 
-func (s *Customer_UIServiceServer) HaltPayments(ctx context.Context, haltPaymentRequestMessage *customer_ui_api.HaltPaymentRequest) (*customer_ui_api.AckNackResponse, error) {
+func (s *customerUIServiceServer) HaltPayments(ctx context.Context, haltPaymentRequestMessage *customer_ui_api.HaltPaymentRequest) (*customer_ui_api.AckNackResponse, error) {
 
 	log.Println("Incoming: 'HaltPayments' with parameter: ", haltPaymentRequestMessage.Haltpayment)
 
 	returnMessage := &customer_ui_api.AckNackResponse{
-		false,
-		"",
+		Acknack:  false,
+		Comments: "",
 	}
 
 	// Decide of user wants to Halt or un-Halt payment
@@ -150,8 +164,8 @@ func (s *Customer_UIServiceServer) HaltPayments(ctx context.Context, haltPayment
 					logMessagesWithOutError(4, "Success in change if state: ")
 
 					returnMessage = &customer_ui_api.AckNackResponse{
-						true,
-						"Success in change of state and Halt payments",
+						Acknack:  true,
+						Comments: "Success in change of state and Halt payments",
 					}
 				}
 
@@ -181,8 +195,8 @@ func (s *Customer_UIServiceServer) HaltPayments(ctx context.Context, haltPayment
 					returnMessage.Comments = "State machine is not in correct state to be able to un-halt payment"
 				} else {
 					returnMessage = &customer_ui_api.AckNackResponse{
-						true,
-						"Success in change of state and Un-Halt payments",
+						Acknack:  true,
+						Comments: "Success in change of state and Un-Halt payments",
 					}
 				}
 
@@ -196,8 +210,8 @@ func (s *Customer_UIServiceServer) HaltPayments(ctx context.Context, haltPayment
 					returnMessage.Comments = "State machine is not in correct state to be able to un-halt payment"
 				} else {
 					returnMessage = &customer_ui_api.AckNackResponse{
-						true,
-						"Success in change of state and Un-Halt payments",
+						Acknack:  true,
+						Comments: "Success in change of state and Un-Halt payments",
 					}
 				}
 			}
@@ -216,13 +230,13 @@ func (s *Customer_UIServiceServer) HaltPayments(ctx context.Context, haltPayment
 // ************************************************************************************
 // UI-Customer leaves Taxi
 
-func (s *Customer_UIServiceServer) LeaveTaxi(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.AckNackResponse, error) {
+func (s *customerUIServiceServer) LeaveTaxi(ctx context.Context, emptyParameter *customer_ui_api.EmptyParameter) (*customer_ui_api.AckNackResponse, error) {
 
 	log.Println("Incoming: 'LeaveTaxi'")
 
 	returnMessage := &customer_ui_api.AckNackResponse{
-		false,
-		"",
+		Acknack:  false,
+		Comments: "",
 	}
 
 	// Check if State machine accepts State change
@@ -242,8 +256,8 @@ func (s *Customer_UIServiceServer) LeaveTaxi(ctx context.Context, emptyParameter
 				logMessagesWithOutError(4, "Success in change if state: ")
 
 				returnMessage = &customer_ui_api.AckNackResponse{
-					true,
-					"State machine is in correct state and customer left taxi",
+					Acknack:  true,
+					Comments: "State machine is in correct state and customer left taxi",
 				}
 			}
 

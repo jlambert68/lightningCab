@@ -62,8 +62,8 @@ var (
 )
 
 // Server used for register clients Name, Ip and Por and Clients Test Enviroments and Clients Test Commandst
-type Customer_UIServiceServer struct{}
-type Customer_UIServiceStreamServer struct{}
+type customerUIServiceServer struct{}
+type customerUIPriceStreamServiceServer struct{}
 
 func initiateCustomer() {
 	var err error
@@ -772,8 +772,9 @@ func main() {
 	go func() {
 		log.Println("Starting Customer RPC UI Server")
 		customerRpcUIServer = grpc.NewServer()
-		customer_ui_api.RegisterCustomer_UIServer(customerRpcUIServer, &Customer_UIServiceServer{})
+		customer_ui_api.RegisterCustomer_UIServer(customerRpcUIServer, &customerUIServiceServer{})
 		log.Println("registerTaxiServer for Taxi Gate started")
+		log.Println(customerRpcUIServer.GetServiceInfo())
 		customerRpcUIServer.Serve(lis)
 	}()
 
@@ -781,7 +782,7 @@ func main() {
 	go func() {
 		log.Println("Starting Customer RPC UI Stream Server")
 		customerRpcUIStreamServer = grpc.NewServer()
-		customer_ui_stream_api.RegisterCustomerUIPriceStreamServer(customerRpcUIStreamServer, &Customer_UIServiceStreamServer{})
+		customer_ui_stream_api.RegisterCustomerUIPriceStreamServer(customerRpcUIStreamServer, &customerUIPriceStreamServiceServer{})
 		log.Println("registerTaxiServer for Taxi Gate started")
 		customerRpcUIStreamServer.Serve(lisStream)
 	}()

@@ -17,7 +17,7 @@ const GrpcTaxiHardwareStreamServer_address = "127.0.0.1"
 const GrpcTaxiHardwareStreamServer_port = ":50654"
 
 const GrpcCustomerUI_RPC_Server_address = "127.0.0.1"
-const GrpcCustomerUI_RPC_Server_port = ":50655"
+const GrpcCustomerUI_RPC_Server_port = ":9090" //":50655"
 
 const GrpcCustomerUI_RPC_StreamServer_address = "127.0.0.1"
 const GrpcCustomerUI_RPC_StreamServer_port = ":50656"

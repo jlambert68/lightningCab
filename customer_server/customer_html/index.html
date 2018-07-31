@@ -38,6 +38,16 @@
             background-color: red;
         }
 
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -25%);
+            text-align: center;
+            ont-family: Arial;
+            color: white;
+        }
+
         .blockAskTaxiForPrice {
             display: block;
             width: 100%;
@@ -185,6 +195,84 @@
             padding: 15px;
         }
 
+        table.tableAvaragePayment {
+            table-layout: fixed;
+            width: 100%;
+            vertical-align: center;
+            margin-bottom: 20px;
+            border-top: 4px solid blue;
+            border-bottom: 4px solid blue;
+            border-left: 4px solid blue;
+            border-right: 4px solid blue;
+        }
+
+        tr.tableNameRowAvaragePayment {
+            text-align: center;
+            font-size: 16px;
+            background-color: #dafa3d;
+            color: #afa7af;
+        }
+
+        th.tableNameCellAvaragePayment {
+            padding: 5px;
+        }
+
+        tr.tableHeaderRowAvaragePayment {
+            text-align: center;
+            font-size: 16px;
+            background-color: #fafadc;
+            color: #592baf;
+
+        }
+
+        th.tableHeaderCellAvaragePayment {
+            padding: 2px;
+        }
+
+        tr.tableDataRowAvaragePayment {
+            text-align: right;
+            font-size: 16px;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #faf62f;
+            color: #592baf;
+
+        }
+
+        td.tableDataCellAvaragePayment {
+            padding: 5px;
+        }
+
+        .catImage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 240px;
+            height: 120px;
+            margin: -60px 0 0 -120px;
+            -webkit-animation: spin 4s linear infinite;
+            -moz-animation: spin 4s linear infinite;
+            animation: spin 4s linear infinite;
+        }
+
+        @-moz-keyframes spin {
+            100% {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
 
     </style>
 
@@ -198,7 +286,7 @@
 
         const INTERVAL = 500; // ms
         const MAX_STREAM_MESSAGES = 50;
-        var echoService;
+        var lightningCabService;
         var addMessage = function (message, cssClass) {
             $("#first").after(
                     $("<div/>").addClass("row").append(
@@ -215,7 +303,7 @@
             addLeftMessage(msg);
             var unaryRequest = new proto.grpc.gateway.testing.EchoRequest();
             unaryRequest.setMessage(msg);
-            echoService.echo(unaryRequest, {"custom-header-1": "value1"},
+            lightningCabService.echo(unaryRequest, {"custom-header-1": "value1"},
                     function (err, response) {
                         if (err) {
                             addRightMessage('Error code: ' + err.code + ' "' + err.message + '"');
@@ -226,12 +314,46 @@
                         }
                     });
         };
+
+        var askForPrice_js = function () {
+            var unaryRequest = new proto.customer_ui_api.EmptyParameter();
+            //unaryRequest.setMessage(msg);
+            lightningCabService.askTaxiForPrice(unaryRequest, {"custom-header-1": "value1"},
+                    function (err, response) {
+                        if (err) {
+                            addRightMessage('Error code: ' + err.code + ' "' + err.message + '"');
+                        } else {
+                            setTimeout(function () {
+                                addRightMessage(response.getMessage());
+                            }, INTERVAL);
+                        }
+                    });
+        };
+
+        var askForPrice_js2 = function () {
+            var unaryRequest = new proto.customer_ui_api.EmptyParameter();
+
+            lightningCabService.askTaxiForPrice({}, {}, function (err, response) {
+                console.log('Unary Ask Taxi for Price response: ' + response.getMessage());
+            });
+        };
+
+        var haltPayments_js = function (boolean) {
+            var unaryRequest = new proto.customer_ui_api.HaltPaymentRequest();
+            unaryRequest.setHaltpayment(boolean)
+
+            lightningCabService.haltPayments(unaryRequest, {}, function (err, response) {
+                console.log('Unary HaltPayment response: ' + response.getMessage());
+            });
+        };
+
+
         var echoError = function (msg) {
             addLeftMessage(msg);
             var unaryRequest =
                     new proto.grpc.gateway.testing.EchoRequest();
             unaryRequest.setMessage(msg);
-            echoService.echoAbort(unaryRequest, {}, function (err, response) {
+            lightningCabService.echoAbort(unaryRequest, {}, function (err, response) {
                 if (err) {
                     addRightMessage('Error code: ' + err.code + ' "' + err.message + '"');
                     console.log('Error code: ' + err.code +
@@ -249,7 +371,7 @@
             streamRequest.setMessage(msg);
             streamRequest.setMessageCount(count);
             streamRequest.setMessageInterval(INTERVAL);
-            var stream = echoService.serverStreamingEcho(streamRequest,
+            var stream = lightningCabService.serverStreamingEcho(streamRequest,
                     {"custom-header-1": "value1"});
             stream.on('data', function (response) {
                 addRightMessage(response.getMessage());
@@ -289,23 +411,62 @@
             return false;
         };
         $(document).ready(function () {
-            echoService = new proto.grpc.gateway.testing.EchoServiceClient(
-                    'http://' + window.location.hostname + ':8080');
+            lightningCabService = new proto.customer_ui_api.Customer_UIClient(
+                    'http://' + window.location.hostname + ':8080')
             // event handlers
-            $("#send").click(send);
-            $("#msg").keyup(function (e) {
-                if (e.keyCode == 13) send(); // enter key
-                return false;
-            });
-            $("#msg").focus();
+
+            //rotate()
+
         });
+    </script>
+    <script type="text/javascript">
+
+        function toggleAnimation(haltOrUnHaltAnimation) {
+            var style;
+            style = catImageId.style
+            if (haltOrUnHaltAnimation == true) {
+                style.webkitAnimationPlayState = 'paused';
+                haltPayments_js(true)
+            } else {
+                style.webkitAnimationPlayState = 'running';
+                haltPayments_js(false)
+            }
+        }
+
+        function rotate() {
+
+            var c = document.getElementById("myCanvas");
+            var context = c.getContext("2d");
+            canvasWidth = c.width
+            canvasHeight = c.height
+
+            // Clear the canvas
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            // Move registration point to the center of the canvas
+            context.translate(canvasWidth / 2, canvasWidth / 2);
+
+            // Rotate 1 degree
+            context.rotate(Math.PI / 180);
+
+            // Move registration point back to the top left corner of canvas
+            context.translate(-canvasWidth / 2, -canvasWidth / 2);
+
+            context.fillStyle = "red";
+            context.fillRect(canvasWidth / 4, canvasWidth / 4, canvasWidth / 2, canvasHeight / 4);
+            context.fillStyle = "blue";
+            context.fillRect(canvasWidth / 4, canvasWidth / 2, canvasWidth / 2, canvasHeight / 4);
+
+
+            setInterval(rotate, 1000);
+        }
     </script>
 </head>
 <body>
 
 
 <div class="split left">
-    <div class="centered">
+    <div class="centered_xxx">
         <table class="tableWalletBalance">
             <tr class="tableNameRowWalletBalance">
                 <th class="tableNameCellWalletBalance" colspan="2">Current Taxi Ride</th>
@@ -320,12 +481,35 @@
             </tr>
         </table>
 
+        <table class="tableAvaragePayment">
+            <tr class="tableNameRowAvaragePayment">
+                <th class="tableNameCellAvaragePayment" colspan="2">Avarege Payment, over 10 seconds</th>
+            </tr>
+            <tr class="tableHeaderRowAvaragePayment">
+                <th class="tableHeaderCellAvaragePayment">[Satoshi]</th>
+                <th class="tableHeaderCellAvaragePayment">[SEK]</th>
+            </tr>
+            <tr class="tableDataRowAvaragePayment">
+                <td class="tableDataCellAvaragePayment">10.0001</td>
+                <td class="tableDataCellAvaragePayment">220.03331</td>
+            </tr>
+        </table>
+
 
     </div>
+
+    <div class="centered">
+
+        <img class="catImage" id="catImageId" src="http://makeameme.org/media/templates/120/grumpy_cat.jpg" alt=""
+             width="120" height="120">
+        <!--<canvas id="myCanvas" width="600px" height="600px" style="border:1px solid #ffffff;">
+        </canvas> -->
+    </div>
+
 </div>
 
 <div class="split right">
-    <div class="centered">
+    <div class="centered_xxx">
         <table class="tableWalletBalance">
             <tr class="tableNameRowWalletBalance">
                 <th class="tableNameCellWalletBalance" colspan="2">Wallet Balance</th>
@@ -341,13 +525,15 @@
         </table>
 
         <div class="containerButtons">
-            <button class="blockAskTaxiForPrice" id="AskTaxiForPrice">Ask Taxi For Price</button>
+            <button class="blockAskTaxiForPrice" id="AskTaxiForPrice" onclick="askForPrice_js2()">Ask Taxi For Price
+            </button>
             <br>
             <button class="blockAcceptPrice" id="AcceptPrice">Accept Price</button>
             <br>
-            <button class="blockHaltPayments" id="HaltPayments">Halt Payments</button>
+            <button class="blockHaltPayments" id="HaltPayments" onclick="toggleAnimation(true)">Halt Payments</button>
             <br>
-            <button class="blockUnHaltPayments" id="UnHaltPayments">Un-Halt Payments</button>
+            <button class="blockUnHaltPayments" id="UnHaltPayments" onclick="toggleAnimation(false)">Un-Halt Payments
+            </button>
             <br>
             <button class="blockLeaveTaxi" id="LeaveTaxi">Leave Taxi</button>
         </div>
