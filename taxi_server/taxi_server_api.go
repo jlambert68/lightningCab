@@ -31,14 +31,14 @@ func (s *taxiServiceServer) AskTaxiForPrice(ctx context.Context, environment *ta
 	time.Sleep(3 * time.Second)
 
 	currentPrice := &taxi_api.Price{
-		true,
-		"",
-		33000,
-		16000,
-		10000,
-		taxi_api.TimeUnit_SecondsBetweenPaymentmentRequests,
-		1,
-		taxi_api.PriceUnit_SatoshiPerSecond}
+		Acknack: false,
+		Comments: "",
+		Speed: 33000,
+		Acceleration: 16000,
+		Time: 10000,
+		Timeunit: taxi_api.TimeUnit_SecondsBetweenPaymentmentRequests,
+		PaymentRequestInterval: 1,
+		Priceunit: taxi_api.PriceUnit_SatoshiPerSecond}
 
 	// Check if State machine accepts State change
 	err := taxi.CustomerConnects(true)
@@ -134,7 +134,7 @@ func (s *taxiServiceServer) AcceptPrice(ctx context.Context, environment *taxi_a
 		returnMessage = "State machine is not in correct state to be able have customer connects to it"
 	}
 
-	return &taxi_api.AckNackResponse{acknack, returnMessage}, nil
+	return &taxi_api.AckNackResponse{Acknack: acknack, Comments: returnMessage}, nil
 }
 
 func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment, stream taxi_api.Taxi_PaymentRequestStreamServer) (err error) {
@@ -147,15 +147,17 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 	err = nil
 	paymentRequestResponse := &taxi_api.PaymentRequest{
-		"",
-		0,
-		0,
-		0,
-		0, 0,
-		0,
-		0,
-		0,
+		LightningPaymentRequest: "",
+		SpeedAmountSatoshi: 0,
+		AccelerationAmountSatoshi: 0,
+		TimeAmountSatoshi: 0,
+		SpeedAmountSek: 0,
+		AccelerationAmountSek: 0,
+		TimeAmountSek: 0,
+		TotalAmountSatoshi: 0,
+		TotalAmountSek: 0,
 	}
+
 
 	firstMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
 	lastMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeSecondPaymentTimeOut * time.Second)
@@ -192,7 +194,12 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			lastMissedPaymentTimeOut = false
 
 			// Populate stream Respons
-			paymentRequestResponse.LightningPaymentRequest, err = generateInvoice()
+			invoicedataToCustomer, err := generateInvoice()
+
+			//spew.Println(invoicedataToCustomer)
+			//log.Println("Invoice Received from LND-generator: " + invoicedataToCustomer.Invoice)
+
+			paymentRequestResponse.LightningPaymentRequest = invoicedataToCustomer.Invoice
 			paymentRequestResponse.AccelerationAmountSatoshi = lastPaymentData.lastReceivedAmountdata.accelerationAmount
 			paymentRequestResponse.SpeedAmountSatoshi = lastPaymentData.lastReceivedAmountdata.speedAmount
 			paymentRequestResponse.TimeAmountSatoshi = lastPaymentData.lastReceivedAmountdata.timeAmount
@@ -202,11 +209,24 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			paymentRequestResponse.TotalAmountSatoshi = lastPaymentData.lastAmountToPay_satoshi
 			paymentRequestResponse.TotalAmountSek = lastPaymentData.lastAmountToPay_sek
 
-			if err := stream.Send(paymentRequestResponse); err != nil {
-				return err
-				log.Printf("Error when streaming back: 'PaymentRequestStream'")
-				break
+			//spew.Println(paymentRequestResponse)
+
+			if err == nil {
+				paymentRequestIsPaid = false
+
+				if err := stream.Send(paymentRequestResponse); err != nil {
+					return err
+					log.Printf("Error when streaming back: 'PaymentRequestStream'")
+					break
+				} else {
+					log.Println("Invoice sent to customer: " + paymentRequestResponse.LightningPaymentRequest)
+				}
+			} else {
+				// TotalAmountSatoshi == 0
+				//log.Printf("Error, can't stream due to 'paymentRequestResponse.TotalAmountSatoshi == 0'")
+				logMessagesWithError(4, "Error, can't stream due to 'paymentRequestResponse.TotalAmountSatoshi == 0'", err)
 			}
+
 
 			/*			if firstTime == true {
 							firstMissedPaymentTimer := time.NewTimer(common_config.SecondsBeforeFirstPaymentTimeOut * time.Second)
@@ -218,13 +238,13 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 			go func() {
 				<-firstMissedPaymentTimer.C
-				fmt.Println("Timer 'firstMissedPaymentTimer' expired")
+				log.Println("Timer 'firstMissedPaymentTimer' expired")
 				firstMissedPaymentTimeOut = true
 
 			}()
 			go func() {
 				<-lastMissedPaymentTimer.C
-				fmt.Println("Timer 'lastMissedPaymentTimer' expired")
+				log.Println("Timer 'lastMissedPaymentTimer' expired")
 				lastMissedPaymentTimeOut = true
 				abortPaymentRequestGeneration = true
 			}()

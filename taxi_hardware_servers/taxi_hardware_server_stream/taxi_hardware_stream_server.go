@@ -50,11 +50,11 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 
 	err = nil
 	powerConsumption := &taxiHW_stream_api.PowerStatusResponse{
-		true,
-		"Standard return message",
-		0,
-		33,
-		time.Now().UnixNano()}
+		Acknack: true,
+		Comments: "Standard return message",
+		Speed: 0,
+		Acceleration: 33,
+		Timestamp: time.Now().UnixNano()}
 
 	for {
 		if err := stream.Send(powerConsumption); err != nil {

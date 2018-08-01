@@ -45,7 +45,7 @@ var (
 
 	//HW-Stream
 	useEnv_stream                                                  = taxiHW_stream_api.TestOrProdEnviroment_Test
-	messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage = &taxiHW_stream_api.MessasurePowerMessage{useEnv_stream, common_config.MilliSecondsBetweenPaymentRequest}
+	messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage = &taxiHW_stream_api.MessasurePowerMessage{ TollGateServoEnviroment: useEnv_stream, Intervall: common_config.MilliSecondsBetweenPaymentRequest}
 
 )
 
@@ -481,7 +481,7 @@ func (taxi *Taxi) SetHardwareInFirstTimeReadyMode() {
 
 			time.Sleep(5 * time.Second)
 
-			PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
+			PowerCutterMessage := &taxiHW_api.PowerCutterMessage{TollGateServoEnviroment:useEnv, PowerCutterCommand:taxiHW_api.PowerCutterCommand_CutPower}
 			resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
 
 			if err != nil {
@@ -557,7 +557,7 @@ func (taxi *Taxi) SetHardwareInNextCustomerReadyMode(check bool) (err error) {
 
 				time.Sleep(5 * time.Second)
 
-				PowerCutterMessage := &taxiHW_api.PowerCutterMessage{useEnv, taxiHW_api.PowerCutterCommand_CutPower}
+				PowerCutterMessage := &taxiHW_api.PowerCutterMessage{TollGateServoEnviroment: useEnv,PowerCutterCommand:taxiHW_api.PowerCutterCommand_CutPower}
 				resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
 
 				if err != nil {

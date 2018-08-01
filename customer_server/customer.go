@@ -32,6 +32,7 @@ type Customer struct {
 	lastRecievedPriceAccept *taxi_grpc_api.AckNackResponse
 	stateBeforeHaltPayments ssm.State
 	lastReceivedInvoice     *taxi_grpc_api.PaymentRequest
+	receivedTaxiInvoiceButNotPaid bool
 }
 
 var customer *Customer
@@ -152,9 +153,9 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
 		log.Println("*** Entering 'StateCustomerWaitingForCommands' ")
-		if customer.askTaxiForPrice(true) == nil {
+		/*if customer.askTaxiForPrice(true) == nil {
 			_ = customer.askTaxiForPrice(false)
-		}
+		}*/
 	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateCustomerWaitingForCommands' ")
@@ -167,9 +168,9 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
 		log.Println("*** Entering 'StateCustomerPriceHasBeenReceived' ")
-		if customer.acceptPrice(true) == nil {
+		/*if customer.acceptPrice(true) == nil {
 			_ = customer.acceptPrice(false)
-		}
+		}*/
 	})
 	cfg.OnExit(func() {
 		log.Println("*** Exiting 'StateCustomerPriceHasBeenReceived' ")
@@ -514,6 +515,7 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 			if err != nil {
 				log.Fatalf("Problem when streaming from Taxi invoice Stream:", client, err)
 			}
+			customer.receivedTaxiInvoiceButNotPaid = true
 
 			//Customer Pays Invoice
 			invoices = append(invoices, invoice.LightningPaymentRequest)
@@ -522,24 +524,27 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 			stateChangeResponse := customer.CustomerStateMachine.Fire(TriggerCustomerReceivesPaymentRequest.Key, nil)
 			if stateChangeResponse != nil {
 				log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerReceivesPaymentRequest'")
-			}
+			} else {
 
-			if customer.CustomerStateMachine.IsInState(StateCustomerPaymentRequestReceived) {
-				err = lightningConnection.PayReceivedInvoicesFromTaxi(invoices)
-				if err != nil {
-					log.Println("Problem when paying Invoice from Taxi: ", err)
-					customer.PaymentStreamStarted = false
-					break
-				} else {
-					log.Println("Invoice from Taxi-Stream is paid: ", invoices)
+				if customer.CustomerStateMachine.IsInState(StateCustomerPaymentRequestReceived) {
+					err = lightningConnection.PayReceivedInvoicesFromTaxi(invoices)
+					if err != nil {
+						log.Println("Problem when paying Invoice from Taxi: ", err)
+						customer.PaymentStreamStarted = false
+						break
+					} else {
+						log.Println("Invoice from Taxi-Stream is paid: ", invoices)
 
-					invoices = append(invoices[:0], invoices[1:]...)
+						invoices = append(invoices[:0], invoices[1:]...)
 
-				}
+						customer.receivedTaxiInvoiceButNotPaid = true
 
-				stateChangeResponse = customer.CustomerStateMachine.Fire(TriggerCustomerPaysPaymentRequest.Key, nil)
-				if stateChangeResponse != nil {
-					log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerPaysPaymentRequest'")
+					}
+
+					stateChangeResponse = customer.CustomerStateMachine.Fire(TriggerCustomerPaysPaymentRequest.Key, nil)
+					if stateChangeResponse != nil {
+						log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerPaysPaymentRequest'")
+					}
 				}
 			}
 		} else {

@@ -2,6 +2,10 @@ syntax = "proto3";
 package taxi_hardware_grpc_stream_api;
 
 //protoc -I taxi_hardware_grpc_stream_api --go_out=plugins=grpc:taxi_hardware_grpc_stream_api taxi_hardware_grpc_stream_api/taxi_hardware_server_stream_api.proto
+// version 3.6.0
+//~/protobuf/bin/protoc -I taxi_hardware_grpc_stream_api --go_out=plugins=grpc:taxi_hardware_grpc_stream_api taxi_hardware_grpc_stream_api/taxi_hardware_server_stream_api.proto
+
+
 
 // The Client register service definition.
 // ***********************

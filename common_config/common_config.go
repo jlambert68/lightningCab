@@ -47,7 +47,7 @@ const TimeSatoshiPerSecond = TimeSEKPerSecond / BTCSEK * SatoshisPerBTC
 
 const MilliSecondsBetweenPaymentRequest = 1000
 const SecondsBeforeFirstPaymentTimeOut = 2
-const SecondsBeforeSecondPaymentTimeOut = 10
+const SecondsBeforeSecondPaymentTimeOut = 60
 
 
 // Simnet or Testnet

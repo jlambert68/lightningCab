@@ -35,7 +35,7 @@ func (s *customerUIServiceServer) AskTaxiForPrice(ctx context.Context, emptyPara
 
 		switch  err.(type) {
 		case nil:
-			err = customer.acceptPrice(false)
+			err = customer.askTaxiForPrice(false)
 			if err != nil {
 				logMessagesWithError(4, "State machine is not in correct state to be able have customer ask for price: ", err)
 				returnMessage.Comments = "State machine is not in correct state to be able have customer ask for price"
@@ -58,19 +58,6 @@ func (s *customerUIServiceServer) AskTaxiForPrice(ctx context.Context, emptyPara
 					Priceunit:                 0, //customer.lastRecievedPriceInfo.Priceunit,
 				}
 
-				/*				returnMessage = &customer_ui_api.Price_UI{
-									true,
-									customer.lastRecievedPriceInfo.Comments,
-									customer.lastRecievedPriceInfo.GetSpeed(),
-									customer.lastRecievedPriceInfo.GetAcceleration(),
-									customer.lastRecievedPriceInfo.GetTime(),
-									float32(customer.lastRecievedPriceInfo.GetSpeed()) * common_config.BTCSEK,
-									float32(customer.lastRecievedPriceInfo.GetAcceleration()) * common_config.BTCSEK,
-									float32(customer.lastRecievedPriceInfo.GetTime()) * common_config.BTCSEK,
-									0, //customer.lastRecievedPriceInfo.Timeunit,
-									0, //customer.lastRecievedPriceInfo.PaymentRequestInterval,
-									0, //customer.lastRecievedPriceInfo.Priceunit,
-								}*/
 			}
 
 		default:
@@ -98,7 +85,7 @@ func (s *customerUIServiceServer) AcceptPrice(ctx context.Context, emptyParamete
 	}
 
 	// Check if State machine accepts State change
-	err := customer.askTaxiForPrice(true)
+	err := customer.acceptPrice(true)
 
 	if err == nil {
 
@@ -148,13 +135,13 @@ func (s *customerUIServiceServer) HaltPayments(ctx context.Context, haltPaymentR
 
 	case true: //Halt Payments
 		// Check if State machine accepts State change
-		err := customer.askTaxiForPrice(true)
+		err := customer.haltPayments(true)
 
 		if err == nil {
 
 			switch  err.(type) {
 			case nil:
-				err = customer.acceptPrice(false)
+				err = customer.haltPayments(false)
 				if err != nil {
 					logMessagesWithError(4, "State machine is not in correct state to be able to halt payment: ", err)
 					returnMessage.Comments = "State machine is not in correct state to be able to halt payment"

@@ -2,6 +2,10 @@ syntax = "proto3";
 package toll_road_grpc_api;
 
 //protoc -I toll_road_grpc_api --go_out=plugins=grpc:toll_road_grpc_api toll_road_grpc_api/toll_road_api.proto
+// version 3.6.0
+//~/protobuf/bin/protoc -I toll_road_grpc_api --go_out=plugins=grpc:toll_road_grpc_api toll_road_grpc_api/toll_road_api.proto
+
+
 
 // Parameter used for Empty inputs
 message EmptyParameter {

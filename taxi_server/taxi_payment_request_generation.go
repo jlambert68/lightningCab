@@ -8,6 +8,7 @@ import (
 	"golang.org/x/net/context"
 	"math"
 	"jlambert/lightningCab/common_config"
+	"errors"
 )
 
 type amountStructure struct {
@@ -34,21 +35,30 @@ type lastPaymentData_struct struct {
 
 var lastPaymentData lastPaymentData_struct
 
-func generateInvoice() (string, error) {
+func generateInvoice() (lightningConnection.PendingInvoice, error) {
 
+	var err error = nil
 	var invoice lightningConnection.PendingInvoice
 
-	paymentRequestIsPaid = false
-	invoice, err := lightningConnection.CreateInvoice("Payment Request for Taxi", lastPaymentData.lastAmountToPay_satoshi, 180)
-	if err != nil || invoice.Invoice == "" {
-		logMessagesWithError(4, "Error when creating Invoice: ", err)
+	// Don't create invoice of zero amount
+	if lastPaymentData.lastAmountToPay_satoshi != 0 {
+		//paymentRequestIsPaid = false
+		invoice, err = lightningConnection.CreateInvoice("Payment Request for Taxi", lastPaymentData.lastAmountToPay_satoshi, 180)
+		if err != nil || invoice.Invoice == "" {
+			logMessagesWithError(4, "Error when creating Invoice: ", err)
 
+		} else {
+			logMessagesWithOutError(4, "Invoice Created: " + invoice.Invoice)
+
+		}
 	} else {
-		logMessagesWithOutError(4, "Invoice Created: ")
-
+		logMessagesWithOutError(4, "Amount is zero, so no Invoice is generated: ")
+		err = errors.New("Amount is zero, so no Invoice is generated")
 	}
 
-	return invoice.Invoice, err
+	//log.Println("Sending back the following data!")
+	//spew.Println(invoice)
+	return invoice, err
 }
 
 func customerPaysPaymentRequest(check bool) (err error) {
