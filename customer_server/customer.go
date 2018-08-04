@@ -765,6 +765,9 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+	//*****************
+
+
 	// Start Customer RPC UI Stream Server for Incomming web connectionss
 	log.Println("Customer UI RPC Stream Server started")
 	log.Println("Start listening on: %v", localCustomerUIRPCStreamServerEngineLocalPort)
@@ -773,14 +776,19 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+
+
 	// Creates a new RegisterClient gRPC server for UI
 	go func() {
 		log.Println("Starting Customer RPC UI Server")
 		customerRpcUIServer = grpc.NewServer()
+		//customerRpcUIServer = grpc.NewServer(grpc.Creds(creds))
 		customer_ui_api.RegisterCustomer_UIServer(customerRpcUIServer, &customerUIServiceServer{})
 		log.Println("registerTaxiServer for Taxi Gate started")
 		log.Println(customerRpcUIServer.GetServiceInfo())
 		customerRpcUIServer.Serve(lis)
+
+
 	}()
 
 	// Creates a new RegisterClient gRPC stream server for UI
@@ -793,8 +801,13 @@ func main() {
 	}()
 	// *********************
 
+
+
 	// Set up the Private Taxi Road State Machine
 	initiateCustomer()
+
+
+	//*****************
 
 	// Set system in wait mode for externa input ...
 	c := make(chan os.Signal, 2)
