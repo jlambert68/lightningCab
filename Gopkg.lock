@@ -73,11 +73,33 @@
   version = "v1.1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/foobaz/go-zopfli"
+  packages = ["zopfli"]
+  revision = "7432051485e2617ac160eba6129ab7efedecd427"
+
+[[projects]]
+  name = "github.com/fsnotify/fsnotify"
+  packages = ["."]
+  revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
+  version = "v1.4.7"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/golang/gddo"
+  packages = ["httputil/header"]
+  revision = "416d5fc8c9c85e9ec9252a70d01e069f4b287ff0"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "jsonpb",
     "proto",
     "protoc-gen-go/descriptor",
+    "protoc-gen-go/generator",
+    "protoc-gen-go/generator/internal/remap",
+    "protoc-gen-go/grpc",
+    "protoc-gen-go/plugin",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
@@ -86,6 +108,36 @@
   ]
   revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
   version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gopherjs/gopherjs"
+  packages = [
+    "build",
+    "compiler",
+    "compiler/analysis",
+    "compiler/astutil",
+    "compiler/filter",
+    "compiler/gopherjspkg",
+    "compiler/natives",
+    "compiler/prelude",
+    "compiler/typesutil",
+    "internal/sysutil",
+    "js"
+  ]
+  revision = "8dffc02ea1cb8398bb73f30424697c60fcf8d4c5"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gopherjs/jquery"
+  packages = ["."]
+  revision = "3ba2b901425ea59c6206842654ff95187b755848"
+
+[[projects]]
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
+  version = "v1.2.0"
 
 [[projects]]
   name = "github.com/grpc-ecosystem/grpc-gateway"
@@ -98,10 +150,53 @@
   version = "v1.4.1"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/hashicorp/hcl"
+  packages = [
+    ".",
+    "hcl/ast",
+    "hcl/parser",
+    "hcl/printer",
+    "hcl/scanner",
+    "hcl/strconv",
+    "hcl/token",
+    "json/parser",
+    "json/scanner",
+    "json/token"
+  ]
+  revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/improbable-eng/grpc-web"
+  packages = ["go/grpcweb"]
+  revision = "6fb683f067bd56862c3a510bc5590b955ce46d2a"
+
+[[projects]]
+  name = "github.com/inconshreveable/mousetrap"
+  packages = ["."]
+  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+  version = "v1.0"
+
+[[projects]]
   name = "github.com/jessevdk/go-flags"
   packages = ["."]
   revision = "c6ca198ec95c841fdb89fc0de7496fed11ab854e"
   version = "v1.4.0"
+
+[[projects]]
+  name = "github.com/johanbrandhorst/protobuf"
+  packages = [
+    "grpcweb",
+    "grpcweb/grpcwebjs",
+    "grpcweb/status",
+    "jspb",
+    "proto",
+    "protoc-gen-gopherjs/generator",
+    "protoc-gen-gopherjs/grpc"
+  ]
+  revision = "227432c61df7f8b5bace4bb8064797c2aea8dc28"
+  version = "v0.7.1"
 
 [[projects]]
   branch = "master"
@@ -109,15 +204,32 @@
   packages = ["."]
   revision = "584905176618da46b895b176c721b02c476b6993"
 
-
-  [[projects]]
-    name = "github.com/lightningnetwork/lnd"
+[[projects]]
+  name = "github.com/kisielk/gotool"
   packages = [
-    "lnrpc",
-    "macaroons"
+    ".",
+    "internal/load"
   ]
-    revision = "6fa93a78c18180a3bc77116b749b3c5e279d5a33"
-    version = "v0.4.1-beta"
+  revision = "80517062f582ea3340cd4baf70e86d539ae7d84d"
+  version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/lightningnetwork/lnd"
+  packages = ["lnrpc"]
+  revision = "6fa93a78c18180a3bc77116b749b3c5e279d5a33"
+  version = "v0.4.1-beta"
+
+[[projects]]
+  name = "github.com/lpar/gzipped"
+  packages = ["."]
+  revision = "8e9a0db009a7e2ca48d46825a0b32e8b2465c810"
+  version = "v1.0.1"
+
+[[projects]]
+  name = "github.com/magiconair/properties"
+  packages = ["."]
+  revision = "c2353362d570a7bfa228149c62842019201cfb71"
+  version = "v1.8.0"
 
 [[projects]]
   branch = "master"
@@ -126,10 +238,34 @@
   revision = "a7b249c6862c5232dfc8fabb0180b690d7c53959"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/mitchellh/mapstructure"
+  packages = ["."]
+  revision = "f15292f7a699fcc1a38a80977f80a046874ba8ac"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/neelance/astrewrite"
+  packages = ["."]
+  revision = "99348263ae862cc230986ce88deaddbf7edcc034"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/neelance/sourcemap"
+  packages = ["."]
+  revision = "8c68805598ab8d5637b1a72b5f7d381ea0f39c31"
+
+[[projects]]
   name = "github.com/op/go-logging"
   packages = ["."]
   revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
   version = "v1"
+
+[[projects]]
+  name = "github.com/pelletier/go-toml"
+  packages = ["."]
+  revision = "c01d1270ff3e442a8a57cddc1c92dc1138598194"
+  version = "v1.2.0"
 
 [[projects]]
   branch = "master"
@@ -147,38 +283,107 @@
   revision = "6724a57986aff9bff1a1770e9347036def7c89f6"
 
 [[projects]]
+  name = "github.com/rs/cors"
+  packages = ["."]
+  revision = "feef513b9575b32f84bafa580aad89b011259019"
+  version = "v1.3.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/shurcooL/httpfs"
+  packages = [
+    "filter",
+    "vfsutil"
+  ]
+  revision = "809beceb23714880abc4a382a00c05f89d13b1cc"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/shurcooL/vfsgen"
+  packages = ["."]
+  revision = "ffb13db8def02f545acc58bd288ec6057c2bbfb9"
+
+[[projects]]
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
+
+[[projects]]
+  name = "github.com/spf13/afero"
+  packages = [
+    ".",
+    "mem"
+  ]
+  revision = "787d034dfe70e44075ccc060d346146ef53270ad"
+  version = "v1.1.1"
+
+[[projects]]
+  name = "github.com/spf13/cast"
+  packages = ["."]
+  revision = "8965335b8c7107321228e3e3702cab9832751bac"
+  version = "v1.2.0"
+
+[[projects]]
+  name = "github.com/spf13/cobra"
+  packages = ["."]
+  revision = "a1f051bc3eba734da4772d60e2d677f47cf93ef4"
+  version = "v0.0.2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/spf13/jwalterweatherman"
+  packages = ["."]
+  revision = "7c0cea34c8ece3fbeb2b27ab9b59511d360fb394"
+
+[[projects]]
+  name = "github.com/spf13/pflag"
+  packages = ["."]
+  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
+  version = "v1.0.1"
+
+[[projects]]
+  name = "github.com/spf13/viper"
+  packages = ["."]
+  revision = "b5e8006cbee93ec955a89ab31e0e3ce3204f3736"
+  version = "v1.0.2"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = [
     "curve25519",
-    "internal/subtle",
     "nacl/box",
     "nacl/secretbox",
     "poly1305",
     "ripemd160",
-    "salsa20/salsa"
+    "salsa20/salsa",
+    "ssh/terminal"
   ]
-  revision = "c126467f60eb25f8f27e5a981f32a87e3965053f"
+  revision = "f70185d77e8278766928032ee1355e3da47e7181"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = [
     "context",
-    "http/httpguts",
     "http2",
     "http2/hpack",
     "idna",
     "internal/timeseries",
+    "lex/httplex",
     "trace"
   ]
-  revision = "a0f8a16cb08c06df97cbdf9c47f4731ba548c33c"
+  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["unix"]
-  revision = "bd9dbc187b6e1dacfdd2722a87e83093c2d7bd6e"
+  packages = [
+    "unix",
+    "windows"
+  ]
+  revision = "3b87a42e500a6dc65dae1a55d0b641295971163e"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -203,12 +408,23 @@
 
 [[projects]]
   branch = "master"
+  name = "golang.org/x/tools"
+  packages = [
+    "go/buildutil",
+    "go/gcexportdata",
+    "go/internal/gcimporter",
+    "go/types/typeutil"
+  ]
+  revision = "48418e5732e1b1e2a10207c8007a5f959e422f20"
+
+[[projects]]
+  branch = "master"
   name = "google.golang.org/genproto"
   packages = [
     "googleapis/api/annotations",
     "googleapis/rpc/status"
   ]
-  revision = "2a72893556e4d1f6c795a4c039314c9fa751eedb"
+  revision = "51d0944304c3cbce4afe9e5247e21100037bff78"
 
 [[projects]]
   name = "google.golang.org/grpc"
@@ -248,6 +464,7 @@
   packages = ["."]
   revision = "c17903c6b19d5dedb9cfba9fa314c7fae63e554f"
 
+
 [[projects]]
   branch = "v1"
   name = "gopkg.in/macaroon-bakery.v1"
@@ -273,15 +490,45 @@
   packages = ["."]
   revision = "ab101776739ee61baab9bc50e4b33b5aeb3ac843"
 
+
+  [[projects]]
+    name = "gopkg.in/macaroon.v2"
+    packages = ["."]
+    revision = "bed2a428da6e56d950bed5b41fcbae3141e5b0d0"
+
 [[projects]]
-  name = "gopkg.in/macaroon.v2"
+  name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "bed2a428da6e56d950bed5b41fcbae3141e5b0d0"
-  version = "v2.0.0"
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
+[[projects]]
+  branch = "master"
+  name = "honnef.co/go/js/dom"
+  packages = ["."]
+  revision = "6da835bec70f84cd4f0c0b8a7239a9260b6bc37f"
+
+[[projects]]
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
+  version = "v1.2.0"
+
+[[projects]]
+  name = "github.com/lpar/gzipped"
+  packages = ["."]
+  revision = "8e9a0db009a7e2ca48d46825a0b32e8b2465c810"
+  version = "v1.0.1"
+
+[[projects]]
+   name = "github.com/sirupsen/logrus"
+   packages = ["."]
+   revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+   version = "v1.0.5"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1f659f9bb369dc7e5cb2faac510ae98bdcdcdc6273e2e7aa4c49c64bc2bc2542"
+  inputs-digest = "32dc648098771e1d3aad8c01836497ef2f9ce4612d2fec746b1d65fb98301ca5"
   solver-name = "gps-cdcl"
   solver-version = 1

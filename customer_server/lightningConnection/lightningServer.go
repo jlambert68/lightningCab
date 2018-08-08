@@ -5,15 +5,8 @@ import (
 	"fmt"
 	//"github.com/donovanhide/eventsource"
 	"github.com/davecgh/go-spew/spew"
-	lndrpc "github.com/lightningnetwork/lnd/lnrpc"
-	lndmacaroons "github.com/lightningnetwork/lnd/macaroons"
-	googleGRPc "google.golang.org/grpc"
-	googleCred "google.golang.org/grpc/credentials"
-	"gopkg.in/macaroon.v2"
-	//"gopkg.in/macaroon.v1"
-	"io/ioutil"
-	"os/user"
-	"path"
+	"github.com/lightningnetwork/lnd/lnrpc"
+
 	"time"
 	"os"
 	//"github.com/op/go-logging"
@@ -22,9 +15,10 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	//"jlambert/lightningCab/customer_server/lightningConnection/backends"
+
 )
 
-var lndClient lndrpc.LightningClient
+var lndClient lnrpc.LightningClient
 
 const eventChannel = "invoiceSettled"
 
@@ -75,6 +69,7 @@ type BackendLayer1 interface {
 
 var callbackToToll TaxiPaysToll
 
+/*
 func InitLndServerConnection() {
 
 	initLog()
@@ -90,7 +85,7 @@ func InitLndServerConnection() {
 	tlsCertPath := path.Join(usr.HomeDir, ".lnd/tls.cert")
 	macaroonPath := path.Join(usr.HomeDir, ".lnd/admin.macaroon")
 
-	tlsCreds, err := googleCred.NewClientTLSFromFile(tlsCertPath, "")
+	tlsCreds, err := credentials.NewClientTLSFromFile(tlsCertPath, "")
 	if err != nil {
 		fmt.Println("Cannot get node tls credentials", err)
 		return
@@ -102,25 +97,28 @@ func InitLndServerConnection() {
 		return
 	}
 
+
 	mac := &macaroon.Macaroon{}
+	//mac := &lndmacarons.MacaroonCredential{}
 	if err = mac.UnmarshalBinary(macaroonBytes); err != nil {
 		fmt.Println("Cannot unmarshal macaroon", err)
 		return
 	}
 
-	opts := []googleGRPc.DialOption{
-		googleGRPc.WithTransportCredentials(tlsCreds),
-		googleGRPc.WithBlock(),
-		googleGRPc.WithPerRPCCredentials(lndmacaroons.NewMacaroonCredential(mac)),
+	opts := []grpc.DialOption{
+		grpc.WithTransportCredentials(tlsCreds),
+		grpc.WithBlock(),
+		grpc.WithPerRPCCredentials(lndmacarons.NewMacaroonCredential(mac)),
 	}
 
-	conn, err := googleGRPc.Dial("localhost:10009", opts...)
+	conn, err := grpc.Dial("localhost:10009", opts...)
 	if err != nil {
 		fmt.Println("cannot dial to lnd", err)
 		return
 	}
-	lndClient = lndrpc.NewLightningClient(conn)
+	lndClient = lnrpc.NewLightningClient(conn)
 }
+*/
 
 func LigtningMainService() { //cbTT TaxiPaysToll) {
 	//callbackToToll = cbTT
@@ -380,7 +378,7 @@ func marshalJson(data interface{}) []byte {
 
 func RetrieveGetInfo() {
 	ctx := context.Background()
-	getInfoResp, err := lndClient.GetInfo(ctx, &lndrpc.GetInfoRequest{})
+	getInfoResp, err := lndClient.GetInfo(ctx, &lnrpc.GetInfoRequest{})
 	if err != nil {
 		fmt.Println("Cannot get info from node:", err)
 		return
@@ -388,6 +386,7 @@ func RetrieveGetInfo() {
 	spew.Dump(getInfoResp)
 }
 
+/*
 func LndServer() {
 	usr, err := user.Current()
 	if err != nil {
@@ -398,7 +397,7 @@ func LndServer() {
 	tlsCertPath := path.Join(usr.HomeDir, ".lnd/tls.cert")
 	macaroonPath := path.Join(usr.HomeDir, ".lnd/admin.macaroon")
 
-	tlsCreds, err := googleCred.NewClientTLSFromFile(tlsCertPath, "")
+	tlsCreds, err := credentials.NewClientTLSFromFile(tlsCertPath, "")
 	if err != nil {
 		fmt.Println("Cannot get node tls credentials", err)
 		return
@@ -416,24 +415,25 @@ func LndServer() {
 		return
 	}
 
-	opts := []googleGRPc.DialOption{
-		googleGRPc.WithTransportCredentials(tlsCreds),
-		googleGRPc.WithBlock(),
-		googleGRPc.WithPerRPCCredentials(lndmacaroons.NewMacaroonCredential(mac)),
+	opts := []grpc.DialOption{
+		grpc.WithTransportCredentials(tlsCreds),
+		grpc.WithBlock(),
+		grpc.WithPerRPCCredentials(lndmacarons.NewMacaroonCredential(mac)),
 	}
 
-	conn, err := googleGRPc.Dial("localhost:10009", opts...)
+	conn, err := grpc.Dial("localhost:10009", opts...)
 	if err != nil {
 		fmt.Println("cannot dial to lnd", err)
 		return
 	}
-	client := lndrpc.NewLightningClient(conn)
+	client := lnrpc.NewLightningClient(conn)
 
 	ctx := context.Background()
-	getInfoResp, err := client.GetInfo(ctx, &lndrpc.GetInfoRequest{})
+	getInfoResp, err := client.GetInfo(ctx, &lnrpc.GetInfoRequest{})
 	if err != nil {
 		fmt.Println("Cannot get info from node:", err)
 		return
 	}
 	spew.Dump(getInfoResp)
 }
+*/

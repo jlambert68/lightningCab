@@ -54,11 +54,11 @@ func (m *EmptyParameter) XXX_DiscardUnknown() {
 var xxx_messageInfo_EmptyParameter proto.InternalMessageInfo
 
 type RPCMethods struct {
-	AskTaxiForPrice      bool     `protobuf:"varint,1,opt,name=AskTaxiForPrice,proto3" json:"AskTaxiForPrice,omitempty"`
-	AcceptPrice          bool     `protobuf:"varint,2,opt,name=AcceptPrice,proto3" json:"AcceptPrice,omitempty"`
-	HaltPaymentsTrue     bool     `protobuf:"varint,3,opt,name=HaltPayments_true,json=HaltPaymentsTrue,proto3" json:"HaltPayments_true,omitempty"`
-	HaltPaymentsFalse    bool     `protobuf:"varint,4,opt,name=HaltPayments_false,json=HaltPaymentsFalse,proto3" json:"HaltPayments_false,omitempty"`
-	LeaveTaxi            bool     `protobuf:"varint,5,opt,name=LeaveTaxi,proto3" json:"LeaveTaxi,omitempty"`
+	AskTaxiForPrice      bool     `protobuf:"varint,1,opt,name=AskTaxiForPrice" json:"AskTaxiForPrice,omitempty"`
+	AcceptPrice          bool     `protobuf:"varint,2,opt,name=AcceptPrice" json:"AcceptPrice,omitempty"`
+	HaltPaymentsTrue     bool     `protobuf:"varint,3,opt,name=HaltPayments_true,json=HaltPaymentsTrue" json:"HaltPayments_true,omitempty"`
+	HaltPaymentsFalse    bool     `protobuf:"varint,4,opt,name=HaltPayments_false,json=HaltPaymentsFalse" json:"HaltPayments_false,omitempty"`
+	LeaveTaxi            bool     `protobuf:"varint,5,opt,name=LeaveTaxi" json:"LeaveTaxi,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -124,18 +124,18 @@ func (m *RPCMethods) GetLeaveTaxi() bool {
 }
 
 type UIPriceAndStateRespons struct {
-	Acknack                   bool        `protobuf:"varint,1,opt,name=acknack,proto3" json:"acknack,omitempty"`
-	Comments                  string      `protobuf:"bytes,2,opt,name=comments,proto3" json:"comments,omitempty"`
-	SpeedAmountSatoshi        int64       `protobuf:"varint,3,opt,name=speed_amount_satoshi,json=speedAmountSatoshi,proto3" json:"speed_amount_satoshi,omitempty"`
-	AccelerationAmountSatoshi int64       `protobuf:"varint,4,opt,name=acceleration_amount_satoshi,json=accelerationAmountSatoshi,proto3" json:"acceleration_amount_satoshi,omitempty"`
-	TimeAmountSatoshi         int64       `protobuf:"varint,5,opt,name=time_amount_satoshi,json=timeAmountSatoshi,proto3" json:"time_amount_satoshi,omitempty"`
-	SpeedAmountSek            float32     `protobuf:"fixed32,6,opt,name=speed_amount_sek,json=speedAmountSek,proto3" json:"speed_amount_sek,omitempty"`
-	AccelerationAmountSek     float32     `protobuf:"fixed32,7,opt,name=acceleration_amount_sek,json=accelerationAmountSek,proto3" json:"acceleration_amount_sek,omitempty"`
-	TimeAmountSek             float32     `protobuf:"fixed32,8,opt,name=time_amount_sek,json=timeAmountSek,proto3" json:"time_amount_sek,omitempty"`
-	TotalAmountSatoshi        int64       `protobuf:"varint,9,opt,name=total_amount_satoshi,json=totalAmountSatoshi,proto3" json:"total_amount_satoshi,omitempty"`
-	TotalAmountSek            float32     `protobuf:"fixed32,10,opt,name=total_amount_sek,json=totalAmountSek,proto3" json:"total_amount_sek,omitempty"`
-	Timestamp                 int64       `protobuf:"varint,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	AllowedRPCMethods         *RPCMethods `protobuf:"bytes,12,opt,name=allowedRPCMethods,proto3" json:"allowedRPCMethods,omitempty"`
+	Acknack                   bool        `protobuf:"varint,1,opt,name=acknack" json:"acknack,omitempty"`
+	Comments                  string      `protobuf:"bytes,2,opt,name=comments" json:"comments,omitempty"`
+	SpeedAmountSatoshi        int64       `protobuf:"varint,3,opt,name=speed_amount_satoshi,json=speedAmountSatoshi" json:"speed_amount_satoshi,omitempty"`
+	AccelerationAmountSatoshi int64       `protobuf:"varint,4,opt,name=acceleration_amount_satoshi,json=accelerationAmountSatoshi" json:"acceleration_amount_satoshi,omitempty"`
+	TimeAmountSatoshi         int64       `protobuf:"varint,5,opt,name=time_amount_satoshi,json=timeAmountSatoshi" json:"time_amount_satoshi,omitempty"`
+	SpeedAmountSek            float32     `protobuf:"fixed32,6,opt,name=speed_amount_sek,json=speedAmountSek" json:"speed_amount_sek,omitempty"`
+	AccelerationAmountSek     float32     `protobuf:"fixed32,7,opt,name=acceleration_amount_sek,json=accelerationAmountSek" json:"acceleration_amount_sek,omitempty"`
+	TimeAmountSek             float32     `protobuf:"fixed32,8,opt,name=time_amount_sek,json=timeAmountSek" json:"time_amount_sek,omitempty"`
+	TotalAmountSatoshi        int64       `protobuf:"varint,9,opt,name=total_amount_satoshi,json=totalAmountSatoshi" json:"total_amount_satoshi,omitempty"`
+	TotalAmountSek            float32     `protobuf:"fixed32,10,opt,name=total_amount_sek,json=totalAmountSek" json:"total_amount_sek,omitempty"`
+	Timestamp                 int64       `protobuf:"varint,11,opt,name=timestamp" json:"timestamp,omitempty"`
+	AllowedRPCMethods         *RPCMethods `protobuf:"bytes,12,opt,name=allowedRPCMethods" json:"allowedRPCMethods,omitempty"`
 	XXX_NoUnkeyedLiteral      struct{}    `json:"-"`
 	XXX_unrecognized          []byte      `json:"-"`
 	XXX_sizecache             int32       `json:"-"`
@@ -263,9 +263,8 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// CustomerUIPriceStreamClient is the client API for CustomerUIPriceStream service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+// Client API for CustomerUIPriceStream service
+
 type CustomerUIPriceStreamClient interface {
 	// Returns a stream with
 	UIPriceAndStateStream(ctx context.Context, in *EmptyParameter, opts ...grpc.CallOption) (CustomerUIPriceStream_UIPriceAndStateStreamClient, error)
@@ -280,7 +279,7 @@ func NewCustomerUIPriceStreamClient(cc *grpc.ClientConn) CustomerUIPriceStreamCl
 }
 
 func (c *customerUIPriceStreamClient) UIPriceAndStateStream(ctx context.Context, in *EmptyParameter, opts ...grpc.CallOption) (CustomerUIPriceStream_UIPriceAndStateStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_CustomerUIPriceStream_serviceDesc.Streams[0], "/customer_ui_stream_api.CustomerUIPriceStream/UIPriceAndStateStream", opts...)
+	stream, err := grpc.NewClientStream(ctx, &_CustomerUIPriceStream_serviceDesc.Streams[0], c.cc, "/customer_ui_stream_api.CustomerUIPriceStream/UIPriceAndStateStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -311,7 +310,8 @@ func (x *customerUIPriceStreamUIPriceAndStateStreamClient) Recv() (*UIPriceAndSt
 	return m, nil
 }
 
-// CustomerUIPriceStreamServer is the server API for CustomerUIPriceStream service.
+// Server API for CustomerUIPriceStream service
+
 type CustomerUIPriceStreamServer interface {
 	// Returns a stream with
 	UIPriceAndStateStream(*EmptyParameter, CustomerUIPriceStream_UIPriceAndStateStreamServer) error

@@ -21,8 +21,10 @@ import (
 	"fmt"
 	"net"
 	"jlambert/lightningCab/customer_server/customer_ui_stream_api"
-	"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
-	"jlambert/lightningCab/customer_server/customer_html/gopherjs"
+	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
+	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
+	"jlambert/lightningCab/customer_server/customer_gui/proto/server"
+	"jlambert/lightningCab/customer_server/customer_gui/webmain"
 )
 
 
@@ -1007,7 +1009,7 @@ func main() {
 	go lightningConnection.LigtningMainService()
 
 	//Start Web Backend
-	go gopherjs.Webmain(CallBackAskTaxiForPrice, CallBackAcceptPrice, CallBackHaltPayments, CallBackLeaveTaxi)
+	go webmain.Webmain(CallBackAskTaxiForPrice, CallBackAcceptPrice, CallBackHaltPayments, CallBackLeaveTaxi)
 /*
 	// *********************
 	// Start Customer RPC UI Server for Incomming web connectionss
