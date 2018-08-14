@@ -1,5 +1,7 @@
 package common_config
 
+import "github.com/sirupsen/logrus"
+
 // gRPC-ports
 const GrpcTollServer_address = "127.0.0.1"
 const GrpcTollServer_port = ":50651"
@@ -35,11 +37,16 @@ const USDSEK = 8.88            //SEK per USD
 const BTCUSD = 5890            //USD per BTC
 const BTCSEK = BTCUSD * USDSEK //SEK per BTC
 
-const SpeedSEKPerSecond = 0.30                              //SEK
-const MaxAccelarationSEKPerSecond = SpeedSEKPerSecond * 0.5 //SEK
-const TimeSEKPerSecond = SpeedSEKPerSecond                  //SEK
+const MaxSEKPerSecond = 0.01 // SEK
+const SpeedProcent = 0.25 // %
+const AccelarionProcent = 0.25 // %
+const TimeProcent = 0.5 // %
 
-const SatoshisPerBTC = 1000000000
+const SpeedSEKPerSecond = MaxSEKPerSecond * SpeedProcent				//SEK
+const MaxAccelarationSEKPerSecond = MaxSEKPerSecond * AccelarionProcent //SEK
+const TimeSEKPerSecond = MaxSEKPerSecond * TimeProcent         			//SEK
+
+const SatoshisPerBTC = 100000000
 
 const SpeedSatoshiPerSecond = SpeedSEKPerSecond / BTCSEK * SatoshisPerBTC
 const MaxAccelarationSatoshiPerSecond = MaxAccelarationSEKPerSecond / BTCSEK * SatoshisPerBTC
@@ -59,4 +66,15 @@ const defaultLndTollGRPCHost = "localhost:10001"
 const defaultLndTaxiGRPCHost = "localhost:10002"
 const defaultLndCustomerGRPCHost = "localhost:10003"
 */
+
+// Used for Calculating Average Payment Amount presented in Customer GUI
+// Value in seconds
+const TimeForAveragePaymentCalculation = 10
+
+
+// Logrus debug level
+//const LoggingLevel = logrus.DebugLevel
+//const LoggingLevel = logrus.InfoLevel
+const LoggingLevel = logrus.WarnLevel
+
 

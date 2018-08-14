@@ -8,6 +8,7 @@ import (
 	"golang.org/x/net/context"
 	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
 	"jlambert/lightningCab/common_config"
+	"math"
 )
 
 /*
@@ -33,9 +34,9 @@ func (s *taxiServiceServer) AskTaxiForPrice(ctx context.Context, environment *ta
 	currentPrice := &taxi_api.Price{
 		Acknack: false,
 		Comments: "",
-		Speed: 33000,
-		Acceleration: 16000,
-		Time: 10000,
+		Speed: int64(math.Round(float64(common_config.SpeedSatoshiPerSecond))),
+		Acceleration: int64(math.Round(float64(common_config.MaxAccelarationSatoshiPerSecond))),
+		Time: int64(math.Round(float64(common_config.TimeSatoshiPerSecond))),
 		Timeunit: taxi_api.TimeUnit_SecondsBetweenPaymentmentRequests,
 		PaymentRequestInterval: 1,
 		Priceunit: taxi_api.PriceUnit_SatoshiPerSecond}
@@ -168,6 +169,7 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			break
 		}*/
 
+
 		if paymentRequestIsPaid == true || firstTime == true {
 			if firstTime == true {
 				log.Printf("First time creating PaymentRequest")
@@ -175,19 +177,6 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 				log.Printf("Not first time creating PaymentRequest")
 			}
 
-			/*
-						if firstTime == false {
-							if firstMissedPaymentTimeOut == false {
-								_ = firstMissedPaymentTimer.Stop()
-							}
-
-							if lastMissedPaymentTimeOut == false {
-								_ = lastMissedPaymentTimer.Stop()
-							}
-			*/
-			//fmt.Println("Timer 'firstMissedPaymentTimer' Stopped")
-			//fmt.Println("Timer 'lastMissedPaymentTimer' Stopped")
-			//}
 
 			firstTime = false
 			firstMissedPaymentTimeOut = false

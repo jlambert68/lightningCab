@@ -1,10 +1,8 @@
 package main
 
 import (
-	"strings"
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
-	"log"
 	"os"
 	//taxoTotollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
 	"jlambert/lightningCab/common_config"
@@ -18,13 +16,16 @@ import (
 	"errors"
 	"os/signal"
 	"syscall"
-	"fmt"
-	"net"
-	"jlambert/lightningCab/customer_server/customer_ui_stream_api"
+	//"net"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
 	"jlambert/lightningCab/customer_server/customer_gui/proto/server"
 	"jlambert/lightningCab/customer_server/customer_gui/webmain"
+
+	"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
+	"github.com/sirupsen/logrus"
+	"google.golang.org/grpc/grpclog"
+
 )
 
 
@@ -37,9 +38,24 @@ type Customer struct {
 	stateBeforeHaltPayments ssm.State
 	lastReceivedInvoice     *taxi_grpc_api.PaymentRequest
 	receivedTaxiInvoiceButNotPaid bool
+	invoiceReceivedAtleastOnce bool
+	currentWalletAmountSatoshi int64
+	currentWalletAmountSEK float32
+	currentTaxiRideAmountSatoshi int64
+	currentTaxiRideAmountSEK float32
+	averagePaymentAmountSatoshi int64
+	averagePaymentAmountSEK float32
+	logger *logrus.Logger
+
+}
+type averagePayment_struct struct {
+	paymentAmount int64
+	aggregateAmount int64
+	unixTime int64
 }
 
 var customer *Customer
+var averagePayment []averagePayment_struct
 
 var (
 	// Standard Taxi gRPC Server
@@ -56,31 +72,37 @@ const (
 	localCustomerUIRPCStreamServerEngineLocalPort = common_config.GrpcCustomerUI_RPC_StreamServer_port
 )
 
+/*
 var (
-	/*
-	//Customer_ui_api
+
+//Customer_ui_api
 	customerRpcUIServer *grpc.Server
 	lis                 net.Listener
-*/
+
 
 	//Customer_ui_stream_api
 	customerRpcUIStreamServer *grpc.Server
 	lisStream                 net.Listener
 )
-
+*/
 // Server used for register clients Name, Ip and Por and Clients Test Enviroments and Clients Test Commandst
 //type customerUIServiceServer struct{}
 type customerUIPriceStreamServiceServer struct{}
 
-func initiateCustomer() {
+func initCustomer() {
+	customer = NewCustomer("MyCustomer")
+}
+
+func (customer *Customer) startCustomer() {
 	var err error
 	err = nil
-	customer = NewCustomer("MyCustomer")
-	//customer.RestartToaxiSystem()
+	//customer = NewCustomer("MyCustomer")
+
 
 	err = validateBitcoind()
 	if err != nil {
-		log.Println("Couldn't check Bitcoind, exiting system!")
+		////log.Println("Couldn't check Bitcoind, exiting system!")
+		customer.logger.Error("Couldn't check Bitcoind, exiting system!")
 		os.Exit(0)
 	}
 	customer.CustomerChecksLightning()
@@ -119,7 +141,21 @@ var (
 
 func NewCustomer(title string) *Customer {
 
-	customer := &Customer{Title: title, PaymentStreamStarted: false}
+//	currenChannelBalance, err := lightningConnection.CustomerChannelbalance()
+//	if err != nil {
+//		//log.Println(err)
+//	}
+
+
+	customer := &Customer{Title: title,
+	PaymentStreamStarted: false,
+	invoiceReceivedAtleastOnce:false,
+	currentTaxiRideAmountSatoshi: 0,
+	currentTaxiRideAmountSEK: 0,
+	currentWalletAmountSatoshi: 0, //currenChannelBalance.Balance,
+	currentWalletAmountSEK: 0, //SatoshiToSEK(currenChannelBalance.Balance),
+	}
+
 	// Create State machine
 	CustomerStateMachine := ssm.NewStateMachine(StateCustomerInit)
 
@@ -127,30 +163,40 @@ func NewCustomer(title string) *Customer {
 	cfg := CustomerStateMachine.Configure(StateCustomerInit)
 	cfg.Permit(TriggerCustomerChecksBitcoin, StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateCustomerInit' ") })
+	cfg.OnEnter(func() { //log.Println("*** *** Entering 'StateCustomerInit' ")
+	customer.logger.Info("*** *** Entering 'StateCustomerInit' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerInit' ")
-		log.Println("")
+		////log.Println("*** Exiting 'StateCustomerInit' ")
+		customer.logger.Info("*** Exiting 'StateCustomerInit' ")
+		////log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateBitcoinIsCheckedAndOK
 	cfg = CustomerStateMachine.Configure(StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerCustomerChecksLightning, StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { //log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ")
+		customer.logger.Info("*** *** Entering 'StateBitcoinIsCheckedAndOK' ")})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
+		customer.logger.Info("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateLigtningIsCheckedAndOK
 	cfg = CustomerStateMachine.Configure(StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerCustomerWaitsForCommands, StateCustomerWaitingForCommands)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ")
+		customer.logger.Info("*** Entering 'StateLigtningIsCheckedAndOK' ")})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
+		customer.logger.Info("*** Exiting 'StateLigtningIsCheckedAndOK' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerWaitingForCommands
@@ -158,14 +204,17 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerCommandAskForPrice, StateCustomerPriceHasBeenReceived)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerWaitingForCommands' ")
+		//log.Println("*** Entering 'StateCustomerWaitingForCommands' ")
+		customer.logger.Info("*** Entering 'StateCustomerWaitingForCommands' ")
 		/*if customer.askTaxiForPrice(true) == nil {
 			_ = customer.askTaxiForPrice(false)
 		}*/
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerWaitingForCommands' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerWaitingForCommands' ")
+		customer.logger.Info("*** Exiting 'StateCustomerWaitingForCommands' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerPriceHasBeenReceived
@@ -173,14 +222,17 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerCommandAcceptPrice, StateCustomerWaitingForPaymentRequest)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerPriceHasBeenReceived' ")
+		//log.Println("*** Entering 'StateCustomerPriceHasBeenReceived' ")
+		customer.logger.Info("*** Entering 'StateCustomerPriceHasBeenReceived' ")
 		/*if customer.acceptPrice(true) == nil {
 			_ = customer.acceptPrice(false)
 		}*/
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerPriceHasBeenReceived' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerPriceHasBeenReceived' ")
+		customer.logger.Info("*** Exiting 'StateCustomerPriceHasBeenReceived' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerWaitingForPaymentRequest
@@ -190,14 +242,17 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerTaxiKicksOutCustomer, StateTaxiKickedOutCustomer)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerWaitingForPaymentRequest' ")
+		//log.Println("*** Entering 'StateCustomerWaitingForPaymentRequest' ")
+		customer.logger.Info("*** Entering 'StateCustomerWaitingForPaymentRequest' ")
 		if customer.PaymentStreamStarted == false {
 			go receiveTaxiInvoices(customerClient, useEnvironment)
 		}
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerWaitingForPaymentRequest' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerWaitingForPaymentRequest' ")
+		customer.logger.Info("*** Exiting 'StateCustomerWaitingForPaymentRequest' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerPaymentRequestReceived
@@ -207,12 +262,15 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerTaxiKicksOutCustomer, StateTaxiKickedOutCustomer)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerPaymentRequestReceived' ")
+		//log.Println("*** Entering 'StateCustomerPaymentRequestReceived' ")
+		customer.logger.Info("*** Entering 'StateCustomerPaymentRequestReceived' ")
 
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerPaymentRequestReceived' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerPaymentRequestReceived' ")
+		customer.logger.Info("*** Exiting 'StateCustomerPaymentRequestReceived' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerHaltedPayments
@@ -223,41 +281,54 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerTaxiKicksOutCustomer, StateTaxiKickedOutCustomer)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerHaltedPayments' ")
+		//log.Println("*** Entering 'StateCustomerHaltedPayments' ")
+		customer.logger.Info("*** Entering 'StateCustomerHaltedPayments' ")
 		//_ = customer.CustomerStateMachine.Fire(TriggerCustomerSetsHardwareInDriveMode.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerHaltedPayments' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerHaltedPayments' ")
+		customer.logger.Info("*** Exiting 'StateCustomerHaltedPayments' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateTaxiKickedOutCustomer
 	cfg = CustomerStateMachine.Configure(StateTaxiKickedOutCustomer)
 	cfg.Permit(TriggerCustomerWaitsForCommands, StateCustomerWaitingForCommands)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiKickedOutCustomer' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiKickedOutCustomer' ")
+		customer.logger.Info("*** Entering 'StateTaxiKickedOutCustomer' ")})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxiKickedOutCustomer' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxiKickedOutCustomer' ")
+		customer.logger.Info("*** Exiting 'StateTaxiKickedOutCustomer' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerLeftTaxi
 	cfg = CustomerStateMachine.Configure(StateCustomerLeftTaxi)
 	cfg.Permit(TriggerCustomerWaitsForCommands, StateCustomerWaitingForCommands)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerLeftTaxi' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateCustomerLeftTaxi' ")
+		customer.logger.Info("*** Entering 'StateCustomerLeftTaxi' ")})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
+		customer.logger.Info("*** Exiting 'StateCustomerLeftTaxi' ")
+
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	// Configure States: StateCustomerIsInErrorMode
 	cfg = CustomerStateMachine.Configure(StateCustomerIsInErrorMode)
 
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerIsInErrorMode' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateCustomerIsInErrorMode' ")
+		customer.logger.Info("*** Entering 'StateCustomerIsInErrorMode' ")})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerIsInErrorMode' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerIsInErrorMode' ")
+		customer.logger.Info("*** Exiting 'StateCustomerIsInErrorMode' ")
+		//log.Println("")
+		customer.logger.Info("")
 	})
 
 	customer.CustomerStateMachine = CustomerStateMachine
@@ -269,32 +340,39 @@ func NewCustomer(title string) *Customer {
 // log Errors for Triggers and States
 func logTriggerStateError(spaceCount int, currentState ssm.State, trigger ssm.Trigger, err error) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
-}
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
+	messageToLog := "Current state: " + currentState.Name + " doesn't accept trigger'" + trigger.String() + "'."
+	customer.logger.Info(messageToLog)
+	}
 
 // ******************************************************************************
 
 // ******************************************************************************
 // Log Errors for Triggers and States
-func logMessagesWithOutError(spaceCount int, message string) {
+ func logMessagesWithOutError(spaceCount int, message string) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, message)
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, message)
+	customer.logger.Info(message)
 }
 
 // ******************************************************************************
 // Log Errors for Triggers and States
 func logMessagesWithError(spaceCount int, message string, err error) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, message, err)
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, message, err)
+	customer.logger.WithFields(logrus.Fields{
+		"error": err,
+	}).Info(message)
 }
 
 // ******************************************************************************
 // Ask Taxi for Price
 func CallBackAskTaxiForPrice(emptyParameter *server.EmptyParameter) (*server.Price_UI, error) {
-	log.Println("Incoming: 'AskTaxiForPrice'")
+	//log.Println("Incoming: 'AskTaxiForPrice'")
+	customer.logger.Info("Incoming: 'AskTaxiForPrice'")
 
 	returnMessage := &server.Price_UI{
 		Acknack:                   false,
@@ -429,7 +507,8 @@ func (customer *Customer) askTaxiForPrice(check bool) (err error) {
 
 func CallBackAcceptPrice(emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error){
 
-	log.Println("Incoming: 'AcceptPrice'")
+	//log.Println("Incoming: 'AcceptPrice'")
+	customer.logger.Info("Incoming: 'AcceptPrice'")
 
 	returnMessage := &server.AckNackResponse{
 		Acknack:  false,
@@ -534,7 +613,10 @@ func (customer *Customer) acceptPrice(check bool) (err error) {
 // Customer Halts Payments
 func CallBackHaltPayments(haltPaymentRequestMessage *server.HaltPaymentRequest) (*server.AckNackResponse, error){
 
-	log.Println("Incoming: 'HaltPayments' with parameter: ", haltPaymentRequestMessage.Haltpayment)
+	//log.Println("Incoming: 'HaltPayments' with parameter: ", haltPaymentRequestMessage.Haltpayment)
+	customer.logger.WithFields(logrus.Fields{
+		"haltPaymentRequestMessage.Haltpaymen":    haltPaymentRequestMessage.Haltpayment,
+	}).Info("Incoming: 'HaltPayments' with parameter!")
 
 	returnMessage := &server.AckNackResponse{
 		Acknack:  false,
@@ -663,7 +745,8 @@ func (customer *Customer) haltPayments(check bool) (err error) {
 
 func CallBackLeaveTaxi(emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error){
 
-	log.Println("Incoming: 'LeaveTaxi'")
+	//log.Println("Incoming: 'LeaveTaxi'")
+	customer.logger.Info("Incoming: 'LeaveTaxi'")
 
 	returnMessage := &server.AckNackResponse{
 		Acknack:  false,
@@ -739,53 +822,105 @@ func (customer *Customer) leaveTaxi(check bool) (err error) {
 
 
 // ******************************************************************************
-// Simulate a Customer recieves paymentRequest Stream
+// Customer recieves paymentRequest Stream
 func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_api.Enviroment) {
-	log.Printf("Starting Taxi PaymentRequest stream %v", enviroment)
-	var invoices []string
+	//log.Printf("Starting Taxi PaymentRequest stream %v", enviroment)
+	customer.logger.Info("Starting Taxi PaymentRequest stream")
+
+	var invoicesAndPaymentData []*taxi_grpc_api.PaymentRequest
 
 	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 
 	stream, err := client.PaymentRequestStream(ctx, enviroment)
 	if err != nil {
-		log.Fatalf("Problem to connect to Taxi Invoice Stream: ", client, err)
+		//log.Fatalf("Problem to connect to Taxi Invoice Stream: ", client, err)
+		customer.logger.WithFields(logrus.Fields{
+			"client":    client,
+			"err": err,
+		}).Fatal("Problem to connect to Taxi Invoice Stream")
 	}
 	// Used for controlling state machine
 	customer.PaymentStreamStarted = true
 	for {
 		if customer.CustomerStateMachine.IsInState(StateCustomerWaitingForPaymentRequest) {
 
-			invoice, err := stream.Recv()
+			invoiceAndPaymentData, err := stream.Recv()
 			if err == io.EOF {
-				log.Println("HMMM, skumt borde inte slutat här när vi tar emot InvoiceStream, borde avsluta Customer")
+				//log.Println("HMMM, skumt borde inte slutat här när vi tar emot InvoiceStream, borde avsluta Customer")
+				customer.logger.Error("MMM, skumt borde inte slutat här när vi tar emot InvoiceStream, borde avsluta Customer")
 				customer.PaymentStreamStarted = false
 				break
 			}
 			if err != nil {
-				log.Fatalf("Problem when streaming from Taxi invoice Stream:", client, err)
+				//log.Fatalf("Problem when streaming from Taxi invoiceAndPaymentData Stream:", client, err)
+				customer.logger.WithFields(logrus.Fields{
+					"client":    client,
+					"err": err,
+				}).Fatal("Problem when streaming from Taxi invoiceAndPaymentData Stream")
 			}
 			customer.receivedTaxiInvoiceButNotPaid = true
+			customer.invoiceReceivedAtleastOnce = true
 
 			//Customer Pays Invoice
-			invoices = append(invoices, invoice.LightningPaymentRequest)
-			log.Println("Invoices: ", invoices)
+			invoicesAndPaymentData = append(invoicesAndPaymentData, invoiceAndPaymentData)
+
+			customer.lastReceivedInvoice = invoiceAndPaymentData
+			customer.currentTaxiRideAmountSatoshi = customer.currentTaxiRideAmountSatoshi + invoiceAndPaymentData.TotalAmountSatoshi
+			customer.currentTaxiRideAmountSEK = customer.currentTaxiRideAmountSEK + invoiceAndPaymentData.TotalAmountSek
+			/*
+						customer.lastReceivedInvoice.AccelerationAmountSatoshi = invoiceAndPaymentData.AccelerationAmountSatoshi
+						customer.lastReceivedInvoice.SpeedAmountSatoshi = invoiceAndPaymentData.SpeedAmountSatoshi
+						customer.lastReceivedInvoice.TimeAmountSatoshi = invoiceAndPaymentData.TimeAmountSatoshi
+						customer.lastReceivedInvoice.AccelerationAmountSek = invoiceAndPaymentData.AccelerationAmountSek
+						customer.lastReceivedInvoice.SpeedAmountSek = invoiceAndPaymentData.SpeedAmountSek
+						customer.lastReceivedInvoice.TimeAmountSek = invoiceAndPaymentData.TimeAmountSek
+						customer.lastReceivedInvoice.TotalAmountSatoshi = customer.lastReceivedInvoice.TotalAmountSatoshi + invoiceAndPaymentData.TotalAmountSatoshi
+						customer.lastReceivedInvoice.TotalAmountSek = customer.lastReceivedInvoice.TotalAmountSek + invoiceAndPaymentData.TotalAmountSek
+			*/
+
+			//log.Println("Invoices: ", invoicesAndPaymentData)
+			customer.logger.WithFields(logrus.Fields{
+				"Invoices":    invoicesAndPaymentData,
+			}).Info("Invoices")
 
 			stateChangeResponse := customer.CustomerStateMachine.Fire(TriggerCustomerReceivesPaymentRequest.Key, nil)
 			if stateChangeResponse != nil {
-				log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerReceivesPaymentRequest'")
+				//log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerReceivesPaymentRequest'")
+				customer.logger.Warning("Error, Should be able to change state with Trigger: 'TriggerCustomerReceivesPaymentRequest'")
 			} else {
 
 				if customer.CustomerStateMachine.IsInState(StateCustomerPaymentRequestReceived) {
-					err = lightningConnection.PayReceivedInvoicesFromTaxi(invoices)
+					err = lightningConnection.PayReceivedInvoicesFromTaxi(invoicesAndPaymentData)
 					if err != nil {
-						log.Println("Problem when paying Invoice from Taxi: ", err)
+						//log.Println("Problem when paying Invoice from Taxi: ", err)
+						customer.logger.WithFields(logrus.Fields{
+							"err":    err,
+						}).Warning("Problem when paying Invoice from Taxi")
 						customer.PaymentStreamStarted = false
 						break
 					} else {
-						log.Println("Invoice from Taxi-Stream is paid: ", invoices)
+						// Update info about Wallet Channel Balance
+						walletRespons, err := lightningConnection.CustomerChannelbalance()
+						if err != nil {
+							//log.Println("Error, couldn't get Wallet Balance")
+							customer.logger.Warning("Error, couldn't get Wallet Balance")
+						} else {
+							customer.currentWalletAmountSatoshi = walletRespons.Balance
+							customer.currentWalletAmountSEK = SatoshiToSEK(customer.currentWalletAmountSatoshi)
+						}
 
-						invoices = append(invoices[:0], invoices[1:]...)
+						// Add payment amount to average calculation
+						customer.averagePaymentAmountSatoshi = calculateAveragePaymentAmount(invoiceAndPaymentData.TotalAmountSatoshi)
+						customer.averagePaymentAmountSEK = SatoshiToSEK(customer.averagePaymentAmountSatoshi)
+
+						//log.Println("Invoice from Taxi-Stream is paid: ", invoicesAndPaymentData)
+						customer.logger.WithFields(logrus.Fields{
+							"invoicesAndPaymentData":    invoicesAndPaymentData,
+						}).Info("Invoice from Taxi-Stream is paid")
+
+						// Remove paid invoice
+						invoicesAndPaymentData = append(invoicesAndPaymentData[:0], invoicesAndPaymentData[1:]...)
 
 						customer.receivedTaxiInvoiceButNotPaid = true
 
@@ -793,7 +928,8 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 
 					stateChangeResponse = customer.CustomerStateMachine.Fire(TriggerCustomerPaysPaymentRequest.Key, nil)
 					if stateChangeResponse != nil {
-						log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerPaysPaymentRequest'")
+						//log.Println("Error, Should be able to change state with Trigger: 'TriggerCustomerPaysPaymentRequest'")
+						customer.logger.Warning("Error, Should be able to change state with Trigger: 'TriggerCustomerPaysPaymentRequest'")
 					}
 				}
 			}
@@ -805,6 +941,11 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 	}
 
 	customer.PaymentStreamStarted = false
+}
+
+func SatoshiToSEK( satoshis int64) (sek float32) {
+	sek = float32(satoshis) * common_config.BTCSEK / common_config.SatoshisPerBTC
+	return sek
 }
 
 // ******************************************************************************
@@ -909,7 +1050,11 @@ func validateBitcoind() (err error) {
 			Pass:         "jlambert97531",
 		}, nil)
 		if err != nil {
-			log.Fatalf("error creating new btc client: %v", err)
+			//log.Fatalf("error creating new btc client: %v", err)
+			customer.logger.WithFields(logrus.Fields{
+				"err":    err,
+			}).Fatal("Error creating new btc client")
+
 		}
 
 		// If SimNet is used then skip this check
@@ -954,6 +1099,45 @@ func validateBitcoind() (err error) {
 }
 
 // ******************************************************************************
+// Calculate Average Payment
+func calculateAveragePaymentAmount(latestAmount int64) (int64) {
+	var latestPaymentAmount averagePayment_struct
+
+	// Get current Unix time in seconds
+	now := time.Now()
+	secs := now.Unix()
+
+	latestPaymentAmount.paymentAmount = latestAmount
+	latestPaymentAmount.unixTime = secs
+
+	if len(averagePayment) != 0 {
+		for {
+			// Remove all data objects that has an old timestamp
+			if secs-averagePayment[0].unixTime > common_config.TimeForAveragePaymentCalculation {
+				// Subract old data from latest and Remove post due to old data
+				averagePayment[len(averagePayment)-1].aggregateAmount = averagePayment[len(averagePayment)-1].aggregateAmount - averagePayment[0].paymentAmount
+				averagePayment = averagePayment[1:]
+			} else {
+
+				break
+			}
+		}
+	}
+
+		// Add the new payment object
+		if len(averagePayment) == 0 {
+			// If empty then this is the first object
+			latestPaymentAmount.aggregateAmount = latestAmount
+			averagePayment = append(averagePayment, latestPaymentAmount)
+
+		} else {
+			latestPaymentAmount.aggregateAmount = averagePayment[len(averagePayment)-1].aggregateAmount + latestAmount
+			averagePayment = append(averagePayment, latestPaymentAmount)
+		}
+
+	averagePaymentValue := averagePayment[len(averagePayment)-1].aggregateAmount / int64(len(averagePayment))
+	return averagePaymentValue
+}
 
 // ******************************************************************************
 // Used for only process cleanup once
@@ -966,22 +1150,23 @@ func cleanup() {
 		cleanupProcessed = true
 
 		// Cleanup before close down application
-		log.Println("Clean up and shut down servers")
+		//log.Println("Clean up and shut down servers")
+		customer.logger.Warning("Clean up and shut down servers")
 
 		remoteTaxiServerConnection.Close()
 
 		/*
-		log.Println("Gracefull stop for: 'customerRpcUIServer'")
+		//log.Println("Gracefull stop for: 'customerRpcUIServer'")
 		customerRpcUIServer.GracefulStop()
 */
-		log.Println("Gracefull stop for: 'customerRpcUIStreamServer'")
-		customerRpcUIStreamServer.GracefulStop()
+//		//log.Println("Gracefull stop for: 'customerRpcUIStreamServer'")
+//		customerRpcUIStreamServer.GracefulStop()
 /*
-		log.Println("Close net.Listing: %v", localCustomerUIRPCServerEngineLocalPort)
+		//log.Println("Close net.Listing: %v", localCustomerUIRPCServerEngineLocalPort)
 		lis.Close()
 */
-		log.Println("Close net.Listing: %v", localCustomerUIRPCStreamServerEngineLocalPort)
-		lisStream.Close()
+//		//log.Println("Close net.Listing: %v", localCustomerUIRPCStreamServerEngineLocalPort)
+//		lisStream.Close()
 
 	}
 }
@@ -992,14 +1177,29 @@ func main() {
 
 	defer cleanup()
 
+	// Init Customer Object
+	initCustomer()
+
+	// Init logger
+	customer.InitLogger("")
+
+	// Should only be done from init functions
+	grpclog.SetLoggerV2(grpclog.NewLoggerV2(customer.logger.Out, customer.logger.Out, customer.logger.Out))
 	// *********************
 	// Set up connection to Toll Gate Hardware Server
 	remoteTaxiServerConnection, err = grpc.Dial(taxi_address_to_dial, grpc.WithInsecure())
 	if err != nil {
-		log.Println("did not connect to Taxi Server on address: ", taxi_address_to_dial, "error message", err)
+		customer.logger.WithFields(logrus.Fields{
+			"taxi_address_to_dial":    taxi_address_to_dial,
+			"error message": err,
+		}).Error("Did not connect to Taxi Server!")
+		// //log.Println("did not connect to Taxi Server on address: ", taxi_address_to_dial, "error message", err)
 		os.Exit(0)
 	} else {
-		log.Println("gRPC connection OK to Taxi Server, address: ", taxi_address_to_dial)
+		customer.logger.WithFields(logrus.Fields{
+			"taxi_address_to_dial":    taxi_address_to_dial,
+		}).Info("gRPC connection OK to Taxi Server!")
+		////log.Println("gRPC connection OK to Taxi Server, address: ", taxi_address_to_dial)
 		// Creates a new Clients
 		customerClient = taxi_grpc_api.NewTaxiClient(remoteTaxiServerConnection)
 
@@ -1007,14 +1207,32 @@ func main() {
 
 	//Init Lightning
 	go lightningConnection.LigtningMainService()
+	time.Sleep(5 * time.Second)
+
+	r, e := lightningConnection.CustomerWalletbalance()
+	//spew.Println(r, e)
+	customer.logger.WithFields(logrus.Fields{
+		"Wallet Balance":    r,
+		"err": e,
+	}).Info("lightningConnection.CustomerWalletbalance()")
+	r2, e2 := lightningConnection.CustomerChannelbalance()
+	spew.Println(r2, e2)
+	customer.logger.WithFields(logrus.Fields{
+		"Channel Balance":    r,
+		"err": e,
+	}).Info("lightningConnection.CustomerChannelbalance()")
 
 	//Start Web Backend
-	go webmain.Webmain(CallBackAskTaxiForPrice, CallBackAcceptPrice, CallBackHaltPayments, CallBackLeaveTaxi)
+	go webmain.Webmain(CallBackAskTaxiForPrice,
+		CallBackAcceptPrice,
+		CallBackHaltPayments,
+		CallBackLeaveTaxi,
+		CallBackPriceAndStateData)
 /*
 	// *********************
 	// Start Customer RPC UI Server for Incomming web connectionss
-	log.Println("Customer UI RPC Server started")
-	log.Println("Start listening on: %v", localCustomerUIRPCServerEngineLocalPort)
+	//log.Println("Customer UI RPC Server started")
+	//log.Println("Start listening on: %v", localCustomerUIRPCServerEngineLocalPort)
 	lis, err = net.Listen("tcp", localCustomerUIRPCServerEngineLocalPort)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -1022,45 +1240,47 @@ func main() {
 */
 	//*****************
 
-
+/*
 	// Start Customer RPC UI Stream Server for Incomming web connectionss
-	log.Println("Customer UI RPC Stream Server started")
-	log.Println("Start listening on: %v", localCustomerUIRPCStreamServerEngineLocalPort)
+	//log.Println("Customer UI RPC Stream Server started")
+	//log.Println("Start listening on: %v", localCustomerUIRPCStreamServerEngineLocalPort)
 	lisStream, err = net.Listen("tcp", localCustomerUIRPCStreamServerEngineLocalPort)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-
+*/
 
 /*
 	// Creates a new RegisterClient gRPC server for UI
 	go func() {
-		log.Println("Starting Customer RPC UI Server")
+		//log.Println("Starting Customer RPC UI Server")
 		customerRpcUIServer = grpc.NewServer()
 		//customerRpcUIServer = grpc.NewServer(grpc.Creds(creds))
 		customer_ui_api.RegisterCustomer_UIServer(customerRpcUIServer, &customerUIServiceServer{})
-		log.Println("registerTaxiServer for Taxi Gate started")
-		log.Println(customerRpcUIServer.GetServiceInfo())
+		//log.Println("registerTaxiServer for Taxi Gate started")
+		//log.Println(customerRpcUIServer.GetServiceInfo())
 		customerRpcUIServer.Serve(lis)
 
 
 	}()
 */
 
+/*
+
 	// Creates a new RegisterClient gRPC stream server for UI
 	go func() {
-		log.Println("Starting Customer RPC UI Stream Server")
+		//log.Println("Starting Customer RPC UI Stream Server")
 		customerRpcUIStreamServer = grpc.NewServer()
 		customer_ui_stream_api.RegisterCustomerUIPriceStreamServer(customerRpcUIStreamServer, &customerUIPriceStreamServiceServer{})
-		log.Println("registerTaxiServer for Taxi Gate started")
+		//log.Println("registerTaxiServer for Taxi Gate started")
 		customerRpcUIStreamServer.Serve(lisStream)
 	}()
 	// *********************
 
-
+*/
 
 	// Set up the Private Taxi Road State Machine
-	initiateCustomer()
+	customer.startCustomer()
 
 
 	//*****************
@@ -1075,7 +1295,8 @@ func main() {
 	}()
 
 	for {
-		fmt.Println("sleeping...for another 5 minutes")
+		customer.logger.Info("Sleeping...for another 5 minutes!")
+		//fmt.Println("sleeping...for another 5 minutes")
 		time.Sleep(300 * time.Second) // or runtime.Gosched() or similar per @misterbee
 	}
 

@@ -82,13 +82,22 @@ func customerPaysPaymentRequest(check bool) (err error) {
 }
 
 func calculateInvoiceAmount() {
-	lastPaymentData.lastReceivedAmountdata.speedAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
-	lastPaymentData.lastReceivedAmountdata.accelerationAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.MaxAccelarationSatoshiPerSecond / 100.0))
-	lastPaymentData.lastReceivedAmountdata.timeAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0))
+	/*
+	log.Println("Underlag för Invoice:::::::")
+	log.Println(lastPaymentData.lastPowerMessaurment.GetSpeed())
+	log.Println()
+	log.Println()
+	*/
+
+	lastPaymentData.lastReceivedAmountdata.speedAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetSpeed()) * common_config.SpeedSatoshiPerSecond / 100.0 * common_config.MilliSecondsBetweenPaymentRequest / 1000))
+	lastPaymentData.lastReceivedAmountdata.accelerationAmount = int64(math.Round(float64(lastPaymentData.lastPowerMessaurment.GetAcceleration()) * common_config.MaxAccelarationSatoshiPerSecond / 100.0 * common_config.MilliSecondsBetweenPaymentRequest / 1000))
+	lastPaymentData.lastReceivedAmountdata.timeAmount = int64(math.Round(float64(common_config.SpeedSatoshiPerSecond * common_config.MilliSecondsBetweenPaymentRequest / 1000)))
 
 	lastPaymentData.lastAmountToPay_satoshi = lastPaymentData.lastReceivedAmountdata.speedAmount + lastPaymentData.lastReceivedAmountdata.accelerationAmount + lastPaymentData.lastReceivedAmountdata.timeAmount
 	lastPaymentData.lastAmountToPay_sek = float32(lastPaymentData.lastAmountToPay_satoshi) * common_config.BTCSEK / common_config.SatoshisPerBTC
 
+	//spew.Println(lastPaymentData)
+	//log.Println(lastPaymentData)
 }
 
 func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage) {
@@ -115,6 +124,7 @@ func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, m
 		lastPaymentData.lastPowerMessaurment = *powerMessaurement
 
 		calculateInvoiceAmount()
+		//log.Println("New Data for invoice is calculated")
 
 	}
 }

@@ -6,14 +6,7 @@ import (
 	//"github.com/donovanhide/eventsource"
 	"github.com/davecgh/go-spew/spew"
 	lndrpc "github.com/lightningnetwork/lnd/lnrpc"
-	lndmacaroons "github.com/lightningnetwork/lnd/macaroons"
-	googleGRPc "google.golang.org/grpc"
-	googleCred "google.golang.org/grpc/credentials"
-	"gopkg.in/macaroon.v2"
-	//"gopkg.in/macaroon.v1"
-	"io/ioutil"
-	"os/user"
-	"path"
+
 	"time"
 	"os"
 	//"github.com/op/go-logging"
@@ -74,6 +67,7 @@ type BackendLayer1 interface {
 
 var callbackToToll TaxiPaysToll
 
+/*
 func InitLndServerConnection() {
 
 	initLog()
@@ -120,7 +114,7 @@ func InitLndServerConnection() {
 	}
 	lndClient = lndrpc.NewLightningClient(conn)
 }
-
+*/
 func LigtningMainService(cbTT TaxiPaysToll) {
 	callbackToToll = cbTT
 
@@ -378,6 +372,7 @@ func RetrieveGetInfo() {
 	spew.Dump(getInfoResp)
 }
 
+/*
 func LndServer() {
 	usr, err := user.Current()
 	if err != nil {
@@ -427,3 +422,4 @@ func LndServer() {
 	}
 	spew.Dump(getInfoResp)
 }
+*/

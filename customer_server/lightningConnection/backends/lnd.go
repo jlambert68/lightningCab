@@ -13,6 +13,9 @@ import (
 	"golang.org/x/net/context"
 	"fmt"
 	"time"
+	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
+
+
 )
 
 type LND struct {
@@ -135,7 +138,7 @@ func (lnd *LND) SubscribeInvoices(callback PublishInvoiceSettled) error { //, ev
 	return err
 }
 
-func (lnd *LND) CompletePaymentRequests(paymentRequests []string, awaitResponse bool) (err error) {
+func (lnd *LND) CompletePaymentRequests(paymentRequests []*taxi_grpc_api.PaymentRequest, awaitResponse bool) (err error) {
 
 	fmt.Println("Entering 'CompletePaymentRequests'")
 
@@ -147,7 +150,8 @@ func (lnd *LND) CompletePaymentRequests(paymentRequests []string, awaitResponse 
 		return err
 	}
 
-	for _, payReq := range paymentRequests {
+	for _, payReqData := range paymentRequests {
+		payReq := payReqData.LightningPaymentRequest
 		sendReq := &lnrpc.SendRequest{PaymentRequest: payReq}
 		err := payStream.Send(sendReq)
 		if err != nil {
@@ -174,4 +178,35 @@ func (lnd *LND) CompletePaymentRequests(paymentRequests []string, awaitResponse 
 	}
 
 	return nil
+}
+
+/*
+func  (lnd *LND) RetrieveGetInfo() {
+	ctx := context.Background()
+	getInfoResp, err := lnd.client.GetInfo(ctx, &lnrpc.GetInfoRequest{})
+		//getInfoResp, err := lndClient.GetInfo(ctx, &lnrpc.GetInfoRequest{})
+	if err != nil {
+		fmt.Println("Cannot get info from node:", err)
+		return
+	}
+	(getInfoResp)
+}
+*/
+
+func (lnd *LND) GetWalletBalance() (*lnrpc.WalletBalanceResponse, error){
+	//ctxb := context.Background()
+	//ctx, _ := context.WithTimeout(context.Background(), 60)
+
+	req := &lnrpc.WalletBalanceRequest{}
+	resp, err := lnd.client.WalletBalance(lnd.ctx, req)
+
+	return resp, err
+}
+
+func (lnd *LND) GetWalletChannelBalance() (*lnrpc.ChannelBalanceResponse, error){
+
+	req := &lnrpc.ChannelBalanceRequest{}
+	resp, err := lnd.client.ChannelBalance(lnd.ctx, req)
+
+	return resp, err
 }

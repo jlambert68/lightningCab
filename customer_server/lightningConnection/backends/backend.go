@@ -1,5 +1,10 @@
 package backends
 
+import (
+	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
+	"github.com/lightningnetwork/lnd/lnrpc"
+)
+
 type PublishInvoiceSettled func(invoice string) //, eventSrv *eventsource.Server)
 
 type Backend interface {
@@ -9,5 +14,11 @@ type Backend interface {
 	GetInvoice(description string, amount int64, expiry int64) (invoice string, err error)
 
 	// Pay an array of payment requests
-	CompletePaymentRequests(paymentRequests []string, awaitResponse bool) (err error)
+	CompletePaymentRequests(paymentRequests []*taxi_grpc_api.PaymentRequest, awaitResponse bool) (err error)
+
+	//Get Wallet Balance
+	GetWalletBalance() (*lnrpc.WalletBalanceResponse, error)
+
+	//Get Channel Balance
+	GetWalletChannelBalance() (*lnrpc.ChannelBalanceResponse, error)
 }

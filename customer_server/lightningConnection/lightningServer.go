@@ -1,10 +1,8 @@
 package lightningConnection
 
 import (
-	"context"
 	"fmt"
-	//"github.com/donovanhide/eventsource"
-	"github.com/davecgh/go-spew/spew"
+
 	"github.com/lightningnetwork/lnd/lnrpc"
 
 	"time"
@@ -16,6 +14,7 @@ import (
 	"encoding/hex"
 	//"jlambert/lightningCab/customer_server/lightningConnection/backends"
 
+	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
 )
 
 var lndClient lnrpc.LightningClient
@@ -243,7 +242,7 @@ func invoiceSettledHandler(writer http.ResponseWriter, request *http.Request) {
 }
 */
 
-func PayReceivedInvoicesFromTaxi(invoices []string) (err error) {
+func PayReceivedInvoicesFromTaxi(invoices []*taxi_grpc_api.PaymentRequest) (err error) {
 	err = nil
 
 	err = backend.CompletePaymentRequests(invoices, true)
@@ -376,8 +375,10 @@ func marshalJson(data interface{}) []byte {
 
 */
 
-func RetrieveGetInfo() {
+/*
+func  (lnd *LND) RetrieveGetInfo() {
 	ctx := context.Background()
+	a,b : = cfg.LND.
 	getInfoResp, err := lndClient.GetInfo(ctx, &lnrpc.GetInfoRequest{})
 	if err != nil {
 		fmt.Println("Cannot get info from node:", err)
@@ -385,6 +386,9 @@ func RetrieveGetInfo() {
 	}
 	spew.Dump(getInfoResp)
 }
+*/
+
+
 
 /*
 func LndServer() {
@@ -437,3 +441,14 @@ func LndServer() {
 	spew.Dump(getInfoResp)
 }
 */
+
+func CustomerWalletbalance() (*lnrpc.WalletBalanceResponse, error) {
+	rest, err := cfg.LND.GetWalletBalance()
+		return rest, err
+}
+
+func CustomerChannelbalance() (*lnrpc.ChannelBalanceResponse, error) {
+	rest, err := cfg.LND.GetWalletChannelBalance()
+	return rest, err
+
+}
