@@ -22,9 +22,10 @@ import (
 	"jlambert/lightningCab/customer_server/customer_gui/proto/server"
 	"jlambert/lightningCab/customer_server/customer_gui/webmain"
 
-	"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
+	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc/grpclog"
+	"github.com/stackimpact/stackimpact-go"
 
 )
 
@@ -1151,7 +1152,7 @@ func cleanup() {
 
 		// Cleanup before close down application
 		//log.Println("Clean up and shut down servers")
-		customer.logger.Warning("Clean up and shut down servers")
+		customer.logger.Info("Clean up and shut down servers")
 
 		remoteTaxiServerConnection.Close()
 
@@ -1173,6 +1174,13 @@ func cleanup() {
 
 func main() {
 
+	agent := stackimpact.Start(stackimpact.Options{
+		AgentKey: "3595d3d1600b648248cebaf5bc0f9be8c6b4a74e",
+		AppName: "LightningCAB - Customer",
+	})
+
+	span := agent.Profile();
+	defer span.Stop();
 	var err error
 
 	defer cleanup()
@@ -1206,7 +1214,7 @@ func main() {
 	}
 
 	//Init Lightning
-	go lightningConnection.LigtningMainService()
+	go lightningConnection.LigtningMainService(customer.logger)
 	time.Sleep(5 * time.Second)
 
 	r, e := lightningConnection.CustomerWalletbalance()
@@ -1216,14 +1224,15 @@ func main() {
 		"err": e,
 	}).Info("lightningConnection.CustomerWalletbalance()")
 	r2, e2 := lightningConnection.CustomerChannelbalance()
-	spew.Println(r2, e2)
+	//spew.Println(r2, e2)
 	customer.logger.WithFields(logrus.Fields{
-		"Channel Balance":    r,
-		"err": e,
+		"Channel Balance":    r2,
+		"err": e2,
 	}).Info("lightningConnection.CustomerChannelbalance()")
 
 	//Start Web Backend
-	go webmain.Webmain(CallBackAskTaxiForPrice,
+	go webmain.Webmain(customer.logger,
+		CallBackAskTaxiForPrice,
 		CallBackAcceptPrice,
 		CallBackHaltPayments,
 		CallBackLeaveTaxi,

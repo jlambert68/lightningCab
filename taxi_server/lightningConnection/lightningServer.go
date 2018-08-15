@@ -14,6 +14,8 @@ import (
 	"strconv"
 	"crypto/sha256"
 	"encoding/hex"
+	"github.com/sirupsen/logrus"
+	"jlambert/lightningCab/taxi_server/lightningConnection/backends"
 )
 
 var lndClient lndrpc.LightningClient
@@ -115,12 +117,13 @@ func InitLndServerConnection() {
 	lndClient = lndrpc.NewLightningClient(conn)
 }
 */
-func LigtningMainService(cbTT TaxiPaysToll) {
+func LigtningMainService(taxiLogger *logrus.Logger, cbTT TaxiPaysToll) {
 	callbackToToll = cbTT
 
 	var err error
 
-	initLog()
+	initLog(taxiLogger)
+	backends.UseLogger(taxiLogger)
 
 	initConfig()
 

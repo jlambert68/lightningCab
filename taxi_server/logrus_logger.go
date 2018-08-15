@@ -11,9 +11,8 @@ import (
 
 
 
-func (customer *Customer) InitLogger(filename string) {
-	customer.logger = logrus.StandardLogger()
-
+func (taxi *Taxi) InitLogger(filename string) {
+	taxi.logger = logrus.StandardLogger()
 
 	switch common_config.LoggingLevel {
 
@@ -38,7 +37,6 @@ func (customer *Customer) InitLogger(filename string) {
 		os.Exit(0)
 
 	}
-
 	logrus.SetLevel(common_config.LoggingLevel)
 	logrus.SetFormatter(&logrus.TextFormatter{
 		ForceColors:     true,
@@ -51,12 +49,12 @@ func (customer *Customer) InitLogger(filename string) {
 	//If no file then set standard out
 
 	if filename == "" {
-		customer.logger.Out = os.Stdout
+		taxi.logger.Out = os.Stdout
 
 	} else {
 		file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0666)
 		if err == nil {
-			customer.logger.Out = file
+			taxi.logger.Out = file
 		} else {
 			log.Println("Failed to log to file, using default stderr")
 		}

@@ -3,12 +3,12 @@ package main
 import (
 	"jlambert/lightningCab/taxi_server/lightningConnection"
 	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api" //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
-	"log"
 	"io"
 	"golang.org/x/net/context"
 	"math"
 	"jlambert/lightningCab/common_config"
 	"errors"
+	"github.com/sirupsen/logrus"
 )
 
 type amountStructure struct {
@@ -74,7 +74,7 @@ func customerPaysPaymentRequest(check bool) (err error) {
 			err = taxi.continueStreamingPaymentRequests(false)
 		} else {
 			// Inform Customer that Invoice must be paid in x seconds otherwise Taxi is ready for new customer
-			log.Println("State machine is not in correct State to be able to accept payments")
+			taxi.logger.Warning("State machine is not in correct State to be able to accept payments")
 		}
 	}
 
@@ -101,7 +101,10 @@ func calculateInvoiceAmount() {
 }
 
 func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage) {
-	log.Println("Starting Engine Powerdata stream %v", messasurePowerMessage)
+	//log.Println("Starting Engine Powerdata stream %v", messasurePowerMessage)
+	taxi.logger.WithFields(logrus.Fields{
+		"messasurePowerMessage":    messasurePowerMessage,
+	}).Info("Starting Engine Powerdata stream")
 
 	ctx := context.Background()
 	//	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
@@ -109,17 +112,28 @@ func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, m
 
 	stream, err := client.MessasurePowerConsumption(ctx, messasurePowerMessage)
 	if err != nil {
-		log.Fatalf("Problem to connect to Taxi Engine Stream: ", client, err)
+		//log.Fatalf("Problem to connect to Taxi Engine Stream: ", client, err)
+		taxi.logger.WithFields(logrus.Fields{
+			"client":    client,
+			"error":	err,
+		}).Fatal("Problem to connect to Taxi Engine Stream")
 	}
 	for {
 		powerMessaurement, err := stream.Recv()
 		if err == io.EOF {
-			log.Println("HMMM, skumt borde inte slutat h" +
+			//log.Println("HMMM, skumt borde inte slutat h" +
+			//	"är när vi tar emot EngineStream, borde avsluta Taxi-server")
+			taxi.logger.Error("HMMM, skumt borde inte slutat h" +
 				"är när vi tar emot EngineStream, borde avsluta Taxi-server")
+
 			break
 		}
 		if err != nil {
-			log.Fatalf("Problem when streaming from Taxi Engine Stream:", client, err)
+			//log.Fatalf("Problem when streaming from Taxi Engine Stream:", client, err)
+			taxi.logger.WithFields(logrus.Fields{
+				"client":    client,
+				"error":	err,
+			}).Fatal("Problem when streaming from Taxi Engine Stream")
 		}
 		lastPaymentData.lastPowerMessaurment = *powerMessaurement
 

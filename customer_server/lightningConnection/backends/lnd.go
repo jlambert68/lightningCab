@@ -140,7 +140,7 @@ func (lnd *LND) SubscribeInvoices(callback PublishInvoiceSettled) error { //, ev
 
 func (lnd *LND) CompletePaymentRequests(paymentRequests []*taxi_grpc_api.PaymentRequest, awaitResponse bool) (err error) {
 
-	fmt.Println("Entering 'CompletePaymentRequests'")
+	log.Info(("Entering 'CompletePaymentRequests'"))
 
 	ctx, cancel := context.WithCancel(lnd.ctx)
 	defer cancel()

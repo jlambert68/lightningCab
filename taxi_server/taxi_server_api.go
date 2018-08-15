@@ -9,6 +9,7 @@ import (
 	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
 	"jlambert/lightningCab/common_config"
 	"math"
+	"github.com/sirupsen/logrus"
 )
 
 /*
@@ -27,8 +28,10 @@ rpc PaymentRequestStream (Enviroment) returns (stream PaymentRequest) {
 // Customer connects and ask for price
 func (s *taxiServiceServer) AskTaxiForPrice(ctx context.Context, environment *taxi_api.Enviroment) (*taxi_api.Price, error) {
 
-	log.Println("Incoming: 'AskTaxiForPrice'")
-	fmt.Println("sleeping...for 3 seconds")
+	//log.Println("Incoming: 'AskTaxiForPrice'")
+	taxi.logger.Info("Incoming: 'AskTaxiForPrice'")
+	//fmt.Println("sleeping...for 3 seconds")
+	taxi.logger.Info("sleeping...for 3 seconds")
 	time.Sleep(3 * time.Second)
 
 	currentPrice := &taxi_api.Price{
@@ -51,13 +54,15 @@ func (s *taxiServiceServer) AskTaxiForPrice(ctx context.Context, environment *ta
 
 		case taxi_api.TestOrProdEnviroment_Test:
 			// Customer Connects to Taxi
-			log.Println("Customer Connects to Taxi:")
+			//log.Println("Customer Connects to Taxi:")
+			taxi.logger.Info("Customer Connects to Taxi:")
 			currentPrice.Acknack = true
 			currentPrice.Comments = "Welcome to the best Taxi you can find around here!"
 
 		case taxi_api.TestOrProdEnviroment_Production:
 			// Customer Connects to Taxi
-			log.Println("Customer Connects to Taxi:")
+			//log.Println("Customer Connects to Taxi:")
+			taxi.logger.Info("Customer Connects to Taxi:")
 			currentPrice.Acknack = true
 			currentPrice.Comments = "Welcome to the best Taxi you can find around here!"
 
@@ -105,13 +110,15 @@ func (s *taxiServiceServer) AcceptPrice(ctx context.Context, environment *taxi_a
 
 		case taxi_api.TestOrProdEnviroment_Test:
 			// Customer Connects to Taxi
-			log.Println("Customer Connects to Taxi:")
+			//log.Println("Customer Connects to Taxi:")
+			taxi.logger.Info("Customer Connects to Taxi:")
 			acknack = true
 			returnMessage = "Welcome to the best Taxi you can find around here!"
 
 		case taxi_api.TestOrProdEnviroment_Production:
 			// Customer Connects to Taxi
-			log.Println("Customer Connects to Taxi:")
+			//log.Println("Customer Connects to Taxi:")
+			taxi.logger.Info("Customer Connects to Taxi:")
 			acknack = true
 			returnMessage = "Welcome to the best Taxi you can find around here!"
 
@@ -139,7 +146,8 @@ func (s *taxiServiceServer) AcceptPrice(ctx context.Context, environment *taxi_a
 }
 
 func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment, stream taxi_api.Taxi_PaymentRequestStreamServer) (err error) {
-	log.Printf("Incoming: 'PaymentRequestStream'")
+	//log.Printf("Incoming: 'PaymentRequestStream'")
+	taxi.logger.Info("Incoming: 'PaymentRequestStream'")
 	var firstTime bool = true
 	//	var firstMissedPaymentTimer time.Timer
 	//	var lastMissedPaymentTimer time.Timer
@@ -172,9 +180,11 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 		if paymentRequestIsPaid == true || firstTime == true {
 			if firstTime == true {
-				log.Printf("First time creating PaymentRequest")
+				//log.Printf("First time creating PaymentRequest")
+				taxi.logger.Info("First time creating PaymentRequest")
 			} else {
-				log.Printf("Not first time creating PaymentRequest")
+				//log.Printf("Not first time creating PaymentRequest")
+				taxi.logger.Info("Not first time creating PaymentRequest")
 			}
 
 
@@ -205,10 +215,14 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 				if err := stream.Send(paymentRequestResponse); err != nil {
 					return err
-					log.Printf("Error when streaming back: 'PaymentRequestStream'")
+					//log.Printf("Error when streaming back: 'PaymentRequestStream'")
+					taxi.logger.Error("Error when streaming back: 'PaymentRequestStream")
 					break
 				} else {
-					log.Println("Invoice sent to customer: " + paymentRequestResponse.LightningPaymentRequest)
+					//log.Println("Invoice sent to customer: " + paymentRequestResponse.LightningPaymentRequest)
+					taxi.logger.WithFields(logrus.Fields{
+						"paymentRequestResponse.LightningPaymentRequest":    paymentRequestResponse.LightningPaymentRequest,
+					}).Info("Invoice sent to customer:")
 				}
 			} else {
 				// TotalAmountSatoshi == 0
@@ -227,13 +241,15 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 			go func() {
 				<-firstMissedPaymentTimer.C
-				log.Println("Timer 'firstMissedPaymentTimer' expired")
+				//log.Println("Timer 'firstMissedPaymentTimer' expired")
+				taxi.logger.Warning("imer 'firstMissedPaymentTimer' expired")
 				firstMissedPaymentTimeOut = true
 
 			}()
 			go func() {
 				<-lastMissedPaymentTimer.C
-				log.Println("Timer 'lastMissedPaymentTimer' expired")
+				//log.Println("Timer 'lastMissedPaymentTimer' expired")
+				taxi.logger.Warning("Timer 'lastMissedPaymentTimer' expired")
 				lastMissedPaymentTimeOut = true
 				abortPaymentRequestGeneration = true
 			}()
@@ -250,11 +266,16 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 		if paymentRequestIsPaid == false && firstMissedPaymentTimeOut == true {
 			//Check if posible to change state
 			if taxi.PaymentsStopsComing(true) == nil {
-				log.Printf("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
+				//log.Printf("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
+				taxi.logger.Warning("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
 				taxi.PaymentsStopsComing(false)
 			} else {
-				log.Println("This should not happend for firstTimer")
-				log.Println("Current State", taxi.TaxiStateMachine.State())
+				//log.Println("This should not happend for firstTimer")
+				taxi.logger.Error("This should not happend for firstTimer")
+				//log.Println("Current State", taxi.TaxiStateMachine.State())
+				taxi.logger.WithFields(logrus.Fields{
+					"taxi.TaxiStateMachine.State()":    taxi.TaxiStateMachine.State(),
+				}).Error("Current State:")
 				//lastMissedPaymentTimer.Stop()
 				break
 			}
@@ -263,25 +284,33 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 		// Second and Last Timeout
 		if paymentRequestIsPaid == false && lastMissedPaymentTimeOut == true {
-			log.Printf("PaymentRequest timedout. Get Taxi ready for new customer")
+			//log.Printf("PaymentRequest timedout. Get Taxi ready for new customer")
+			taxi.logger.Warning("PaymentRequest timedout. Get Taxi ready for new customer")
 			//Stop Stream for a while and send state machine in wait mode
 
 			//Check if posible to change state
 			if taxi.abortPaymentRequestGeneration(true) == nil {
-				log.Println("Abort Payment Request Generation and make Taxi ready for next customer")
+				//log.Println("Abort Payment Request Generation and make Taxi ready for next customer")
+				taxi.logger.Warning("Abort Payment Request Generation and make Taxi ready for next customer")
 				taxi.abortPaymentRequestGeneration(false)
 			} else {
-				log.Println("This should not happend for lastTimer")
-				log.Println("Current State", taxi.TaxiStateMachine.State())
+				//log.Println("This should not happend for lastTimer")
+				taxi.logger.Error("This should not happend for lastTimer")
+				//log.Println("Current State", taxi.TaxiStateMachine.State())
+				taxi.logger.WithFields(logrus.Fields{
+					"taxi.TaxiStateMachine.State()":    taxi.TaxiStateMachine.State(),
+				}).Error("Current State:")
 				break
 			}
-			log.Println("From LastTimer Existing Generate PaymentRequests")
+			//log.Println("From LastTimer Existing Generate PaymentRequests")
+			taxi.logger.Info("From LastTimer Existing Generate PaymentRequests")
 			break
 		}
 
 	}
 
-	log.Println("Leaving 'func PaymentRequestStream'")
+	//log.Println("Leaving 'func PaymentRequestStream'")
+	taxi.logger.Info("Leaving 'func PaymentRequestStream'")
 	return nil
 }
 

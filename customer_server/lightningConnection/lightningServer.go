@@ -15,6 +15,8 @@ import (
 	//"jlambert/lightningCab/customer_server/lightningConnection/backends"
 
 	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
+	"github.com/sirupsen/logrus"
+	"jlambert/lightningCab/customer_server/lightningConnection/backends"
 )
 
 var lndClient lnrpc.LightningClient
@@ -119,12 +121,13 @@ func InitLndServerConnection() {
 }
 */
 
-func LigtningMainService() { //cbTT TaxiPaysToll) {
+func LigtningMainService(customerLogger *logrus.Logger) { //cbTT TaxiPaysToll) {
 	//callbackToToll = cbTT
 
 	var err error
 
-	initLog()
+	initLog(customerLogger)
+	backends.UseLogger(customerLogger)
 
 	initConfig()
 

@@ -1,9 +1,10 @@
 package backends
 
-import "github.com/op/go-logging"
+import "github.com/sirupsen/logrus"
 
-var log logging.Logger
+//var log logging.Logger
+var log *logrus.Logger
 
-func UseLogger(logger logging.Logger) {
+func UseLogger(logger *logrus.Logger) {
 	log = logger
 }

@@ -8,9 +8,7 @@ import (
 	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
 	"jlambert/lightningCab/common_config"
 	"net"
-	"log"
 	"os"
-	"strings"
 	"sync"
 	"time"
 	"github.com/btcsuite/btcd/rpcclient"
@@ -19,12 +17,13 @@ import (
 	"os/signal"
 	"syscall"
 	"jlambert/lightningCab/taxi_server/lightningConnection"
-	"fmt"
+	"github.com/sirupsen/logrus"
 )
 
 type Taxi struct {
 	Title            string
 	TaxiStateMachine *ssm.StateMachine
+	logger *logrus.Logger
 }
 
 var taxi *Taxi
@@ -82,15 +81,21 @@ func testTaxiCycle() {
 
 }*/
 
-func initiateTaxi() {
+func initTaxi() {
+	taxi = NewTaxi("MyTaxi")
+}
+
+func (taxi *Taxi) startTaxi() {
 	var err error
 	err = nil
-	taxi = NewTaxi("MyTaxi")
+	//taxi = NewTaxi("MyTaxi")
 	//taxi.RestartToaxiSystem()
 
 	err = validateBitcoind()
 	if err != nil {
-		log.Println("Couldn't check Bitcoind, exiting system!")
+		//log.Println("Couldn't check Bitcoind, exiting system!")
+		taxi.logger.Error("Couldn't check Bitcoind, exiting system!")
+
 		os.Exit(0)
 	}
 	taxi.TaxiChecksLightning()
@@ -144,70 +149,98 @@ func NewTaxi(title string) *Taxi {
 	cfg := taxiStateMachine.Configure(StateTaxiInit)
 	cfg.Permit(TriggerTaxiChecksBitcoin, StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateTaxiInit' ") })
+	cfg.OnEnter(func() { //log.Println("*** *** Entering 'StateTaxiInit' ")
+		taxi.logger.Info("xxxx*** *** Entering 'StateTaxiInit' xxxx")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxiInit' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxiInit' ")
+		taxi.logger.Info("*** Exiting 'StateTaxiInit' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateBitcoinIsCheckedAndOK
 	cfg = taxiStateMachine.Configure(StateBitcoinIsCheckedAndOK)
 	cfg.Permit(TriggerTaxiChecksLightning, StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { //log.Println("*** *** Entering 'StateBitcoinIsCheckedAndOK' ")
+		taxi.logger.Info("*** *** Entering 'StateBitcoinIsCheckedAndOK' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
+		taxi.logger.Info("*** Exiting 'StateBitcoinIsCheckedAndOK' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateLigtningIsCheckedAndOK
 	cfg = taxiStateMachine.Configure(StateLigtningIsCheckedAndOK)
 	cfg.Permit(TriggerTaxiChecksHardware, StateHardwareIsCheckedAndOK)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateLigtningIsCheckedAndOK' ")
+		taxi.logger.Info("*** Entering 'StateLigtningIsCheckedAndOK' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateLigtningIsCheckedAndOK' ")
+		taxi.logger.Info("*** Exiting 'StateLigtningIsCheckedAndOK' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateHardwareIsCheckedAndOK
 	cfg = taxiStateMachine.Configure(StateHardwareIsCheckedAndOK)
 	cfg.Permit(TriggerSetHardwareInFirstTimeReadyMode, StateHardwareIsInFirsteTimeReadyMode)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsCheckedAndOK' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateHardwareIsCheckedAndOK' ")
+		taxi.logger.Info("*** Entering 'StateHardwareIsCheckedAndOK' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateHardwareIsCheckedAndOK' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateHardwareIsCheckedAndOK' ")
+		taxi.logger.Info("*** Exiting 'StateHardwareIsCheckedAndOK' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateHardwareIsInFirsteTimeReadyMode
 	cfg = taxiStateMachine.Configure(StateHardwareIsInFirsteTimeReadyMode)
 	cfg.Permit(TriggerTaxiIsReadyAndEntersWaitState, StateTaxisWaitingForCustomer)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ")
+		taxi.logger.Info("*** Entering 'StateHardwareIsInFirsteTimeReadyMode' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
+		taxi.logger.Info("*** Exiting 'StateHardwareIsInFirsteTimeReadyMode' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateTaxisWaitingForCustomer
 	cfg = taxiStateMachine.Configure(StateTaxisWaitingForCustomer)
 	cfg.Permit(TriggerCustomerConnects, StateCustomerHasConnected)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxisWaitingForCustomer' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxisWaitingForCustomer' ")
+		taxi.logger.Info("*** Entering 'StateTaxisWaitingForCustomer' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxisWaitingForCustomer' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxisWaitingForCustomer' ")
+		taxi.logger.Info("*** Exiting 'StateTaxisWaitingForCustomer' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateCustomerHasConnected
 	cfg = taxiStateMachine.Configure(StateCustomerHasConnected)
 	cfg.Permit(TriggerCustomerAcceptsPrice, StateCustomerHasAcceptedPrice)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateCustomerHasConnected' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateCustomerHasConnected' ")
+		taxi.logger.Info("*** Entering 'StateCustomerHasConnected' ")
+	})
 		cfg.OnExit(func() {
-			log.Println("*** Exiting 'StateCustomerHasConnected' ")
-			log.Println("")
+			//log.Println("*** Exiting 'StateCustomerHasConnected' ")
+			taxi.logger.Info("*** Exiting 'StateCustomerHasConnected' ")
+			//log.Println("")
+			taxi.logger.Info("")
 		})
 
 	// Configure States: StateCustomerHasAcceptedPrice
@@ -215,22 +248,29 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiSetsHardwareInDriveMode, StateTaxiIsReadyToDrive)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerHasAcceptedPrice' ")
+		//log.Println("*** Entering 'StateCustomerHasAcceptedPrice' ")
+		taxi.logger.Info("*** Entering 'StateCustomerHasAcceptedPrice' ")
 		_ = taxi.TaxiStateMachine.Fire(TriggerTaxiSetsHardwareInDriveMode.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerHasAcceptedPrice' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerHasAcceptedPrice' ")
+		taxi.logger.Info("*** Exiting 'StateCustomerHasAcceptedPrice' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateTaxiIsReadyToDrive
 	cfg = taxiStateMachine.Configure(StateTaxiIsReadyToDrive)
 	cfg.Permit(TriggerTaxiStopsStreamsAndWaitsforPayment, StateTaxiIsWaitingForPayment)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsReadyToDrive' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiIsReadyToDrive' ")
+		taxi.logger.Info("*** Entering 'StateTaxiIsReadyToDrive' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxiIsReadyToDrive' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxiIsReadyToDrive' ")
+		taxi.logger.Info("*** Exiting 'StateTaxiIsReadyToDrive' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateTaxiIsWaitingForPayment
@@ -238,10 +278,14 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerCustomerPaysPaymentRequest, StateTaxiIsReadyToDrive)
 	cfg.Permit(TriggerCustomerStoppsPayingTimer, StateCustomerStoppedPaying)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsWaitingForPayment' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiIsWaitingForPayment' ")
+		taxi.logger.Info("*** Entering 'StateTaxiIsWaitingForPayment' ")
+	})
 		cfg.OnExit(func() {
-			log.Println("*** Exiting 'StateTaxiIsWaitingForPayment' ")
-			log.Println("")
+			//log.Println("*** Exiting 'StateTaxiIsWaitingForPayment' ")
+			taxi.logger.Info("*** Exiting 'StateTaxiIsWaitingForPayment' ")
+			//log.Println("")
+			taxi.logger.Info("")
 		})
 
 	// Configure States: StateCustomerStoppedPaying
@@ -250,12 +294,15 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerCustomerLeavesTaxi, StateCustomerLeftTaxi)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerStoppedPaying' ")
+		//log.Println("*** Entering 'StateCustomerStoppedPaying' ")
+		taxi.logger.Info("*** Entering 'StateCustomerStoppedPaying' ")
 		_ = taxi.TaxiStateMachine.Fire(TriggerCustomerLeavesTaxi.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerStoppedPaying' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerStoppedPaying' ")
+		taxi.logger.Info("*** Exiting 'StateCustomerStoppedPaying' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateCustomerLeftTaxi
@@ -263,13 +310,16 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiResetsHardwareForNewCustomer, StateTaxiIsReadyForNewCustomer)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateCustomerLeftTaxi' ")
+		//log.Println("*** Entering 'StateCustomerLeftTaxi' ")
+		taxi.logger.Info("*** Entering 'StateCustomerLeftTaxi' ")
 		_ = taxi.SetHardwareInNextCustomerReadyMode(false)
 	})
 
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
+		taxi.logger.Info("*** Exiting 'StateCustomerLeftTaxi' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateTaxiIsReadyForNewCustomer
@@ -277,21 +327,28 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiIsReadyAndEntersWaitState, StateTaxisWaitingForCustomer)
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() {
-		log.Println("*** Entering 'StateTaxiIsReadyForNewCustomer' ")
+		//log.Println("*** Entering 'StateTaxiIsReadyForNewCustomer' ")
+		taxi.logger.Info("*** Entering 'StateTaxiIsReadyForNewCustomer' ")
 		_ = taxi.TaxiStateMachine.Fire(TriggerTaxiIsReadyAndEntersWaitState.Key, nil)
 	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxiIsReadyForNewCustomer' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxiIsReadyForNewCustomer' ")
+		taxi.logger.Info("*** Exiting 'StateTaxiIsReadyForNewCustomer' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	// Configure States: StateTaxiIsInErrorMode
 	cfg = taxiStateMachine.Configure(StateTaxiIsInErrorMode)
 
-	cfg.OnEnter(func() { log.Println("*** Entering 'StateTaxiIsInErrorMode' ") })
+	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiIsInErrorMode' ")
+		taxi.logger.Info("*** Entering 'StateTaxiIsInErrorMode' ")
+	})
 	cfg.OnExit(func() {
-		log.Println("*** Exiting 'StateTaxiIsInErrorMode' ")
-		log.Println("")
+		//log.Println("*** Exiting 'StateTaxiIsInErrorMode' ")
+		taxi.logger.Info("*** Exiting 'StateTaxiIsInErrorMode' ")
+		//log.Println("")
+		taxi.logger.Info("")
 	})
 
 	taxi.TaxiStateMachine = taxiStateMachine
@@ -303,24 +360,30 @@ func NewTaxi(title string) *Taxi {
 // log Errors for Triggers and States
 func logTriggerStateError(spaceCount int, currentState ssm.State, trigger ssm.Trigger, err error) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, "Current state:", currentState, " doesn't accept trigger'", trigger, "'. Error Message: ", err)
+	messageToLog := "Current state: " + currentState.Name + " doesn't accept trigger'" + trigger.String() + "'."
+	taxi.logger.Info(messageToLog)
 }
 
 // ******************************************************************************
 // log Errors for Triggers and States
 func logMessagesWithOutError(spaceCount int, message string) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, message)
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, message)
+	taxi.logger.Info(message)
 }
 
 // ******************************************************************************
 // log Errors for Triggers and States
 func logMessagesWithError(spaceCount int, message string, err error) {
 
-	spaces := strings.Repeat("  ", spaceCount)
-	log.Println(spaces, message, err)
+	//spaces := strings.Repeat("  ", spaceCount)
+	//log.Println(spaces, message, err)
+	taxi.logger.WithFields(logrus.Fields{
+		"error": err,
+	}).Info(message)
 }
 
 // ******************************************************************************
@@ -834,7 +897,11 @@ func validateBitcoind() (err error) {
 			Pass:         "jlambert97531",
 		}, nil)
 		if err != nil {
-			log.Fatalf("error creating new btc client: %v", err)
+			//log.Fatalf("error creating new btc client: %v", err)
+			taxi.logger.WithFields(logrus.Fields{
+				"err":    err,
+			}).Fatal("Error creating new btc client")
+
 		}
 
 		// If SimNet is used then skip this check
@@ -889,12 +956,17 @@ func cleanup() {
 		cleanupProcessed = true
 
 		// Cleanup before close down application
-		log.Println("Clean up and shut down servers")
+		//log.Println("Clean up and shut down servers")
+		taxi.logger.Info("Clean up and shut down servers")
 
-		log.Println("Gracefull stop for: registerTaxiServer")
+		//log.Println("Gracefull stop for: registerTaxiServer")
+		taxi.logger.Info("Gracefull stop for: registerTaxiServer")
 		registerTaxiServer.GracefulStop()
 
-		log.Println("Close net.Listing: %v", localTaxiServerEngineLocalPort)
+		//log.Println("Close net.Listing: %v", localTaxiServerEngineLocalPort)
+		taxi.logger.WithFields(logrus.Fields{
+			"localTaxiServerEngineLocalPort":    localTaxiServerEngineLocalPort,
+		}).Info("Close net.Listing")
 		lis.Close()
 
 		//log.Println("Close DB_session: %v", DB_session)
@@ -912,16 +984,33 @@ func main() {
 
 	defer cleanup()
 
+	// Init Customer Object
+	initTaxi()
+
+	// Init logger
+	taxi.InitLogger("")
+
+	// Should only be done from init functions
+	//grpclog.SetLoggerV2(grpclog.NewLoggerV2(taxi.logger.Out, taxi.logger.Out, taxi.logger.Out))
+
+
 	//initLog()
 
 	// *********************
 	// Set up connection to Taxi Hardware Server
 	remoteTaxiHWServerConnection, err = grpc.Dial(addressToDialToTaxiHWServer, grpc.WithInsecure())
 	if err != nil {
-		log.Println("did not connect to Taxi Hardware Server on address: ", addressToDialToTaxiHWServer, "error message", err)
+		//log.Println("did not connect to Taxi Hardware Server on address: ", addressToDialToTaxiHWServer, "error message", err)
+		taxi.logger.WithFields(logrus.Fields{
+			"addressToDialToTaxiHWServer":    addressToDialToTaxiHWServer,
+			"error message": err,
+		}).Error("did not connect to Taxi Hardware Server on address")
 		os.Exit(0)
 	} else {
-		log.Println("gRPC connection OK to Taxi  Hardware Server, address: ", addressToDialToTaxiHWServer)
+		//log.Println("gRPC connection OK to Taxi  Hardware Server, address: ", addressToDialToTaxiHWServer)
+		taxi.logger.WithFields(logrus.Fields{
+			"addressToDialToTaxiHWServer":    addressToDialToTaxiHWServer,
+		}).Info("gRPC connection OK to Taxi  Hardware Server")
 		// Creates a new Clients
 		taxiHWClient = taxiHW_api.NewTaxiHardwareClient(remoteTaxiHWServerConnection)
 
@@ -931,10 +1020,17 @@ func main() {
 	// Set up connection to Taxi Hardware Stream Server
 	remoteTaxiHWStreamServerConnection, err = grpc.Dial(addressToDialToTaxiHWStreamServer, grpc.WithInsecure())
 	if err != nil {
-		log.Println("did not connect to Taxi Hardware Stream Server on address: ", addressToDialToTaxiHWStreamServer, "error message", err)
+		//log.Println("did not connect to Taxi Hardware Stream Server on address: ", addressToDialToTaxiHWStreamServer, "error message", err)
+		taxi.logger.WithFields(logrus.Fields{
+			"addressToDialToTaxiHWStreamServer":    addressToDialToTaxiHWStreamServer,
+			"error message": err,
+		}).Error("did not connect to Taxi Hardware Stream Server on address")
 		os.Exit(0)
 	} else {
-		log.Println("gRPC connection OK to Taxi Hardware Stream Server, address: ", addressToDialToTaxiHWStreamServer)
+		//log.Println("gRPC connection OK to Taxi Hardware Stream Server, address: ", addressToDialToTaxiHWStreamServer)
+		taxi.logger.WithFields(logrus.Fields{
+			"addressToDialToTaxiHWStreamServer":    addressToDialToTaxiHWStreamServer,
+		}).Info("gRPC connection OK to Taxi Hardware Stream Server")
 		// Creates a new Clients
 		taxiHWStreamClient = taxiHW_stream_api.NewTaxiStreamHardwareClient(remoteTaxiHWStreamServerConnection)
 
@@ -945,19 +1041,28 @@ func main() {
 
 	// *********************
 	// Start Taxi Server for Incomming Customer connectionss
-	log.Println("Taxi Customer Server started")
-	log.Println("Start listening on: %v", localTaxiServerEngineLocalPort)
+	//log.Println("Taxi Customer Server started")
+	taxi.logger.Info("Taxi Customer Server started")
+	//log.Println("Start listening on: %v", localTaxiServerEngineLocalPort)
+	taxi.logger.WithFields(logrus.Fields{
+		"localTaxiServerEngineLocalPort":    localTaxiServerEngineLocalPort,
+	}).Info("Start listening on")
 	lis, err = net.Listen("tcp", localTaxiServerEngineLocalPort)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		//log.Fatalf("failed to listen: %v", err)
+		taxi.logger.WithFields(logrus.Fields{
+			"error":    err,
+		}).Fatal("failed to listen:")
 	}
 
 	// Creates a new RegisterClient gRPC server
 	go func() {
-		log.Println("Starting Taxi Customer Server")
+		//log.Println("Starting Taxi Customer Server")
+		taxi.logger.Info("Starting Taxi Customer Server")
 		registerTaxiServer = grpc.NewServer()
 		taxi_api.RegisterTaxiServer(registerTaxiServer, &taxiServiceServer{})
-		log.Println("registerTaxiServer for Taxi Gate started")
+		//log.Println("registerTaxiServer for Taxi Gate started")
+		taxi.logger.Info("registerTaxiServer for Taxi Gate started")
 		registerTaxiServer.Serve(lis)
 	}()
 	// *********************
@@ -970,10 +1075,10 @@ func main() {
 	//lightningConnection.InitLndServerConnection()
 	//lightningConnection.RetrieveGetInfo()
 
-	go lightningConnection.LigtningMainService(customerPaysPaymentRequest)
+	go lightningConnection.LigtningMainService(taxi.logger, customerPaysPaymentRequest)
 
 	// Set up the Private Taxi Road State Machine
-	initiateTaxi()
+	taxi.startTaxi()
 
 	// Set system in wait mode for externa input, Taxi and payment ...
 	c := make(chan os.Signal, 2)
@@ -985,7 +1090,9 @@ func main() {
 	}()
 
 	for {
-		fmt.Println("sleeping...for another 5 minutes")
+		//fmt.Println("sleeping...for another 5 minutes")
+		taxi.logger.Info("sleeping...for another 5 minutes")
+
 		time.Sleep(300 * time.Second) // or runtime.Gosched() or similar per @misterbee
 	}
 

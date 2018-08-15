@@ -5,11 +5,7 @@ import (
 	"os/user"
 	"runtime"
 	"jlambert/lightningCab/customer_server/lightningConnection/backends"
-	"github.com/jessevdk/go-flags"
-	"github.com/op/go-logging"
 	"strings"
-	"os"
-	"fmt"
 )
 
 const (
@@ -92,6 +88,9 @@ func initConfig() {
 	}
 
 	// Ignore unknown flags the first time parsing command line flags to prevent showing the unknown flag error twice
+
+	// Removed due to that I use the same logger as core Customer
+	/*
 	flags.NewParser(&cfg, flags.IgnoreUnknown).Parse()
 
 	errFile := flags.IniParse(cfg.ConfigFile, &cfg)
@@ -123,7 +122,7 @@ func initConfig() {
 		dataDirCreated = true
 	}
 
-	errLogFile := initLogger(cfg.LogFile, logLevel)
+	//errLogFile := initLogger(cfg.LogFile, logLevel)
 
 	// Show error messages
 	if err != nil {
@@ -149,7 +148,7 @@ func initConfig() {
 
 	} else {
 		log.Debug("Initialized log file: " + cfg.LogFile)
-	}
+	}*/
 
 	// TODO: add more backends options like for example c-lighting and eclair
 	backend = cfg.LND

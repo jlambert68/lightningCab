@@ -3,19 +3,22 @@ package lightningConnection
 import (
 	"github.com/op/go-logging"
 	"os"
+	"github.com/sirupsen/logrus"
 )
 
-var log = logging.MustGetLogger("")
+//var log = logging.MustGetLogger("")
+var log *logrus.Logger
 
 //var log = logging.MustGetLogger("")
 var logFormat = logging.MustStringFormatter("%{time:2006-01-02 15:04:05.000} [%{level}] %{message}")
 
 var backendConsole = logging.NewLogBackend(os.Stdout, "", 0)
 
-func initLog() {
-	logging.SetFormatter(logFormat)
+func initLog(customerLogger *logrus.Logger) {
+	log = customerLogger
+	//logging.SetFormatter(logFormat)
 
-	logging.SetBackend(backendConsole)
+	//logging.SetBackend(backendConsole)
 }
 
 func initLogger(logFile string, level logging.Level) error {

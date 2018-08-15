@@ -52,7 +52,7 @@ const SpeedSatoshiPerSecond = SpeedSEKPerSecond / BTCSEK * SatoshisPerBTC
 const MaxAccelarationSatoshiPerSecond = MaxAccelarationSEKPerSecond / BTCSEK * SatoshisPerBTC
 const TimeSatoshiPerSecond = TimeSEKPerSecond / BTCSEK * SatoshisPerBTC
 
-const MilliSecondsBetweenPaymentRequest = 1000
+const MilliSecondsBetweenPaymentRequest = 400
 const SecondsBeforeFirstPaymentTimeOut = 2
 const SecondsBeforeSecondPaymentTimeOut = 60
 
@@ -73,8 +73,9 @@ const TimeForAveragePaymentCalculation = 10
 
 
 // Logrus debug level
+
 //const LoggingLevel = logrus.DebugLevel
-//const LoggingLevel = logrus.InfoLevel
-const LoggingLevel = logrus.WarnLevel
+const LoggingLevel = logrus.InfoLevel
+//const LoggingLevel = logrus.WarnLevel
 
 
