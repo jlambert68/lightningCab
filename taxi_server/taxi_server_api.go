@@ -25,6 +25,8 @@ rpc PaymentRequestStream (Enviroment) returns (stream PaymentRequest) {
 }
 */
 
+var averageTimeBetweenIncoicesToCustomer []int64
+
 // Customer connects and ask for price
 func (s *taxiServiceServer) AskTaxiForPrice(ctx context.Context, environment *taxi_api.Enviroment) (*taxi_api.Price, error) {
 
@@ -262,8 +264,14 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			log.Println("firstTime =", firstTime)
 		}*/
 
+		averageTime := calculateAverageTimeBetweenInvoices()
+		if averageTime > common_config.MilliSecondsBetweenPaymentRequest {
+			timeToSleep := time.Duration(common_config.MilliSecondsBetweenPaymentRequest * (common_config.MilliSecondsBetweenPaymentRequest / averageTime))
+			time.Sleep( timeToSleep * time.Millisecond)
+		} else {
+			time.Sleep(common_config.MilliSecondsBetweenPaymentRequest * time.Millisecond)
+		}
 
-		time.Sleep(common_config.MilliSecondsBetweenPaymentRequest * time.Millisecond)
 
 		// First Timeout
 		if paymentRequestIsPaid == false && firstMissedPaymentTimeOut == true {
@@ -315,5 +323,38 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 	//log.Println("Leaving 'func PaymentRequestStream'")
 	taxi.logger.Info("Leaving 'func PaymentRequestStream'")
 	return nil
+}
+
+// Calculate Average time between invoices to customer
+func calculateAverageTimeBetweenInvoices() (int64) {
+
+
+	// Get current Unix time in seconds
+	now := time.Now()
+	secs := now.Unix()
+
+
+	if len(averageTimeBetweenIncoicesToCustomer) != 0 {
+		for {
+			// Remove all data objects that has an old timestamp
+			if secs-averageTimeBetweenIncoicesToCustomer[0] > common_config.TimeForAveragePaymentCalculation {
+				// Subract old data from latest and Remove post due to old data
+
+				averageTimeBetweenIncoicesToCustomer = averageTimeBetweenIncoicesToCustomer[1:]
+				if len(averageTimeBetweenIncoicesToCustomer) == 0 {
+					break
+				}
+			} else {
+
+				break
+			}
+		}
+	}
+
+	// Add the new payment object
+	averageTimeBetweenIncoicesToCustomer = append(averageTimeBetweenIncoicesToCustomer, secs)
+
+	averageTime := int64(1000 / (float32(len(averageTimeBetweenIncoicesToCustomer)) / common_config.TimeForAveragePaymentCalculation))
+	return averageTime
 }
 
