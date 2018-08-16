@@ -24,7 +24,6 @@ import (
 
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
-	"google.golang.org/grpc/grpclog"
 	"github.com/stackimpact/stackimpact-go"
 
 )
@@ -47,12 +46,19 @@ type Customer struct {
 	averagePaymentAmountSatoshi int64
 	averagePaymentAmountSEK float32
 	logger *logrus.Logger
+	paymentStatistics paymentStatistics_struct
+
 
 }
 type averagePayment_struct struct {
 	paymentAmount int64
 	aggregateAmount int64
 	unixTime int64
+}
+type paymentStatistics_struct struct {
+	numbertOfReceivedTransactions int32
+	numbertOfPayedTransactions int32
+	averageNoOfPayments float32
 }
 
 var customer *Customer
@@ -148,13 +154,15 @@ func NewCustomer(title string) *Customer {
 //	}
 
 
-	customer := &Customer{Title: title,
-	PaymentStreamStarted: false,
-	invoiceReceivedAtleastOnce:false,
-	currentTaxiRideAmountSatoshi: 0,
-	currentTaxiRideAmountSEK: 0,
-	currentWalletAmountSatoshi: 0, //currenChannelBalance.Balance,
-	currentWalletAmountSEK: 0, //SatoshiToSEK(currenChannelBalance.Balance),
+	customer := &Customer{
+		Title: title,
+		PaymentStreamStarted: false,
+		invoiceReceivedAtleastOnce:false,
+		currentTaxiRideAmountSatoshi: 0,
+		currentTaxiRideAmountSEK: 0,
+		currentWalletAmountSatoshi: 0, //currenChannelBalance.Balance,
+		currentWalletAmountSEK: 0, //SatoshiToSEK(currenChannelBalance.Balance),
+		paymentStatistics: paymentStatistics_struct{numbertOfReceivedTransactions:0 , numbertOfPayedTransactions: 0, averageNoOfPayments: 0},
 	}
 
 	// Create State machine
@@ -830,8 +838,9 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 
 	var invoicesAndPaymentData []*taxi_grpc_api.PaymentRequest
 
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
-	defer cancel()
+	ctx := context.Background()
+	//ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	//defer cancel()
 
 	stream, err := client.PaymentRequestStream(ctx, enviroment)
 	if err != nil {
@@ -839,7 +848,8 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 		customer.logger.WithFields(logrus.Fields{
 			"client":    client,
 			"err": err,
-		}).Fatal("Problem to connect to Taxi Invoice Stream")
+		}).Error("Problem to connect to Taxi Invoice Stream")
+		os.Exit(0)
 	}
 	// Used for controlling state machine
 	customer.PaymentStreamStarted = true
@@ -858,8 +868,11 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 				customer.logger.WithFields(logrus.Fields{
 					"client":    client,
 					"err": err,
-				}).Fatal("Problem when streaming from Taxi invoiceAndPaymentData Stream")
+				}).Error("Problem when streaming from Taxi invoiceAndPaymentData Stream")
+				os.Exit(0)
+
 			}
+			customer.paymentStatistics.numbertOfReceivedTransactions = customer.paymentStatistics.numbertOfReceivedTransactions + 1
 			customer.receivedTaxiInvoiceButNotPaid = true
 			customer.invoiceReceivedAtleastOnce = true
 
@@ -912,13 +925,14 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 						}
 
 						// Add payment amount to average calculation
-						customer.averagePaymentAmountSatoshi = calculateAveragePaymentAmount(invoiceAndPaymentData.TotalAmountSatoshi)
+						customer.averagePaymentAmountSatoshi, customer.paymentStatistics.averageNoOfPayments = calculateAveragePaymentAmount(invoiceAndPaymentData.TotalAmountSatoshi)
 						customer.averagePaymentAmountSEK = SatoshiToSEK(customer.averagePaymentAmountSatoshi)
 
 						//log.Println("Invoice from Taxi-Stream is paid: ", invoicesAndPaymentData)
 						customer.logger.WithFields(logrus.Fields{
 							"invoicesAndPaymentData":    invoicesAndPaymentData,
 						}).Info("Invoice from Taxi-Stream is paid")
+						customer.paymentStatistics.numbertOfPayedTransactions = customer.paymentStatistics.numbertOfPayedTransactions + 1
 
 						// Remove paid invoice
 						invoicesAndPaymentData = append(invoicesAndPaymentData[:0], invoicesAndPaymentData[1:]...)
@@ -1054,7 +1068,8 @@ func validateBitcoind() (err error) {
 			//log.Fatalf("error creating new btc client: %v", err)
 			customer.logger.WithFields(logrus.Fields{
 				"err":    err,
-			}).Fatal("Error creating new btc client")
+			}).Error("Error creating new btc client")
+			os.Exit(0)
 
 		}
 
@@ -1101,7 +1116,7 @@ func validateBitcoind() (err error) {
 
 // ******************************************************************************
 // Calculate Average Payment
-func calculateAveragePaymentAmount(latestAmount int64) (int64) {
+func calculateAveragePaymentAmount(latestAmount int64) (int64, float32) {
 	var latestPaymentAmount averagePayment_struct
 
 	// Get current Unix time in seconds
@@ -1137,7 +1152,8 @@ func calculateAveragePaymentAmount(latestAmount int64) (int64) {
 		}
 
 	averagePaymentValue := averagePayment[len(averagePayment)-1].aggregateAmount / int64(len(averagePayment))
-	return averagePaymentValue
+	averageNoOfPayments := float32(len(averagePayment)) / common_config.TimeForAveragePaymentCalculation
+	return averagePaymentValue, averageNoOfPayments
 }
 
 // ******************************************************************************
@@ -1181,6 +1197,7 @@ func main() {
 
 	span := agent.Profile();
 	defer span.Stop();
+
 	var err error
 
 	defer cleanup()
@@ -1192,7 +1209,7 @@ func main() {
 	customer.InitLogger("")
 
 	// Should only be done from init functions
-	grpclog.SetLoggerV2(grpclog.NewLoggerV2(customer.logger.Out, customer.logger.Out, customer.logger.Out))
+	//grpclog.SetLoggerV2(grpclog.NewLoggerV2(customer.logger.Out, customer.logger.Out, customer.logger.Out))
 	// *********************
 	// Set up connection to Toll Gate Hardware Server
 	remoteTaxiServerConnection, err = grpc.Dial(taxi_address_to_dial, grpc.WithInsecure())

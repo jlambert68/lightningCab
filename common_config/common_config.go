@@ -37,7 +37,7 @@ const USDSEK = 8.88            //SEK per USD
 const BTCUSD = 5890            //USD per BTC
 const BTCSEK = BTCUSD * USDSEK //SEK per BTC
 
-const MaxSEKPerSecond = 0.01 // SEK
+const MaxSEKPerSecond = 0.1 // SEK
 const SpeedProcent = 0.25 // %
 const AccelarionProcent = 0.25 // %
 const TimeProcent = 0.5 // %
@@ -52,9 +52,9 @@ const SpeedSatoshiPerSecond = SpeedSEKPerSecond / BTCSEK * SatoshisPerBTC
 const MaxAccelarationSatoshiPerSecond = MaxAccelarationSEKPerSecond / BTCSEK * SatoshisPerBTC
 const TimeSatoshiPerSecond = TimeSEKPerSecond / BTCSEK * SatoshisPerBTC
 
-const MilliSecondsBetweenPaymentRequest = 400
+const MilliSecondsBetweenPaymentRequest = 100
 const SecondsBeforeFirstPaymentTimeOut = 2
-const SecondsBeforeSecondPaymentTimeOut = 60
+const SecondsBeforeSecondPaymentTimeOut = 90
 
 
 // Simnet or Testnet
@@ -75,7 +75,7 @@ const TimeForAveragePaymentCalculation = 10
 // Logrus debug level
 
 //const LoggingLevel = logrus.DebugLevel
-const LoggingLevel = logrus.InfoLevel
-//const LoggingLevel = logrus.WarnLevel
+//const LoggingLevel = logrus.InfoLevel
+const LoggingLevel = logrus.WarnLevel
 
 

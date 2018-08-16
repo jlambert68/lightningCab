@@ -185,6 +185,7 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			} else {
 				//log.Printf("Not first time creating PaymentRequest")
 				taxi.logger.Info("Not first time creating PaymentRequest")
+				taxi.invoiceStatistics.invoicesPaid = taxi.invoiceStatistics.invoicesPaid + 1
 			}
 
 
@@ -208,21 +209,23 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			paymentRequestResponse.TotalAmountSatoshi = lastPaymentData.lastAmountToPay_satoshi
 			paymentRequestResponse.TotalAmountSek = lastPaymentData.lastAmountToPay_sek
 
+			taxi.logger.Debug("invoicedataToCustomer:", invoicedataToCustomer)
 			//spew.Println(paymentRequestResponse)
 
 			if err == nil {
 				paymentRequestIsPaid = false
 
 				if err := stream.Send(paymentRequestResponse); err != nil {
-					return err
 					//log.Printf("Error when streaming back: 'PaymentRequestStream'")
-					taxi.logger.Error("Error when streaming back: 'PaymentRequestStream")
+					taxi.logger.Error("Error when streaming back: 'PaymentRequestStream", err)
+					return err
 					break
 				} else {
 					//log.Println("Invoice sent to customer: " + paymentRequestResponse.LightningPaymentRequest)
 					taxi.logger.WithFields(logrus.Fields{
 						"paymentRequestResponse.LightningPaymentRequest":    paymentRequestResponse.LightningPaymentRequest,
 					}).Info("Invoice sent to customer:")
+					taxi.invoiceStatistics.invoicedCreated = taxi.invoiceStatistics.invoicedCreated + 1
 				}
 			} else {
 				// TotalAmountSatoshi == 0
@@ -242,7 +245,7 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			go func() {
 				<-firstMissedPaymentTimer.C
 				//log.Println("Timer 'firstMissedPaymentTimer' expired")
-				taxi.logger.Warning("imer 'firstMissedPaymentTimer' expired")
+				taxi.logger.Warning("Timer 'firstMissedPaymentTimer' expired")
 				firstMissedPaymentTimeOut = true
 
 			}()

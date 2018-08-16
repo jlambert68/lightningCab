@@ -32,6 +32,7 @@ func CallBackPriceAndStateData() (*server.UIPriceAndStateRespons, error) {
 			CurrentWalletbalanceSek: float32(customer.currentWalletAmountSEK),
 			AveragePaymentAmountSatoshi: 0,
 			AveragePaymentAmountSek: 0,
+			AvaregeNumberOfPayments: 0,
 		}
 	} else {
 		priceAndStateRespons = &server.UIPriceAndStateRespons{
@@ -53,6 +54,7 @@ func CallBackPriceAndStateData() (*server.UIPriceAndStateRespons, error) {
 			CurrentWalletbalanceSek: float32(customer.currentWalletAmountSEK),
 			AveragePaymentAmountSatoshi: int64(customer.averagePaymentAmountSatoshi),
 			AveragePaymentAmountSek: float32(customer.averagePaymentAmountSEK),
+			AvaregeNumberOfPayments: float32(customer.paymentStatistics.averageNoOfPayments),
 		}
 	}
 

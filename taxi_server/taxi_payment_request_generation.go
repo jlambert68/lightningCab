@@ -43,7 +43,7 @@ func generateInvoice() (lightningConnection.PendingInvoice, error) {
 	// Don't create invoice of zero amount
 	if lastPaymentData.lastAmountToPay_satoshi != 0 {
 		//paymentRequestIsPaid = false
-		invoice, err = lightningConnection.CreateInvoice("Payment Request for Taxi", lastPaymentData.lastAmountToPay_satoshi, 180)
+		invoice, err = lightningConnection.CreateInvoice("Payment Request for Taxi", lastPaymentData.lastAmountToPay_satoshi, 360)
 		if err != nil || invoice.Invoice == "" {
 			logMessagesWithError(4, "Error when creating Invoice: ", err)
 

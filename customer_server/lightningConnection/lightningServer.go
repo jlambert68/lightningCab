@@ -7,11 +7,8 @@ import (
 
 	"time"
 	"os"
-	//"github.com/op/go-logging"
-	//"github.com/donovanhide/eventsource"
-	"strconv"
-	"crypto/sha256"
-	"encoding/hex"
+
+
 	//"jlambert/lightningCab/customer_server/lightningConnection/backends"
 
 	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
@@ -253,6 +250,7 @@ func PayReceivedInvoicesFromTaxi(invoices []*taxi_grpc_api.PaymentRequest) (err 
 	return err
 }
 
+/*
 func CreateInvoice(message string, amount int64, expire int64) (newInvoice PendingInvoice, err error) {
 
 	var errorMessage string = "Amount is zero"
@@ -297,6 +295,7 @@ func CreateInvoice(message string, amount int64, expire int64) (newInvoice Pendi
 	return newInvoice, err
 }
 
+*/
 /*
 func getInvoiceHandler(writer http.ResponseWriter, request *http.Request) {
 	errorMessage := couldNotParseError

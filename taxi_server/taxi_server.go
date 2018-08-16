@@ -24,6 +24,12 @@ type Taxi struct {
 	Title            string
 	TaxiStateMachine *ssm.StateMachine
 	logger *logrus.Logger
+	invoiceStatistics invoiceStatistics_struct
+}
+
+type invoiceStatistics_struct struct {
+	invoicedCreated int32
+	invoicesPaid int32
 }
 
 var taxi *Taxi
@@ -141,7 +147,10 @@ var (
 
 func NewTaxi(title string) *Taxi {
 
-	taxi := &Taxi{Title: title}
+	taxi := &Taxi{
+		Title: title,
+		invoiceStatistics: invoiceStatistics_struct{invoicedCreated:0 , invoicesPaid: 0},
+	}
 	// Create State machine
 	taxiStateMachine := ssm.NewStateMachine(StateTaxiInit)
 

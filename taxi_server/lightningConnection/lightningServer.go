@@ -240,6 +240,7 @@ func invoiceSettledHandler(writer http.ResponseWriter, request *http.Request) {
 	writeError(writer, errorMessage)
 }
 */
+
 func CreateInvoice(message string, amount int64, expire int64) (newInvoice PendingInvoice, err error) {
 
 	var errorMessage string = "Amount is zero"
