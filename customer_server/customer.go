@@ -47,9 +47,10 @@ type Customer struct {
 	averagePaymentAmountSEK float32
 	logger *logrus.Logger
 	paymentStatistics paymentStatistics_struct
-
-
+	accelerationPercent int32
+	speedPercent int32
 }
+
 type averagePayment_struct struct {
 	paymentAmount int64
 	aggregateAmount int64
@@ -163,6 +164,8 @@ func NewCustomer(title string) *Customer {
 		currentWalletAmountSatoshi: 0, //currenChannelBalance.Balance,
 		currentWalletAmountSEK: 0, //SatoshiToSEK(currenChannelBalance.Balance),
 		paymentStatistics: paymentStatistics_struct{numbertOfReceivedTransactions:0 , numbertOfPayedTransactions: 0, averageNoOfPayments: 0},
+		accelerationPercent: 0,
+		speedPercent: 0,
 	}
 
 	// Create State machine
@@ -875,6 +878,9 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 			customer.paymentStatistics.numbertOfReceivedTransactions = customer.paymentStatistics.numbertOfReceivedTransactions + 1
 			customer.receivedTaxiInvoiceButNotPaid = true
 			customer.invoiceReceivedAtleastOnce = true
+
+			customer.accelerationPercent = invoiceAndPaymentData.AccelerationPercent
+			customer.speedPercent = invoiceAndPaymentData.SpeedPercent
 
 			//Customer Pays Invoice
 			invoicesAndPaymentData = append(invoicesAndPaymentData, invoiceAndPaymentData)

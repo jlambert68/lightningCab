@@ -167,6 +167,8 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 		TimeAmountSek: 0,
 		TotalAmountSatoshi: 0,
 		TotalAmountSek: 0,
+		AccelerationPercent:0,
+		SpeedPercent:0,
 	}
 
 
@@ -210,6 +212,8 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 			paymentRequestResponse.TimeAmountSek = float32(lastPaymentData.lastReceivedAmountdata.timeAmount) * common_config.BTCSEK / common_config.SatoshisPerBTC
 			paymentRequestResponse.TotalAmountSatoshi = lastPaymentData.lastAmountToPay_satoshi
 			paymentRequestResponse.TotalAmountSek = lastPaymentData.lastAmountToPay_sek
+			paymentRequestResponse.AccelerationPercent = lastPaymentData.lastPowerMessaurment.Acceleration
+			paymentRequestResponse.SpeedPercent = lastPaymentData.lastPowerMessaurment.Speed
 
 			taxi.logger.Debug("invoicedataToCustomer:", invoicedataToCustomer)
 			//spew.Println(paymentRequestResponse)
