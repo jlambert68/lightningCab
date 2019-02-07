@@ -20,12 +20,9 @@ import (
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
 	"jlambert/lightningCab/customer_server/customer_gui/proto/server"
-	"jlambert/lightningCab/customer_server/customer_gui/webmain"
-
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
-	"github.com/stackimpact/stackimpact-go"
-
+	"jlambert/lightningCab/customer_server/customer_gui/webmain"
 )
 
 
@@ -1195,7 +1192,7 @@ func cleanup() {
 }
 
 func main() {
-
+/*
 	agent := stackimpact.Start(stackimpact.Options{
 		AgentKey: "3595d3d1600b648248cebaf5bc0f9be8c6b4a74e",
 		AppName: "LightningCAB - Customer",
@@ -1203,7 +1200,7 @@ func main() {
 
 	span := agent.Profile();
 	defer span.Stop();
-
+*/
 	var err error
 
 	defer cleanup()

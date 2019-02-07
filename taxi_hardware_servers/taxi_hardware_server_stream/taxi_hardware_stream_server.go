@@ -53,7 +53,7 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 		Acknack: true,
 		Comments: "Standard return message",
 		Speed: 0,
-		Acceleration: 33,
+		Acceleration: 0,
 		Timestamp: time.Now().UnixNano()}
 
 	for {
@@ -62,13 +62,18 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 			log.Printf("Error when streaming back: 'MessasurePowerConsumption'")
 			break
 		}
-		log.Printf("Sent the following powerdata: ", powerConsumption)
-		time.Sleep(1 * time.Second)
+		//log.Printf("Sent the following powerdata: ", powerConsumption)
+		time.Sleep(100 * time.Millisecond)
 
 		powerConsumption.Speed = powerConsumption.Speed + 1
 		if powerConsumption.Speed > 100 {
 			powerConsumption.Speed = 0
-			log.Println("Powerconsuption: ", powerConsumption)
+			//log.Println("Powerconsuption: ", powerConsumption)
+		}
+		powerConsumption.Acceleration = powerConsumption.Acceleration + 2
+		if powerConsumption.Acceleration > 100 {
+			powerConsumption.Acceleration = 0
+			//log.Println("Powerconsuption: ", powerConsumption)
 		}
 		now := time.Now()
 		powerConsumption.Timestamp = now.UnixNano()

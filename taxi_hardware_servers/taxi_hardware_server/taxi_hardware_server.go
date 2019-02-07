@@ -8,11 +8,16 @@ import (
 	"syscall"
 	"fmt"
 	"time"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 	"net"
 	"golang.org/x/net/context"
 
 	taxiHW_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server/taxi_hardware_grpc_api"
+
+	"gobot.io/x/gobot"
+	"gobot.io/x/gobot/platforms/raspi"
+
+	"gobot.io/x/gobot/drivers/i2c"
 )
 
 // Global connection constants
@@ -170,6 +175,28 @@ func main() {
 	var err error
 
 	defer cleanup()
+
+	//*******************************
+	a := raspi.NewAdaptor()
+	ads1015 := i2c.NewADS1015Driver(a)
+	// Adjust the gain to be able to read values of at least 5V
+	ads1015.DefaultGain, _ = ads1015.BestGainForVoltage(5.0)
+
+	work := func() {
+		gobot.Every(100*time.Millisecond, func() {
+			v, _ := ads1015.ReadWithDefaults(0)
+			fmt.Println("A0", v)
+		})
+	}
+
+	robot := gobot.NewRobot("ads1015bot",
+		[]gobot.Connection{a},
+		[]gobot.Device{ads1015},
+		work,
+	)
+
+	robot.Start()
+	//*******************************
 
 	// Set DB Connection
 	/*DB_session, err = db_func.ConnectToFenixDB()

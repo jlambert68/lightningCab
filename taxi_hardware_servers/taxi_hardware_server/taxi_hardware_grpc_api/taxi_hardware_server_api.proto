@@ -5,6 +5,8 @@ package taxi_hardware_grpc_api;
 // version 3.6.0
 //~/protobuf/bin/protoc -I taxi_hardware_grpc_api --go_out=plugins=grpc:taxi_hardware_grpc_api taxi_hardware_grpc_api/taxi_hardware_server_api.proto
 
+//python -m grpc_tools.protoc -I../../protos --python_out=. --grpc_python_out=. ../../protos/route_guide.proto
+//python -m grpc_tools.protoc -I./taxi_hardware_grpc_api --python_out=./taxi_hardware_grpc_api --grpc_python_out=./taxi_hardware_grpc_api ./taxi_hardware_grpc_api/taxi_hardware_server_api.proto
 
 // Parameter used for Empty inputs
 message EmptyParameter {
