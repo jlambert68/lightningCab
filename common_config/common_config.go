@@ -32,7 +32,7 @@ const GrpcCustomerUI_RPC_StreamServer_port = ":50656"
 // Time : 0,5*x; 15 öre per second
 //
 // Total max: 75 öre per hour [2.700 kr/hour], Constant speed: 45 öre per second [1.620 kr/hour]
-//
+// JL
 const USDSEK = 8.88            //SEK per USD
 const BTCUSD = 5890            //USD per BTC
 const BTCSEK = BTCUSD * USDSEK //SEK per BTC
