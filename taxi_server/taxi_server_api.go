@@ -6,7 +6,7 @@ import (
 	"time"
 	//"google.golang.org/grpc"
 	"golang.org/x/net/context"
-	taxi_api "jlambert/lightningCab/taxi_server/taxi_grpc_api"
+	taxi_api "jlambert/lightningCab/grpc_api/taxi_grpc_api"
 	"jlambert/lightningCab/common_config"
 	"math"
 	"github.com/sirupsen/logrus"

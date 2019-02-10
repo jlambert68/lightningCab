@@ -8,7 +8,7 @@ import (
 	"golang.org/x/net/context"
 	//log "log"
 	tollGateHW_api "jlambert/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
-	tollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
+	tollGate_api "jlambert/lightningCab/grpc_api/toll_road_grpc_api"
 
 	"time"
 	"sync"

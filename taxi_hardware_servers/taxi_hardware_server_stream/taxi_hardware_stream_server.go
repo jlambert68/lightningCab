@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/jlambert68/lightningCab/common_config"
 	"google.golang.org/grpc"
-	//"jlambert/lightningCab/common_config"
 	"log"
 	"net"
 	"os"
@@ -13,7 +12,7 @@ import (
 	"time"
 	//"golang.org/x/net/context"
 
-	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api"
+	taxiHW_stream_api "jlambert/lightningCab/grpc_api/taxi_hardware_grpc_stream_api"
 )
 
 // Global connection constants

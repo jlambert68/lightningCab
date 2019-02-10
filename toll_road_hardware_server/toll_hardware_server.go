@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-	tollGateHW_api "jlambert/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
+	tollGateHW_api "jlambert/lightningCab/grpc_api/toll_road_hardware_grpc_api"
 	"jlambert/lightningCab/common_config"
 )
 
