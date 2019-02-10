@@ -7,8 +7,8 @@ import (
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
 	//log "log"
-	tollGateHW_api "jlambert/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
-	tollGate_api "jlambert/lightningCab/grpc_api/toll_road_grpc_api"
+	tollGateHW_api "github.com/jlambert68/lightningCab/toll_road_hardware_server/toll_road_hardware_grpc_api"
+	tollGate_api "github.com/jlambert68/lightningCab/grpc_api/toll_road_grpc_api"
 
 	"time"
 	"sync"
@@ -24,7 +24,7 @@ import (
 	//"github.com/op/go-logging"
 	"log"
 	"jlambert/lightningCab/toll_road_server/lightningServer"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 )
 
 type Toll struct {

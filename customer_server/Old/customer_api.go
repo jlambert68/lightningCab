@@ -3,7 +3,7 @@ package Old
 import (
 	"log"
 	"golang.org/x/net/context"
-	"jlambert/lightningCab/grpc_api/customer_grpc_ui_api"
+	"github.com/jlambert68/lightningCab/grpc_api/customer_grpc_ui_api"
 	"jlambert/lightningCab/common_config"
 )
 

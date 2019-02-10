@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/markdaws/simple-state-machine"
 	"google.golang.org/grpc"
-	taxiHW_api "github.com/jlambert68/lightningCab/taxi_hardware_servers/taxi_hardware_server/taxi_hardware_grpc_api"
-	taxiHW_stream_api "github.com/jlambert68/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api"
-	taxi_api "jlambert/lightningCab/grpc_api/taxi_grpc_api"
+	taxiHW_api "github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_api"
+	taxiHW_stream_api "github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_stream_api"
+	taxi_api "github.com/jlambert68/lightningCab/grpc_api/taxi_grpc_api"
 	"github.com/jlambert68/lightningCab/common_config"
 	"net"
 	"os"

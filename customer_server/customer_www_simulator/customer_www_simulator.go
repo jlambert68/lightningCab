@@ -9,7 +9,7 @@ import (
 	"os"
 	"bufio"
 	"jlambert/lightningCab/common_config"
-	xxx "jlambert/lightningCab/grpc_api/customer_grpc_ui_api"
+	xxx "github.com/jlambert68/lightningCab/grpc_api/customer_grpc_ui_api"
 )
 
 var (

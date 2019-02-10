@@ -12,7 +12,7 @@ import (
 	"net"
 	"golang.org/x/net/context"
 
-	taxiHW_api "jlambert/lightningCab/grpc_api/taxi_hardware_grpc_api"
+	taxiHW_api "github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_api"
 
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/platforms/raspi"
