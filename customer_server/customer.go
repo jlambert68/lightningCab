@@ -6,7 +6,7 @@ import (
 	"os"
 	//taxoTotollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
 	"github.com/jlambert68/lightningCab/common_config"
-	"github.com/jlambert68/grpc_api/taxi_grpc_api"
+	"github.com/jlambert68/lightningCab/grpc_api/taxi_grpc_api"
 	"strconv"
 	"time"
 	"io"

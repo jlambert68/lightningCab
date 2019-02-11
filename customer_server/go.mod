@@ -8,11 +8,11 @@ require (
 	github.com/google/go-cmp v0.2.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e
 	github.com/gorilla/websocket v1.4.0
+	github.com/grpc-ecosystem/grpc-gateway v1.7.0 // indirect
 	github.com/improbable-eng/grpc-web v0.0.0-20190208103255-801c4995c859
-	github.com/jlambert68/lightningCab v0.0.0-20190210184451-371ab93cef78
+	github.com/jlambert68/lightningCab v0.0.0-20190210192536-d4123a55a3a5
 	github.com/johanbrandhorst/protobuf v0.7.1
-	github.com/kr/pretty v0.1.0 // indirect
-	github.com/lightningnetwork/lnd v0.0.2
+	github.com/lightningnetwork/lnd v0.5.2-beta
 	github.com/lpar/gzipped v1.1.0
 	github.com/markdaws/simple-state-machine v0.0.0-20180330211417-a7b249c6862c
 	github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223 // indirect
@@ -30,7 +30,6 @@ require (
 	golang.org/x/tools v0.0.0-20190208222737-3744606dbb67 // indirect
 	google.golang.org/genproto v0.0.0-20190201180003-4b09977fb922 // indirect
 	google.golang.org/grpc v1.18.0
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 	honnef.co/go/js/dom v0.0.0-20181202134054-9dbdcd412bde
 )

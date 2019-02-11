@@ -2,7 +2,7 @@ package main
 
 import (
 	"jlambert/lightningCab/taxi_server/lightningConnection"
-	taxiHW_stream_api "jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream/taxi_hardware_grpc_stream_api" //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
+	taxiHW_stream_api "github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_stream_api" //"jlambert/lightningCab/taxi_hardware_server/taxi_hardware_grpc_api"
 	"io"
 	"golang.org/x/net/context"
 	"math"

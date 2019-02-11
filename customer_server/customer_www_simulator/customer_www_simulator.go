@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 	xxx "github.com/jlambert68/lightningCab/grpc_api/customer_grpc_ui_api"
 )
 

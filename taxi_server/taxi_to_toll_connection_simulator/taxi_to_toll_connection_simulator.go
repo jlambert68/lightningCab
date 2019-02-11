@@ -7,7 +7,7 @@ import (
 	"log"
 	"fmt"
 	"os"
-	taxoTotollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
+	taxoTotollGate_api "github.com/jlambert68/lightningCab/grpc_api/toll_road_grpc_api"
 	"bufio"
 	"jlambert/lightningCab/common_config"
 )
