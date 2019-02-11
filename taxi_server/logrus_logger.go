@@ -6,7 +6,7 @@ import (
 
 	"os"
 	"log"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 )
 
 

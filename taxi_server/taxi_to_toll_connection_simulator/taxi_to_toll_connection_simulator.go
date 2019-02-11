@@ -9,7 +9,7 @@ import (
 	"os"
 	taxoTotollGate_api "github.com/jlambert68/lightningCab/grpc_api/toll_road_grpc_api"
 	"bufio"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 )
 
 var (

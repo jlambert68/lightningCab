@@ -6,7 +6,7 @@ import (
 	"io"
 	"golang.org/x/net/context"
 	"math"
-	"jlambert/lightningCab/common_config"
+	"github.com/jlambert68/lightningCab/common_config"
 	"errors"
 	"github.com/sirupsen/logrus"
 )
