@@ -1,7 +1,7 @@
 package backends
 
 import (
-	"jlambert/lightningCab/taxi_server/taxi_grpc_api"
+	"github.com/jlambert68/lightningCab/grpc_api/taxi_grpc_api"
 	"github.com/lightningnetwork/lnd/lnrpc"
 )
 
