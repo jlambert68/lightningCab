@@ -19,7 +19,7 @@ import (
 	//"net"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
-	"jlambert/lightningCab/grpc_api/proto/server"
+	"github.com/jlambert68/lightningCab/grpc_api/proto/server"
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
 	"jlambert/lightningCab/customer_server/customer_gui/webmain"

@@ -67,8 +67,7 @@ github.com/jessevdk/go-flags v0.0.0-20141203071132-1679536dcc89/go.mod h1:4FA24M
 github.com/jessevdk/go-flags v0.0.0-20170926144705-f88afde2fa19/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jlambert68/lightningCab v0.0.0-20190210192536-d4123a55a3a5 h1:B8Lf/LaYbJwPemwzj7ktiKiU4Vw7HmaPeqvSFuOtqhQ=
 github.com/jlambert68/lightningCab v0.0.0-20190210192536-d4123a55a3a5/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
-github.com/johanbrandhorst/protobuf v0.7.1 h1:i1ItegxDXvyJDQbTraS2DpTxgUB0doNvSFueGhaEVsU=
-github.com/johanbrandhorst/protobuf v0.7.1/go.mod h1:B/uVA4AcXtCUytXZyu2PjnIQv85aXogvVWyHPPdkDBE=
+github.com/jlambert68/lightningCab v0.0.0-20190212061022-624618c684df h1:ZQq/kz11KqFCeeEf/J/4+a7PtMksetzDT4VWZFkSJZY=
 github.com/jrick/logrotate v1.0.0/go.mod h1:LNinyqDIJnpAur+b8yyulnQw/wDuN1+BYKlTRt3OuAQ=
 github.com/juju/clock v0.0.0-20180808021310-bab88fc67299/go.mod h1:nD0vlnrUjcjJhqN5WuCWZyzfd5AHZAC9/ajvbSx69xA=
 github.com/juju/errors v0.0.0-20181118221551-089d3ea4e4d5/go.mod h1:W54LbzXuIE0boCoNJfwqpmkKJ1O4TCTZMetAt6jGk7Q=
@@ -193,8 +192,6 @@ gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 h1:uRGJdciOHaEIrze2W8Q3AKkep
 gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7/go.mod h1:dt/ZhP58zS4L8KSrWDmTeBkI65Dw0HsyUHuEVlX15mw=
 gopkg.in/yaml.v2 v2.2.1 h1:mUhvW9EsL+naU5Q3cakzfE91YhliOondGd6ZrsDBHQE=
 gopkg.in/yaml.v2 v2.2.1/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
-gopkg.in/yaml.v2 v2.2.2 h1:ZCJp+EgiOT7lHqUV2J862kp8Qj64Jo6az82+3Td9dZw=
-gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 honnef.co/go/js/dom v0.0.0-20181202134054-9dbdcd412bde h1:a/zxkB+dOtFR2DO19YIQtrpHfuZVprzJsA19Og0p53A=
 honnef.co/go/js/dom v0.0.0-20181202134054-9dbdcd412bde/go.mod h1:sUMDUKNB2ZcVjt92UnLy3cdGs+wDAcrPdV3JP6sVgA4=
 honnef.co/go/tools v0.0.0-20180728063816-88497007e858/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
