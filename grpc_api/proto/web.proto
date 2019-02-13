@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+// Web exposes a backend server over gRPC.
+package web;
+
+import "github.com/johanbrandhorst/protobuf/proto/gopherjs.proto";
+
+// Define the package locations the generated files will go into
+option (gopherjs.gopherjs_package) = "jlambert/lightningCab/customer_server/customer_gui/proto/client";
+option go_package = "jlambert/lightningCab/customer_server/customer_gui/proto/server";
+
+// Backend defines the interface exposed by the backend.
+// TODO: Define functionality exposed by backend.
+//service Backend {
+//}
+
+// Parameter used for Empty inputs
+message EmptyParameter {
+}
+
+// Ack/Nack- Response message with comment
+message AckNackResponse {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+}
+
+// The Client register service definition.
+// ***********************
+service Customer_UI {
+
+    //Ask taxi for Price
+    rpc AskTaxiForPrice (EmptyParameter) returns (Price_UI) {
+    }
+
+    //Accept price from Taxi
+    rpc AcceptPrice (EmptyParameter) returns (AckNackResponse) {
+    }
+
+    //Halt payment of incoming paymentRequests
+    rpc HaltPayments (HaltPaymentRequest) returns (AckNackResponse) {
+    }
+
+    //Leave Taxi
+    rpc LeaveTaxi (EmptyParameter) returns (AckNackResponse) {
+    }
+
+    // Returns a stream with Price and State-info
+    rpc UIPriceAndStateStream (EmptyParameter) returns (stream UIPriceAndStateRespons) {
+    }
+
+}
+
+
+enum PriceUnit {
+    SatoshiPerSecond = 0;
+}
+
+enum TimeUnit {
+    SecondsBetweenPaymentmentRequests = 0;
+    MilliSecondsBetweenPaymentmentRequests = 1;
+}
+
+
+message HaltPaymentRequest {
+    bool haltpayment = 1;
+}
+
+message Price_UI {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int64 speed_amount_satoshi = 3;
+    int64 acceleration_amount_satoshi = 4;
+    int64 time_amount_satoshi = 5;
+    float speed_amount_sek = 6;
+    float acceleration_amount_sek = 7;
+    float time_amount_sek = 8;
+    TimeUnit timeunit = 9;
+    int32 paymentRequestInterval = 10;
+    PriceUnit priceunit = 11;
+}
+
+// Service for gRPC-methods that can be used and Last PaymentRequest Data
+
+
+
+message RPCMethods {
+    bool AskTaxiForPrice = 1;
+    bool AcceptPrice = 2;
+    bool HaltPayments_true = 3;
+    bool HaltPayments_false = 4;
+    bool LeaveTaxi = 5;
+}
+
+
+message UIPriceAndStateRespons {
+    bool acknack = 1; // True=Ack, False=Nack
+    string comments = 2; //Comments if needed
+    int64 speed_amount_satoshi = 3;
+    int64 acceleration_amount_satoshi = 4;
+    int64 time_amount_satoshi = 5;
+    float speed_amount_sek = 6;
+    float acceleration_amount_sek = 7;
+    float time_amount_sek = 8;
+    int64 total_amount_satoshi = 9;
+    float total_amount_sek = 10;
+    int64 timestamp = 11;
+    RPCMethods allowedRPCMethods = 12;
+    int64 current_taxiride_satoshi = 13;
+    float current_taxi_ride_sek = 14;
+    int64 current_walletbalance_satoshi =15;
+    float current_walletbalance_sek = 16;
+    int64 average_payment_amount_satoshi = 17;
+    float average_payment_amount_sek = 18;
+    float avarege_number_of_payments = 19;
+    int32 accelaration_percent = 20;
+    int32 speed_percent = 21;
+}
