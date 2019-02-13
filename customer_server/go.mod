@@ -9,7 +9,6 @@ require (
 	github.com/gorilla/websocket v1.4.0
 	github.com/grpc-ecosystem/grpc-gateway v1.7.0 // indirect
 	github.com/improbable-eng/grpc-web v0.0.0-20190208103255-801c4995c859
-	github.com/jlambert68/lightningCab v0.0.0-20190210192536-d4123a55a3a5
 	github.com/lightningnetwork/lnd v0.5.2-beta
 	github.com/lpar/gzipped v1.1.0
 	github.com/markdaws/simple-state-machine v0.0.0-20180330211417-a7b249c6862c
