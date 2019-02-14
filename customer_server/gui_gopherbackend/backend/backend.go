@@ -2,7 +2,7 @@ package backend
 
 import (
 	"golang.org/x/net/context"
-	"github.com/jlambert68/lightningCab/grpc_api/proto/server"
+	"jlambert/lightningCab/customer_server/gui_gopherbackend/gui_proto/server"
 	"log"
 	"time"
 	"github.com/sirupsen/logrus"
