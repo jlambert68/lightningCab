@@ -22,7 +22,7 @@ import (
 	"github.com/jlambert68/lightningCab/grpc_api/proto/server"
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
-	"jlambert/lightningCab/customer_gui/webmain"
+	"jlambert/lightningCab/customer_server/webmain"
 )
 
 
