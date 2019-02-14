@@ -6,7 +6,7 @@ require (
 	github.com/google/go-cmp v0.2.0 // indirect
 	github.com/gorilla/websocket v1.4.0
 	github.com/improbable-eng/grpc-web v0.0.0-20190212112605-ebef475aee95
-	github.com/jlambert68/lightningCab v0.0.0-20190214055811-9247bff5cf8d
+	github.com/jlambert68/lightningCab v0.0.0-20190214162933-b331d1144196
 	github.com/johanbrandhorst/protobuf v0.7.1 // indirect
 	github.com/lightningnetwork/lnd v0.0.2
 	github.com/lpar/gzipped v1.1.0
