@@ -2,7 +2,7 @@ package main
 
 import (
 
-	"github.com/jlambert68/lightningCab/grpc_api/proto/server"
+	"jlambert/lightningCab/grpc_api/proto/server"
 	"time"
 )
 
