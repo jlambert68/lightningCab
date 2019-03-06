@@ -2,7 +2,8 @@ package backend
 
 import (
 	"golang.org/x/net/context"
-	"jlambert/lightningCab/grpc_api/proto/server"
+	//"jlambert/lightningCab/grpc_api/proto/server"
+	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"log"
 	"time"
 	"github.com/sirupsen/logrus"
@@ -23,15 +24,15 @@ var logger *logrus.Logger
 
 
 // Ensure struct implements interface
-//var _ server.BackendServer = (*Backend)(nil)
+//var _ protoLibrary.BackendServer = (*Backend)(nil)
 
-var _ server.Customer_UIServer = (*Customer_UI)(nil)
+var _ protoLibrary.Customer_UIServer = (*Customer_UI)(nil)
 
-type CallBackFunctionType_AskForPrice func (*server.EmptyParameter) (*server.Price_UI, error)
-type CallBackFunctionType_AcceptPrice func (*server.EmptyParameter) (*server.AckNackResponse, error)
-type CallBackFunctionType_HaltPayments func (*server.HaltPaymentRequest) (*server.AckNackResponse, error)
-type CallBackFunctionType_LeaveTaxi func (*server.EmptyParameter) (*server.AckNackResponse, error)
-type CallBackFunctionType_PriceAndStateRespons  func () (*server.UIPriceAndStateRespons, error)
+type CallBackFunctionType_AskForPrice func (*protoLibrary.EmptyParameter) (*protoLibrary.Price_UI, error)
+type CallBackFunctionType_AcceptPrice func (*protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error)
+type CallBackFunctionType_HaltPayments func (*protoLibrary.HaltPaymentRequest) (*protoLibrary.AckNackResponse, error)
+type CallBackFunctionType_LeaveTaxi func (*protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error)
+type CallBackFunctionType_PriceAndStateRespons  func () (*protoLibrary.UIPriceAndStateRespons, error)
 
 var (
 	callbackToCustomer_AskForPrice          CallBackFunctionType_AskForPrice
@@ -75,7 +76,7 @@ func SetLPriceAndStateRespons(cbTT CallBackFunctionType_PriceAndStateRespons) {
 // ************************************************************************************
 // UI-customer Ask for Price
 
-func (s *Customer_UI) AskTaxiForPrice(ctx context.Context, emptyParameter *server.EmptyParameter) (*server.Price_UI, error) {
+func (s *Customer_UI) AskTaxiForPrice(ctx context.Context, emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.Price_UI, error) {
 
 	log.Println("Incoming from WWW: 'AskTaxiForPrice'")
 
@@ -89,7 +90,7 @@ func (s *Customer_UI) AskTaxiForPrice(ctx context.Context, emptyParameter *serve
 // ************************************************************************************
 // UI-customer accepts price
 
-func (s *Customer_UI) AcceptPrice(ctx context.Context, emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error) {
+func (s *Customer_UI) AcceptPrice(ctx context.Context, emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error) {
 
 	log.Println("Incoming from WWW: 'AcceptPrice'")
 
@@ -104,7 +105,7 @@ func (s *Customer_UI) AcceptPrice(ctx context.Context, emptyParameter *server.Em
 // ************************************************************************************
 // UI-customer halts payments
 
-func (s *Customer_UI) HaltPayments(ctx context.Context, haltPaymentRequestMessage *server.HaltPaymentRequest) (*server.AckNackResponse, error) {
+func (s *Customer_UI) HaltPayments(ctx context.Context, haltPaymentRequestMessage *protoLibrary.HaltPaymentRequest) (*protoLibrary.AckNackResponse, error) {
 
 	log.Println("Incoming from WWW: 'HaltPayments' with parameter: ", haltPaymentRequestMessage.Haltpayment)
 
@@ -120,7 +121,7 @@ func (s *Customer_UI) HaltPayments(ctx context.Context, haltPaymentRequestMessag
 // ************************************************************************************
 // UI-Customer leaves Taxi
 
-func (s *Customer_UI) LeaveTaxi(ctx context.Context, emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error) {
+func (s *Customer_UI) LeaveTaxi(ctx context.Context, emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error) {
 
 	log.Println("Incoming: 'LeaveTaxi'")
 
@@ -132,7 +133,7 @@ func (s *Customer_UI) LeaveTaxi(ctx context.Context, emptyParameter *server.Empt
 
 // ************************************************************************************
 // Send Stream of Payment-data and state-data for controlling buttons
-func (s *Customer_UI) UIPriceAndStateStream(emptyParameter *server.EmptyParameter, stream server.Customer_UI_UIPriceAndStateStreamServer) (err error) {
+func (s *Customer_UI) UIPriceAndStateStream(emptyParameter *protoLibrary.EmptyParameter, stream protoLibrary.Customer_UI_UIPriceAndStateStreamServer) (err error) {
 
 	log.Printf("Incoming: 'UIPriceAndStateStream'")
 

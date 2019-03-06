@@ -6,6 +6,7 @@ package customer_ui_stream_api;
 // version 3.6.0
 //~/protobuf/bin/protoc -I customer_ui_stream_api --go_out=plugins=grpc:customer_ui_stream_api customer_ui_stream_api/customer_ui_stream_api.proto
 
+// Moved rpc service to customer_ui_api.proto
 
 message EmptyParameter {
 }

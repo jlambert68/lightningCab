@@ -4,21 +4,22 @@
 package webmain
 
 import (
-	"crypto/tls"
-	"github.com/jlambert68/lightningCab/customer_gui/frontend/bundle"
+	//"crypto/tls"
+	//"github.com/jlambert68/lightningCab/customer_gui/frontend/bundle"
 	"net/http"
 	"path"
-	"strings"
-	"time"
+	//"strings"
+	//"time"
 
-	"github.com/gorilla/websocket"
+	//"github.com/gorilla/websocket"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
-	"github.com/lpar/gzipped"
+	//"github.com/lpar/gzipped"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"jlambert/lightningCab/customer_server/gui_gopherbackend/backend"
 	//"jlambert/lightningCab/customer_gui"
 	//"github.com/jlambert68/lightningCab/grpc_api/proto/server"
+	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"os"
 	"fmt"
 )
@@ -57,22 +58,17 @@ func Webmain(customerLogger *logrus.Logger,
 	backend.SetLeaveTaxi(cbTT4)
 	backend.SetLPriceAndStateRespons(cbTT5)
 
-	gs := grpc.NewServer()
-	server.RegisterCustomer_UIServer(gs, &backend.Customer_UI{})
-	wrappedServer := grpcweb.WrapServer(gs, grpcweb.WithWebsockets(true))
+	grpcServer := grpc.NewServer()
+	protoLibrary.RegisterCustomer_UIServer(grpcServer, &backend.Customer_UI{})
+	wrappedServer := grpcweb.WrapServer(grpcServer)
 
 	handler := func(resp http.ResponseWriter, req *http.Request) {
-		// Redirect gRPC and gRPC-Web requests to the gRPC-Web Websocket Proxy server
-		if req.ProtoMajor == 2 && strings.Contains(req.Header.Get("Content-Type"), "application/grpc") ||
-			websocket.IsWebSocketUpgrade(req) {
-			wrappedServer.ServeHTTP(resp, req)
-		} else {
-			// Serve the GopherJS client
-			folderReader(gzipped.FileServer(bundle.Assets)).ServeHTTP(resp, req)
-		}
+		wrappedServer.ServeHTTP(resp, req)
 	}
 
-	addr := "localhost:10000"
+	//addr := "localhost:10000"
+	port := 9091
+	/*
 	httpsSrv := &http.Server{
 		Addr:    addr,
 		Handler: http.HandlerFunc(handler),
@@ -86,9 +82,13 @@ func Webmain(customerLogger *logrus.Logger,
 				tls.X25519,
 			},
 		},
+	}*/
+	httpsSrv := http.Server{
+		Addr:    fmt.Sprintf(":%d", port),
+		Handler: http.HandlerFunc(handler),
 	}
 
-	logger.Info("Serving on https://" + addr)
+	logger.Info("Serving on https://" + string(port))
 	dir, err := os.Getwd()
 	if err != nil {
 		logger.Fatal(err)
@@ -109,8 +109,10 @@ func Webmain(customerLogger *logrus.Logger,
 	}
 	//logger.Fatal(httpsSrv.ListenAndServeTLS("./cert.pem", "./key.pem"))
 	logger.Fatal(httpsSrv.ListenAndServeTLS(appendPath + "apache.crt", appendPath + "apache.key"))
+
 }
 
+/*
 func folderReader(fn http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		if strings.HasSuffix(req.URL.Path, "/") {
@@ -120,3 +122,4 @@ func folderReader(fn http.Handler) http.HandlerFunc {
 		fn.ServeHTTP(w, req)
 	}
 }
+*/

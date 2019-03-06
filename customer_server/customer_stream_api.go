@@ -2,18 +2,19 @@ package main
 
 import (
 
-	"jlambert/lightningCab/grpc_api/proto/server"
+	//"jlambert/lightningCab/grpc_api/proto/server"
+	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"time"
 )
 
-func CallBackPriceAndStateData() (*server.UIPriceAndStateRespons, error) {
+func CallBackPriceAndStateData() (*protoLibrary.UIPriceAndStateRespons, error) {
 	var err error
 	err = nil
-	var priceAndStateRespons *server.UIPriceAndStateRespons
+	var priceAndStateRespons *protoLibrary.UIPriceAndStateRespons
 
 	//Check if any InvoinceData has been received
 	if customer.invoiceReceivedAtleastOnce == false {
-		priceAndStateRespons = &server.UIPriceAndStateRespons{
+		priceAndStateRespons = &protoLibrary.UIPriceAndStateRespons{
 			Acknack:                   true,
 			Comments:                  "",
 			SpeedAmountSatoshi:        0,
@@ -37,7 +38,7 @@ func CallBackPriceAndStateData() (*server.UIPriceAndStateRespons, error) {
 			SpeedPercent:0,
 		}
 	} else {
-		priceAndStateRespons = &server.UIPriceAndStateRespons{
+		priceAndStateRespons = &protoLibrary.UIPriceAndStateRespons{
 			Acknack:                   true,
 			Comments:                  "",
 			SpeedAmountSatoshi:        int64(customer.lastReceivedInvoice.SpeedAmountSatoshi),
@@ -106,12 +107,12 @@ func (s *customerUIPriceStreamServiceServer) UIPriceAndStateStream(emptyParamete
 
 // ******************************************************************************
 // Generate allowd gRPC functions
-func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
+func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *protoLibrary.RPCMethods) {
 
 	switch customer.CustomerStateMachine.State() {
 
 	case StateCustomerWaitingForCommands:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   true,
 			AcceptPrice:       false,
 			HaltPaymentsTrue:  false,
@@ -120,7 +121,7 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
 		}
 
 	case StateCustomerPriceHasBeenReceived:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   false,
 			AcceptPrice:       true,
 			HaltPaymentsTrue:  false,
@@ -129,7 +130,7 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
 		}
 
 	case StateCustomerWaitingForPaymentRequest:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   false,
 			AcceptPrice:       false,
 			HaltPaymentsTrue:  true,
@@ -138,7 +139,7 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
 		}
 
 	case StateCustomerPaymentRequestReceived:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   false,
 			AcceptPrice:       false,
 			HaltPaymentsTrue:  true,
@@ -147,7 +148,7 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
 		}
 
 	case StateCustomerHaltedPayments:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   false,
 			AcceptPrice:       false,
 			HaltPaymentsTrue:  false,
@@ -156,7 +157,7 @@ func allowedgRPC_CustomerUI() (gRPCMethodsAllowed *server.RPCMethods) {
 		}
 
 	default:
-		gRPCMethodsAllowed = &server.RPCMethods{
+		gRPCMethodsAllowed = &protoLibrary.RPCMethods{
 			AskTaxiForPrice:   false,
 			AcceptPrice:       false,
 			HaltPaymentsTrue:  false,

@@ -14,6 +14,14 @@ package customer_ui_api;
 // Stå i root for grpc-web
 //3) java -jar ./closure-compiler.jar --js ./javascript --js ./net --js ./third_party/closure-library --js ./third_party/grpc/third_party/protobuf/js --entry_point=goog:proto.customer_ui_api.Customer_UIClient --dependency_mode=STRICT --js_output_file customer_ui_api.js
 
+
+
+// New when using grpc-web - 190306
+// Stå i roten för customer_gui_grpc-web
+// Generate go-grpc-files
+// protoc_3.7.0.rc2 --plugin=protoc-gen-go=${GOPATH}/bin/protoc-gen-go -I ./proto --go_out=plugins=grpc:./go/_proto ./proto/examplecom/library/customer_ui_api.proto
+
+
 // Parameter used for Empty inputs
 message EmptyParameter {
 }
