@@ -19,7 +19,8 @@ import (
 	//"net"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
-	"github.com/jlambert68/lightningCab/grpc_api/proto/server"
+	//"github.com/jlambert68/lightningCab/grpc_api/proto/server"
+	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
 	"jlambert/lightningCab/customer_server/webmain"
@@ -379,11 +380,11 @@ func logMessagesWithError(spaceCount int, message string, err error) {
 
 // ******************************************************************************
 // Ask Taxi for Price
-func CallBackAskTaxiForPrice(emptyParameter *server.EmptyParameter) (*server.Price_UI, error) {
+func CallBackAskTaxiForPrice(emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.Price_UI, error) {
 	//log.Println("Incoming: 'AskTaxiForPrice'")
 	customer.logger.Info("Incoming: 'AskTaxiForPrice'")
 
-	returnMessage := &server.Price_UI{
+	returnMessage := &protoLibrary.Price_UI{
 		Acknack:                   false,
 		Comments:                  "",
 		SpeedAmountSatoshi:        0,
@@ -413,7 +414,7 @@ func CallBackAskTaxiForPrice(emptyParameter *server.EmptyParameter) (*server.Pri
 
 				logMessagesWithOutError(4, "Success in change if state: ")
 
-				returnMessage = &server.Price_UI{
+				returnMessage = &protoLibrary.Price_UI{
 					Acknack:                   true,
 					Comments:                  customer.lastRecievedPriceInfo.Comments,
 					SpeedAmountSatoshi:        customer.lastRecievedPriceInfo.GetSpeed(),
@@ -514,12 +515,12 @@ func (customer *Customer) askTaxiForPrice(check bool) (err error) {
 // ******************************************************************************
 // Customer accepts Price
 
-func CallBackAcceptPrice(emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error){
+func CallBackAcceptPrice(emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error){
 
 	//log.Println("Incoming: 'AcceptPrice'")
 	customer.logger.Info("Incoming: 'AcceptPrice'")
 
-	returnMessage := &server.AckNackResponse{
+	returnMessage := &protoLibrary.AckNackResponse{
 		Acknack:  false,
 		Comments: "",
 	}
@@ -540,7 +541,7 @@ func CallBackAcceptPrice(emptyParameter *server.EmptyParameter) (*server.AckNack
 
 				logMessagesWithOutError(4, "Success in change if state: ")
 
-				returnMessage = &server.AckNackResponse{
+				returnMessage = &protoLibrary.AckNackResponse{
 					Acknack:  true,
 					Comments: customer.lastRecievedPriceAccept.Comments,
 				}
@@ -620,14 +621,14 @@ func (customer *Customer) acceptPrice(check bool) (err error) {
 
 // ******************************************************************************
 // Customer Halts Payments
-func CallBackHaltPayments(haltPaymentRequestMessage *server.HaltPaymentRequest) (*server.AckNackResponse, error){
+func CallBackHaltPayments(haltPaymentRequestMessage *protoLibrary.HaltPaymentRequest) (*protoLibrary.AckNackResponse, error){
 
 	//log.Println("Incoming: 'HaltPayments' with parameter: ", haltPaymentRequestMessage.Haltpayment)
 	customer.logger.WithFields(logrus.Fields{
 		"haltPaymentRequestMessage.Haltpaymen":    haltPaymentRequestMessage.Haltpayment,
 	}).Info("Incoming: 'HaltPayments' with parameter!")
 
-	returnMessage := &server.AckNackResponse{
+	returnMessage := &protoLibrary.AckNackResponse{
 		Acknack:  false,
 		Comments: "",
 	}
@@ -652,7 +653,7 @@ func CallBackHaltPayments(haltPaymentRequestMessage *server.HaltPaymentRequest) 
 
 					logMessagesWithOutError(4, "Success in change if state: ")
 
-					returnMessage = &server.AckNackResponse{
+					returnMessage = &protoLibrary.AckNackResponse{
 						Acknack:  true,
 						Comments: "Success in change of state and Halt payments",
 					}
@@ -683,7 +684,7 @@ func CallBackHaltPayments(haltPaymentRequestMessage *server.HaltPaymentRequest) 
 					logTriggerStateError(4, customer.CustomerStateMachine.State(), currentTrigger, err)
 					returnMessage.Comments = "State machine is not in correct state to be able to un-halt payment"
 				} else {
-					returnMessage = &server.AckNackResponse{
+					returnMessage = &protoLibrary.AckNackResponse{
 						Acknack:  true,
 						Comments: "Success in change of state and Un-Halt payments",
 					}
@@ -698,7 +699,7 @@ func CallBackHaltPayments(haltPaymentRequestMessage *server.HaltPaymentRequest) 
 					logTriggerStateError(4, customer.CustomerStateMachine.State(), currentTrigger, err)
 					returnMessage.Comments = "State machine is not in correct state to be able to un-halt payment"
 				} else {
-					returnMessage = &server.AckNackResponse{
+					returnMessage = &protoLibrary.AckNackResponse{
 						Acknack:  true,
 						Comments: "Success in change of state and Un-Halt payments",
 					}
@@ -752,12 +753,12 @@ func (customer *Customer) haltPayments(check bool) (err error) {
 // ******************************************************************************
 // Customer Leaves Taxi
 
-func CallBackLeaveTaxi(emptyParameter *server.EmptyParameter) (*server.AckNackResponse, error){
+func CallBackLeaveTaxi(emptyParameter *protoLibrary.EmptyParameter) (*protoLibrary.AckNackResponse, error){
 
 	//log.Println("Incoming: 'LeaveTaxi'")
 	customer.logger.Info("Incoming: 'LeaveTaxi'")
 
-	returnMessage := &server.AckNackResponse{
+	returnMessage := &protoLibrary.AckNackResponse{
 		Acknack:  false,
 		Comments: "",
 	}
@@ -778,7 +779,7 @@ func CallBackLeaveTaxi(emptyParameter *server.EmptyParameter) (*server.AckNackRe
 
 				logMessagesWithOutError(4, "Success in change if state: ")
 
-				returnMessage = &server.AckNackResponse{
+				returnMessage = &protoLibrary.AckNackResponse{
 					Acknack:  true,
 					Comments: "State machine is in correct state and customer left taxi",
 				}
@@ -1177,10 +1178,10 @@ func cleanup() {
 
 		/*
 		//log.Println("Gracefull stop for: 'customerRpcUIServer'")
-		customerRpcUIServer.GracefulStop()
+		customerRpcUIprotoLibrary.GracefulStop()
 */
 //		//log.Println("Gracefull stop for: 'customerRpcUIStreamServer'")
-//		customerRpcUIStreamServer.GracefulStop()
+//		customerRpcUIStreamprotoLibrary.GracefulStop()
 /*
 		//log.Println("Close net.Listing: %v", localCustomerUIRPCServerEngineLocalPort)
 		lis.Close()
@@ -1287,8 +1288,8 @@ func main() {
 		//customerRpcUIServer = grpc.NewServer(grpc.Creds(creds))
 		customer_ui_api.RegisterCustomer_UIServer(customerRpcUIServer, &customerUIServiceServer{})
 		//log.Println("registerTaxiServer for Taxi Gate started")
-		//log.Println(customerRpcUIServer.GetServiceInfo())
-		customerRpcUIServer.Serve(lis)
+		//log.Println(customerRpcUIprotoLibrary.GetServiceInfo())
+		customerRpcUIprotoLibrary.Serve(lis)
 
 
 	}()
@@ -1302,7 +1303,7 @@ func main() {
 		customerRpcUIStreamServer = grpc.NewServer()
 		customer_ui_stream_api.RegisterCustomerUIPriceStreamServer(customerRpcUIStreamServer, &customerUIPriceStreamServiceServer{})
 		//log.Println("registerTaxiServer for Taxi Gate started")
-		customerRpcUIStreamServer.Serve(lisStream)
+		customerRpcUIStreamprotoLibrary.Serve(lisStream)
 	}()
 	// *********************
 
