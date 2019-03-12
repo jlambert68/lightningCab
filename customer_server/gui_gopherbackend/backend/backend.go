@@ -3,7 +3,7 @@ package backend
 import (
 	"golang.org/x/net/context"
 	//"jlambert/lightningCab/grpc_api/proto/server"
-	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
+	protoLibrary "github.com/jlambert68/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"log"
 	"time"
 	"github.com/sirupsen/logrus"

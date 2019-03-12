@@ -20,7 +20,7 @@ import (
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
 	//"github.com/jlambert68/lightningCab/grpc_api/proto/server"
-	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
+	protoLibrary "github.com/jlambert68/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	//"jlambert/lightningCab/vendor_old/github.com/davecgh/go-spew/spew"
 	"github.com/sirupsen/logrus"
 	"jlambert/lightningCab/customer_server/webmain"

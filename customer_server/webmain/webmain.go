@@ -19,7 +19,7 @@ import (
 	"jlambert/lightningCab/customer_server/gui_gopherbackend/backend"
 	//"jlambert/lightningCab/customer_gui"
 	//"github.com/jlambert68/lightningCab/grpc_api/proto/server"
-	protoLibrary "jlambert/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
+	protoLibrary "github.com/jlambert68/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"os"
 	"fmt"
 )
