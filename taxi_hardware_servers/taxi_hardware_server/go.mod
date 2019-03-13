@@ -15,6 +15,6 @@ require (
 	golang.org/x/sys v0.0.0-20190209173611-3b5209105503 // indirect
 	golang.org/x/text v0.3.1-0.20180807135948-17ff2d5776d2 // indirect
 	google.golang.org/genproto v0.0.0-20190201180003-4b09977fb922 // indirect
-	google.golang.org/grpc v1.18.0
+	google.golang.org/grpc v1.19.0
 	periph.io/x/periph v3.4.0+incompatible // indirect
 )
