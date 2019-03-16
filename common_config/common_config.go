@@ -75,7 +75,7 @@ const TimeForAveragePaymentCalculation = 10
 // Logrus debug level
 
 //const LoggingLevel = logrus.DebugLevel
-//const LoggingLevel = logrus.InfoLevel
-const LoggingLevel = logrus.WarnLevel
+const LoggingLevel = logrus.InfoLevel
+//const LoggingLevel = logrus.WarnLevel
 
 
