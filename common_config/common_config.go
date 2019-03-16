@@ -52,7 +52,7 @@ const SpeedSatoshiPerSecond = SpeedSEKPerSecond / BTCSEK * SatoshisPerBTC
 const MaxAccelarationSatoshiPerSecond = MaxAccelarationSEKPerSecond / BTCSEK * SatoshisPerBTC
 const TimeSatoshiPerSecond = TimeSEKPerSecond / BTCSEK * SatoshisPerBTC
 
-const MilliSecondsBetweenPaymentRequest = 100
+const MilliSecondsBetweenPaymentRequest = 1000
 const SecondsBeforeFirstPaymentTimeOut = 2
 const SecondsBeforeSecondPaymentTimeOut = 90
 
