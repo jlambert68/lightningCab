@@ -190,7 +190,7 @@ func getDefaultLndDir() (dir string) {
 
 func getHardcodedMacaroonDirForSimnet() (dir string) {
 	homeDir := getHomeDir()
-	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/customer/data")
+	dir = path.Join(homeDir, "/go_workspace/src/jlambert/lightningCab/lightningServers/customer/data/chain/bitcoin/simnet")
 
 	return dir
 }

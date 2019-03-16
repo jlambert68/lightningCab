@@ -3343,3 +3343,7 @@
 2019-03-16 20:29:34.759 [INF] CRTR: Updated vertex data for node=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
 2019-03-16 20:29:46.509 [INF] DISC: Broadcasting batch of 5 new announcements
 2019-03-16 20:52:16.509 [INF] DISC: Broadcasting batch of 1 new announcements
+2019-03-16 20:59:46.509 [INF] DISC: Broadcasting batch of 1 new announcements
+2019-03-16 21:18:25.459 [INF] INVC: New invoice subscription client: id=0
+2019-03-16 21:26:46.571 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-16 21:26:46.575 [INF] CRTR: Pruning 0 Zombie Channels

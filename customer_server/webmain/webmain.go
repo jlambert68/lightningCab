@@ -7,7 +7,6 @@ import (
 	//"crypto/tls"
 	//"github.com/jlambert68/lightningCab/customer_gui/frontend/bundle"
 	"net/http"
-	"path"
 	//"strings"
 	//"time"
 
@@ -17,11 +16,11 @@ import (
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"jlambert/lightningCab/customer_server/gui_gopherbackend/backend"
+	"fmt"
 	//"jlambert/lightningCab/customer_gui"
 	//"github.com/jlambert68/lightningCab/grpc_api/proto/server"
 	protoLibrary "github.com/jlambert68/lightningCab/customer_gui_grpc-web/go/_proto/examplecom/library"
 	"os"
-	"fmt"
 )
 
 var logger *logrus.Logger
@@ -94,7 +93,7 @@ func Webmain(customerLogger *logrus.Logger,
 		logger.Fatal(err)
 	}
 	fmt.Println(dir)
-	var appendPath string
+	/*var appendPath string
 	basePath := path.Base(dir)
 
 	switch basePath {
@@ -107,8 +106,9 @@ func Webmain(customerLogger *logrus.Logger,
 	default:
 		appendPath = "./"
 	}
-	//logger.Fatal(httpsSrv.ListenAndServeTLS("./cert.pem", "./key.pem"))
-	logger.Fatal(httpsSrv.ListenAndServeTLS(appendPath + "apache.crt", appendPath + "apache.key"))
+	*/
+	logger.Fatal(httpsSrv.ListenAndServeTLS("./apache.crt", "./apache.key"))
+	//logger.Fatal(httpsSrv.ListenAndServeTLS(appendPath + "apache.crt", appendPath + "apache.key"))
 
 }
 
