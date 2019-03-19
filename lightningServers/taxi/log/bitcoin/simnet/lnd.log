@@ -3365,3 +3365,5 @@
 2019-03-18 21:40:53.741 [INF] CRTR: Pruning 0 Zombie Channels
 2019-03-19 06:10:39.916 [INF] INVC: New invoice subscription client: id=1
 2019-03-19 06:33:42.840 [INF] INVC: New invoice subscription client: id=2
+2019-03-19 18:48:14.469 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-19 18:48:14.505 [INF] CRTR: Pruning 0 Zombie Channels
