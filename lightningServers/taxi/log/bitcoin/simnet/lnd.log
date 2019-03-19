@@ -3347,3 +3347,21 @@
 2019-03-16 21:18:25.459 [INF] INVC: New invoice subscription client: id=0
 2019-03-16 21:26:46.571 [INF] CRTR: Examining Channel Graph for zombie channels
 2019-03-16 21:26:46.575 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-17 10:35:28.376 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-17 10:35:28.380 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-17 20:59:12.540 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-17 20:59:12.554 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-17 20:59:12.553 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-17 21:26:13.352 [INF] DISC: Broadcasting batch of 1 new announcements
+2019-03-18 06:10:33.381 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-18 06:10:33.383 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-18 19:40:53.703 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-18 19:40:53.703 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-18 20:40:53.701 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-18 20:40:53.738 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-18 21:10:53.759 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-18 21:37:53.639 [INF] DISC: Broadcasting batch of 1 new announcements
+2019-03-18 21:40:53.701 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-18 21:40:53.741 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-19 06:10:39.916 [INF] INVC: New invoice subscription client: id=1
+2019-03-19 06:33:42.840 [INF] INVC: New invoice subscription client: id=2

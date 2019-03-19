@@ -65,6 +65,8 @@ github.com/jlambert68/lightningCab v0.0.0-20190316195838-7daac39089dd h1:bYAg62F
 github.com/jlambert68/lightningCab v0.0.0-20190316195838-7daac39089dd/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
 github.com/jlambert68/lightningCab v0.0.0-20190316203849-b624ea898832 h1:dvq4CfS7T34xlEHsYO0dfDQJ/JXijnYlEYN31RcK4ow=
 github.com/jlambert68/lightningCab v0.0.0-20190316203849-b624ea898832/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
+github.com/jlambert68/lightningCab v0.0.0-20190316204210-78ceca62abeb h1:PzSksBt8Vb4JWdrR1kuj0FSvTJH/76o3MtWY886yMKc=
+github.com/jlambert68/lightningCab v0.0.0-20190316204210-78ceca62abeb/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
 github.com/jrick/logrotate v1.0.0/go.mod h1:LNinyqDIJnpAur+b8yyulnQw/wDuN1+BYKlTRt3OuAQ=
 github.com/juju/clock v0.0.0-20180808021310-bab88fc67299/go.mod h1:nD0vlnrUjcjJhqN5WuCWZyzfd5AHZAC9/ajvbSx69xA=
 github.com/juju/errors v0.0.0-20181118221551-089d3ea4e4d5/go.mod h1:W54LbzXuIE0boCoNJfwqpmkKJ1O4TCTZMetAt6jGk7Q=

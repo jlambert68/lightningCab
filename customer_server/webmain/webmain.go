@@ -4,6 +4,7 @@
 package webmain
 
 import (
+	"google.golang.org/grpc/grpclog"
 	//"crypto/tls"
 	//"github.com/jlambert68/lightningCab/customer_gui/frontend/bundle"
 	"net/http"
@@ -57,6 +58,8 @@ func Webmain(customerLogger *logrus.Logger,
 	backend.SetLeaveTaxi(cbTT4)
 	backend.SetLPriceAndStateRespons(cbTT5)
 
+	enableTls := false
+
 	grpcServer := grpc.NewServer()
 	protoLibrary.RegisterCustomer_UIServer(grpcServer, &backend.Customer_UI{})
 	wrappedServer := grpcweb.WrapServer(grpcServer)
@@ -66,7 +69,10 @@ func Webmain(customerLogger *logrus.Logger,
 	}
 
 	//addr := "localhost:10000"
-	port := 9091
+	port := 9090
+	if enableTls {
+		port = 9091
+	}
 	/*
 	httpsSrv := &http.Server{
 		Addr:    addr,
@@ -87,7 +93,7 @@ func Webmain(customerLogger *logrus.Logger,
 		Handler: http.HandlerFunc(handler),
 	}
 
-	logger.Info("Serving on https://" + string(port))
+	logger.Info("Starting server. http port: %d, with TLS: %v", port, enableTls)
 	dir, err := os.Getwd()
 	if err != nil {
 		logger.Fatal(err)
@@ -107,8 +113,17 @@ func Webmain(customerLogger *logrus.Logger,
 		appendPath = "./"
 	}
 	*/
-	logger.Fatal(httpsSrv.ListenAndServeTLS("./apache.crt", "./apache.key"))
+	//logger.Fatal(httpsSrv.ListenAndServeTLS("./apache.crt", "./apache.key"))
 	//logger.Fatal(httpsSrv.ListenAndServeTLS(appendPath + "apache.crt", appendPath + "apache.key"))
+	if enableTls {
+		if err := httpsSrv.ListenAndServeTLS("./apache.crt", "./apache.key"); err != nil {
+			grpclog.Fatalf("failed starting http2 server: %v", err)
+		}
+	} else {
+		if err := httpsSrv.ListenAndServe(); err != nil {
+			grpclog.Fatalf("failed starting http server: %v", err)
+		}
+	}
 
 }
 

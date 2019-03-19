@@ -18,9 +18,11 @@ package customer_ui_api;
 
 // New when using grpc-web - 190306
 // Stå i roten för customer_gui_grpc-web
-// Generate go-grpc-files
-// protoc_3.7.0.rc2 --plugin=protoc-gen-go=${GOPATH}/bin/protoc-gen-go -I ./proto --go_out=plugins=grpc:./go/_proto ./proto/examplecom/library/customer_ui_api.proto
-
+// 1) Generate go-grpc-files
+// 1) protoc_3.7.0.rc2 --plugin=protoc-gen-go=${GOPATH}/bin/protoc-gen-go -I ./proto --go_out=plugins=grpc:./go/_proto ./proto/examplecom/library/customer_ui_api.proto
+//
+// 2) Generate js-grpc-files
+// 2) protoc_3.7.0.rc2 --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:js_grpc_code --ts_out=service=true:js_grpc_code -I ./proto proto/examplecom/library/*.proto
 
 // Parameter used for Empty inputs
 message EmptyParameter {

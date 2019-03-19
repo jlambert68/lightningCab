@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .left {
+            left: 0;
+            background-color: #111;
+        }
+
+        .right {
+            right: 0;
+            background-color: #ffe7e2;
+        }
+
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -25%);
+            text-align: center;
+            ont-family: Arial;
+            color: white;
+        }
+
+        .blockAskTaxiForPrice {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #afad7d;
+            color: white;
+            padding: 28px;
+            font-size: 64px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .blockAskTaxiForPrice:disabled {
+            background-color: #afa7af !important;
+        }
+
+        .blockAskTaxiForPrice:hover {
+            background-color: #00ff00;
+            color: white;
+        }
+
+        .blockAcceptPrice {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #af801d;
+            color: white;
+            padding: 28px;
+            font-size: 64px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .blockAcceptPrice:disabled {
+            background-color: #afa7af !important;
+        }
+
+        .blockAcceptPrice:hover {
+            background-color: #00ff00;
+            color: white;
+        }
+
+        .blockHaltPayments {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #1960af;
+            color: white;
+            padding: 28px;
+            font-size: 64px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .blockHaltPayments:disabled {
+            background-color: #afa7af !important;
+        }
+
+        .blockHaltPayments:hover {
+            background-color: #00ff00;
+            color: white;
+        }
+
+        .blockUnHaltPayments {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #dafa3d;
+            color: white;
+            padding: 28px;
+            font-size: 64px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .blockUnHaltPayments:disabled {
+            background-color: #afa7af !important;
+        }
+
+        .blockUnHaltPayments:hover {
+            background-color: #00ff00;
+            color: white;
+        }
+
+        .blockLeaveTaxi {
+            display: block;
+            width: 100%;
+            border: none;
+            background-color: #af139b;
+            color: white;
+            padding: 28px;
+            font-size: 64px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .blockLeaveTaxi:disabled {
+            background-color: #afa7af !important;
+        }
+
+        .blockLeaveTaxi:hover {
+            background-color: #ddd;
+            color: white;
+        }
+
+        .walletBalance {
+            font-family: 'Ubuntu Mono', monospace;
+            font-size: 32px;
+            border-style: solid;
+            border-color: #287EC7;
+            padding-top: 8px;
+            padding-right: 5px;
+            padding-bottom: 1px;
+            padding-left: 5px;
+            background-color: #faf62f;
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 100%
+        }
+
+        table.tableWalletBalance {
+            table-layout: fixed;
+            width: 100%;
+            vertical-align: center;
+            margin-bottom: 20px;
+            border-top: 4px solid blue;
+            border-bottom: 4px solid blue;
+            border-left: 4px solid blue;
+            border-right: 4px solid blue;
+        }
+
+        tr.tableNameRowWalletBalance {
+            text-align: center;
+            font-size: 32px;
+            background-color: #dafa3d;
+            color: #afa7af;
+        }
+
+        th.tableNameCellWalletBalance {
+            padding: 15px;
+        }
+
+        tr.tableHeaderRowWalletBalance {
+            text-align: center;
+            font-size: 32px;
+            background-color: #fafadc;
+            color: #592baf;
+
+        }
+
+        th.tableHeaderCellWalletBalance {
+            padding: 2px;
+        }
+
+        tr.tableDataRowWalletBalance {
+            text-align: right;
+            font-size: 32px;
+            font-family: 'Ubuntu Mono', monospace;
+            background-color: #faf62f;
+            color: #592baf;
+
+        }
+
+        td.tableDataCellWalletBalance {
+            padding: 15px;
+        }
+
+        table.tableAvaragePayment {
+            table-layout: fixed;
+            width: 100%;
+            vertical-align: center;
+            margin-bottom: 20px;
+            border-top: 4px solid blue;
+            border-bottom: 4px solid blue;
+            border-left: 4px solid blue;
+            border-right: 4px solid blue;
+        }
+
+        tr.tableNameRowAvaragePayment {
+            text-align: center;
+            font-size: 16px;
+            background-color: #dafa3d;
+            color: #afa7af;
+        }
+
+        th.tableNameCellAvaragePayment {
+            padding: 5px;
+        }
+
+        tr.tableHeaderRowAvaragePayment {
+            text-align: center;
+            font-size: 16px;
+            background-color: #fafadc;
+            color: #592baf;
+
+        }
+
+        th.tableHeaderCellAvaragePayment {
+            padding: 2px;
+        }
+
+        tr.tableDataRowAvaragePayment {
+            text-align: right;
+            font-size: 16px;
+            font-family: 'Ubuntu Mono', monospace;
+            background-color: #faf62f;
+            color: #592baf;
+
+        }
+
+        td.tableDataCellAvaragePayment {
+            padding: 5px;
+        }
+
+        .catImage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            margin: -60px 0 0 -60px;
+            -webkit-animation: spin 4s linear infinite;
+            -moz-animation: spin 4s linear infinite;
+            animation: spin 4s linear infinite;
+        }
+
+        @-moz-keyframes spin {
+            100% {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+    </style>
+
+    <title>Lightning CAB - Customer UI - 1708</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/build/bundle.js" charset="utf-8"></script>
+    <!--script src="frontend.js"></script--!>
+    <script type="text/javascript">
+
+
+        function toggleAnimation(haltOrUnHaltAnimation) {
+            console.log("Incoming call to 'toggleAnimation' with parameter: " + haltOrUnHaltAnimation )
+            var style;
+            style = catImageId.style
+            if (haltOrUnHaltAnimation == true) {
+                style.webkitAnimationPlayState = 'paused';
+                //haltPayments_js(true)
+            } else {
+                style.webkitAnimationPlayState = 'running';
+                //haltPayments_js(false)
+            }
+        }
+
+        function changeCatProperties(acceleation, speed, rotation) {
+
+            var style;
+            var catWidth;
+            var catHeigt;
+            var catTopMarign;
+            var catRightMargin;
+            var catBottomMargin;
+            var catLeftMargin;
+            var catOriginalWidth;
+            var catOriginalHeight;
+
+            //console.log(acceleation);
+            //console.log(speed);
+            //console.log(rotation);
+            //console.log("");
+
+            catOriginalWidth = 120;
+            catOriginalHeight = 120
+            catWidth = acceleation / 100 * 3 * 120 + 120;
+            catHeigt = speed / 100 * 3 * 120 + 120;
+
+            catTopMarign = - catHeigt / 2;
+            catRightMargin = 0;
+            catBottomMargin = 0;
+            catLeftMargin = - catWidth / 2;
+
+            style = document.getElementById("catImageId").style;
+            style.width = catWidth.toString() + "px";;
+            style.height = catHeigt.toString() + "px";;
+            style.margintop = catTopMarign.toString() + "px";
+            //style.marginright = catRightMargin.toString() + "px";
+            //style.marginbottom = catBottomMargin.toString() + "px";
+            style.marginleft = catLeftMargin.toString() + "px";
+            calculate_rotation = (23.5 - 3.5 * rotation) / 4
+            //console.log(rotation)
+            //console.log(calculate_rotation)
+
+            document.getElementById("catImageId").style.animationDuration = calculate_rotation.toString() + "s";
+            //style.animation = "spin " + rotation.toString() + "s linear infinite";
+            //style.animation = "spin 1s linear infinite"
+            //width: 240px;
+            //height: 120px;
+            //margin: -60px 0 0 -120px;
+            //-webkit-animation: spin 4s linear infinite;
+            //-moz-animation: spin 4s linear infinite;
+            //animation: spin 4s linear infinite;
+        }
+
+       // $( document ).ready(function() {
+        //    prepareButtons();
+       // });
+        //$(window).load(function(){ prepareButtons() })
+
+    </script>
+</head>
+<body>
+
+<div class="split left">
+    <div class="centered_xxx">
+        <table class="tableWalletBalance">
+            <tr class="tableNameRowWalletBalance">
+                <th class="tableNameCellWalletBalance" colspan="2">Current Taxi Ride</th>
+            </tr>
+            <tr class="tableHeaderRowWalletBalance">
+                <th class="tableHeaderCellWalletBalance">[Satoshi]</th>
+                <th class="tableHeaderCellWalletBalance">[SEK]</th>
+            </tr>
+            <tr class="tableDataRowWalletBalance">
+                <td class="tableDataCellWalletBalance" id="taxiRideAmountSatoshi">10.0001</td>
+                <td class="tableDataCellWalletBalance" id="taxiRideAmountSEK">220.03331</td>
+            </tr>
+        </table>
+
+        <table class="tableAvaragePayment">
+            <tr class="tableNameRowAvaragePayment">
+                <th class="tableNameCellAvaragePayment" colspan="2">Avarege Payment, over 10 seconds</th>
+            </tr>
+            <tr class="tableHeaderRowAvaragePayment">
+                <th class="tableHeaderCellAvaragePayment">[Satoshi]</th>
+                <th class="tableHeaderCellAvaragePayment">[SEK]</th>
+                <th class="tableHeaderCellAvaragePayment">[No. of Payments]</th>
+            </tr>
+            <tr class="tableDataRowAvaragePayment">
+                <td class="tableDataCellAvaragePayment" id="averageAmountSatoshi">10.0001</td>
+                <td class="tableDataCellAvaragePayment" id="averageAmountSEK">220.03331</td>
+                <td class="tableDataCellAvaragePayment" id="averageNoPayments">330.03331</td>
+            </tr>
+        </table>
+
+
+    </div>
+
+    <div class="centered">
+
+        <img class="catImage" id="catImageId" src="grumpy_cat.jpg" alt="" width="120" height="120">
+        <!--<canvas id="myCanvas" width="600px" height="600px" style="border:1px solid #ffffff;">
+        </canvas> -->
+    </div>
+    cd
+</div>
+
+<div class="split right">
+    <div class="centered_xxx">
+        <table class="tableWalletBalance">
+            <tr class="tableNameRowWalletBalance">
+                <th class="tableNameCellWalletBalance" colspan="2">Wallet Balance</th>
+            </tr>
+            <tr class="tableHeaderRowWalletBalance">
+                <th class="tableHeaderCellWalletBalance">[Satoshi]</th>
+                <th class="tableHeaderCellWalletBalance">[SEK]</th>
+            </tr>
+            <tr class="tableDataRowWalletBalance">
+                <td class="tableDataCellWalletBalance" id="walletAmountSatoshi">10.0001</td>
+                <td class="tableDataCellWalletBalance" id="walletAmountSEK">220.03331</td>
+            </tr>
+        </table>
+
+        <div class="containerButtons">
+            <button class="blockAskTaxiForPrice" id="AskTaxiForPrice">Ask Taxi For Price</button>
+            <br>
+            <button class="blockAcceptPrice" id="AcceptPrice">Accept Price</button>
+            <br>
+            <button class="blockHaltPayments" id="HaltPayments">Halt Payments</button>
+            <br>
+            <button class="blockUnHaltPayments" id="UnHaltPayments">Un-Halt Payments
+            </button>
+            <br>
+            <button class="blockLeaveTaxi" id="LeaveTaxi">Leave Taxi</button>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<!--
+AskTaxiForPrice (EmptyParameter) returns (Price_UI)
+AcceptPrice (EmptyParameter) returns (AckNackResponse)
+HaltPayments (true/false) returns (AckNackResponse)
+LeaveTaxi (EmptyParameter) returns (AckNackResponse)
+
