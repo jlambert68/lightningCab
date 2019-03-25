@@ -5,6 +5,7 @@ import (
 	"github.com/jlambert68/lightningCab/common_config"
 	"google.golang.org/grpc"
 	"log"
+	"math"
 	"net"
 	"os"
 	"os/signal"
@@ -18,6 +19,7 @@ import (
 // Global connection constants
 const (
 	localServerEngineLocalPort = common_config.GrpcTaxiHardwareStreamServer_port
+	runWithRadioControlledCard = false
 )
 
 // Constants used for Db-objects to save
@@ -44,6 +46,38 @@ var (
 
 // Server used for register clients Name, Ip and Por and Clients Test Enviroments and Clients Test Commandst
 type taxiHardwareStreamServer struct{}
+
+type currentMessurements struct {
+	currentPowerMessurement int8
+	previousPowerMessurement int8
+	currentAccelaration int8
+}
+var powerData currentMessurements
+
+// This is run as an go-routine
+func receiveMessurements() {
+	powerData.currentPowerMessurement = 0
+	powerData.previousPowerMessurement = 0
+	powerData.currentAccelaration = 0
+
+	getPowerMessurements := make(chan int8, 1)
+
+	// data retrieving as an go-routine
+	go messurePower(getPowerMessurements)
+
+	// Loop to infinity
+	for {
+		//Harvest channel
+		newMessurement := <-getPowerMessurements
+
+		// Add time messurement between values for better acceleration
+
+		// Save values into global variable
+		powerData.previousPowerMessurement = powerData.currentPowerMessurement
+		powerData.currentPowerMessurement = newMessurement
+		powerData.currentAccelaration = int8(math.Abs(float64(powerData.currentAccelaration - powerData.previousPowerMessurement) / 0.1))
+	}
+}
 
 func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage, stream taxiHW_stream_api.TaxiStreamHardware_MessasurePowerConsumptionServer) (err error) {
 	log.Printf("Incoming: 'MessasurePowerConsumption'")
@@ -111,6 +145,12 @@ func main() {
 	var err error
 
 	defer cleanup()
+
+	// Start up messurement from Engine if radio controlled car is used
+	if runWithRadioControlledCard == true {
+		log.Println("Starting messurement from engine!")
+		go receiveMessurements()
+	}
 
 	// Set DB Connection
 	/*DB_session, err = db_func.ConnectToFenixDB()

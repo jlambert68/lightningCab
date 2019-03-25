@@ -961,7 +961,8 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 
 	customer.PaymentStreamStarted = false
 }
-
+// ******************************************************************
+// Convert Satoshi to SEK
 func SatoshiToSEK( satoshis int64) (sek float32) {
 	sek = float32(satoshis) * common_config.BTCSEK / common_config.SatoshisPerBTC
 	return sek
@@ -1250,6 +1251,10 @@ func main() {
 		"Channel Balance":    r2,
 		"err": e2,
 	}).Info("lightningConnection.CustomerChannelbalance()")
+
+	// Set Wallet balance to custer
+	customer.currentWalletAmountSatoshi = r2.GetBalance()
+	customer.currentWalletAmountSEK = SatoshiToSEK(customer.currentWalletAmountSatoshi)
 
 	//Start Web Backend
 	go webmain.Webmain(customer.logger,

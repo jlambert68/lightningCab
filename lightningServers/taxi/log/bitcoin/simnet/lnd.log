@@ -3367,3 +3367,1317 @@
 2019-03-19 06:33:42.840 [INF] INVC: New invoice subscription client: id=2
 2019-03-19 18:48:14.469 [INF] CRTR: Examining Channel Graph for zombie channels
 2019-03-19 18:48:14.505 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-19 20:12:32.586 [INF] INVC: New invoice subscription client: id=3
+2019-03-19 20:15:37.843 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-19 20:15:40.301 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-19 20:29:57.813 [INF] LTND: Version: 0.5.1-beta commit=v0.5.1-beta-624-g5d33d7226c3a88c2fee8d16b6745c94324b9a7b7, build=production, logging=default
+2019-03-19 20:29:57.813 [INF] LTND: Active chain: Bitcoin (network=simnet)
+2019-03-19 20:29:57.814 [INF] CHDB: Checking for schema update: latest_version=7, db_version=7
+2019-03-19 20:29:57.827 [INF] RPCS: password RPC server listening on 127.0.0.1:10002
+2019-03-19 20:29:57.828 [INF] RPCS: password gRPC proxy started at 127.0.0.1:8002
+2019-03-19 20:29:57.828 [INF] LTND: Waiting for wallet encryption password. Use `lncli create` to create a wallet, `lncli unlock` to unlock an existing wallet, or `lncli changepassword` to change the password of an existing wallet and unlock it.
+2019-03-19 20:30:12.885 [INF] LNWL: Opened wallet
+2019-03-19 20:30:12.950 [INF] LTND: Primary chain is set to: bitcoin
+2019-03-19 20:30:14.168 [INF] LNWL: The wallet has been unlocked without a time limit
+2019-03-19 20:30:14.222 [INF] LTND: LightningWallet opened
+2019-03-19 20:30:14.224 [WRN] LNWL: Unable to synchronize wallet to chain: -1: Block number out of range
+2019-03-19 20:30:14.227 [INF] HSWC: Restoring in-memory circuit state from disk
+2019-03-19 20:30:14.229 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2019-03-19 20:30:14.230 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-03-19 20:30:14.235 [INF] ATPL: Instantiating autopilot with cfg: (*main.autoPilotConfig)(0xc0001ce500)({
+ Active: (bool) false,
+ Heuristic: (map[string]float64) (len=1) {
+  (string) (len=12) "preferential": (float64) 1
+ },
+ MaxChannels: (int) 5,
+ Allocation: (float64) 0.6,
+ MinChannelSize: (int64) 20000,
+ MaxChannelSize: (int64) 16777215,
+ Private: (bool) false,
+ MinConfs: (int32) 0
+})
+
+2019-03-19 20:30:14.235 [INF] RPCS: RPC server listening on 127.0.0.1:10002
+2019-03-19 20:30:14.235 [INF] RPCS: gRPC proxy started at 127.0.0.1:8002
+2019-03-19 20:30:14.288 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.289 [INF] HSWC: Starting HTLC Switch
+2019-03-19 20:30:14.289 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.291 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.292 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.296 [INF] CNCT: Creating ChannelArbitrators for 1 active channels
+2019-03-19 20:30:14.296 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.296 [INF] NTFN: New spend subscription: spend_id=1, outpoint=67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0, height_hint=601
+2019-03-19 20:30:14.296 [INF] CNCT: Close observer for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) active
+2019-03-19 20:30:14.296 [INF] CNCT: ChannelArbitrator(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): starting state=StateDefault
+2019-03-19 20:30:14.297 [INF] DISC: Authenticated Gossiper is starting
+2019-03-19 20:30:14.297 [INF] BRAR: Starting contract observer, watching for breaches.
+2019-03-19 20:30:14.297 [INF] NTFN: New block epoch subscription
+2019-03-19 20:30:14.299 [INF] CRTR: FilteredChainView starting
+2019-03-19 20:30:14.343 [INF] CRTR: Filtering chain using 1 channels active
+2019-03-19 20:30:14.344 [INF] CRTR: Prune tip for Channel Graph: height=200, hash=3b984237ac6e27d72f53fb8fc670b233de4080f31c232e4c7be29dd2a788c46a
+2019-03-19 20:30:14.344 [INF] CRTR: Syncing channel graph from height=200 (hash=3b984237ac6e27d72f53fb8fc670b233de4080f31c232e4c7be29dd2a788c46a) to height=600 (hash=4c1cbeb5ca62679179aaaeeaa7e868d29a58ea9a17ed5c67b571ecd97d62a322)
+2019-03-19 20:30:14.346 [INF] CRTR: Block 3d300a8563d28e09cb96311da0899596c131efd67b56068b8a10c58303b629c7 (height=201) closed 0 channels
+2019-03-19 20:30:14.348 [INF] CRTR: Block 03200d8f0646d2191a6d8edebb3e1b32d352c5a03104013c34804f42445f3026 (height=202) closed 0 channels
+2019-03-19 20:30:14.351 [INF] CRTR: Block 03212eb06436e377bc3136fd3549d86bafc991ad6f6d649dd98b5b9a020f9cd1 (height=203) closed 0 channels
+2019-03-19 20:30:14.353 [INF] CRTR: Block 0a1fefc9ebf39e07ccf71fdc2219546d7bedce44ac62ee51b970875944273bf9 (height=204) closed 0 channels
+2019-03-19 20:30:14.356 [INF] CRTR: Block 455f83a337311fa0f2fa773a4da7282dfeeebe49ee89cb253d793185aec89c2c (height=205) closed 0 channels
+2019-03-19 20:30:14.359 [INF] CRTR: Block 5797fdc0941ab92fbd19ebe187d151d0758ab4632122ad600d7a01bcbcd85246 (height=206) closed 0 channels
+2019-03-19 20:30:14.363 [INF] CRTR: Block 59b68573cffa544e78c3cb6437deb8097f50c5c99379ce391aa172c63012a423 (height=207) closed 0 channels
+2019-03-19 20:30:14.366 [INF] CRTR: Block 6ba3b118d8f1c420cb185008dd8ddb3094bb9b1d230284fd24232f23849bff4d (height=208) closed 0 channels
+2019-03-19 20:30:14.369 [INF] CRTR: Block 57f54809f6b87d18d36ff94ca6643e5ea96222042dfa4b5f1152f79cefba366f (height=209) closed 0 channels
+2019-03-19 20:30:14.372 [INF] CRTR: Block 18d43f47317dd00c5d9010f9f2f33222edf6349927c054ff084ca718b67ee59f (height=210) closed 0 channels
+2019-03-19 20:30:14.375 [INF] CRTR: Block 34154dd1089618f7a33420046895678b49a77307ce0a9eac14251ff9d79ceb33 (height=211) closed 0 channels
+2019-03-19 20:30:14.377 [INF] CRTR: Block 25d6604231a50f53a49f91474d8d6fb7229e2c748643f15f3932719656e78727 (height=212) closed 0 channels
+2019-03-19 20:30:14.379 [INF] CRTR: Block 187ee747e092fde59bfb1255a1888e1136bbe7a506d69f28b057bf2d4a6c1a99 (height=213) closed 0 channels
+2019-03-19 20:30:14.382 [INF] CRTR: Block 69c247c91a929567070e3c98ddd396e74ca1c66d16d5f752f12eb72047c8ef5c (height=214) closed 0 channels
+2019-03-19 20:30:14.385 [INF] CRTR: Block 5344cd79e051dc58efb3bc16910ff7f0c14326e75f42b2f4e0f9097a0649e519 (height=215) closed 0 channels
+2019-03-19 20:30:14.387 [INF] CRTR: Block 1acf57a48bbbc7f8b46c1c02c4ef0fc1541fca9577e20d26a652997b49f0c449 (height=216) closed 0 channels
+2019-03-19 20:30:14.390 [INF] CRTR: Block 78e84ba13e9d49de3bea3b7f85f529cbbfb18de9d3240c364db47b001df3f133 (height=217) closed 0 channels
+2019-03-19 20:30:14.392 [INF] CRTR: Block 1a140f0e7af17bf7a8c3d8d382896cdb29285808e9042efa218dc9693da84ff3 (height=218) closed 0 channels
+2019-03-19 20:30:14.394 [INF] CRTR: Block 2eaf7e00f9a9048b4e5cf1f3a816b4d9dee27242235031b43b5ca0cac1c8bfae (height=219) closed 0 channels
+2019-03-19 20:30:14.397 [INF] CRTR: Block 0e0639e4dfb0a84a3b5393fe49a31ab320b626663126ccd344f80a27ddb65032 (height=220) closed 0 channels
+2019-03-19 20:30:14.399 [INF] CRTR: Block 33906f6fd7d520c3f22c750a2ac6008360ec5e2d07a1d790513da0a10cc68ce2 (height=221) closed 0 channels
+2019-03-19 20:30:14.401 [INF] CRTR: Block 619b2262d52d96dec7dc8e6577625d1252c749f2ce798f8b5f803d5da14d4d5a (height=222) closed 0 channels
+2019-03-19 20:30:14.404 [INF] CRTR: Block 0abdb9cc12a347eb9d37b5f053b970d8ae68e739aa6ba7e298ad90213f995880 (height=223) closed 0 channels
+2019-03-19 20:30:14.406 [INF] CRTR: Block 15544ffc34dff3374f2c1a64eaa766d9b11b32c86fe0c4af951e194fde5cd418 (height=224) closed 0 channels
+2019-03-19 20:30:14.409 [INF] CRTR: Block 5c162aa8e772cae3867c1c323f1878c6876ca21ab37594b001ad2d9507a598a1 (height=225) closed 0 channels
+2019-03-19 20:30:14.411 [INF] CRTR: Block 3cccbba770c63ec9c86a9430fb554fde97308c0db632a9e4c66d1d6bc6d522ef (height=226) closed 0 channels
+2019-03-19 20:30:14.413 [INF] CRTR: Block 47213e1a0217b4646054d71506126cf690ee5f4213d33024a3cc4e651752a087 (height=227) closed 0 channels
+2019-03-19 20:30:14.416 [INF] CRTR: Block 23dcbace27fd92d8c600a6fa0ec7ce63a542aea1a5762fe10f82a4b2cf5f52fb (height=228) closed 0 channels
+2019-03-19 20:30:14.419 [INF] CRTR: Block 1b58d18ac0f4a30ca54bca9c183366316014322fa15e682c5799168d165bc1ef (height=229) closed 0 channels
+2019-03-19 20:30:14.421 [INF] CRTR: Block 05635647a663156ad6d031dc66cbd0aefa1a760bf3ad5c5d1af51e68ada6d1b7 (height=230) closed 0 channels
+2019-03-19 20:30:14.423 [INF] CRTR: Block 07ac0ed4b00e1be35ed5e5574fbcc0ced982e0a95922244f2b0ac6ba5c5ad259 (height=231) closed 0 channels
+2019-03-19 20:30:14.426 [INF] CRTR: Block 6db17e820825f65e08efc22b42af5bc05fc3e7bcc8d44ff9e4637db01d29527e (height=232) closed 0 channels
+2019-03-19 20:30:14.429 [INF] CRTR: Block 568513b668786710e9e8299b84c2036c5eaa6aade56e411bfa81c2e91e070467 (height=233) closed 0 channels
+2019-03-19 20:30:14.432 [INF] CRTR: Block 232d170959cc67fbba04751607017b30b01181cb2a20cd207e4faae07cfe8e74 (height=234) closed 0 channels
+2019-03-19 20:30:14.435 [INF] CRTR: Block 5a35b2b68e2d5e82887b56ab0fb2952199ba1f11fdad821fbbdd05a102b190e6 (height=235) closed 0 channels
+2019-03-19 20:30:14.438 [INF] CRTR: Block 0d4593e900f2ac2dbedfb908ad45d7957c831447c3cfdafe9a85a08842d41363 (height=236) closed 0 channels
+2019-03-19 20:30:14.440 [INF] CRTR: Block 5d6e3312ca510c3f8177943674f87957df9ee24ca6f7fd294a8f5405e5aa9403 (height=237) closed 0 channels
+2019-03-19 20:30:14.443 [INF] CRTR: Block 5e06caacf64bc6a525b9a0b5b2d7cc8325f3bdf6d4e0166f89c6747fa5ea0b41 (height=238) closed 0 channels
+2019-03-19 20:30:14.445 [INF] CRTR: Block 40527ca7da1bd32cfe958752ee6836e7ef0bada5e721b8f700bccefc49ecd94f (height=239) closed 0 channels
+2019-03-19 20:30:14.448 [INF] CRTR: Block 2bf1b511eb15294cf2e88ea709191737d7632265903b0fb01adfddf9b88f0457 (height=240) closed 0 channels
+2019-03-19 20:30:14.450 [INF] CRTR: Block 2b23c192ab7e779abe225634a16bb4541ab169def9f1d0ebc5c4b17b2990ed55 (height=241) closed 0 channels
+2019-03-19 20:30:14.453 [INF] CRTR: Block 74a7c78a0be8dcd65d12c6808c9ae963608c5a668144173e0ed277047e916974 (height=242) closed 0 channels
+2019-03-19 20:30:14.455 [INF] CRTR: Block 49c35203349ccb5d12a75cfad8822c67c8aa9183f0f0a34db2591f78a66c3c25 (height=243) closed 0 channels
+2019-03-19 20:30:14.457 [INF] CRTR: Block 2e969c263e35b43516a9f5e91362c30a6f6469482e455f4f8c7ade2ca922f5fc (height=244) closed 0 channels
+2019-03-19 20:30:14.459 [INF] CRTR: Block 39119eff44054bffa49e808c83466995ca88d457e6e581f9f6a0cf22680c71b3 (height=245) closed 0 channels
+2019-03-19 20:30:14.462 [INF] CRTR: Block 4d596a027635b9d1593ddbf631eeefbc5e1f8bd32df73dcfd74f296c322fba16 (height=246) closed 0 channels
+2019-03-19 20:30:14.465 [INF] CRTR: Block 171b12ab0d199f27b07778ef6ddec0b8a158faab552aad75d067f0b80e434201 (height=247) closed 0 channels
+2019-03-19 20:30:14.467 [INF] CRTR: Block 1e29e9c12d38b1deb7a1c1df08e290efe8289ae2c9dcfd7feac2c5df0d5663d1 (height=248) closed 0 channels
+2019-03-19 20:30:14.470 [INF] CRTR: Block 4d3d8872513cf8e3c1df9f19d1b53dd9dc467d26e6006cc64fb60e2867ef464b (height=249) closed 0 channels
+2019-03-19 20:30:14.472 [INF] CRTR: Block 17b212ad83231c61b5c84b41fbcb2cbb35cbcb0036eade04803b9faf190f1643 (height=250) closed 0 channels
+2019-03-19 20:30:14.475 [INF] CRTR: Block 7ed921cbdd793cab6f876ec6b6b636e0bf479e30c0908584416be93c64237c6d (height=251) closed 0 channels
+2019-03-19 20:30:14.479 [INF] CRTR: Block 05d74c279d22f97ceaaa85ed3528f9017dcfce805e8b710af5f2e557e420abcd (height=252) closed 0 channels
+2019-03-19 20:30:14.483 [INF] CRTR: Block 7f9a767e2e90bb5990004cfc07565838b970c94deb91f1bcdfe6448163ea379d (height=253) closed 0 channels
+2019-03-19 20:30:14.485 [INF] CRTR: Block 02281c0803f9412675bb1b6c30df9d20d6fb68c579f24ae6136718e2ed9bd042 (height=254) closed 0 channels
+2019-03-19 20:30:14.488 [INF] CRTR: Block 48c921b4b860c1f09ad43c75cf0efc53cb6edae2eab9e9c787e6d7ab6a311277 (height=255) closed 0 channels
+2019-03-19 20:30:14.490 [INF] CRTR: Block 146649e550c61e499f61a2ff9ededed04beba62f957148c88cad6d7f8e25675c (height=256) closed 0 channels
+2019-03-19 20:30:14.492 [INF] CRTR: Block 24e74e0771d245ea2fd9eb107fa65303786a5b84a0e8c20834eb63133821a79a (height=257) closed 0 channels
+2019-03-19 20:30:14.495 [INF] CRTR: Block 50c8191802e0481bd7fc1fe476b7b59cbf711286cc10702f827c19f2b4a9a9c5 (height=258) closed 0 channels
+2019-03-19 20:30:14.498 [INF] CRTR: Block 5f529d1716dd510c7488a104494c64f5c9c8d7cc17ec139e04edcca423df54b7 (height=259) closed 0 channels
+2019-03-19 20:30:14.500 [INF] CRTR: Block 130f9845b633e2417b18883566253290bd806633b4d2544e65024bca45d21167 (height=260) closed 0 channels
+2019-03-19 20:30:14.502 [INF] CRTR: Block 2adf4e6274e365064cad3e06a9eeb5e65c8114532ef5acc39f6b89122f586ed6 (height=261) closed 0 channels
+2019-03-19 20:30:14.505 [INF] CRTR: Block 626e07c92b94fbfb50669018e129b7addd0682ba8b948b44c333c16c02cca48b (height=262) closed 0 channels
+2019-03-19 20:30:14.507 [INF] CRTR: Block 5c681ae59d99d1bf13ec5d3cb77af2e5967d3fc3a7dd438f0abb36ac39403f79 (height=263) closed 0 channels
+2019-03-19 20:30:14.509 [INF] CRTR: Block 5a3de3f89be81d2292f528d7e87816d89925bccecadfd20e681525dce8c734a9 (height=264) closed 0 channels
+2019-03-19 20:30:14.512 [INF] CRTR: Block 28d9e53dcdc58087c849880247f88f3f8e670c1d198aefe0a71d8770579b6ce7 (height=265) closed 0 channels
+2019-03-19 20:30:14.514 [INF] CRTR: Block 3c37ba4f9952622bf15635549a01a0338668bd92088b3c75b82596a64d370fab (height=266) closed 0 channels
+2019-03-19 20:30:14.517 [INF] CRTR: Block 28eab1615f81be96450f819948660d7ca0d4469cb89a5563e95674c65b944e94 (height=267) closed 0 channels
+2019-03-19 20:30:14.520 [INF] CRTR: Block 18f117d298c8c08b3366cad78f1de308a5b292dff83d6d637d225f1f8a590040 (height=268) closed 0 channels
+2019-03-19 20:30:14.522 [INF] CRTR: Block 6e442366f40cae42ae106e16b5dbd9bf47f3c75a839f66aef8ed9553e9d6005a (height=269) closed 0 channels
+2019-03-19 20:30:14.525 [INF] CRTR: Block 184b863f24fa74d556be65ec1749cbf3c508aaa86cc27d91983d54674f0de30b (height=270) closed 0 channels
+2019-03-19 20:30:14.528 [INF] CRTR: Block 0b10bb1a8870a04940c837101828d437e180ae72e1e690a0aeefebfddd1f795e (height=271) closed 0 channels
+2019-03-19 20:30:14.530 [INF] CRTR: Block 7f3912315292c80059d5313fa2bb61c61178be9fdf0dd42d92e6f1b1e042faeb (height=272) closed 0 channels
+2019-03-19 20:30:14.548 [INF] CRTR: Block 34b2ddeb2c849a423bdec29aeaa45b25c1253f1f6785ba0dcb71efd43f9bfecc (height=273) closed 0 channels
+2019-03-19 20:30:14.550 [INF] CRTR: Block 3f980d54f40b82c3ca8e56937b97db491b5f8d8264a9a7ed4c0dfe2cffb9a9ea (height=274) closed 0 channels
+2019-03-19 20:30:14.553 [INF] CRTR: Block 22d54ce367c4a957b4267c3cb9589f5e331c988031e183d717efb50e74e09d5b (height=275) closed 0 channels
+2019-03-19 20:30:14.555 [INF] CRTR: Block 2a87129ee358f1e3767da771d34ab775425d1e07dfd2823c0d72117dda0c95b5 (height=276) closed 0 channels
+2019-03-19 20:30:14.558 [INF] CRTR: Block 06d3331328f36cf02ff47626a056f9f52b8fa13a86ca1b09ba19d3b911191177 (height=277) closed 0 channels
+2019-03-19 20:30:14.560 [INF] CRTR: Block 1f2c7acd520425976d3d42a30238b4a3cb226cb50ab2eaeab8a026d13c8915e0 (height=278) closed 0 channels
+2019-03-19 20:30:14.563 [INF] CRTR: Block 047aa29b52b38abd6d2f2efe614a68c10d422859394f676db3c22df62c8bceed (height=279) closed 0 channels
+2019-03-19 20:30:14.565 [INF] CRTR: Block 3705bb3e403d63142d8361b895ad7ad8ffdfeffad22ce8809228d767d76c9b92 (height=280) closed 0 channels
+2019-03-19 20:30:14.567 [INF] CRTR: Block 5e16ebdbd618422f445aec9985c9053614794b3a5266da52de629a19a5a5a680 (height=281) closed 0 channels
+2019-03-19 20:30:14.570 [INF] CRTR: Block 7a36ea190e5c0e713b7a9e63919c204206a4137d4f6b9f7bc5434d6e071a0608 (height=282) closed 0 channels
+2019-03-19 20:30:14.572 [INF] CRTR: Block 38ee6505c67b3bbdc0087b4b96445b22e575970566126967407d30d57d61d631 (height=283) closed 0 channels
+2019-03-19 20:30:14.574 [INF] CRTR: Block 7af0f6eeb8ea80fc4e3f3f397bfa6b624ed3cfa0a9b6497c68fe1b82e6ddad0f (height=284) closed 0 channels
+2019-03-19 20:30:14.577 [INF] CRTR: Block 3652af7f527ce39456fdae295f4261715bca51d684ac3f55f248e6591d45b63f (height=285) closed 0 channels
+2019-03-19 20:30:14.579 [INF] CRTR: Block 4753ce8188a6c7d182cdf43858d2bdd3b3b5d3c8aa42550f86723ff7a640ea7e (height=286) closed 0 channels
+2019-03-19 20:30:14.581 [INF] CRTR: Block 7562b0ce38475f9e9a440fcb98cfa1bf31a9023d927004e4a72fbd370108105e (height=287) closed 0 channels
+2019-03-19 20:30:14.584 [INF] CRTR: Block 6566fa2d331f150fc2e97abcd144c2864ce9988df96146cc4b761fb35eec16b1 (height=288) closed 0 channels
+2019-03-19 20:30:14.586 [INF] CRTR: Block 7cb8fce289b9fa1d43804c7fa2b31110381537b25e6d506654cf4cac77fed05f (height=289) closed 0 channels
+2019-03-19 20:30:14.589 [INF] CRTR: Block 3074744f628e6393e09d3605b5020b956306b1884f994cb71997ce22650de16e (height=290) closed 0 channels
+2019-03-19 20:30:14.591 [INF] CRTR: Block 368f82fb20fd0a1f3fe7c48ab42850ee7bf06f0da20e54ecbb61c96d7a346a7e (height=291) closed 0 channels
+2019-03-19 20:30:14.594 [INF] CRTR: Block 298b181924ebcf45ed2a09fef91799695584de541f8234e2e414325c8cf27ead (height=292) closed 0 channels
+2019-03-19 20:30:14.596 [INF] CRTR: Block 563deae720744ee7bddf4c78c202222fa0922f0c7ed12bd4e2b38bd8bce36905 (height=293) closed 0 channels
+2019-03-19 20:30:14.599 [INF] CRTR: Block 172b05cda5b4434940b3b39a0875aaa9e08b7690cd940bd88256d6a5dca55f20 (height=294) closed 0 channels
+2019-03-19 20:30:14.601 [INF] CRTR: Block 68f3bc8519b52c21ce082c4053e355966bdf778190d6a0f0011ab07a93114011 (height=295) closed 0 channels
+2019-03-19 20:30:14.603 [INF] CRTR: Block 4e9396b6b951aa3a09957541d361666d9f7422bfd68596b75173c75182bbefad (height=296) closed 0 channels
+2019-03-19 20:30:14.605 [INF] CRTR: Block 669a80c67ad00b0e831b10ccf80f9cb7e43cf1d2d70d6bfa8350f2e39d8f92dd (height=297) closed 0 channels
+2019-03-19 20:30:14.608 [INF] CRTR: Block 2497b58ec5980823d990f8cb228f7b69c66a41363cc709607bc540fbf9b72e80 (height=298) closed 0 channels
+2019-03-19 20:30:14.610 [INF] CRTR: Block 5fc66a56a5478b0cf668c0fc272a42d9747b47ec65edd4481447494f7242e734 (height=299) closed 0 channels
+2019-03-19 20:30:14.612 [INF] CRTR: Block 37caceb94e54951aed8afba6128c8ce86eff495428ddf8e1942e45d8abf2ee89 (height=300) closed 0 channels
+2019-03-19 20:30:14.615 [INF] CRTR: Block 0858d2bfdc43f13bfe31b05c90372c8d5c205ad31e282b1b0403d082b9500b4e (height=301) closed 0 channels
+2019-03-19 20:30:14.617 [INF] CRTR: Block 63650726c831ef72b97c7810e6f48b5aec6edf4634c72c3ed90a1d1af7dc516b (height=302) closed 0 channels
+2019-03-19 20:30:14.619 [INF] CRTR: Block 69c145a60d7b4069fb9267742c559503df0266cceea32e0a864de9d10d2e9ef9 (height=303) closed 0 channels
+2019-03-19 20:30:14.622 [INF] CRTR: Block 28328ddb788f5f405a1982142c9f226475d070e10b8fef358ef8358bd8a1517b (height=304) closed 0 channels
+2019-03-19 20:30:14.625 [INF] CRTR: Block 3bd32b1336f8879661a5eae11e1b07a2a6b7b523d55f10fa9f0d40296e32ab59 (height=305) closed 0 channels
+2019-03-19 20:30:14.628 [INF] CRTR: Block 51222017ac62a378f3d4c15b34f491f920da0e88d0395cbe088a9dadd1628799 (height=306) closed 0 channels
+2019-03-19 20:30:14.631 [INF] CRTR: Block 2502d65473a7e03946cc1306642f0c7aa11f43a37899b7ff42c7e7127048f922 (height=307) closed 0 channels
+2019-03-19 20:30:14.634 [INF] CRTR: Block 72a600a2abc2dfb26e03e958a965baa3e1dd7a6cdbf00f55e16a672b3510e531 (height=308) closed 0 channels
+2019-03-19 20:30:14.636 [INF] CRTR: Block 1b4cd83c6c8c824a48e64105584abe22bac04b9706cbbb36c668fcc73e61830c (height=309) closed 0 channels
+2019-03-19 20:30:14.638 [INF] CRTR: Block 376dc0d6369edd8bf339798f07931403af5ac67c9a703f389bfa00a00059de34 (height=310) closed 0 channels
+2019-03-19 20:30:14.640 [INF] CRTR: Block 4469692229cc8cb221e1a54d4596910d5d4c638c371c1ff6753d1cd74d4917f3 (height=311) closed 0 channels
+2019-03-19 20:30:14.651 [INF] CRTR: Block 15be7ec4a6b19d07d1be467d07873e7ed2a2c228f7a4d1ca8311b4b5c3d519b0 (height=312) closed 0 channels
+2019-03-19 20:30:14.653 [INF] CRTR: Block 466248f96a6c3f6a34556c56d2daecb5f16c10edddf66ee9f3faf5e4998dd593 (height=313) closed 0 channels
+2019-03-19 20:30:14.655 [INF] CRTR: Block 6322a4691e1829886ddf906095007a7457617bbc001ce3b30d57f4f34b0da833 (height=314) closed 0 channels
+2019-03-19 20:30:14.658 [INF] CRTR: Block 0742e3908e53076d6431c559eb8861293ebb6de4d639e2e0c90e74ae9c7291b0 (height=315) closed 0 channels
+2019-03-19 20:30:14.660 [INF] CRTR: Block 1ba5c3d848a5fde9a628d1a044023bb6a400335d1051a2ff14943d957416037f (height=316) closed 0 channels
+2019-03-19 20:30:14.662 [INF] CRTR: Block 4ca637a51a1ffa4d1b5a0a5eeb08c34533c069098c03985f3448cbecfaaca7c4 (height=317) closed 0 channels
+2019-03-19 20:30:14.665 [INF] CRTR: Block 6a099dbe5ecdbd73f7ddf2d7aa3b63e52b20681f6700ad75e72d2a9682d7b13e (height=318) closed 0 channels
+2019-03-19 20:30:14.667 [INF] CRTR: Block 0e192a2a7bf3bb6a204958a9188d235555f3f46ef1b7bddf699498d8a7a043de (height=319) closed 0 channels
+2019-03-19 20:30:14.670 [INF] CRTR: Block 7349fab68963e5ca049f77bdfcbc78f461a22684316fd703314fb1f98515814f (height=320) closed 0 channels
+2019-03-19 20:30:14.672 [INF] CRTR: Block 6c62aa25d014306b4736df0e3cad8a6882965380fb01784a94b12ba744c4f2f3 (height=321) closed 0 channels
+2019-03-19 20:30:14.674 [INF] CRTR: Block 5ffe6c030760aefaecfd136c5d7993771f3b9dd24c4f2656179bbeee6433b92b (height=322) closed 0 channels
+2019-03-19 20:30:14.677 [INF] CRTR: Block 6937611f14d8d62f351cd04441adbc9cd7e8cd64fa77ae935e0b971c5ce75928 (height=323) closed 0 channels
+2019-03-19 20:30:14.679 [INF] CRTR: Block 2d1fdabb765dcefb5eff184ace221fe5505fa44faa4ee04fde679b334ebf990a (height=324) closed 0 channels
+2019-03-19 20:30:14.681 [INF] CRTR: Block 11fc980cf2c817e7d5da667b34ce2755ad4b52bcfc43802e5a3781c03fb0eaaa (height=325) closed 0 channels
+2019-03-19 20:30:14.684 [INF] CRTR: Block 1adda71cb916044a57ff78a70e7b0dbab4f821be951310bc84562b511d422d59 (height=326) closed 0 channels
+2019-03-19 20:30:14.686 [INF] CRTR: Block 597e643aada6f9af4c2b8dce662dc1186d5fc6ea535070b24ed095162950679b (height=327) closed 0 channels
+2019-03-19 20:30:14.688 [INF] CRTR: Block 716602c9b1be9b6ec88e1161816dcc9a25033f42919d9a5421c52225fb0b3e06 (height=328) closed 0 channels
+2019-03-19 20:30:14.691 [INF] CRTR: Block 230ad7cd98b6b7141331d18208faf2d640dcb4ffaaff6e28d662f67cf354ee44 (height=329) closed 0 channels
+2019-03-19 20:30:14.693 [INF] CRTR: Block 49452d93480f4c015c86ef555ab12b444b6f695286f9fd9a7a01aa5eff436cea (height=330) closed 0 channels
+2019-03-19 20:30:14.696 [INF] CRTR: Block 38ff2b7d6171272e37ea2372e28e5474103e42b5a5e4f07cb23f346073e507d8 (height=331) closed 0 channels
+2019-03-19 20:30:14.699 [INF] CRTR: Block 0738b79524e4a3bedcbc1bd4e1f26423dd338199e3f11edfdf0465c04d7174b7 (height=332) closed 0 channels
+2019-03-19 20:30:14.701 [INF] CRTR: Block 7867620a88b9996833f5f148fb3a66efb9a0cfc857f199c48b0ce590c03f24cc (height=333) closed 0 channels
+2019-03-19 20:30:14.703 [INF] CRTR: Block 3ad30291186c6565ac6e48433f906b241b958f9df07e28fe88dcbd9d892db8a6 (height=334) closed 0 channels
+2019-03-19 20:30:14.706 [INF] CRTR: Block 59d4c428aab9ec7d7bc30df6df04facc84aae0e4adc2b37360b5bfacddb04380 (height=335) closed 0 channels
+2019-03-19 20:30:14.708 [INF] CRTR: Block 70772041aea4c609767d91b03731ada8069785f9c3c9e631222f3cda5ec2b91f (height=336) closed 0 channels
+2019-03-19 20:30:14.710 [INF] CRTR: Block 41534b7c0a6929412b7b0dc6b2e2d95035cbd2aa5a15dd5934192208144baa14 (height=337) closed 0 channels
+2019-03-19 20:30:14.713 [INF] CRTR: Block 1a8ab241ef42f2d6773b669677daeb6209c0429dfdcbad58b2d73f9f0320f6c5 (height=338) closed 0 channels
+2019-03-19 20:30:14.715 [INF] CRTR: Block 710a7a5310d7b20a7e804d8bc96e560f5f7ddbdcad51df051bae099a4c939d47 (height=339) closed 0 channels
+2019-03-19 20:30:14.718 [INF] CRTR: Block 36fd61952bac7ad52497be7374ff01f093e88a7f0ed62f81327ac23ea86b74d6 (height=340) closed 0 channels
+2019-03-19 20:30:14.720 [INF] CRTR: Block 23f873e2da32578910d392aa65d57ba249bfe9928d1c1147b837801a58ec3b89 (height=341) closed 0 channels
+2019-03-19 20:30:14.722 [INF] CRTR: Block 1c69dd32069289382461a5b23ccf24f535be95d2268dbcf369179391838b9468 (height=342) closed 0 channels
+2019-03-19 20:30:14.727 [INF] CRTR: Block 6b8a5c67f9f093f301d2eccff020ca3810bec2573f09ee4f1a5f68b6d1b94a45 (height=343) closed 0 channels
+2019-03-19 20:30:14.730 [INF] CRTR: Block 2c2911886ff7f266924345dcc0309a666ff83a713c83f3c9a06ec5f8a6e44e8b (height=344) closed 0 channels
+2019-03-19 20:30:14.732 [INF] CRTR: Block 4ca2157757d6a13bc22ff8ff13945a27f2b876c22e5e78eae105f7038b1d475b (height=345) closed 0 channels
+2019-03-19 20:30:14.734 [INF] CRTR: Block 15a5cf4f95d16934a7857456ed7e56d513d814b4f61e2a7aa916e64c229d47d1 (height=346) closed 0 channels
+2019-03-19 20:30:14.737 [INF] CRTR: Block 60c3c6a8374bcdcbf3c47255257f55e51483e0206070e6c399f73d04712585ce (height=347) closed 0 channels
+2019-03-19 20:30:14.739 [INF] CRTR: Block 6d34f48cddce510b93d62f8a7ae9f1bf87a7df9694117d410bc72a425a8726be (height=348) closed 0 channels
+2019-03-19 20:30:14.741 [INF] CRTR: Block 79e3d8688ca418be3689286d8170f46090cb532b6591496d7c79e26671e6ae12 (height=349) closed 0 channels
+2019-03-19 20:30:14.744 [INF] CRTR: Block 0929a6e77d93692db8c7159fe7d354a9e4991b8cdebd215717c735709fd3a996 (height=350) closed 0 channels
+2019-03-19 20:30:14.754 [INF] CRTR: Block 5fd7974eebfa795035d21ead12fb44032183385f2546f84d6aea4a9e5c59dd8d (height=351) closed 0 channels
+2019-03-19 20:30:14.756 [INF] CRTR: Block 269b7ace5f4536138583435ac454f3e6a8f4868fdb4e3d34096d183cbf6cb89e (height=352) closed 0 channels
+2019-03-19 20:30:14.758 [INF] CRTR: Block 07b3ed6c04ab0e445573b68360d8eb666f218ad51feaa42e2337d485a2625004 (height=353) closed 0 channels
+2019-03-19 20:30:14.761 [INF] CRTR: Block 15b99a4b920e901677663c36eec54e1c8c9f12d1d00b96ba8d15a3d5e12b5281 (height=354) closed 0 channels
+2019-03-19 20:30:14.763 [INF] CRTR: Block 49d32a22dded8ff0f24832d2d3a4ace6decc5edea190230d884f633dba81a520 (height=355) closed 0 channels
+2019-03-19 20:30:14.765 [INF] CRTR: Block 6c1275c53472dc4dea96c139cfb25b21ca4ccd12fca8964fe7125e10ed982aee (height=356) closed 0 channels
+2019-03-19 20:30:14.768 [INF] CRTR: Block 61a484b6cea45de16e9247f3ccf7dd98ff8feb4179526b819885137cd108643b (height=357) closed 0 channels
+2019-03-19 20:30:14.771 [INF] CRTR: Block 52ed99305141bed68b9e8330cd37b192cd1f8ad34e7bd7853dfc3729bd994cbb (height=358) closed 0 channels
+2019-03-19 20:30:14.774 [INF] CRTR: Block 5cd474ba70796dc697da88e2fc5f160d14c9790b835c263c3d143f1a37c049e0 (height=359) closed 0 channels
+2019-03-19 20:30:14.776 [INF] CRTR: Block 4df872942d776f6ec295a5f556b9401073aeae792b8b782955ef01e269cca5f8 (height=360) closed 0 channels
+2019-03-19 20:30:14.779 [INF] CRTR: Block 5f47d0ac4e2897c9598c56be818cd16c8110313c0f57dc4ce0ba4a1f6bb416a4 (height=361) closed 0 channels
+2019-03-19 20:30:14.781 [INF] CRTR: Block 3943510385b287399be1769712bd08a35ee872da5f415c6682c209613c53d612 (height=362) closed 0 channels
+2019-03-19 20:30:14.783 [INF] CRTR: Block 5293ac662f51c10665dfe24e7660e7c0a94a0d3ae94b21ee6bc007e633e12e20 (height=363) closed 0 channels
+2019-03-19 20:30:14.786 [INF] CRTR: Block 2dac4e444a8af7acceb0f1dbad7b3043fdfec75b62344605a2f4da0853b6131c (height=364) closed 0 channels
+2019-03-19 20:30:14.788 [INF] CRTR: Block 33f07fbfa6ff9c0e76e696ba42cebf61c07a7e26dc5129147ae707b7d6816869 (height=365) closed 0 channels
+2019-03-19 20:30:14.790 [INF] CRTR: Block 63a03075b023c580e66e3f8843537d6ad94c8d29bfae31554bcc3660976c8484 (height=366) closed 0 channels
+2019-03-19 20:30:14.792 [INF] CRTR: Block 11c065fcf04ee0df731d190cac865e8d501e0f08cd279e96e9a53af6a93ea868 (height=367) closed 0 channels
+2019-03-19 20:30:14.795 [INF] CRTR: Block 56a78027929d4141c585f97ebc7cc6a832a0f120dc485d526e2285c55496f0ed (height=368) closed 0 channels
+2019-03-19 20:30:14.797 [INF] CRTR: Block 782e095b43cb3b639422133b0725e131e6ae08d8921afe1351595c52369ffa3b (height=369) closed 0 channels
+2019-03-19 20:30:14.799 [INF] CRTR: Block 0d55190259c0ec075c4171532eb63d8b7767f48c6b80d6f2d1040b045c84cd39 (height=370) closed 0 channels
+2019-03-19 20:30:14.802 [INF] CRTR: Block 05be0af4608b91ce054b2a44a81d7703c5faa8db33e3688e6caf47e27c7155d8 (height=371) closed 0 channels
+2019-03-19 20:30:14.805 [INF] CRTR: Block 0e1c2113accbc902331f231249eff0c8dd3e40216180a2614477b65f1cb0b05e (height=372) closed 0 channels
+2019-03-19 20:30:14.807 [INF] CRTR: Block 495852ca57b0c030a5ae038e429a824f785d7ddb8ddfb805bc2f03081ed5d4f1 (height=373) closed 0 channels
+2019-03-19 20:30:14.809 [INF] CRTR: Block 3a873208ec665a9856e51b2a23ab923306062d3109822a63e499e997ec721c39 (height=374) closed 0 channels
+2019-03-19 20:30:14.812 [INF] CRTR: Block 59e58fb89b59cc4c099dbf67f5f4ef94a259889a754146014f327746d6b6a747 (height=375) closed 0 channels
+2019-03-19 20:30:14.815 [INF] CRTR: Block 40ffe4b558e98a0fd1b4065ba552c4f9013df43d6b7af3a7a8963f4dd4d14c9c (height=376) closed 0 channels
+2019-03-19 20:30:14.817 [INF] CRTR: Block 1d40d3029f66294aa73503fc2892555beb4328922e646a4a9ddf73e6a2336690 (height=377) closed 0 channels
+2019-03-19 20:30:14.819 [INF] CRTR: Block 45e2b857ec3977c332434471752477ce5dbf5ace89a21a1fdf6abf236697592d (height=378) closed 0 channels
+2019-03-19 20:30:14.822 [INF] CRTR: Block 700d88a22692556787af9200c6c14cfe83572fb299fa8a32acca0deda651f3e8 (height=379) closed 0 channels
+2019-03-19 20:30:14.824 [INF] CRTR: Block 7bd8bb829e592d4fb288169b8df45bfecce618391331ce517ec6abf7055b27fa (height=380) closed 0 channels
+2019-03-19 20:30:14.827 [INF] CRTR: Block 486ba4bf5d2b3eea0a2af412760b4ee6441d4d161780caec122766dfb11d45b5 (height=381) closed 0 channels
+2019-03-19 20:30:14.829 [INF] CRTR: Block 4b061d202b31ca6724fa23ab04e627a5644443f4bba7af6f08885a12dc3fdcb9 (height=382) closed 0 channels
+2019-03-19 20:30:14.832 [INF] CRTR: Block 20faddc9dc2255a63a303b401e5c799a66d48b0bb06594ef76471847e05e91bd (height=383) closed 0 channels
+2019-03-19 20:30:14.834 [INF] CRTR: Block 488c5a0dc7e529a30c356deb2ce17e26d42128920a9d8fa3398a88ba9fb9110a (height=384) closed 0 channels
+2019-03-19 20:30:14.837 [INF] CRTR: Block 06d9dcf7a3e1312c3791bd883b0802e274bc0f6d44d06561374d6545a1332a4a (height=385) closed 0 channels
+2019-03-19 20:30:14.840 [INF] CRTR: Block 4f326af8354d30a9ef799a5c0bb70574ababddc1fd3242ceb40ea16a77a00630 (height=386) closed 0 channels
+2019-03-19 20:30:14.842 [INF] CRTR: Block 6722211906b3c7096b6550e7bd33a03b77251e0005dce41ce6201fb6662ba6b6 (height=387) closed 0 channels
+2019-03-19 20:30:14.845 [INF] CRTR: Block 7fecba4ac10d1598a1e8ed7718b577686191e81e3b93b0ef98b1afb1e3b67ea3 (height=388) closed 0 channels
+2019-03-19 20:30:14.848 [INF] CRTR: Block 21a53c9964dc1bd42a36b3dcb32ea4295fb87edc71a22ec44543faae686410b4 (height=389) closed 0 channels
+2019-03-19 20:30:14.858 [INF] CRTR: Block 7ee329e1cebf007eb1a987ec1029a8a018e62d3a6d269674aa091cbe12dd2545 (height=390) closed 0 channels
+2019-03-19 20:30:14.861 [INF] CRTR: Block 21b58a4770bccaaf5611edd9c94ee8474e4de78fc6130de34867925881e5d4ef (height=391) closed 0 channels
+2019-03-19 20:30:14.863 [INF] CRTR: Block 587e3a29c5a83e9cfd44c63135850277d6cee7af0bb83af3a976bd39636b8dd0 (height=392) closed 0 channels
+2019-03-19 20:30:14.866 [INF] CRTR: Block 62910744d3a56c4b2d9a8da03e89618db9621d3cec9cfab8e72577215fb5b1c8 (height=393) closed 0 channels
+2019-03-19 20:30:14.868 [INF] CRTR: Block 390006ff6f135bc3f020a5147fa189eb02b2dd18f09c5317f9060db89465e18b (height=394) closed 0 channels
+2019-03-19 20:30:14.870 [INF] CRTR: Block 5e5931e8195577c9a69abfb673fb6f0383f6a6cc66bb2880c326e2e274d9e7ca (height=395) closed 0 channels
+2019-03-19 20:30:14.873 [INF] CRTR: Block 14957dfc05bf6ae4f366a91a6e3109b3e12eca04c4b65ae645514cfba8e6c05b (height=396) closed 0 channels
+2019-03-19 20:30:14.875 [INF] CRTR: Block 235c566235b7c12d62ce324404c3d6db297ceab1adb13e56c6958a7a988be1be (height=397) closed 0 channels
+2019-03-19 20:30:14.877 [INF] CRTR: Block 2f16f53c1a480b1700ad864ecbcc40d87d083f4d4f963faa5021955b74ddcc40 (height=398) closed 0 channels
+2019-03-19 20:30:14.880 [INF] CRTR: Block 09f447ca7c27a2ef4a23554327cbb40deb6be565ad656418a780c7b592305ff5 (height=399) closed 0 channels
+2019-03-19 20:30:14.882 [INF] CRTR: Block 3ec872290175577f1955bd485989ce61d8d7d2a686be6e5e54e850b6bb91ac02 (height=400) closed 0 channels
+2019-03-19 20:30:14.884 [INF] CRTR: Block 72d4876649d8cf342f48bfd36272b907444333d6ba1b6c4a95c940711dcb9a4f (height=401) closed 0 channels
+2019-03-19 20:30:14.887 [INF] CRTR: Block 10bd7cb2b94f4d759254c04fa6ce9b1138ab70f62c7b5ddbe4dafa5b513fab05 (height=402) closed 0 channels
+2019-03-19 20:30:14.889 [INF] CRTR: Block 5284f66cf2a7155699d280bd26d360e5f57f9605f30b5286e7d825b60c247f58 (height=403) closed 0 channels
+2019-03-19 20:30:14.892 [INF] CRTR: Block 3f978877ab486217c6330096f5b6c521bdf41813a523650679ac9d5466aff503 (height=404) closed 0 channels
+2019-03-19 20:30:14.894 [INF] CRTR: Block 0eed393db3d0fdd6ed9a8fcd9aa5fbaa8a0948ac07219dcfda67dfeedab743ab (height=405) closed 0 channels
+2019-03-19 20:30:14.897 [INF] CRTR: Block 13bd28a5a920127defd2730fb5dc7f395dc5dab4eb9e517de2ca3cee2314271f (height=406) closed 0 channels
+2019-03-19 20:30:14.899 [INF] CRTR: Block 63587c114d2f72a6d349a765b16fc645959dd4229dc39971f9171659407b5ec6 (height=407) closed 0 channels
+2019-03-19 20:30:14.901 [INF] CRTR: Block 4506fecd49d5d8a68ad52f6d34a21ecf14a0683197abd2fa7e844f1b4b46a008 (height=408) closed 0 channels
+2019-03-19 20:30:14.904 [INF] CRTR: Block 605bc3c0eef6dbad6a3c3135531344e96c3e587fdc4ee97b08d0465f6cedeb22 (height=409) closed 0 channels
+2019-03-19 20:30:14.907 [INF] CRTR: Block 487fcd931fe6bce9857271bf3a1fe854911c0b4e456c5584df34d37a1a39287e (height=410) closed 0 channels
+2019-03-19 20:30:14.909 [INF] CRTR: Block 23e9b71ae5869e8930fd395c07ce6759df0ee0bdb2a344e94b801712ffc83a2b (height=411) closed 0 channels
+2019-03-19 20:30:14.912 [INF] CRTR: Block 090990e8be5490d2eb08480f16dad8ef56dd363a2f8b1368ed41895c815e7506 (height=412) closed 0 channels
+2019-03-19 20:30:14.915 [INF] CRTR: Block 017867e747010361ab3743103aee47829399fb3b99e19e95def03f4100dab285 (height=413) closed 0 channels
+2019-03-19 20:30:14.918 [INF] CRTR: Block 3d97d45552a2fa75b68bc7b46ee460d75f85a2d44d1dca9474f8e47c20a058dc (height=414) closed 0 channels
+2019-03-19 20:30:14.921 [INF] CRTR: Block 1678b736a4fee997278a490898206e9825a98a19d53d3826511e7f86dabd887d (height=415) closed 0 channels
+2019-03-19 20:30:14.923 [INF] CRTR: Block 67482079a55bf3b1e04c9490658bf084f7dff802ac6ffeaf7146c52b994de50f (height=416) closed 0 channels
+2019-03-19 20:30:14.926 [INF] CRTR: Block 6f435ce455a0796c1b73d2cd67005efb466d53d4b5bfe054f994a54d2e7bdb47 (height=417) closed 0 channels
+2019-03-19 20:30:14.928 [INF] CRTR: Block 2fc6042d9c40766c60636c9bbbdd373d4cc847935c48db6bdd663d035c2421dc (height=418) closed 0 channels
+2019-03-19 20:30:14.931 [INF] CRTR: Block 7b5abb15661010805a79691db725d2eaeda0810b22e5057ed98a38abf5f7ce80 (height=419) closed 0 channels
+2019-03-19 20:30:14.934 [INF] CRTR: Block 4ac7c90504115bf55416178efbdc8852abccd6a51b2c07484709b19b6d10476f (height=420) closed 0 channels
+2019-03-19 20:30:14.936 [INF] CRTR: Block 2a09932e0785e58f14a97d2c87b0b8b86e28010fa7b9144e98e9e5461156d166 (height=421) closed 0 channels
+2019-03-19 20:30:14.938 [INF] CRTR: Block 4de9bf79468f6c1fcecb6150d70823f68411dab8502fbf4e081ba7edef9b3959 (height=422) closed 0 channels
+2019-03-19 20:30:14.941 [INF] CRTR: Block 5f3d191649b243913311ab2575fde01aaccbc82f79480f527d9bf91e98cdffee (height=423) closed 0 channels
+2019-03-19 20:30:14.943 [INF] CRTR: Block 12a4b881bd0d07442295cb07b17a979eda8a882d8ff687668f497c1a8aa14935 (height=424) closed 0 channels
+2019-03-19 20:30:14.946 [INF] CRTR: Block 652aec5369f766a0e77930faabf4732a411ca46869ac3a4426c8d2b1b5074cb1 (height=425) closed 0 channels
+2019-03-19 20:30:14.948 [INF] CRTR: Block 3f27a40e1447083b6093271301b5a76a50f7c6890256b97ee31b3d032e8cac3e (height=426) closed 0 channels
+2019-03-19 20:30:14.955 [INF] CRTR: Block 18b9dd495e1989075639a555a4a5297e50d2f5631267ad63bcc1f771c6731993 (height=427) closed 0 channels
+2019-03-19 20:30:14.957 [INF] CRTR: Block 060923ed33969067dce124d16b74bb61ecaf6e2b529e0dc3885c26550cd2b906 (height=428) closed 0 channels
+2019-03-19 20:30:14.967 [INF] CRTR: Block 4e7cc475f2eb137d090435cdbf705bc8d1628571c020229b358fa90a0622f91b (height=429) closed 0 channels
+2019-03-19 20:30:14.970 [INF] CRTR: Block 284556f768f367cd6b3ddefb5d15da7f1ea0b9731159d4eac2299d4c10ef4c71 (height=430) closed 0 channels
+2019-03-19 20:30:14.972 [INF] CRTR: Block 69357e13e60abf22e5d06215d92ca09f7b686e30464a5e0505ab8d9440aee6d0 (height=431) closed 0 channels
+2019-03-19 20:30:14.975 [INF] CRTR: Block 7c0714164d52c23a406b96eb02954e0486924f073620af310b9fd2d1934940d0 (height=432) closed 0 channels
+2019-03-19 20:30:14.978 [INF] CRTR: Block 568f4b1d3bef29abd1d0d6d685234e29ad1898e3f93b524121a348cc13e086a7 (height=433) closed 0 channels
+2019-03-19 20:30:14.980 [INF] CRTR: Block 642486950a7ba5e28d3c93730e453f50ce996e51914e091f0643ddc7c91800dc (height=434) closed 0 channels
+2019-03-19 20:30:14.983 [INF] CRTR: Block 03552dac12c8c670ce72499898bd740c5147bb96cbc3d17c070560f61372ba26 (height=435) closed 0 channels
+2019-03-19 20:30:14.985 [INF] CRTR: Block 60eda0992243c9475cd11ba0fcab28a2f61a947098b5e7f2ad3526cc34cf12a9 (height=436) closed 0 channels
+2019-03-19 20:30:14.988 [INF] CRTR: Block 0f76c3c0d98cf40bccd6f6724a84ee3f905e8466c35a729f61438fe1a666b9fb (height=437) closed 0 channels
+2019-03-19 20:30:14.991 [INF] CRTR: Block 5e90cd41d88ee11617d444b3a081108dc362a7184c5a141a709e32a878e5c4e1 (height=438) closed 0 channels
+2019-03-19 20:30:14.994 [INF] CRTR: Block 04fc1ce1fcdef5863bfe40b14dcf3b6f994070d9e412290c565ea3ac29324339 (height=439) closed 0 channels
+2019-03-19 20:30:14.996 [INF] CRTR: Block 7606a9f13f783f8b55f53f7dc094ab2adb9aca983fdc15ef997b34640c62253c (height=440) closed 0 channels
+2019-03-19 20:30:14.999 [INF] CRTR: Block 088da0cd7e6ad548d1d927ea589e8f44edfae09eb73d03d400b75ae49d41f3c7 (height=441) closed 0 channels
+2019-03-19 20:30:15.001 [INF] CRTR: Block 104fe83118630934531ff6245de99375460febf9050f318c1a30a4fb1423a892 (height=442) closed 0 channels
+2019-03-19 20:30:15.004 [INF] CRTR: Block 54dd55db0d08f4c7e277b7f22306ebc649f9a7779588a7eaaa2ae37ef9787e8f (height=443) closed 0 channels
+2019-03-19 20:30:15.006 [INF] CRTR: Block 4beb915a4e6603c8a559d2bb66c5463938c6f8ef02e94e333ebff612af993178 (height=444) closed 0 channels
+2019-03-19 20:30:15.009 [INF] CRTR: Block 14eda7ce5fab71b2c7b92fa816275c109558cb99122086542f0b6d9bc801ee16 (height=445) closed 0 channels
+2019-03-19 20:30:15.011 [INF] CRTR: Block 2e16ffb1674ce7a1cad4e55ee0f6baf83935f5f6caf2d922d63953a2a67ce728 (height=446) closed 0 channels
+2019-03-19 20:30:15.014 [INF] CRTR: Block 2c0e051eb6bd363fcc26968cc908ffbaa3601a8fdd6dc5d075d07f0cb8bddb3f (height=447) closed 0 channels
+2019-03-19 20:30:15.017 [INF] CRTR: Block 0693a1891d524768c0ac864f49ec367fd4e2f97e0fe67ef65aed51e8488ba738 (height=448) closed 0 channels
+2019-03-19 20:30:15.019 [INF] CRTR: Block 2f226b4a3ab2bae8377095edbc9f857c9250b984b99b896134ad0270f8478a12 (height=449) closed 0 channels
+2019-03-19 20:30:15.022 [INF] CRTR: Block 688b445f32273847a62e925d92ed5bcde287b54952adb43fdc812db83baf56a5 (height=450) closed 0 channels
+2019-03-19 20:30:15.025 [INF] CRTR: Block 5db9e9a94969566a3b161b7ba3fd33c63ed4f2050630806f4a9b65e456ee9881 (height=451) closed 0 channels
+2019-03-19 20:30:15.027 [INF] CRTR: Block 4c937482e9ff935d50611626b95968b84536062e9c4e60e7145c2f65f8eb1e51 (height=452) closed 0 channels
+2019-03-19 20:30:15.030 [INF] CRTR: Block 4c753a1e3f21d04ff18c9c8d6397c4e8f55f60ff04e09515ef48417810b75b39 (height=453) closed 0 channels
+2019-03-19 20:30:15.033 [INF] CRTR: Block 52a41997d84f49b015ee098af68aa4a7062e7f6ef0ae714b69bdf3e7e9445df8 (height=454) closed 0 channels
+2019-03-19 20:30:15.035 [INF] CRTR: Block 0bbb7bb2d72c48fd4c40b33c069ab7a86f940e2a169d55492aecf8e8302946cb (height=455) closed 0 channels
+2019-03-19 20:30:15.038 [INF] CRTR: Block 135f179aef0574988d75c98704e78755fe0d1252ab26f983ac0461a12c6e2c61 (height=456) closed 0 channels
+2019-03-19 20:30:15.041 [INF] CRTR: Block 247052ce7d1fc2445eb71404d5cac0ec638dd13deffa22ce1811f8452264b79b (height=457) closed 0 channels
+2019-03-19 20:30:15.046 [INF] CRTR: Block 2159adfedb375d6f3dfb87e68d0cfb2280df5ea1e7abf4acbe1f89823eb3cccd (height=458) closed 0 channels
+2019-03-19 20:30:15.050 [INF] CRTR: Block 3ddafd29fe04b1f6db3ab6b21c0c3e9d9f4b29813e8c094054ce0c6318167052 (height=459) closed 0 channels
+2019-03-19 20:30:15.052 [INF] CRTR: Block 3480a6422442ff65662cddbf8167f6875e6f12c829d3a3dcdcdcaff5faf49d63 (height=460) closed 0 channels
+2019-03-19 20:30:15.055 [INF] CRTR: Block 24b3ad2ad512b686cce97234a781029da0396aef2fbae6c7a61b4b73c985ae20 (height=461) closed 0 channels
+2019-03-19 20:30:15.057 [INF] CRTR: Block 722db8e3edd31fc788e516b4bb6ca4757147eb2525cdf290c76f179da389c45d (height=462) closed 0 channels
+2019-03-19 20:30:15.060 [INF] CRTR: Block 26c7c36b5f11dc023a5098bec1e9c57967708c02bfd12e451c04d4d32d4d7eec (height=463) closed 0 channels
+2019-03-19 20:30:15.063 [INF] CRTR: Block 4967344cbf9ebbf5911ea8280f2bc3c9e16b57e659533d24e100c5549ab2c779 (height=464) closed 0 channels
+2019-03-19 20:30:15.065 [INF] CRTR: Block 04169b3f1515da4a2cb7ceb09ee98ac5c592305a366a7e619fcbe019dfcbf0fd (height=465) closed 0 channels
+2019-03-19 20:30:15.069 [INF] CRTR: Block 70651848207b6e4f62deb9d89da8e82a3b1a81cde5732f61b95aef76a9dc0de8 (height=466) closed 0 channels
+2019-03-19 20:30:15.071 [INF] CRTR: Block 4e840948f32e2e8a6c27cf70f89a0990c66fddd6f487fb75bc06b013e34e1f36 (height=467) closed 0 channels
+2019-03-19 20:30:15.081 [INF] CRTR: Block 5183b8cc4f4b4e5deb265c6bfc8c0fdae0b86b0e96174ca22265f81c2a6a10c1 (height=468) closed 0 channels
+2019-03-19 20:30:15.084 [INF] CRTR: Block 43d96a171d1c41540a127542ffe8c1aee1b0c2ac625e2d18447747270f2961e6 (height=469) closed 0 channels
+2019-03-19 20:30:15.086 [INF] CRTR: Block 323c9c6e3f18e833c00e0b0361477583b4903f0e9ff87124b18a56b7284594ad (height=470) closed 0 channels
+2019-03-19 20:30:15.089 [INF] CRTR: Block 3a1554fa826aa7f0ea6fae03a3d0f73936034d6443598a4618ce15f8cb9db325 (height=471) closed 0 channels
+2019-03-19 20:30:15.091 [INF] CRTR: Block 41271342c156019e81e82223370ff18f8e95d614d511d8c1d9f6967561873b52 (height=472) closed 0 channels
+2019-03-19 20:30:15.094 [INF] CRTR: Block 6cc665f34a0f6bd0e18143d2da7ac54e8a1d38f818a801293d2896f47451ea1d (height=473) closed 0 channels
+2019-03-19 20:30:15.096 [INF] CRTR: Block 5e00b258252f209bfa7db6ac3b72526f3432efdb7f0e1933777b9febf74c9a98 (height=474) closed 0 channels
+2019-03-19 20:30:15.099 [INF] CRTR: Block 461604afb883791ffa1618d420105593917177db888762ed6c0baee9fc4b1cab (height=475) closed 0 channels
+2019-03-19 20:30:15.102 [INF] CRTR: Block 651326410c3c00cd0e7b0ae3ad5ceae734ca56f56bc1afed896ba05804792c74 (height=476) closed 0 channels
+2019-03-19 20:30:15.104 [INF] CRTR: Block 6701678f6d839b66bb23d01c3fd2d75debdd291c4ff203a135c5e54ded2d5e0e (height=477) closed 0 channels
+2019-03-19 20:30:15.106 [INF] CRTR: Block 532bd6a52e27aedd651a41420c79fafd961c6dea6fc682b01270c3f7b18abf11 (height=478) closed 0 channels
+2019-03-19 20:30:15.109 [INF] CRTR: Block 0a3ac5a548b0512344266dfb67861b36cdd33c64eee6ca2dc2316e46b9357681 (height=479) closed 0 channels
+2019-03-19 20:30:15.112 [INF] CRTR: Block 76dbc8ce671999c3a081b95cd77db62b14468b1206f795c3cde20f4745f370e6 (height=480) closed 0 channels
+2019-03-19 20:30:15.115 [INF] CRTR: Block 7566ce2b33b8e28bccd9d46421b147ee9a84c0f152cbf5c47f28f6e0df20be5f (height=481) closed 0 channels
+2019-03-19 20:30:15.117 [INF] CRTR: Block 545ad26f90e6d21d09fd695352016d330a4b6fd4bc41fed956500ecb466f6161 (height=482) closed 0 channels
+2019-03-19 20:30:15.120 [INF] CRTR: Block 6143649dae51690b5d9f437e6d0d692b59612d4e0ef86d9f60675711aeeb1837 (height=483) closed 0 channels
+2019-03-19 20:30:15.122 [INF] CRTR: Block 143b374c153b181c979967542127f94ba60a64f930700545eef61aa7ff2e3f52 (height=484) closed 0 channels
+2019-03-19 20:30:15.125 [INF] CRTR: Block 0fbf24c1954b2b785454c6b9e7d072fef723ba0b59876bd81331c8c9f78b4652 (height=485) closed 0 channels
+2019-03-19 20:30:15.127 [INF] CRTR: Block 00610b57ebcfa098db1ab5709628332931f5f9b9920f6c972ae131b7f7e702ca (height=486) closed 0 channels
+2019-03-19 20:30:15.130 [INF] CRTR: Block 7ba765d57d55837b1698593ad55a1bec5fa056a2ec5bbf99746f08e505302d14 (height=487) closed 0 channels
+2019-03-19 20:30:15.133 [INF] CRTR: Block 1d588da96e7685fc6eb27efaf5ac2e07ca1969cd54955e2d2a6e8c859fecf2b8 (height=488) closed 0 channels
+2019-03-19 20:30:15.135 [INF] CRTR: Block 1b0ada3209fe9ac1658766d6fad49dc5cf0076bd9c7eaf2921befbeb8027e75e (height=489) closed 0 channels
+2019-03-19 20:30:15.138 [INF] CRTR: Block 6dce72d557e87c26c52697cc5dd12a4fd84570b7992a91dd047b558c3e71c1da (height=490) closed 0 channels
+2019-03-19 20:30:15.140 [INF] CRTR: Block 6a3c24dc4bd3660e26c6eed308e58b733c8c7cbed316adb38bf5f7a2ce3a006d (height=491) closed 0 channels
+2019-03-19 20:30:15.143 [INF] CRTR: Block 13a50117733c20b4790f8889c1362955bdd5825a59c7a52d24585af36c82001b (height=492) closed 0 channels
+2019-03-19 20:30:15.146 [INF] CRTR: Block 7ffaf6248df44a05d25765e02ef94767f3b4c11b06d09de163666bae97683232 (height=493) closed 0 channels
+2019-03-19 20:30:15.148 [INF] CRTR: Block 490a051dcd07551bc668fd1407ff061cafd74f57da768da361ad6fbe648c9499 (height=494) closed 0 channels
+2019-03-19 20:30:15.151 [INF] CRTR: Block 42ddd3a4b83e7e8b63bbffc1f30b33274cc1abff7bb7406b6f5bd12a1959f33e (height=495) closed 0 channels
+2019-03-19 20:30:15.154 [INF] CRTR: Block 5a235f9b0f10b1d74854a21fc33c7617a0bc6578326e515d2a2e9d9a7e5c18be (height=496) closed 0 channels
+2019-03-19 20:30:15.156 [INF] CRTR: Block 7705fb4854c575fec040b28d987979ec33a1c6e46af33e7db41f6396f3ad1ecf (height=497) closed 0 channels
+2019-03-19 20:30:15.159 [INF] CRTR: Block 03a18f4bb8d4b9abfbb35364da29749c7e9fa76048bd93f52357cd8e5c7a8b63 (height=498) closed 0 channels
+2019-03-19 20:30:15.162 [INF] CRTR: Block 52d8c87840e1a822aa74d9d4fc03293a844d1c6fe1d88c673c92a5441631e79a (height=499) closed 0 channels
+2019-03-19 20:30:15.164 [INF] CRTR: Block 0b271a20d01f5d90c49086b939c494ea7a05fcad66b2f0ea9cf9e39e61c2fbda (height=500) closed 0 channels
+2019-03-19 20:30:15.167 [INF] CRTR: Block 05900c1f8f3720524a1ba49343c54719a4b3b6d301495c2079297beb97e96a30 (height=501) closed 0 channels
+2019-03-19 20:30:15.169 [INF] CRTR: Block 531a587ab32ca0b29b6122eddbb4470eab7cc63e4f2f1f083aa6d3f860a99c70 (height=502) closed 0 channels
+2019-03-19 20:30:15.172 [INF] CRTR: Block 2c8a0d655b2fb143fe67a941556801c1091844ad59b29921812b93a99a6f1d11 (height=503) closed 0 channels
+2019-03-19 20:30:15.174 [INF] CRTR: Block 515e687bf5f51a4c1d34650990b1d0abea2b2a82bf689567890f342f4d206106 (height=504) closed 0 channels
+2019-03-19 20:30:15.177 [INF] CRTR: Block 7b1b2af7bd1529cebe02df45288d0daddf1e6a40657d499273b918f9f05ca05e (height=505) closed 0 channels
+2019-03-19 20:30:15.179 [INF] CRTR: Block 2f0845e469952a0a4af342286c89b93ed6fc6dfc8740c50d985a711e07b4b448 (height=506) closed 0 channels
+2019-03-19 20:30:15.190 [INF] CRTR: Block 294358d2402c95ab6da1265a1c9cb3b41875eaad37ea57191db3dec7b4ee9923 (height=507) closed 0 channels
+2019-03-19 20:30:15.192 [INF] CRTR: Block 64c6ba4b6c63949b9140b9b9dd50b1c7b3c241885c9609952ae115d51a04d8bd (height=508) closed 0 channels
+2019-03-19 20:30:15.212 [INF] CRTR: Block 6374e25d1dbc9e7461502b1eb2cbb4d15217a792eef6f00cd831f663a0b02922 (height=509) closed 0 channels
+2019-03-19 20:30:15.215 [INF] CRTR: Block 05a5cd66824fc672ffb9f6c6e2c95c03f7f3f9e0fad72fa1d32c92cd66de089f (height=510) closed 0 channels
+2019-03-19 20:30:15.218 [INF] CRTR: Block 25d794014af6b90660295f254f78fbac26c34986516b40cb569daaedd1b18ee5 (height=511) closed 0 channels
+2019-03-19 20:30:15.220 [INF] CRTR: Block 217a80f33a3aecb0c4ae8077b42bfe0c616c5bafcb1066c116bc9be3231596af (height=512) closed 0 channels
+2019-03-19 20:30:15.223 [INF] CRTR: Block 738311eb622422406337ed68bf5741384752d3f2faaca7e3acf3217915c3274c (height=513) closed 0 channels
+2019-03-19 20:30:15.226 [INF] CRTR: Block 625105ba7efd184fada484cd424e5fcb4ec09c22340f5d2b3900dd7feb6065b7 (height=514) closed 0 channels
+2019-03-19 20:30:15.232 [INF] CRTR: Block 5d78391233d07290535d555b67faf22081f435f21408e594a6f2cc87e4667e71 (height=515) closed 0 channels
+2019-03-19 20:30:15.235 [INF] CRTR: Block 3e1c870060e68767e76a801e14937bdbe3f090d4e0f8b535d8fc30e329a8bf8d (height=516) closed 0 channels
+2019-03-19 20:30:15.238 [INF] CRTR: Block 40e65c705d00cb7a598d7d8548841c4612be673787a8bc51814423e9d2f07c6c (height=517) closed 0 channels
+2019-03-19 20:30:15.241 [INF] CRTR: Block 6cf80caa19f7c443a38ab09d8f9a44615cd86a020ff0e0b722833be5eb8991c1 (height=518) closed 0 channels
+2019-03-19 20:30:15.244 [INF] CRTR: Block 5ddefee630600361f5e45789dcf96e3e8d83ebb1f9146fac681f24336518ce03 (height=519) closed 0 channels
+2019-03-19 20:30:15.253 [INF] CRTR: Block 7f25d6822c9009a8da3570c390e3541c2998f3dcca30505ada019888fe780e5b (height=520) closed 0 channels
+2019-03-19 20:30:15.256 [INF] CRTR: Block 441958719e5e13edef3c64be82b5ff32c893a141e6d73ae3aa3965de4b1116c2 (height=521) closed 0 channels
+2019-03-19 20:30:15.259 [INF] CRTR: Block 6d948faa892241ed473fabcfd4757aa70a85041a419cf6da3741494753dc6a26 (height=522) closed 0 channels
+2019-03-19 20:30:15.262 [INF] CRTR: Block 057fd0706f3536ffb6bec489ee7db7fa9903846f507654550f2424247bce781b (height=523) closed 0 channels
+2019-03-19 20:30:15.265 [INF] CRTR: Block 70884d562d2d21a9faff0edbc3517e2b21e05e9708a9ffdc0a9dce5ecc3668d3 (height=524) closed 0 channels
+2019-03-19 20:30:15.268 [INF] CRTR: Block 785c20899a46073f3ac6efa82154ea88301857385ba6cada23fce374c0be52b0 (height=525) closed 0 channels
+2019-03-19 20:30:15.271 [INF] CRTR: Block 032f472d89a9def8ba843225e815853f53b005b41ba559409e61d36d42aebf11 (height=526) closed 0 channels
+2019-03-19 20:30:15.274 [INF] CRTR: Block 450dd22fa7800683b105de1bcf4626282f0359c26f63fdf68df4517c112f4011 (height=527) closed 0 channels
+2019-03-19 20:30:15.277 [INF] CRTR: Block 4bca21374bf777a9881adc93c7f623467c0b8fd73eb77266144c10d76edab514 (height=528) closed 0 channels
+2019-03-19 20:30:15.279 [INF] CRTR: Block 43aabf0c4b03609d34ece7eda7b0af8578648184ec0051bf20f7353027b4a0a8 (height=529) closed 0 channels
+2019-03-19 20:30:15.282 [INF] CRTR: Block 658e10a9f2bb2bba226d3ba74366db9dca7bd73676c83ca34fe36d8dfd5907d7 (height=530) closed 0 channels
+2019-03-19 20:30:15.286 [INF] CRTR: Block 54904066d58dedb17c0a51dfbb194ee67b309bbf6460d22afedf102beabf56df (height=531) closed 0 channels
+2019-03-19 20:30:15.289 [INF] CRTR: Block 696cc11b5670337fb31c8b0da943eeb959636a9b8246ecc5f4aa279c0ed1fd4b (height=532) closed 0 channels
+2019-03-19 20:30:15.291 [INF] CRTR: Block 217881593cf4015c66e340774ca6721b5f909fadb5ab345fbe094a9de5820fca (height=533) closed 0 channels
+2019-03-19 20:30:15.294 [INF] CRTR: Block 63b35757713e4af53ecdeb1773c1267901bdf6caa774bb2da415acc4a5e1d60f (height=534) closed 0 channels
+2019-03-19 20:30:15.297 [INF] CRTR: Block 2642a51994f7fcdb04fef0203cbf41bb31a5404673a09f39f64f993661213a56 (height=535) closed 0 channels
+2019-03-19 20:30:15.299 [INF] CRTR: Block 767e61fa576d6dd130e9b7a7f7b5ecd494373c0bb5a2d754ebd116c4f1662578 (height=536) closed 0 channels
+2019-03-19 20:30:15.302 [INF] CRTR: Block 1d8caaab1b648ce8ae91efcf8510702ca01905f3ddf3b8422b33426d9607fa19 (height=537) closed 0 channels
+2019-03-19 20:30:15.304 [INF] CRTR: Block 2f7443d6e5e211b1d5180d6a3c0ab09a4acda0349bae2378d977301e8e0eb9c7 (height=538) closed 0 channels
+2019-03-19 20:30:15.307 [INF] CRTR: Block 0ce92ba35a9a94c734436d9f7bb55eabd5c2ed4d8aac1f6a04a8965b2f99b761 (height=539) closed 0 channels
+2019-03-19 20:30:15.310 [INF] CRTR: Block 61c19850f246a05410ac7ffab0bedfea1ba9960a6283e6b1b6e854e2700eaeb9 (height=540) closed 0 channels
+2019-03-19 20:30:15.312 [INF] CRTR: Block 20e08271c3814929a5d19bb151df846dc14b5758d7fadf73afd19f28925a01e3 (height=541) closed 0 channels
+2019-03-19 20:30:15.315 [INF] CRTR: Block 1ec7f39d064c25fd8a8d4ea14cc697cb5b57cdf783ae253addec0c18b659c814 (height=542) closed 0 channels
+2019-03-19 20:30:15.318 [INF] CRTR: Block 68a51c850d409f73cddfdb041a53dd7066571d7ad055dddda79914a619a1c7ba (height=543) closed 0 channels
+2019-03-19 20:30:15.320 [INF] CRTR: Block 3047ce6045f9287bd1e7d98fb5df63673dd22eab4081d4a681ee52e0f05e7ad6 (height=544) closed 0 channels
+2019-03-19 20:30:15.323 [INF] CRTR: Block 5ca729832dc66f4be39e1c92cf333b2c8b58ffe55056d286853a337befb3c006 (height=545) closed 0 channels
+2019-03-19 20:30:15.333 [INF] CRTR: Block 2283f32db8a8028af8ed1ec38a16ec6ef9dd5a7bb1b6ef8842a41ec0474ed3da (height=546) closed 0 channels
+2019-03-19 20:30:15.335 [INF] CRTR: Block 4c4ee7a89d208ab5f548690915ea1d5aae6ffd5ebf9e04698a050fbdc2672e94 (height=547) closed 0 channels
+2019-03-19 20:30:15.338 [INF] CRTR: Block 49b33a643864d5773f8a7f155e38eaa66f07b496cbc9d0c1969166a5ea705f0e (height=548) closed 0 channels
+2019-03-19 20:30:15.340 [INF] CRTR: Block 7bf2ec6108ca5fdff59819127c9284a9d5c75366835142bf1e807f4798ed7f3d (height=549) closed 0 channels
+2019-03-19 20:30:15.342 [INF] CRTR: Block 356855f0295d536afd489fb5c19ed6d5dc86e18ead9e57f3522c66bfa9a0eaa7 (height=550) closed 0 channels
+2019-03-19 20:30:15.345 [INF] CRTR: Block 3d772901c9c1b1d6e2f5ddad42a72dbc372e10c060940204f9db14c3a5607b2c (height=551) closed 0 channels
+2019-03-19 20:30:15.347 [INF] CRTR: Block 0b5aadef9ef8a22075363bf7207f8ed7b0a74874b6cf81a5f3017b3466af80cf (height=552) closed 0 channels
+2019-03-19 20:30:15.350 [INF] CRTR: Block 5fe29c9265ea313fc8420aacb2b2c8623f17457a9a3b1e5b06db4f5248c3a166 (height=553) closed 0 channels
+2019-03-19 20:30:15.352 [INF] CRTR: Block 728196950c6518736643f8a4d8d9e1a56dfbb381977206e94edafb60fa31e7d7 (height=554) closed 0 channels
+2019-03-19 20:30:15.354 [INF] CRTR: Block 48270f969ff5964ebaea97d4c275f6cfbf8a9b1cf0c6d50aff055f9f304058ab (height=555) closed 0 channels
+2019-03-19 20:30:15.357 [INF] CRTR: Block 6ea785d2b86c77a442a045708c006a4c021bcc02098a393de9bde8224833101a (height=556) closed 0 channels
+2019-03-19 20:30:15.359 [INF] CRTR: Block 13c8c07ed52a2151410bd67493054c117677e33a56551ca57143e8b9c24c5eb8 (height=557) closed 0 channels
+2019-03-19 20:30:15.362 [INF] CRTR: Block 53cca9524ffe18e17cf459853e31eb4f71a835960e2270ffc73f56e2bd356c33 (height=558) closed 0 channels
+2019-03-19 20:30:15.365 [INF] CRTR: Block 73e83e07213177cec60eea8e2a88715725fae15290518c3b374637aecaec9633 (height=559) closed 0 channels
+2019-03-19 20:30:15.367 [INF] CRTR: Block 5058f5f1bd379250d2a4ae14dc9dd2b8b5f7ca23471e5e1ed4d3ac9694cb340b (height=560) closed 0 channels
+2019-03-19 20:30:15.369 [INF] CRTR: Block 3580effa1c222ec02be36f281b5bc2eba27b0db4b376d7e43e4233ec5c208f43 (height=561) closed 0 channels
+2019-03-19 20:30:15.372 [INF] CRTR: Block 3ce854851e0515b80903491d777eb0992e107ee5e3c301910971c867f1c63ed5 (height=562) closed 0 channels
+2019-03-19 20:30:15.374 [INF] CRTR: Block 32ee82e67983bd2259a043e4173849f79a815238366bab907fe481245858b8e3 (height=563) closed 0 channels
+2019-03-19 20:30:15.377 [INF] CRTR: Block 5c42f9522c004df12a07aec8c2912aa28713fa8b465c373295fd9a6a7adb98ad (height=564) closed 0 channels
+2019-03-19 20:30:15.379 [INF] CRTR: Block 564c9250f329649d8db968245b967c22c5e55324351c0740d5e1079e53ed5528 (height=565) closed 0 channels
+2019-03-19 20:30:15.382 [INF] CRTR: Block 3f0420c555aa22f3de310d22c308742d4decb9737b9e67286cbf6ef74fd1f4b9 (height=566) closed 0 channels
+2019-03-19 20:30:15.384 [INF] CRTR: Block 32c5b1dccaa677ece96ffa4ccf99bd2a36440ca945b1914fafb0ffec29791910 (height=567) closed 0 channels
+2019-03-19 20:30:15.387 [INF] CRTR: Block 618332e9384fe084606cdb40c21ffa00449d7d62bcdf078b0b26a02c971d0ea5 (height=568) closed 0 channels
+2019-03-19 20:30:15.389 [INF] CRTR: Block 671822a4c3f29ec2313ff014635595b2e30da60dddf957d406cbc3f62ba1fff1 (height=569) closed 0 channels
+2019-03-19 20:30:15.392 [INF] CRTR: Block 27ee8654c6f1af16696187f9b84e577b5a86a833bf71aba30056b16b27d80d56 (height=570) closed 0 channels
+2019-03-19 20:30:15.395 [INF] CRTR: Block 15da8078ada4e450fa425b9e58aad95e08326e7ce1f4e267c432244174bcf62f (height=571) closed 0 channels
+2019-03-19 20:30:15.397 [INF] CRTR: Block 195853d606254726b67421f78e1e99e845a6b5d113564f3bf4eb896063578cd4 (height=572) closed 0 channels
+2019-03-19 20:30:15.400 [INF] CRTR: Block 6b6844497c3f02c47f96418311f23a3e1dda181707150a6fc7a25f4d53fa6600 (height=573) closed 0 channels
+2019-03-19 20:30:15.402 [INF] CRTR: Block 33bce1cd15e778b6adb7f4b26579425669a19a30f975f2324da6020359bdf709 (height=574) closed 0 channels
+2019-03-19 20:30:15.405 [INF] CRTR: Block 06b62e5058a353ceacf7ac8d6b58631d0464180031b32b2ebbe20b89181b49af (height=575) closed 0 channels
+2019-03-19 20:30:15.407 [INF] CRTR: Block 0766114b409e042662b64da949ef0c61e985ede9947f4c362f5e46a8f1bcef99 (height=576) closed 0 channels
+2019-03-19 20:30:15.410 [INF] CRTR: Block 68e853084ab23575a22f7f107b622cb038b2fab5ec7bb12068a6c774b8551cbd (height=577) closed 0 channels
+2019-03-19 20:30:15.412 [INF] CRTR: Block 4787abde8ae90689b693e3a6ed7174cd8989ea4b7610b0b7fa2310c2c2c599f5 (height=578) closed 0 channels
+2019-03-19 20:30:15.415 [INF] CRTR: Block 6f32253e9232983f8a5e2cbcae4067308e9ce4152bdf2be6a0e20611dd3a5373 (height=579) closed 0 channels
+2019-03-19 20:30:15.417 [INF] CRTR: Block 48c1442fd77915090f4fa7ff08ba422e6045203da8bf759ddb3a647535bed86f (height=580) closed 0 channels
+2019-03-19 20:30:15.419 [INF] CRTR: Block 3dcf6b452f6fe3d73dee1844d295ce448c0acd521824ef489440612187afe839 (height=581) closed 0 channels
+2019-03-19 20:30:15.422 [INF] CRTR: Block 4376c855200eee2ecf4e624cc9d7f01332635c244f3c7ae6dfcfb5b383472445 (height=582) closed 0 channels
+2019-03-19 20:30:15.424 [INF] CRTR: Block 3283098fbd161bb30b439b486f38d887c21502d940e6a1951b265777accd3e98 (height=583) closed 0 channels
+2019-03-19 20:30:15.427 [INF] CRTR: Block 55261dac6874335082fd904c6bb32ad72b589a530aa8d0045d2bd4690e507e7d (height=584) closed 0 channels
+2019-03-19 20:30:15.445 [INF] CRTR: Block 5ded039b500713d57e1c714ecde9cccc80f6f95bbfbc2acc51307d99372a6920 (height=585) closed 0 channels
+2019-03-19 20:30:15.448 [INF] CRTR: Block 02e3e94fc874120848ed237c83cd447a71b7a5cf932981647a1cad04ba6f1e03 (height=586) closed 0 channels
+2019-03-19 20:30:15.450 [INF] CRTR: Block 278ff0dda486a5110030a03fc6978bdd5bb408d8c112e00302bd8fc4053ab396 (height=587) closed 0 channels
+2019-03-19 20:30:15.453 [INF] CRTR: Block 26ba3bf876c8acf93a94d7feaeaf75b5aeb4413f7fac6aab54d903357955b264 (height=588) closed 0 channels
+2019-03-19 20:30:15.456 [INF] CRTR: Block 51844a3c9e01d17a768e54d39328efa3fc6b9203e337115bb6d7a0ee12d1fd3e (height=589) closed 0 channels
+2019-03-19 20:30:15.458 [INF] CRTR: Block 291b3329a46b07eb537169810e6ec051582e2f7c9c18b30e3d394e12afdb1a3d (height=590) closed 0 channels
+2019-03-19 20:30:15.461 [INF] CRTR: Block 42e5fc0b1d2e78ca3d04f9a5585a9c50e0d7b10d2f955df4fc73ba0dbc5935bc (height=591) closed 0 channels
+2019-03-19 20:30:15.463 [INF] CRTR: Block 7e44f864375d11db189bf3fe35de317793b1604863dc32bddaa57664d3c97d1f (height=592) closed 0 channels
+2019-03-19 20:30:15.466 [INF] CRTR: Block 6db26859f2b7fe2d49090cfb4b036439d30039e27feb441d06f199aa62740704 (height=593) closed 0 channels
+2019-03-19 20:30:15.468 [INF] CRTR: Block 796982f0c5e4924ad0fa754b9943631cebb91fb8e2eccf82aba6b47def28194a (height=594) closed 0 channels
+2019-03-19 20:30:15.471 [INF] CRTR: Block 4d8324862a4bf011fca8987bfabf44a9a8c3f1b8d51ac76edefd7e851e79375d (height=595) closed 0 channels
+2019-03-19 20:30:15.473 [INF] CRTR: Block 344eb2a7ec2eb5d25f2c237b449b2d72a14820067f744731957e6528ee451b84 (height=596) closed 0 channels
+2019-03-19 20:30:15.475 [INF] CRTR: Block 7bc9a853066c3bfa783afe8f9621b5afdd77129e759f51721ea7b4f890f8f7df (height=597) closed 0 channels
+2019-03-19 20:30:15.478 [INF] CRTR: Block 6c8695ac2cf6da6b9f9a7a71993d7c0a534f82fe17982fa15a3ec7b7c9b6ea48 (height=598) closed 0 channels
+2019-03-19 20:30:15.480 [INF] CRTR: Block 1641afa552ede493f7cff7f7997cd23e78174b3174d65077c56aebbb12ab7010 (height=599) closed 0 channels
+2019-03-19 20:30:15.482 [INF] CRTR: Block 4c1cbeb5ca62679179aaaeeaa7e868d29a58ea9a17ed5c67b571ecd97d62a322 (height=600) closed 0 channels
+2019-03-19 20:30:15.482 [INF] CRTR: Graph pruning complete: 0 channels were closed since height 200
+2019-03-19 20:30:15.487 [INF] CMGR: Server listening on 127.0.0.1:10012
+2019-03-19 20:30:15.489 [INF] SRVR: Auto peer bootstrapping is disabled
+2019-03-19 20:31:03.510 [INF] SRVR: New inbound connection from 127.0.0.1:36790
+2019-03-19 20:31:03.510 [INF] SRVR: Finalizing connection to 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa, inbound=true
+2019-03-19 20:31:03.516 [INF] PEER: NodeKey(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa) loading ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:31:03.517 [INF] HSWC: Removing channel link with ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767)
+2019-03-19 20:31:03.517 [INF] HSWC: ChannelLink(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) is starting
+2019-03-19 20:31:03.518 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-03-19 20:31:03.518 [INF] HSWC: Adding live link chan_id=26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767, short_chan_id=601:1:0
+2019-03-19 20:31:03.518 [INF] CNCT: Attempting to update ContractSignals for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:31:03.519 [INF] HSWC: HTLC manager for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) started, bandwidth=0 mSAT
+2019-03-19 20:31:03.519 [INF] HSWC: Attempting to re-resynchronize ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:31:03.519 [INF] SRVR: Negotiated chan series queries with 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:31:03.520 [INF] DISC: Creating new gossipSyncer for peer=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:31:03.520 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): requesting new chans from height=457 and 4294966838 blocks after
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering chan range: start_height=457, num_blocks=4294966838
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): sending final chan range chunk, size=1
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): buffering chan range reply of size=1
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering through 1 chans
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): remote peer has no new chans
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying gossipFilter(start=2019-03-19 19:31:03.521572464 +0100 CET m=-3534.201140180)
+2019-03-19 20:31:03.521 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying new update horizon: start=2019-03-19 19:31:03 +0100 CET, end=2155-04-26 01:59:18 +0100 CET, backlog_size=1
+2019-03-19 20:31:03.523 [INF] HSWC: ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): resending FundingLocked message to peer
+2019-03-19 20:31:03.523 [INF] HSWC: Received re-establishment message from remote side for channel(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:31:03.526 [INF] FNDG: Received duplicate fundingLocked for ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767), ignoring.
+2019-03-19 20:31:03.533 [INF] CRTR: Updated vertex data for node=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:31:44.300 [INF] DISC: Broadcasting batch of 2 new announcements
+2019-03-19 20:32:32.368 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-19 20:34:46.772 [INF] INVC: New invoice subscription client: id=0
+2019-03-19 20:42:55.018 [INF] PEER: unable to read message from 127.0.0.1:36790: EOF
+2019-03-19 20:42:55.018 [INF] PEER: Disconnecting 127.0.0.1:36790, reason: read handler closed
+2019-03-19 20:42:55.218 [INF] DISC: Removing gossipSyncer for peer=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:42:55.219 [INF] HSWC: Removing channel link with ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767)
+2019-03-19 20:42:55.219 [INF] HSWC: ChannelLink(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) is stopping
+2019-03-19 20:42:55.320 [INF] HSWC: ChannelLink(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) has exited
+2019-03-19 20:42:55.320 [ERR] SRVR: Unable to retrieve advertised address for node 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa: no advertised addresses found
+2019-03-19 20:43:32.534 [INF] SRVR: New inbound connection from 127.0.0.1:40236
+2019-03-19 20:43:32.534 [INF] SRVR: Finalizing connection to 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa, inbound=true
+2019-03-19 20:43:32.540 [INF] PEER: NodeKey(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa) loading ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:43:32.540 [INF] HSWC: Removing channel link with ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767)
+2019-03-19 20:43:32.540 [INF] HSWC: ChannelLink(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) is starting
+2019-03-19 20:43:32.540 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-03-19 20:43:32.540 [INF] HSWC: Adding live link chan_id=26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767, short_chan_id=601:1:0
+2019-03-19 20:43:32.540 [INF] CNCT: Attempting to update ContractSignals for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:43:32.540 [INF] SRVR: Negotiated chan series queries with 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:43:32.540 [INF] HSWC: HTLC manager for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) started, bandwidth=0 mSAT
+2019-03-19 20:43:32.540 [INF] HSWC: Attempting to re-resynchronize ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:43:32.540 [INF] DISC: Creating new gossipSyncer for peer=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:43:32.540 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): requesting new chans from height=457 and 4294966838 blocks after
+2019-03-19 20:43:32.542 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering chan range: start_height=457, num_blocks=4294966838
+2019-03-19 20:43:32.542 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): sending final chan range chunk, size=1
+2019-03-19 20:43:32.545 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): buffering chan range reply of size=1
+2019-03-19 20:43:32.542 [INF] HSWC: ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): resending FundingLocked message to peer
+2019-03-19 20:43:32.545 [INF] FNDG: Received duplicate fundingLocked for ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767), ignoring.
+2019-03-19 20:43:32.545 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering through 1 chans
+2019-03-19 20:43:32.545 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): remote peer has no new chans
+2019-03-19 20:43:32.545 [INF] HSWC: Received re-establishment message from remote side for channel(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-03-19 20:43:32.545 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying gossipFilter(start=2019-03-19 19:43:32.54586099 +0100 CET m=-2785.176851683)
+2019-03-19 20:43:32.546 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying new update horizon: start=2019-03-19 19:43:32 +0100 CET, end=2155-04-26 02:11:47 +0100 CET, backlog_size=5
+2019-03-19 20:43:32.546 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-19 20:43:32.546 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-19 20:43:32.546 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-19 20:43:32.549 [INF] CRTR: Updated vertex data for node=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-03-19 20:43:44.300 [INF] DISC: Broadcasting batch of 1 new announcements
+2019-03-19 20:45:02.485 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-19 20:57:25.335 [INF] INVC: New invoice subscription client: id=1
+2019-03-19 21:25:57.159 [INF] INVC: New invoice subscription client: id=2
+2019-03-19 21:27:38.707 [INF] INVC: New invoice subscription client: id=3
+2019-03-19 21:30:15.484 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-19 21:30:15.485 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-19 21:52:22.903 [INF] INVC: New invoice subscription client: id=4
+2019-03-19 21:52:54.305 [INF] INVC: Cancelling invoice subscription for client=1
+2019-03-19 21:52:54.311 [INF] INVC: Cancelling invoice subscription for client=2
+2019-03-19 21:52:54.311 [INF] INVC: Cancelling invoice subscription for client=0
+2019-03-19 21:52:54.311 [INF] INVC: Cancelling invoice subscription for client=3
+2019-03-19 21:52:54.528 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002cc840)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 30 30 6e  31 70 77 66 7a 34 34 78  |lnsb600n1pwfz44x|
+  00000010  70 70 35 37 63 6a 77 65  6d 71 74 76 34 6e 30 78  |pp57cjwemqtv4n0x|
+  00000020  70 75 6a 70 33 30 38 6a  71 37 65 39 6c 70 73 36  |pujp308jq7e9lps6|
+  00000030  65 64 79 38 75 6d 7a 70  73 36 6b 37 39 32 35 65  |edy8umzps6k7925e|
+  00000040  32 6a 65 7a 6d 67 73 64  70 38 32 70 73 68 6a 6d  |2jezmgsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 30 61 67 79 6c  |gcqzysxqztg0agyl|
+  00000080  33 7a 6b 68 30 79 37 67  6a 7a 67 71 7a 70 74 6d  |3zkh0y7gjzgqzptm|
+  00000090  34 76 34 38 39 77 63 77  74 66 78 71 79 70 37 61  |4v489wcwtfxqyp7a|
+  000000a0  66 36 71 37 79 32 78 33  73 35 6d 63 78 6c 6a 38  |f6q7y2x3s5mcxlj8|
+  000000b0  63 63 71 37 65 78 76 71  32 67 6a 67 70 6c 75 7a  |ccq7exvq2gjgpluz|
+  000000c0  33 78 6c 6a 68 36 66 37  74 67 68 30 30 70 35 73  |3xljh6f7tgh00p5s|
+  000000d0  77 6b 6e 75 7a 64 64 71  37 68 30 6d 79 35 61 39  |wknuzddq7h0my5a9|
+  000000e0  68 71 70 6a 66 6a 79 63  61                       |hqpjfjyca|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:54.296929286 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:54.526104846 +0100 CET m=+4976.803392294,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) ea42d3fd4cb1c08841e998e3e17c0031447e6fec6876151db46da99dc42b0ac0,
+  Value: (lnwire.MilliSatoshi) 60000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1,
+ SettleIndex: (uint64) 1,
+ AmtPaid: (lnwire.MilliSatoshi) 60000 mSAT
+})
+
+2019-03-19 21:52:54.528 [INF] HSWC: ChannelLink(601:1:0) settling f624ecec0b6566f307920c5e7903d92fc30d65a43f3620c356f1554caa5916d1 as exit hop
+2019-03-19 21:52:55.502 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc01072a180)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 34 30 6e  31 70 77 66 7a 34 34 38  |lnsb740n1pwfz448|
+  00000010  70 70 35 70 36 66 68 36  61 73 34 34 68 6e 30 39  |pp5p6fh6as44hn09|
+  00000020  39 61 6c 6d 75 39 76 68  37 33 77 6a 61 63 75 68  |9almu9vh73wjacuh|
+  00000030  38 38 7a 6a 70 7a 70 35  36 6c 37 6b 6b 7a 61 6d  |88zjpzp56l7kkzam|
+  00000040  6b 34 39 63 67 33 73 64  70 38 32 70 73 68 6a 6d  |k49cg3sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 74 68 38 76 6c  |gcqzysxqztgth8vl|
+  00000080  78 72 6e 67 34 66 64 32  75 70 38 70 68 34 74 72  |xrng4fd2up8ph4tr|
+  00000090  32 75 79 7a 6e 39 74 6e  6e 73 78 34 63 68 6a 79  |2uyzn9tnnsx4chjy|
+  000000a0  32 34 6c 39 73 36 72 30  63 68 33 76 30 39 7a 77  |24l9s6r0ch3v09zw|
+  000000b0  72 30 6d 35 39 33 76 74  6e 79 6d 67 73 67 75 34  |r0m593vtnymgsgu4|
+  000000c0  66 36 30 75 70 6d 75 67  66 64 66 35 38 71 75 78  |f60upmugfdf58qux|
+  000000d0  65 73 32 75 36 6d 38 36  76 73 64 38 6d 30 68 78  |es2u6m86vsd8m0hx|
+  000000e0  6a 63 70 6c 61 33 32 36  6d                       |jcpla326m|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:55.306303805 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:55.50023323 +0100 CET m=+4977.777520597,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) b49c2a4f1942957b7fa037ade12b73b44fd055815da141a306ecc38a334d66ef,
+  Value: (lnwire.MilliSatoshi) 74000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 2,
+ SettleIndex: (uint64) 2,
+ AmtPaid: (lnwire.MilliSatoshi) 74000 mSAT
+})
+
+2019-03-19 21:52:55.502 [INF] HSWC: ChannelLink(601:1:0) settling 0e937d7615ade6f297bfdf0acbfa2e9771cb9ce290441a6bfeb585dddaa5c223 as exit hop
+2019-03-19 21:52:56.619 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002cd2c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 38 30 6e  31 70 77 66 7a 34 34 67  |lnsb880n1pwfz44g|
+  00000010  70 70 35 6a 6d 72 36 72  76 74 68 6a 6e 72 67 6d  |pp5jmr6rvthjnrgm|
+  00000020  65 35 35 68 6a 68 74 6d  35 61 30 34 78 38 66 76  |e55hjhtm5a04x8fv|
+  00000030  33 32 36 64 38 77 36 67  72 68 68 71 7a 78 36 70  |326d8w6grhhqzx6p|
+  00000040  64 76 65 71 6d 39 73 64  70 38 32 70 73 68 6a 6d  |dveqm9sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 63 30 77 72 72  |gcqzysxqztgc0wrr|
+  00000080  35 6e 72 6b 63 75 75 79  30 35 39 6b 7a 39 6e 33  |5nrkcuuy059kz9n3|
+  00000090  38 65 33 38 33 66 39 34  74 75 64 66 32 75 6b 61  |8e383f94tudf2uka|
+  000000a0  34 7a 79 61 79 76 34 32  6c 61 37 6c 70 32 70 7a  |4zyayv42la7lp2pz|
+  000000b0  63 74 72 33 70 39 32 6b  6d 6b 38 6b 39 63 33 65  |ctr3p92kmk8k9c3e|
+  000000c0  6a 61 78 72 68 72 71 37  71 61 63 6b 78 6c 75 68  |jaxrhrq7qackxluh|
+  000000d0  6e 36 70 6c 6b 79 38 33  36 61 77 6d 71 72 71 34  |n6plky836awmqrq4|
+  000000e0  6d 63 71 6d 77 72 78 33  73                       |mcqmwrx3s|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:56.322802991 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:56.6168767 +0100 CET m=+4978.894164378,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 9be36a1ba46f733c4abe1a68bfc1c7030204e5a369b68ced225980c5789e8544,
+  Value: (lnwire.MilliSatoshi) 88000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 3,
+ SettleIndex: (uint64) 3,
+ AmtPaid: (lnwire.MilliSatoshi) 88000 mSAT
+})
+
+2019-03-19 21:52:56.619 [INF] HSWC: ChannelLink(601:1:0) settling 96c7a1b17794c68de694bcaebdd3afa98e96455a69dda40ef7008da0b59906cb as exit hop
+2019-03-19 21:52:57.639 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001dd2c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 35 30  6e 31 70 77 66 7a 34 34  |lnsb1050n1pwfz44|
+  00000010  66 70 70 35 72 6b 73 70  61 33 76 6e 77 30 74 74  |fpp5rkspa3vnw0tt|
+  00000020  38 35 64 36 7a 71 6d 76  38 35 66 38 61 78 36 78  |85d6zqmv85f8ax6x|
+  00000030  74 64 7a 64 78 61 66 78  6a 32 7a 33 76 78 68 30  |tdzdxafxj2z3vxh0|
+  00000040  74 74 6b 67 6c 6e 76 71  64 70 38 32 70 73 68 6a  |ttkglnvqdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 6d 68 30 71  |6gcqzysxqztgmh0q|
+  00000080  35 6e 61 32 79 77 38 37  6a 70 68 36 30 7a 67 78  |5na2yw87jph60zgx|
+  00000090  6d 73 74 63 66 67 64 6a  73 61 67 33 73 64 78 34  |mstcfgdjsag3sdx4|
+  000000a0  78 68 66 39 6d 65 7a 64  34 61 67 36 74 63 39 72  |xhf9mezd4ag6tc9r|
+  000000b0  33 39 75 71 6e 35 65 33  71 65 33 74 65 39 39 6c  |39uqn5e3qe3te99l|
+  000000c0  65 35 72 64 73 71 6c 70  61 32 6c 37 33 71 6a 73  |e5rdsqlpa2l73qjs|
+  000000d0  6e 68 73 6b 73 78 72 6e  6b 35 6b 74 63 30 76 66  |nhsksxrnk5ktc0vf|
+  000000e0  37 64 73 71 61 67 33 7a  74 68                    |7dsqag3zth|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:57.455272426 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:57.637712221 +0100 CET m=+4979.914999621,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) b5dfda59c107297816fc684fecee21c44eedeab02aeee81139268bf6811e82f8,
+  Value: (lnwire.MilliSatoshi) 105000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 4,
+ SettleIndex: (uint64) 4,
+ AmtPaid: (lnwire.MilliSatoshi) 105000 mSAT
+})
+
+2019-03-19 21:52:57.639 [INF] HSWC: ChannelLink(601:1:0) settling 1da01ec59373d6b3d1ba1036c3d127e9b465b44d375269285161aef5aec8fcd8 as exit hop
+2019-03-19 21:52:58.628 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002cda40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 32 30 30  6e 31 70 77 66 7a 34 34  |lnsb1200n1pwfz44|
+  00000010  32 70 70 35 38 32 64 7a  33 79 6b 73 6e 61 78 38  |2pp582dz3yksnax8|
+  00000020  37 33 32 35 67 38 6b 38  35 74 35 70 6b 73 39 68  |7325g8k85t5pks9h|
+  00000030  70 6c 6b 72 32 30 39 6b  6c 39 33 6e 33 6c 32 35  |plkr209kl93n3l25|
+  00000040  7a 32 67 6b 72 63 74 71  64 70 38 32 70 73 68 6a  |z2gkrctqdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 66 70 64 6c  |6gcqzysxqztgfpdl|
+  00000080  76 39 74 6d 78 71 6e 77  71 6d 65 6e 66 78 75 75  |v9tmxqnwqmenfxuu|
+  00000090  6a 34 64 71 34 71 39 71  70 76 63 6c 77 37 76 66  |j4dq4q9qpvclw7vf|
+  000000a0  78 67 63 64 76 37 64 67  32 66 35 30 39 36 71 6e  |xgcdv7dg2f5096qn|
+  000000b0  76 72 70 33 68 34 66 68  70 71 74 70 76 61 66 34  |vrp3h4fhpqtpvaf4|
+  000000c0  6b 7a 6c 73 71 6e 6e 36  79 36 67 63 6c 66 39 73  |kzlsqnn6y6gclf9s|
+  000000d0  78 6d 33 6e 37 6a 67 32  6b 6c 78 66 6e 72 39 76  |xm3n7jg2klxfnr9v|
+  000000e0  6c 66 67 71 36 36 79 66  63 68                    |lfgq66yfch|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:58.466659187 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:58.626377361 +0100 CET m=+4980.903664709,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 249e1f63e0eca086503760881803ad9973aee96b0d60e20238a73d155a967c15,
+  Value: (lnwire.MilliSatoshi) 120000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 5,
+ SettleIndex: (uint64) 5,
+ AmtPaid: (lnwire.MilliSatoshi) 120000 mSAT
+})
+
+2019-03-19 21:52:58.628 [INF] HSWC: ChannelLink(601:1:0) settling 3a9a2892d09f4c7f455441ec7a2e81b40b70fec353cb6f96338fd54129161e16 as exit hop
+2019-03-19 21:52:59.642 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001dcd80)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 36 30 6e  31 70 77 66 7a 34 34 74  |lnsb860n1pwfz44t|
+  00000010  70 70 35 32 72 36 35 6b  67 72 67 36 74 32 36 6a  |pp52r65kgrg6t26j|
+  00000020  32 32 75 33 68 65 76 34  68 37 77 6b 7a 77 36 38  |22u3hev4h7wkzw68|
+  00000030  6a 7a 72 32 34 64 73 71  37 39 35 6d 33 78 72 72  |jzr24dsq795m3xrr|
+  00000040  77 66 34 65 6e 30 71 64  70 38 32 70 73 68 6a 6d  |wf4en0qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6a 6b 6b 6c 71  |gcqzysxqztgjkklq|
+  00000080  33 67 35 6b 38 68 39 64  36 39 7a 75 6d 34 79 39  |3g5k8h9d69zum4y9|
+  00000090  76 75 6d 70 39 6e 79 67  65 78 79 34 73 61 68 6d  |vump9nygexy4sahm|
+  000000a0  33 33 63 7a 6d 76 75 35  74 38 61 72 70 37 68 63  |33czmvu5t8arp7hc|
+  000000b0  61 33 6e 6c 66 78 76 7a  68 70 6a 65 76 75 34 77  |a3nlfxvzhpjevu4w|
+  000000c0  64 6d 72 67 7a 75 67 68  39 6d 61 7a 38 7a 61 68  |dmrgzugh9maz8zah|
+  000000d0  36 67 68 63 6b 7a 6b 35  33 70 64 7a 38 73 37 34  |6ghckzk53pdz8s74|
+  000000e0  6d 71 70 6e 6b 68 79 38  37                       |mqpnkhy87|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:52:59.479076191 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:52:59.640394398 +0100 CET m=+4981.917681778,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) ee1f6e1baff65e764f7bea4792e0e40e80d614d294a6dbaecaf3459788e01aff,
+  Value: (lnwire.MilliSatoshi) 86000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 6,
+ SettleIndex: (uint64) 6,
+ AmtPaid: (lnwire.MilliSatoshi) 86000 mSAT
+})
+
+2019-03-19 21:52:59.642 [INF] HSWC: ChannelLink(601:1:0) settling 50f54b2068d2d5a9295c8df2cadfceb09da3c843555b0078b4dc4c31b935ccde as exit hop
+2019-03-19 21:53:00.688 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001dd200)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 39 30 6e  31 70 77 66 7a 34 34 76  |lnsb990n1pwfz44v|
+  00000010  70 70 35 68 32 36 73 6d  30 61 65 75 6b 39 38 6d  |pp5h26sm0aeuk98m|
+  00000020  39 30 34 78 75 78 71 34  6b 66 71 74 61 6c 75 66  |904xuxq4kfqtaluf|
+  00000030  36 6d 6c 76 35 6d 36 70  79 6b 65 35 39 6a 79 38  |6mlv5m6pyke59jy8|
+  00000040  63 34 66 6b 34 6d 73 64  70 38 32 70 73 68 6a 6d  |c4fk4msdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6a 36 71 6a 38  |gcqzysxqztgj6qj8|
+  00000080  30 66 71 78 6a 61 6e 77  66 6c 67 76 66 71 6e 71  |0fqxjanwflgvfqnq|
+  00000090  70 77 6c 36 66 37 6c 61  37 32 66 6b 64 35 37 63  |pwl6f7la72fkd57c|
+  000000a0  74 6a 65 61 71 7a 38 32  63 67 64 77 63 33 70 61  |tjeaqz82cgdwc3pa|
+  000000b0  39 6e 77 70 37 6d 68 68  36 72 63 73 77 6d 32 39  |9nwp7mhh6rcswm29|
+  000000c0  33 6e 75 6c 73 66 6a 35  64 34 76 68 38 6c 6b 7a  |3nulsfj5d4vh8lkz|
+  000000d0  63 63 6e 30 65 73 75 35  77 6b 36 6e 74 68 30 33  |ccn0esu5wk6nth03|
+  000000e0  64 73 70 6d 71 37 38 71  66                       |dspmq78qf|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:00.486749191 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:00.686473584 +0100 CET m=+4982.963761122,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 71e26daaf2ffc937db9a8a5991c57fca9fa1acff192f6bb61073d84d73d3b60d,
+  Value: (lnwire.MilliSatoshi) 99000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 7,
+ SettleIndex: (uint64) 7,
+ AmtPaid: (lnwire.MilliSatoshi) 99000 mSAT
+})
+
+2019-03-19 21:53:00.690 [INF] HSWC: ChannelLink(601:1:0) settling bab50dbfb9e58a7d95f5370c0ad9205f7fc4eb7f6537a092d9a16443e2a9b577 as exit hop
+2019-03-19 21:53:01.669 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc01072aa80)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 31 34 30  6e 31 70 77 66 7a 34 34  |lnsb1140n1pwfz44|
+  00000010  64 70 70 35 65 79 71 30  32 33 6d 63 77 30 30 34  |dpp5eyq023mcw004|
+  00000020  63 71 63 73 32 66 77 75  34 33 64 36 7a 61 73 38  |cqcs2fwu43d6zas8|
+  00000030  39 67 30 6e 39 74 61 65  6b 36 6a 37 34 73 68 38  |9g0n9taek6j74sh8|
+  00000040  39 6e 77 6e 6a 64 76 73  64 70 38 32 70 73 68 6a  |9nwnjdvsdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 7a 6a 6b 7a  |6gcqzysxqztgzjkz|
+  00000080  35 79 72 32 70 70 70 64  38 39 77 30 68 78 66 71  |5yr2pppd89w0hxfq|
+  00000090  32 70 33 63 65 34 38 6a  37 79 35 6a 37 37 32 72  |2p3ce48j7y5j772r|
+  000000a0  79 66 73 68 7a 37 70 32  32 6e 30 67 67 61 35 78  |yfshz7p22n0gga5x|
+  000000b0  33 7a 39 78 38 71 6c 6b  39 74 37 68 7a 34 30 6a  |3z9x8qlk9t7hz40j|
+  000000c0  39 68 67 34 35 38 74 6c  6c 72 7a 64 74 35 6a 39  |9hg458tllrzdt5j9|
+  000000d0  77 68 30 74 61 6c 68 37  6e 30 76 6a 68 78 6a 76  |wh0talh7n0vjhxjv|
+  000000e0  7a 77 71 71 75 68 68 6e  75 67                    |zwqquhhnug|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:01.498990762 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:01.668294605 +0100 CET m=+4983.945581968,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 5da4614c0dab355eaa450e43da06d6d1c1c494845d62840a18a64eb233715f66,
+  Value: (lnwire.MilliSatoshi) 114000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 8,
+ SettleIndex: (uint64) 8,
+ AmtPaid: (lnwire.MilliSatoshi) 114000 mSAT
+})
+
+2019-03-19 21:53:01.670 [INF] HSWC: ChannelLink(601:1:0) settling c900f5477873df5c0310525dcac5ba176072a1f32afb9b6a5eac2e72cdd39359 as exit hop
+2019-03-19 21:53:02.675 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001ddbc0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 32 38 30  6e 31 70 77 66 7a 34 34  |lnsb1280n1pwfz44|
+  00000010  77 70 70 35 37 36 64 33  77 34 6c 73 78 7a 73 38  |wpp576d3w4lsxzs8|
+  00000020  33 37 36 7a 75 67 79 61  6c 36 61 37 34 76 73 76  |376zugyal6a74vsv|
+  00000030  6c 64 79 7a 70 30 75 64  68 68 61 7a 61 7a 38 6a  |ldyzp0udhhazaz8j|
+  00000040  75 6b 36 65 73 66 32 73  64 70 38 32 70 73 68 6a  |uk6esf2sdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 79 39 38 64  |6gcqzysxqztgy98d|
+  00000080  34 36 30 66 75 37 32 64  77 71 64 75 36 73 33 37  |460fu72dwqdu6s37|
+  00000090  33 6c 6b 78 39 79 77 65  34 37 38 66 6c 78 7a 78  |3lkx9ywe478flxzx|
+  000000a0  79 76 32 33 37 7a 76 79  73 33 30 30 30 6b 37 72  |yv237zvys3000k7r|
+  000000b0  38 74 72 78 77 74 79 71  76 6a 78 37 37 71 76 65  |8trxwtyqvjx77qve|
+  000000c0  63 70 39 6e 6b 78 39 6b  35 70 61 6c 6e 61 67 7a  |cp9nkx9k5palnagz|
+  000000d0  70 79 36 6d 78 76 74 6d  30 61 63 6a 70 66 68 61  |py6mxvtm0acjpfha|
+  000000e0  6a 38 63 71 68 35 64 6d  79 70                    |j8cqh5dmyp|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:02.506337495 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:02.673483047 +0100 CET m=+4984.950770421,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 178b9d662043853c21b67783c7fa8d74c6d16d57b6ab4be98ffdb80432ab1b86,
+  Value: (lnwire.MilliSatoshi) 128000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 9,
+ SettleIndex: (uint64) 9,
+ AmtPaid: (lnwire.MilliSatoshi) 128000 mSAT
+})
+
+2019-03-19 21:53:02.676 [INF] HSWC: ChannelLink(601:1:0) settling f69b1757f030a078fb42e209dfebbeab20cfb4820bf8dbdfa2e88f2e5b598255 as exit hop
+2019-03-19 21:53:03.685 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010784180)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 34 30 6e  31 70 77 66 7a 34 34 30  |lnsb940n1pwfz440|
+  00000010  70 70 35 6e 6d 73 6e 35  71 75 6a 32 6d 64 71 78  |pp5nmsn5quj2mdqx|
+  00000020  37 61 76 6a 68 36 79 7a  37 6a 38 74 71 35 78 30  |7avjh6yz7j8tq5x0|
+  00000030  63 76 6b 71 67 72 33 61  6a 70 6c 67 36 61 32 35  |cvkqgr3ajplg6a25|
+  00000040  73 73 63 77 77 79 73 64  70 38 32 70 73 68 6a 6d  |sscwwysdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 35 7a 72 63 38  |gcqzysxqztg5zrc8|
+  00000080  32 32 30 32 36 6a 61 70  7a 6b 7a 32 76 6d 78 6e  |22026japzkz2vmxn|
+  00000090  77 34 7a 30 32 6d 36 6a  67 7a 6a 77 75 77 74 61  |w4z02m6jgzjwuwta|
+  000000a0  63 36 6e 79 36 63 61 77  77 79 76 34 36 36 6e 61  |c6ny6cawwyv466na|
+  000000b0  63 70 33 70 79 70 61 7a  78 71 32 6c 30 30 39 6c  |cp3pypazxq2l009l|
+  000000c0  6e 68 6b 61 68 6c 70 79  74 6c 75 38 30 73 67 66  |nhkahlpytlu80sgf|
+  000000d0  39 79 63 76 7a 76 37 64  37 39 36 68 78 66 37 36  |9ycvzv7d796hxf76|
+  000000e0  61 67 71 74 63 35 65 76  38                       |agqtc5ev8|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:03.513299147 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:03.680773133 +0100 CET m=+4985.958060580,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d1485d6bac9b862ab6f4aca8cbaa842aa9d50d3b51883eb817a8bbcf157f43e0,
+  Value: (lnwire.MilliSatoshi) 94000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 10,
+ SettleIndex: (uint64) 10,
+ AmtPaid: (lnwire.MilliSatoshi) 94000 mSAT
+})
+
+2019-03-19 21:53:03.685 [INF] HSWC: ChannelLink(601:1:0) settling 9ee13a039256da037bac95f4417a47582867e19602071ec83f46baaa42187389 as exit hop
+2019-03-19 21:53:04.675 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002cc600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 30 30 6e  31 70 77 66 7a 34 34 73  |lnsb600n1pwfz44s|
+  00000010  70 70 35 34 36 64 70 78  71 76 61 6a 39 35 34 36  |pp546dpxqvaj9546|
+  00000020  6d 36 63 68 63 70 30 76  39 72 70 77 65 67 6c 35  |m6chcp0v9rpwegl5|
+  00000030  35 35 79 30 7a 6d 6a 71  79 61 67 6c 78 73 68 6d  |55y0zmjqyaglxshm|
+  00000040  30 6b 36 64 38 38 73 64  70 38 32 70 73 68 6a 6d  |0k6d88sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 61 75 64 79 67  |gcqzysxqztgaudyg|
+  00000080  6c 70 6e 6e 70 6c 64 65  30 77 38 66 38 71 6a 35  |lpnnplde0w8f8qj5|
+  00000090  39 6b 30 30 64 73 6b 63  77 36 73 6d 36 34 66 74  |9k00dskcw6sm64ft|
+  000000a0  30 6e 64 33 6a 63 7a 79  72 30 68 71 74 67 6b 75  |0nd3jczyr0hqtgku|
+  000000b0  35 30 38 71 6d 70 68 30  67 75 34 66 38 70 6d 35  |508qmph0gu4f8pm5|
+  000000c0  74 72 65 78 6a 61 75 32  6c 6b 78 63 6e 6a 78 32  |trexjau2lkxcnjx2|
+  000000d0  6e 63 36 6c 77 65 36 6e  35 6b 6a 71 36 37 72 74  |nc6lwe6n5kjq67rt|
+  000000e0  39 67 71 74 33 75 77 71  32                       |9gqt3uwq2|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:04.520889405 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:04.673799009 +0100 CET m=+4986.951086432,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 1e95437c85704368cc2ca071902dfed47a075e3ed43390e0b4926ae2d3c06955,
+  Value: (lnwire.MilliSatoshi) 60000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 11,
+ SettleIndex: (uint64) 11,
+ AmtPaid: (lnwire.MilliSatoshi) 60000 mSAT
+})
+
+2019-03-19 21:53:04.675 [INF] HSWC: ChannelLink(601:1:0) settling ae9a13019d91695d6f58be02f614617651fa528478b72013a8f9a17dbeda69cf as exit hop
+2019-03-19 21:53:05.709 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002ccb40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 34 30 6e  31 70 77 66 7a 34 34 33  |lnsb740n1pwfz443|
+  00000010  70 70 35 38 67 36 6d 6c  39 6b 6d 61 75 37 75 68  |pp58g6ml9kmau7uh|
+  00000020  30 77 35 39 72 6e 79 30  6c 68 79 34 67 77 73 68  |0w59rny0lhy4gwsh|
+  00000030  33 38 61 70 76 71 66 39  65 65 35 6e 6e 68 74 61  |38apvqf9ee5nnhta|
+  00000040  34 73 6d 6a 32 67 71 64  70 38 32 70 73 68 6a 6d  |4smj2gqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 75 76 64 74 30  |gcqzysxqztguvdt0|
+  00000080  38 63 76 68 37 76 72 38  35 37 32 66 35 6a 36 6e  |8cvh7vr8572f5j6n|
+  00000090  76 74 73 37 72 39 6e 76  63 79 64 76 38 6a 6d 33  |vts7r9nvcydv8jm3|
+  000000a0  72 78 64 35 7a 70 34 6d  6b 78 74 6d 76 37 34 6a  |rxd5zp4mkxtmv74j|
+  000000b0  67 71 34 65 78 64 64 76  74 77 68 32 68 68 36 32  |gq4exddvtwh2hh62|
+  000000c0  72 7a 78 66 6e 77 33 37  77 36 32 77 76 68 75 78  |rzxfnw37w62wvhux|
+  000000d0  66 39 6e 6c 34 75 78 79  76 30 72 61 64 37 38 65  |f9nl4uxyv0rad78e|
+  000000e0  6e 67 70 6c 6e 70 75 6d  68                       |ngplnpumh|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:05.528237861 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:05.706997777 +0100 CET m=+4987.984285255,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 126b81185ee7e559ff58ac2ca3ae3fff47e97750376e9a88304f83b7666a0eb9,
+  Value: (lnwire.MilliSatoshi) 74000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 12,
+ SettleIndex: (uint64) 12,
+ AmtPaid: (lnwire.MilliSatoshi) 74000 mSAT
+})
+
+2019-03-19 21:53:05.709 [INF] HSWC: ChannelLink(601:1:0) settling 3a35bf96dbef3dcbbdd428e647fee4aa1d0bc4fd0b0092e7349ceebed61b9290 as exit hop
+2019-03-19 21:53:06.713 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001dd800)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 39 30 6e  31 70 77 66 7a 34 34 6a  |lnsb890n1pwfz44j|
+  00000010  70 70 35 71 6a 64 6c 30  36 76 72 61 72 35 38 36  |pp5qjdl06vrar586|
+  00000020  30 65 30 33 61 37 67 32  39 36 79 78 38 37 65 6d  |0e03a7g296yx87em|
+  00000030  65 76 74 35 36 79 73 6c  7a 39 38 75 64 34 37 71  |evt56yslz98ud47q|
+  00000040  73 34 35 64 7a 6a 73 64  70 38 32 70 73 68 6a 6d  |s45dzjsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 7a 67 78 78 68  |gcqzysxqztgzgxxh|
+  00000080  7a 72 32 6d 38 68 78 38  6c 68 63 68 7a 37 72 33  |zr2m8hx8lhchz7r3|
+  00000090  39 76 37 67 33 32 32 64  38 6d 66 6e 37 7a 68 72  |9v7g322d8mfn7zhr|
+  000000a0  73 39 33 72 65 6b 67 74  76 6b 71 6e 65 6d 6a 37  |s93rekgtvkqnemj7|
+  000000b0  32 77 38 6d 6d 64 6c 61  74 33 78 64 76 38 6a 72  |2w8mmdlat3xdv8jr|
+  000000c0  33 72 61 35 6e 39 63 65  30 6d 6e 35 6d 78 6d 63  |3ra5n9ce0mn5mxmc|
+  000000d0  6a 6e 72 75 66 79 33 35  64 67 7a 33 37 64 6b 6e  |jnrufy35dgz37dkn|
+  000000e0  76 67 71 68 75 67 30 63  76                       |vgqhug0cv|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:06.53962542 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:06.712172403 +0100 CET m=+4988.989459735,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) af11c96356c1bca5f5ad6fe9c03ed4fe5b7fff63a82956a265791e00c96376ff,
+  Value: (lnwire.MilliSatoshi) 89000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 13,
+ SettleIndex: (uint64) 13,
+ AmtPaid: (lnwire.MilliSatoshi) 89000 mSAT
+})
+
+2019-03-19 21:53:06.713 [INF] HSWC: ChannelLink(601:1:0) settling 049bf7e983e8e87d3f2f8f7c85174431fd9de58ba6890f88a7e36be042b468a5 as exit hop
+2019-03-19 21:53:07.744 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001ddd40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 33 30  6e 31 70 77 66 7a 34 34  |lnsb1030n1pwfz44|
+  00000010  6e 70 70 35 79 68 72 30  73 36 30 76 35 76 6d 61  |npp5yhr0s60v5vma|
+  00000020  65 32 75 36 75 64 6e 61  66 79 70 78 74 67 36 32  |e2u6udnafypxtg62|
+  00000030  6e 6a 76 39 34 77 38 71  67 73 75 66 68 6b 73 7a  |njv94w8qgsufhksz|
+  00000040  38 6b 68 7a 71 72 7a 73  64 70 38 32 70 73 68 6a  |8khzqrzsdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 35 6e 6b 70  |6gcqzysxqztg5nkp|
+  00000080  39 64 61 66 77 79 67 71  61 78 39 70 64 6c 61 64  |9dafwygqax9pdlad|
+  00000090  72 68 6d 6a 33 79 6e 70  63 34 68 32 32 33 7a 79  |rhmj3ynpc4h223zy|
+  000000a0  38 35 70 78 33 63 35 77  64 6d 68 6c 71 63 71 34  |85px3c5wdmhlqcq4|
+  000000b0  35 68 77 79 72 64 39 68  33 74 6b 68 74 70 33 78  |5hwyrd9h3tkhtp3x|
+  000000c0  6d 76 6a 67 6a 64 34 79  30 34 39 34 6b 39 6e 68  |mvjgjd4y0494k9nh|
+  000000d0  6e 34 78 6b 37 30 6e 6c  6c 6d 79 68 77 6c 35 74  |n4xk70nllmyhwl5t|
+  000000e0  72 72 63 70 79 35 71 34  37 6a                    |rrcpy5q47j|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:07.552971523 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:07.742812713 +0100 CET m=+4990.020100100,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 185f0271a9f38e2ca43d52c605bf768df27c88a2cfe086e2160795d091af4554,
+  Value: (lnwire.MilliSatoshi) 103000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 14,
+ SettleIndex: (uint64) 14,
+ AmtPaid: (lnwire.MilliSatoshi) 103000 mSAT
+})
+
+2019-03-19 21:53:07.745 [INF] HSWC: ChannelLink(601:1:0) settling 25c6f869eca337dcab9ae367d490265a34a9c985ab8e044389bda023dae200c5 as exit hop
+2019-03-19 21:53:08.748 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0001dc9c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 31 37 30  6e 31 70 77 66 7a 34 34  |lnsb1170n1pwfz44|
+  00000010  35 70 70 35 79 6b 34 6d  68 71 73 61 66 6e 74 6e  |5pp5yk4mhqsafntn|
+  00000020  6e 33 68 77 36 73 33 76  73 61 6d 37 79 73 71 6e  |n3hw6s3vsam7ysqn|
+  00000030  35 6b 73 6e 65 68 74 6d  71 64 65 71 67 66 67 70  |5ksnehtmqdeqgfgp|
+  00000040  71 78 6c 61 72 71 7a 73  64 70 38 32 70 73 68 6a  |qxlarqzsdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 33 63 77 33  |6gcqzysxqztg3cw3|
+  00000080  33 34 63 79 63 73 75 6b  67 6e 77 33 75 30 63 75  |34cycsukgnw3u0cu|
+  00000090  65 38 7a 6d 72 79 71 73  76 32 61 6d 64 75 7a 70  |e8zmryqsv2amduzp|
+  000000a0  77 76 75 63 78 74 7a 78  79 6d 61 67 34 7a 73 34  |wvucxtzxymag4zs4|
+  000000b0  38 63 65 71 6e 70 6a 34  6b 39 64 67 37 74 72 6e  |8ceqnpj4k9dg7trn|
+  000000c0  68 38 32 35 74 6d 74 6b  63 30 66 6c 34 65 71 33  |h825tmtkc0fl4eq3|
+  000000d0  76 76 67 64 36 68 6b 34  32 79 7a 68 61 6c 6a 71  |vvgd6hk42yzhaljq|
+  000000e0  35 76 67 70 38 73 72 64  6d 38                    |5vgp8srdm8|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:08.562253272 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:08.745880354 +0100 CET m=+4991.023167828,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 81a80392af39824028670fcdf5ab65c7d1068347bc0fc1a8fb642ddb70594b62,
+  Value: (lnwire.MilliSatoshi) 117000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 15,
+ SettleIndex: (uint64) 15,
+ AmtPaid: (lnwire.MilliSatoshi) 117000 mSAT
+})
+
+2019-03-19 21:53:08.748 [INF] HSWC: ChannelLink(601:1:0) settling 25abbb821d4cd739c6eed422c8777e24013a5a13cdd7b037204250101bfd1805 as exit hop
+2019-03-19 21:53:09.760 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010778240)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 35 30 6e  31 70 77 66 7a 34 34 34  |lnsb850n1pwfz444|
+  00000010  70 70 35 66 75 6c 68 73  72 7a 67 77 65 34 70 6b  |pp5fulhsrzgwe4pk|
+  00000020  74 61 30 6e 63 63 61 6c  6a 68 33 37 6d 6e 6b 63  |ta0nccaljh37mnkc|
+  00000030  66 39 36 78 66 6d 34 75  39 6e 30 72 75 6c 79 32  |f96xfm4u9n0ruly2|
+  00000040  36 65 68 61 61 65 71 64  70 38 32 70 73 68 6a 6d  |6ehaaeqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 32 77 6c 6c 63  |gcqzysxqztg2wllc|
+  00000080  68 73 6c 6c 72 77 78 36  63 71 66 73 68 32 34 30  |hsllrwx6cqfsh240|
+  00000090  7a 66 6a 6c 76 77 35 35  30 6c 67 36 73 78 70 6e  |zfjlvw550lg6sxpn|
+  000000a0  36 74 68 73 34 63 67 39  74 64 6e 32 65 74 33 35  |6ths4cg9tdn2et35|
+  000000b0  6e 74 33 71 65 63 37 71  65 72 38 63 6d 70 71 76  |nt3qec7qer8cmpqv|
+  000000c0  65 74 64 61 61 6c 32 73  38 6b 32 72 7a 72 6c 73  |etdaal2s8k2rzrls|
+  000000d0  6e 6d 75 32 6d 75 61 33  77 6c 37 37 6b 32 63 66  |nmu2mua3wl77k2cf|
+  000000e0  71 63 71 77 35 6d 64 63  6d                       |qcqw5mdcm|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:09.576429245 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:09.758452311 +0100 CET m=+4992.035739746,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 79c0ef34a1135ecfbb7fc19626cfdcbb6eed637b75fce28b432996ee88b736fe,
+  Value: (lnwire.MilliSatoshi) 85000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 16,
+ SettleIndex: (uint64) 16,
+ AmtPaid: (lnwire.MilliSatoshi) 85000 mSAT
+})
+
+2019-03-19 21:53:09.761 [INF] HSWC: ChannelLink(601:1:0) settling 4f3f780c48766a1b2faf9e31dfcaf1f6e76c24ba32775e166f1f3e456b37ef72 as exit hop
+2019-03-19 21:53:10.801 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010778900)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 38 30 6e  31 70 77 66 7a 34 34 6b  |lnsb980n1pwfz44k|
+  00000010  70 70 35 6d 38 6e 66 39  32 36 76 6c 6c 67 64 67  |pp5m8nf926vllgdg|
+  00000020  70 67 39 63 75 34 77 6b  73 76 38 6c 75 39 65 6d  |pg9cu4wksv8lu9em|
+  00000030  33 6b 74 6b 72 64 70 65  67 76 73 37 36 63 37 39  |3ktkrdpegvs76c79|
+  00000040  32 76 70 70 38 30 71 64  70 38 32 70 73 68 6a 6d  |2vpp80qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 74 32 39 32 34  |gcqzysxqztgt2924|
+  00000080  78 79 6b 64 32 75 6c 73  35 6d 66 6a 6a 71 39 74  |xykd2uls5mfjjq9t|
+  00000090  33 32 32 37 75 73 37 64  37 66 77 32 72 35 35 6e  |3227us7d7fw2r55n|
+  000000a0  73 6c 76 6e 66 37 35 79  63 6e 37 39 38 37 72 7a  |slvnf75ycn7987rz|
+  000000b0  68 61 79 33 73 6b 37 37  30 74 34 71 76 67 67 65  |hay3sk770t4qvgge|
+  000000c0  63 38 6a 39 75 79 32 67  71 78 6e 38 67 79 75 72  |c8j9uy2gqxn8gyur|
+  000000d0  66 39 61 70 39 6b 61 39  65 38 61 72 38 30 32 36  |f9ap9ka9e8ar8026|
+  000000e0  39 67 71 71 75 61 7a 38  70                       |9gqquaz8p|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:10.589802312 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:10.79960965 +0100 CET m=+4993.076897017,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) df28a97de496b52caf6aeccc61c9d25911f3aa7d4c17c7d48bfee35fb4d5ccc6,
+  Value: (lnwire.MilliSatoshi) 98000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 17,
+ SettleIndex: (uint64) 17,
+ AmtPaid: (lnwire.MilliSatoshi) 98000 mSAT
+})
+
+2019-03-19 21:53:10.801 [INF] HSWC: ChannelLink(601:1:0) settling d9e692ab4cffd0d40505c72aeb4187ff0b9dc6cbb0da1ca190f6b1e2a98109de as exit hop
+2019-03-19 21:53:11.771 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010778f00)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 31 33 30  6e 31 70 77 66 7a 34 34  |lnsb1130n1pwfz44|
+  00000010  68 70 70 35 34 7a 38 64  61 63 68 37 77 7a 63 67  |hpp54z8dach7wzcg|
+  00000020  76 39 72 35 38 74 65 7a  67 30 65 65 30 6a 6e 68  |v9r58tezg0ee0jnh|
+  00000030  77 32 63 76 7a 75 30 36  70 72 39 35 65 7a 70 6c  |w2cvzu06pr95ezpl|
+  00000040  30 79 73 63 71 64 7a 73  64 70 38 32 70 73 68 6a  |0yscqdzsdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 64 78 37 64  |6gcqzysxqztgdx7d|
+  00000080  74 37 32 70 6a 64 73 78  74 34 65 64 78 61 66 77  |t72pjdsxt4edxafw|
+  00000090  75 70 77 33 68 33 6e 6a  67 68 7a 37 34 67 64 68  |upw3h3njghz74gdh|
+  000000a0  30 6e 73 36 32 38 74 32  73 77 71 6e 68 6b 34 39  |0ns628t2swqnhk49|
+  000000b0  76 34 34 63 37 64 37 74  73 74 74 6d 75 78 78 77  |v44c7d7tsttmuxxw|
+  000000c0  37 35 76 63 64 6d 79 79  37 33 30 35 6d 75 78 73  |75vcdmyy7305muxs|
+  000000d0  78 32 35 39 6c 30 6a 61  79 79 39 6c 61 30 76 6e  |x259l0jayy9la0vn|
+  000000e0  75 6b 63 70 39 30 70 66  76 73                    |ukcp90pfvs|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:11.598395482 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:11.769673066 +0100 CET m=+4994.046960395,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 438b56fe5132337537a0e1d45fe6d0006befa31bdc6d91af28593ff13fac6286,
+  Value: (lnwire.MilliSatoshi) 113000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 18,
+ SettleIndex: (uint64) 18,
+ AmtPaid: (lnwire.MilliSatoshi) 113000 mSAT
+})
+
+2019-03-19 21:53:11.771 [INF] HSWC: ChannelLink(601:1:0) settling a88edee2fe70b08614743af2243f397ca7772b0c171fa08cb4c883f792180345 as exit hop
+2019-03-19 21:53:12.791 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0002cc9c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 32 37 30  6e 31 70 77 66 7a 34 34  |lnsb1270n1pwfz44|
+  00000010  63 70 70 35 36 76 79 77  77 70 79 76 61 38 38 63  |cpp56vywwpyva88c|
+  00000020  72 74 6a 32 33 66 65 75  6c 64 6e 63 6b 68 6e 7a  |rtj23feuldnckhnz|
+  00000030  74 73 34 76 66 34 6c 7a  77 73 76 33 39 78 34 7a  |ts4vf4lzwsv39x4z|
+  00000040  78 73 78 65 34 38 66 71  64 70 38 32 70 73 68 6a  |xsxe48fqdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 66 73 78 6b  |6gcqzysxqztgfsxk|
+  00000080  72 37 66 76 75 76 6a 30  79 33 35 74 72 76 63 32  |r7fvuvj0y35trvc2|
+  00000090  77 71 6d 74 33 71 36 64  33 6c 64 38 61 32 71 61  |wqmt3q6d3ld8a2qa|
+  000000a0  6a 79 66 35 63 6c 33 39  30 79 67 67 71 66 76 72  |jyf5cl390yggqfvr|
+  000000b0  30 36 65 67 33 6e 68 71  72 64 76 70 37 64 7a 33  |06eg3nhqrdvp7dz3|
+  000000c0  74 74 76 79 79 6a 36 78  6c 6c 78 32 73 78 79 38  |ttvyyj6xllx2sxy8|
+  000000d0  30 6b 33 33 33 63 6d 34  79 67 6a 30 39 79 72 79  |0k333cm4ygj09yry|
+  000000e0  67 39 73 70 71 6d 7a 30  68 6b                    |g9spqmz0hk|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:12.62289523 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:12.789178695 +0100 CET m=+4995.066466184,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 958c19f36415294316b66375ebabac49d7ac2a760fe56322c8a36175c2d32bc4,
+  Value: (lnwire.MilliSatoshi) 127000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 19,
+ SettleIndex: (uint64) 19,
+ AmtPaid: (lnwire.MilliSatoshi) 127000 mSAT
+})
+
+2019-03-19 21:53:12.792 [INF] HSWC: ChannelLink(601:1:0) settling d308e7048ce9cf81ae4a8a73cfb678b5e625c2ac4d7e27419129aa2340d9a9d2 as exit hop
+2019-03-19 21:53:13.813 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc01072a0c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 33 30 6e  31 70 77 66 7a 34 34 65  |lnsb930n1pwfz44e|
+  00000010  70 70 35 6b 30 30 6a 67  73 77 33 32 71 79 30 75  |pp5k00jgsw32qy0u|
+  00000020  64 6b 68 68 75 35 7a 73  64 67 36 6c 30 75 39 6e  |dkhhu5zsdg6l0u9n|
+  00000030  38 64 6b 67 70 38 77 35  61 75 68 6d 65 73 75 7a  |8dkgp8w5auhmesuz|
+  00000040  66 75 33 38 6e 66 71 64  70 38 32 70 73 68 6a 6d  |fu38nfqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 72 71 35 34 38  |gcqzysxqztgrq548|
+  00000080  66 76 77 34 67 37 65 64  74 32 39 6e 39 77 6d 73  |fvw4g7edt29n9wms|
+  00000090  64 71 36 36 65 79 63 76  6d 76 73 6d 65 6c 7a 7a  |dq66eycvmvsmelzz|
+  000000a0  78 74 70 6e 73 71 32 66  65 68 38 36 61 35 34 64  |xtpnsq2feh86a54d|
+  000000b0  6e 6b 71 66 75 70 75 34  6e 32 76 6d 70 64 6b 7a  |nkqfupu4n2vmpdkz|
+  000000c0  6b 75 32 6d 63 75 78 78  67 37 67 34 39 65 75 39  |ku2mcuxxg7g49eu9|
+  000000d0  64 63 68 74 71 61 77 37  39 36 63 38 73 67 79 67  |dchtqaw796c8sgyg|
+  000000e0  78 67 71 38 72 65 6d 65  65                       |xgq8remee|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:13.631591853 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:13.811366521 +0100 CET m=+4996.088653909,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 10af1e7cbf6def06cd0eefc11718758b04f393d9192a54e35d3b0c55aeb8bc69,
+  Value: (lnwire.MilliSatoshi) 93000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 20,
+ SettleIndex: (uint64) 20,
+ AmtPaid: (lnwire.MilliSatoshi) 93000 mSAT
+})
+
+2019-03-19 21:53:13.813 [INF] HSWC: ChannelLink(601:1:0) settling b3df2441d15008fe36d7bf2828351afbf8599db6404eea7797de61c127913cd2 as exit hop
+2019-03-19 21:53:14.854 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010568300)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 39 30 6e  31 70 77 66 7a 34 34 36  |lnsb590n1pwfz446|
+  00000010  70 70 35 70 7a 6a 32 68  38 35 36 65 63 33 33 78  |pp5pzj2h856ec33x|
+  00000020  30 39 67 64 36 77 35 72  7a 32 39 70 66 6e 7a 64  |09gd6w5rz29pfnzd|
+  00000030  36 66 63 34 63 38 37 6a  6c 72 37 39 34 72 77 6e  |6fc4c87jlr794rwn|
+  00000040  78 76 63 36 74 30 71 64  70 38 32 70 73 68 6a 6d  |xvc6t0qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 38 75 76 6a 6c  |gcqzysxqztg8uvjl|
+  00000080  71 30 34 32 64 75 76 66  72 68 65 36 78 67 35 79  |q042duvfrhe6xg5y|
+  00000090  34 30 6d 36 39 7a 35 33  75 61 6b 63 33 6b 6c 6d  |40m69z53uakc3klm|
+  000000a0  39 77 39 38 76 34 70 34  79 6b 65 66 64 67 33 38  |9w98v4p4ykefdg38|
+  000000b0  6e 30 74 71 70 68 75 70  6e 64 30 65 76 67 32 65  |n0tqphupnd0evg2e|
+  000000c0  65 39 38 35 75 79 6a 65  63 36 30 37 72 7a 77 39  |e985uyjec607rzw9|
+  000000d0  74 34 37 36 39 37 61 78  34 66 6c 79 73 37 71 30  |t47697ax4flys7q0|
+  000000e0  66 67 71 6b 70 64 72 78  67                       |fgqkpdrxg|
+ },
+ CreationDate: (time.Time) 2019-03-19 21:53:14.657146821 +0100 CET,
+ SettleDate: (time.Time) 2019-03-19 21:53:14.852315623 +0100 CET m=+4997.129603007,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 4a3f9ceaeadbb4496aab13c1b3bf50856aea549ebbabf0fb954b4e85a0cc91d0,
+  Value: (lnwire.MilliSatoshi) 59000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 21,
+ SettleIndex: (uint64) 21,
+ AmtPaid: (lnwire.MilliSatoshi) 59000 mSAT
+})
+
+2019-03-19 21:53:14.854 [INF] HSWC: ChannelLink(601:1:0) settling 08a4ab9e9ace23133ca86e9d4189450a6626e938ae0fe97c7e2d46e99998d2de as exit hop
+2019-03-20 21:50:08.226 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-20 22:03:26.557 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-20 22:03:26.567 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-24 19:09:03.738 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-24 19:09:04.902 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-24 19:09:04.904 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-24 19:22:21.912 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-24 19:22:21.912 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-24 20:09:04.902 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-24 20:09:04.958 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-24 21:22:54.107 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-24 21:22:54.107 [INF] CRTR: Pruning 0 Zombie Channels

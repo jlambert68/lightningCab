@@ -23,19 +23,19 @@ function prepareButtons() {
 
   //AcceptPrice-Button
   var acceptpriceButton = <HTMLInputElement>document.getElementById("AcceptPrice");
-  acceptpriceButton.addEventListener("click", Event => askTaxiForPrice());
+  acceptpriceButton.addEventListener("click", Event => acceptPrice());
 
   //HaltPayments-Button
   var haltpaymentsTrueButton = <HTMLInputElement>document.getElementById("HaltPayments");
-  haltpaymentsTrueButton.addEventListener("click", Event => askTaxiForPrice());
+  haltpaymentsTrueButton.addEventListener("click", Event => haltPayments(true));
 
   //UnHaltPayments-Button
   var haltpaymentsFalseButton = <HTMLInputElement>document.getElementById("UnHaltPayments");
-  haltpaymentsFalseButton.addEventListener("click", Event => askTaxiForPrice());
+  haltpaymentsFalseButton.addEventListener("click", Event => haltPayments(false));
 
   //LeaveTaxi-Button
   var leavetaxiButton = <HTMLInputElement>document.getElementById("LeaveTaxi");
-  leavetaxiButton.addEventListener("click", Event => askTaxiForPrice());
+  leavetaxiButton.addEventListener("click", Event => leaveTaxi());
 
 }
 //****************************
