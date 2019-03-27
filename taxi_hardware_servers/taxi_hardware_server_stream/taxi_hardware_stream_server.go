@@ -19,7 +19,7 @@ import (
 // Global connection constants
 const (
 	localServerEngineLocalPort = common_config.GrpcTaxiHardwareStreamServer_port
-	runWithRadioControlledCard = false
+	runWithRadioControlledCard = true
 )
 
 // Constants used for Db-objects to save
@@ -51,10 +51,12 @@ type currentMessurements struct {
 	currentPowerMessurement int8
 	previousPowerMessurement int8
 	currentAccelaration int8
+	currentTime int64
+	previousTime int64
 }
 var powerData currentMessurements
 
-// This is run as an go-routine
+// This is run as an go-routine to be able to receive messurement data
 func receiveMessurements() {
 	powerData.currentPowerMessurement = 0
 	powerData.previousPowerMessurement = 0
@@ -70,12 +72,17 @@ func receiveMessurements() {
 		//Harvest channel
 		newMessurement := <-getPowerMessurements
 
-		// Add time messurement between values for better acceleration
+		// Calculate time difference between values
+		now := time.Now()
+		powerData.previousTime = powerData.currentTime
+		powerData.currentTime= now.UnixNano()
+
 
 		// Save values into global variable
 		powerData.previousPowerMessurement = powerData.currentPowerMessurement
 		powerData.currentPowerMessurement = newMessurement
-		powerData.currentAccelaration = int8(math.Abs(float64(powerData.currentAccelaration - powerData.previousPowerMessurement) / 0.1))
+		//TODO Fix acceleration calculation
+		powerData.currentAccelaration = int8(math.Abs(float64(powerData.currentAccelaration - powerData.previousPowerMessurement) / (float64(powerData.currentTime - powerData.previousTime) /10000000) ))
 	}
 }
 
@@ -99,6 +106,8 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 		//log.Printf("Sent the following powerdata: ", powerConsumption)
 		time.Sleep(100 * time.Millisecond)
 
+		// Switch source of data
+		if runWithRadioControlledCard == false {
 		powerConsumption.Speed = powerConsumption.Speed + 1
 		if powerConsumption.Speed > 100 {
 			powerConsumption.Speed = 0
@@ -108,6 +117,10 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 		if powerConsumption.Acceleration > 100 {
 			powerConsumption.Acceleration = 0
 			//log.Println("Powerconsuption: ", powerConsumption)
+		} else {
+			powerConsumption.Speed = int32(powerData.currentPowerMessurement)
+			powerConsumption.Acceleration = int32(powerData.currentAccelaration)
+		}
 		}
 		now := time.Now()
 		powerConsumption.Timestamp = now.UnixNano()

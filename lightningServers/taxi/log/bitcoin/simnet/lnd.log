@@ -4681,3 +4681,15 @@
 2019-03-24 20:09:04.958 [INF] CRTR: Pruning 0 Zombie Channels
 2019-03-24 21:22:54.107 [INF] CRTR: Examining Channel Graph for zombie channels
 2019-03-24 21:22:54.107 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-25 21:31:20.562 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-25 21:31:21.733 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-25 21:31:21.733 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-25 21:44:38.740 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-25 21:44:38.741 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-27 17:09:54.455 [INF] DISC: Retransmitting 1 outgoing channels
+2019-03-27 17:09:55.634 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-27 17:09:55.634 [INF] CRTR: Pruning 0 Zombie Channels
+2019-03-27 17:23:12.656 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-27 17:23:12.656 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-03-27 18:31:29.698 [INF] CRTR: Examining Channel Graph for zombie channels
+2019-03-27 18:31:29.704 [INF] CRTR: Pruning 0 Zombie Channels

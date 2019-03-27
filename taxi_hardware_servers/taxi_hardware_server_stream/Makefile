@@ -12,3 +12,6 @@ buildRasPi:
 
 run:
 	./taxi_hardware_stream_server
+
+move:
+	scp taxi_hardware_stream_server_raspi jlambert@192.168.2.51:/home/jlambert/go_workspace/src/jlambert/lightningCab/
