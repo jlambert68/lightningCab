@@ -39,8 +39,8 @@ var (
 )
 
 var (
-	// Use mcu pin 10, corresponds to physical pin 19 on the pi, 19 Dec = 13 Hex
-	pin = rpio.Pin(13)
+	// Use physical gpio pin 19 to the right of 13 that work for LED-test
+	pin = rpio.Pin(19)
 )
 
 /*var (
@@ -82,6 +82,8 @@ func (s *taxiHardwareServer) CheckPowerCutter(ctx context.Context, environment *
 
 	var returnMessage string
 
+	log.Printf("TestOrProdEnviroment: ", environment.TestOrProduction)
+
 	// Check if to Simulate or not
 	switch environment.TestOrProduction {
 
@@ -92,11 +94,16 @@ func (s *taxiHardwareServer) CheckPowerCutter(ctx context.Context, environment *
 
 	case taxiHW_api.TestOrProdEnviroment_Production:
 		// Use Test Taxi hardware
-		log.Printf("Test of Power Cutter hardware:")
+		log.Printf("Test of Power Cutter hardware, pin.High")
 		// CALL TO HARDWARE
 		pin.High()
+
+		log.Printf("Sleep for 3 seconds")
 		time.Sleep(3 * time.Second)
+
+		log.Printf("Test of Power Cutter hardware, pin.Low()")
 		pin.Low()
+
 		returnMessage = "A test of the Power Cutter hardware was done"
 	}
 
@@ -115,6 +122,8 @@ func (s *taxiHardwareServer) CutPower(ctx context.Context, powerCutterMessage *t
 
 	case taxiHW_api.TestOrProdEnviroment_Test:
 
+		log.Printf("TestOrProdEnviroment: ", powerCutterMessage.TollGateServoEnviroment)
+
 		switch powerCutterMessage.PowerCutterCommand {
 
 		case taxiHW_api.PowerCutterCommand_CutPower:
@@ -130,6 +139,7 @@ func (s *taxiHardwareServer) CutPower(ctx context.Context, powerCutterMessage *t
 
 	case taxiHW_api.TestOrProdEnviroment_Production:
 		// Use Test Taxi hardware
+		log.Printf("TestOrProdEnviroment: ", powerCutterMessage.TollGateServoEnviroment)
 
 		switch powerCutterMessage.PowerCutterCommand {
 

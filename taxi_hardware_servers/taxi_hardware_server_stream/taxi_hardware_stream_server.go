@@ -69,7 +69,7 @@ func receiveMessurements() {
 
 	// data retrieving as an go-routine
 	go messurePowerForward(getPowerMessurementsForward)
-	go messurePowerForward(getPowerMessurementsReversed)
+	go messurePowerRevered(getPowerMessurementsReversed)
 
 	// Loop to infinity
 	for {

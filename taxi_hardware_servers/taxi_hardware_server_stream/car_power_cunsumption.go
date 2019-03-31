@@ -15,7 +15,7 @@ var maxPowerMessureReversed float64
 func messurePowerForward(outgoingChannel chan<- int8)  {
 
 	//Initial values
-	maxPowerMessureForward = 0
+	maxPowerMessureForward = 3.5
 
 	var err error
 	a := raspi.NewAdaptor()
@@ -76,7 +76,7 @@ func messurePowerForward(outgoingChannel chan<- int8)  {
 func messurePowerRevered(outgoingChannel chan<- int8)  {
 
 	//Initial values
-	maxPowerMessureReversed = 0
+	maxPowerMessureReversed = 3.5
 
 	var err error
 	a := raspi.NewAdaptor()

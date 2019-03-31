@@ -4,32 +4,15 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/hashicorp/errwrap v1.0.0
-github.com/hashicorp/errwrap
-# github.com/hashicorp/go-multierror v1.0.0
-github.com/hashicorp/go-multierror
-# github.com/jlambert68/lightningCab v0.0.0-20190210184451-371ab93cef78
+# github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee
 github.com/jlambert68/lightningCab/common_config
 github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_api
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
-# github.com/pkg/errors v0.8.1
-github.com/pkg/errors
-# github.com/sigurn/crc8 v0.0.0-20160107002456-e55481d6f45c
-github.com/sigurn/crc8
-# github.com/sigurn/utils v0.0.0-20151230205143-f19e41f79f8f
-github.com/sigurn/utils
 # github.com/sirupsen/logrus v1.3.0
 github.com/sirupsen/logrus
 # github.com/stianeikeland/go-rpio v4.2.0+incompatible
 github.com/stianeikeland/go-rpio
-# gobot.io/x/gobot v1.12.0
-gobot.io/x/gobot
-gobot.io/x/gobot/drivers/i2c
-gobot.io/x/gobot/platforms/raspi
-gobot.io/x/gobot/drivers/spi
-gobot.io/x/gobot/sysfs
-gobot.io/x/gobot/drivers/gpio
 # golang.org/x/crypto v0.0.0-20190208162236-193df9c0f06f
 golang.org/x/crypto/ssh/terminal
 # golang.org/x/net v0.0.0-20190206173232-65e2d4e15006
@@ -82,16 +65,3 @@ google.golang.org/grpc/balancer/base
 google.golang.org/grpc/credentials/internal
 google.golang.org/grpc/binarylog/grpc_binarylog_v1
 google.golang.org/grpc/internal/syscall
-# periph.io/x/periph v3.4.0+incompatible
-periph.io/x/periph/conn/physic
-periph.io/x/periph/conn/spi
-periph.io/x/periph/host/sysfs
-periph.io/x/periph/conn
-periph.io/x/periph/conn/gpio
-periph.io/x/periph/conn/pin
-periph.io/x/periph
-periph.io/x/periph/conn/gpio/gpioreg
-periph.io/x/periph/conn/i2c
-periph.io/x/periph/conn/i2c/i2creg
-periph.io/x/periph/conn/spi/spireg
-periph.io/x/periph/host/fs

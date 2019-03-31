@@ -3,7 +3,7 @@ module jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server_stream
 require (
 	github.com/golang/protobuf v1.3.1-0.20190228151929-b5d812f8a370 // indirect
 	github.com/hashicorp/go-multierror v1.0.0 // indirect
-	github.com/jlambert68/lightningCab v0.0.0-20190313194430-4796c4ffb050
+	github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/sigurn/crc8 v0.0.0-20160107002456-e55481d6f45c // indirect
 	github.com/sigurn/utils v0.0.0-20151230205143-f19e41f79f8f // indirect

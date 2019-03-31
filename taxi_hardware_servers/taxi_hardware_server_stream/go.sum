@@ -16,8 +16,8 @@ github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/U
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-multierror v1.0.0 h1:iVjPR7a6H0tWELX5NxNe7bYopibicUzc7uPribsnS6o=
 github.com/hashicorp/go-multierror v1.0.0/go.mod h1:dHtQlpGsu+cZNNAkkCN/P3hoUDHhCYQXV3UM06sGGrk=
-github.com/jlambert68/lightningCab v0.0.0-20190313194430-4796c4ffb050 h1:7aT+QznxGFBvT2j6dsU8kmHAJd+t+SpCztYRhOWrc3I=
-github.com/jlambert68/lightningCab v0.0.0-20190313194430-4796c4ffb050/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
+github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee h1:VpTHnmrJ0eQ2LY+sWlmFCq3GURKzmEvVjwYyulnpQzE=
+github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1 h1:mweAR1A6xJ3oS2pRaGiHgQ4OO8tzTaLawm8vnODuwDk=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
