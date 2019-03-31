@@ -44,7 +44,6 @@ github.com/golang/mock v1.1.1/go.mod h1:oTYuIxOrZwtPieC+H1uAHpcLFnEyAGVDL/k47Jfb
 github.com/golang/protobuf v0.0.0-20180821051752-b27b920f9e71/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.2.0 h1:P3YflyNX/ehuJFLhxviNdFxQPkGK5cDcApsge1SqnvM=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
-github.com/golang/protobuf v1.3.1 h1:YF8+flBXS5eO826T4nzqPrxfhQThhXl0YzfuUPu4SBg=
 github.com/golang/protobuf v1.3.2-0.20190316015151-b85cd75de734 h1:02WFTORMNwxjoCKznyMBb5zKHtuYoU496KRjM05q5iM=
 github.com/golang/protobuf v1.3.2-0.20190316015151-b85cd75de734/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/grpc-ecosystem/grpc-gateway v0.0.0-20170724004829-f2862b476edc h1:3NXdOHZ1YlN6SGP3FPbn4k73O2MeEp065abehRwGFxI=
@@ -54,10 +53,8 @@ github.com/jackpal/gateway v1.0.4/go.mod h1:lTpwd4ACLXmpyiCTRtfiNyVnUmqT9RivzCDQ
 github.com/jackpal/go-nat-pmp v0.0.0-20170405195558-28a68d0c24ad/go.mod h1:QPH045xvCAeXUZOxsnwmrtiCoxIr9eob+4orBN1SBKc=
 github.com/jessevdk/go-flags v0.0.0-20141203071132-1679536dcc89/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
 github.com/jessevdk/go-flags v0.0.0-20170926144705-f88afde2fa19/go.mod h1:4FA24M0QyGHXBuZZK/XkWh8h0e1EYbRYJSGM75WSRxI=
-github.com/jlambert68/lightningCab v0.0.0-20190316195838-7daac39089dd h1:bYAg62FjCYT1QftBJVJxjoZn1ookbNwKgw/xKXiZUjA=
-github.com/jlambert68/lightningCab v0.0.0-20190316195838-7daac39089dd/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
-github.com/jlambert68/lightningCab v0.0.0-20190319184229-17cb41b54522 h1:iHi0v0xqvRKo/TIYUl/SfOg3jf5oRk6+389K+AXsDD4=
-github.com/jlambert68/lightningCab v0.0.0-20190319184229-17cb41b54522/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
+github.com/jlambert68/lightningCab v0.0.0-20190327194050-ba9b4ebfcd06 h1:JOE9FN+Zsz9SdS5eCWAajo9PmYX5JNPsthCs42VHYnY=
+github.com/jlambert68/lightningCab v0.0.0-20190327194050-ba9b4ebfcd06/go.mod h1:0SPAq3aXc39dqlj3hXjVJnDGiFi2coB2REe+4t3jIlc=
 github.com/jrick/logrotate v1.0.0/go.mod h1:LNinyqDIJnpAur+b8yyulnQw/wDuN1+BYKlTRt3OuAQ=
 github.com/juju/clock v0.0.0-20180808021310-bab88fc67299/go.mod h1:nD0vlnrUjcjJhqN5WuCWZyzfd5AHZAC9/ajvbSx69xA=
 github.com/juju/errors v0.0.0-20181118221551-089d3ea4e4d5/go.mod h1:W54LbzXuIE0boCoNJfwqpmkKJ1O4TCTZMetAt6jGk7Q=

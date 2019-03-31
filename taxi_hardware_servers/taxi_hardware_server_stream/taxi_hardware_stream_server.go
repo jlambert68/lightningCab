@@ -19,7 +19,7 @@ import (
 // Global connection constants
 const (
 	localServerEngineLocalPort = common_config.GrpcTaxiHardwareStreamServer_port
-	runWithRadioControlledCard = true
+	runWithRadioControlledCar  = true
 )
 
 // Constants used for Db-objects to save
@@ -58,19 +58,32 @@ var powerData currentMessurements
 
 // This is run as an go-routine to be able to receive messurement data
 func receiveMessurements() {
+	var newMessurement int8
 	powerData.currentPowerMessurement = 0
 	powerData.previousPowerMessurement = 0
 	powerData.currentAccelaration = 0
 
-	getPowerMessurements := make(chan int8, 1)
+	// Create channels for incoming power usage for Forward and Reversed
+	getPowerMessurementsForward := make(chan int8, 1)
+	getPowerMessurementsReversed := make(chan int8, 1)
 
 	// data retrieving as an go-routine
-	go messurePower(getPowerMessurements)
+	go messurePowerForward(getPowerMessurementsForward)
+	go messurePowerForward(getPowerMessurementsReversed)
 
 	// Loop to infinity
 	for {
-		//Harvest channel
-		newMessurement := <-getPowerMessurements
+		//Harvest channels
+		newMessurementForward := <-getPowerMessurementsForward
+		newMessurementReversed := <-getPowerMessurementsReversed
+
+		// Only use the biggest value
+		if newMessurementForward > newMessurementReversed {
+			newMessurement = newMessurementForward
+		} else {
+			newMessurement = newMessurementReversed
+		}
+
 
 		// Calculate time difference between values
 		now := time.Now()
@@ -107,20 +120,20 @@ func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessa
 		time.Sleep(100 * time.Millisecond)
 
 		// Switch source of data
-		if runWithRadioControlledCard == false {
-		powerConsumption.Speed = powerConsumption.Speed + 1
-		if powerConsumption.Speed > 100 {
-			powerConsumption.Speed = 0
-			//log.Println("Powerconsuption: ", powerConsumption)
-		}
-		powerConsumption.Acceleration = powerConsumption.Acceleration + 2
-		if powerConsumption.Acceleration > 100 {
-			powerConsumption.Acceleration = 0
-			//log.Println("Powerconsuption: ", powerConsumption)
+		if runWithRadioControlledCar == false {
+			powerConsumption.Speed = powerConsumption.Speed + 1
+			if powerConsumption.Speed > 100 {
+				powerConsumption.Speed = 0
+				//log.Println("Powerconsuption: ", powerConsumption)
+			}
+			powerConsumption.Acceleration = powerConsumption.Acceleration + 2
+			if powerConsumption.Acceleration > 100 {
+				powerConsumption.Acceleration = 0
+				//log.Println("Powerconsuption: ", powerConsumption)
+			}
 		} else {
 			powerConsumption.Speed = int32(powerData.currentPowerMessurement)
 			powerConsumption.Acceleration = int32(powerData.currentAccelaration)
-		}
 		}
 		now := time.Now()
 		powerConsumption.Timestamp = now.UnixNano()
@@ -160,7 +173,7 @@ func main() {
 	defer cleanup()
 
 	// Start up messurement from Engine if radio controlled car is used
-	if runWithRadioControlledCard == true {
+	if runWithRadioControlledCar == true {
 		log.Println("Starting messurement from engine!")
 		go receiveMessurements()
 	}

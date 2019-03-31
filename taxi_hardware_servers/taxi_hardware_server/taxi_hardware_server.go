@@ -1,23 +1,18 @@
 package main
 
 import (
-	"log"
+	"fmt"
+	"github.com/jlambert68/lightningCab/common_config"
+	"github.com/stianeikeland/go-rpio"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"log"
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
-	"fmt"
 	"time"
-	"github.com/jlambert68/lightningCab/common_config"
-	"net"
-	"golang.org/x/net/context"
-
 	taxiHW_api "github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_api"
-
-	"gobot.io/x/gobot"
-	"gobot.io/x/gobot/platforms/raspi"
-
-	"gobot.io/x/gobot/drivers/i2c"
 )
 
 // Global connection constants
@@ -41,6 +36,11 @@ const (
 var (
 	registerTaxiHardwareServer *grpc.Server
 	lis                        net.Listener
+)
+
+var (
+	// Use mcu pin 10, corresponds to physical pin 19 on the pi, 19 Dec = 13 Hex
+	pin = rpio.Pin(13)
 )
 
 /*var (
@@ -68,6 +68,7 @@ func (s *taxiHardwareServer) CheckPowerSensor(ctx context.Context, environment *
 		// Use Test Taxi hardware
 		log.Printf("Test of Power Sensor hardware:")
 		// CALL TO HARDWARE
+
 		returnMessage = "A test of the Power Sensor hardware was done"
 	}
 
@@ -93,6 +94,9 @@ func (s *taxiHardwareServer) CheckPowerCutter(ctx context.Context, environment *
 		// Use Test Taxi hardware
 		log.Printf("Test of Power Cutter hardware:")
 		// CALL TO HARDWARE
+		pin.High()
+		time.Sleep(3 * time.Second)
+		pin.Low()
 		returnMessage = "A test of the Power Cutter hardware was done"
 	}
 
@@ -130,11 +134,17 @@ func (s *taxiHardwareServer) CutPower(ctx context.Context, powerCutterMessage *t
 		switch powerCutterMessage.PowerCutterCommand {
 
 		case taxiHW_api.PowerCutterCommand_CutPower:
+			//Cut Power on pin
+			pin.Low()
+
 			log.Printf("Execute Hardware Power Cutter 'Cuts' power:")
 			acknack = true
 			returnMessage = "Execute Hardware that Power Cutter 'Cuts' power"
 
 		case taxiHW_api.PowerCutterCommand_HavePower:
+			//Have Power on pin
+			pin.High()
+
 			log.Printf("Execute Hardware Power Cutter 'Have' power:")
 			acknack = true
 			returnMessage = "Execute Hardware that Power Cutter 'Have' power"
@@ -177,25 +187,18 @@ func main() {
 	defer cleanup()
 
 	//*******************************
-	a := raspi.NewAdaptor()
-	ads1015 := i2c.NewADS1015Driver(a)
-	// Adjust the gain to be able to read values of at least 5V
-	ads1015.DefaultGain, _ = ads1015.BestGainForVoltage(5.0)
-
-	work := func() {
-		gobot.Every(100*time.Millisecond, func() {
-			v, _ := ads1015.ReadWithDefaults(0)
-			fmt.Println("A0", v)
-		})
+	// initate PowerCutter
+	if err := rpio.Open(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
-	robot := gobot.NewRobot("ads1015bot",
-		[]gobot.Connection{a},
-		[]gobot.Device{ads1015},
-		work,
-	)
+	// Unmap gpio memory when done
+	defer rpio.Close()
 
-	robot.Start()
+	// Set pin to output mode
+	pin.Output()
+
 	//*******************************
 
 	// Set DB Connection

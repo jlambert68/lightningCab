@@ -45,11 +45,11 @@ var (
 	addressToDialToTaxiHWStreamServer string = common_config.GrpcTaxiHardwareStreamServer_address + common_config.GrpcTaxiHardwareStreamServer_port
 
 	//HW
-	useEnv                                        = taxiHW_api.TestOrProdEnviroment_Test
+	useEnv                                        = taxiHW_api.TestOrProdEnviroment_Production
 	useHardwareEnvironment *taxiHW_api.Enviroment = &taxiHW_api.Enviroment{TestOrProduction: useEnv}
 
 	//HW-Stream
-	useEnv_stream                                                  = taxiHW_stream_api.TestOrProdEnviroment_Test
+	useEnv_stream                                                  = taxiHW_stream_api.TestOrProdEnviroment_Production
 	messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage = &taxiHW_stream_api.MessasurePowerMessage{ TollGateServoEnviroment: useEnv_stream, Intervall: common_config.MilliSecondsBetweenPaymentRequest}
 
 )
@@ -1076,8 +1076,8 @@ func main() {
 	}()
 	// *********************
 
-	// Test State Machine in Test Mode
-	useEnv = taxiHW_api.TestOrProdEnviroment_Test
+	// Test State Machine in Test/Production Mode
+	useEnv = taxiHW_api.TestOrProdEnviroment_Production
 	//testTaxiCycle()
 
 	//Initiate Lightning
