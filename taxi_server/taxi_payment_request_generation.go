@@ -98,6 +98,10 @@ func calculateInvoiceAmount() {
 
 	//spew.Println(lastPaymentData)
 	//log.Println(lastPaymentData)
+	/*taxi.logger.WithFields(logrus.Fields{
+		"lastPaymentData":    lastPaymentData,
+	}).Info("lastPaymentData for Invoice")*/
+
 }
 
 func receiveEnginePowerdata(client taxiHW_stream_api.TaxiStreamHardwareClient, messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage) {

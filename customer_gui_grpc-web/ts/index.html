@@ -36,6 +36,10 @@
             color: white;
         }
 
+        .hideButton {
+            visibility: hidden;
+        }
+
         .blockAskTaxiForPrice {
             display: block;
             width: 100%;
@@ -259,6 +263,7 @@
             -webkit-animation: spin 4s linear infinite;
             -moz-animation: spin 4s linear infinite;
             animation: spin 4s linear infinite;
+            transition:  0.2s ease-in-out;
         }
 
         @-moz-keyframes spin {
@@ -290,7 +295,7 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/build/bundle.js" charset="utf-8"></script>
-    <!--script src="frontend.js"></script--!>
+
     <script type="text/javascript">
 
 
@@ -432,7 +437,7 @@
             <br>
             <button class="blockHaltPayments" id="HaltPayments">Halt Payments</button>
             <br>
-            <button class="blockUnHaltPayments" id="UnHaltPayments">Un-Halt Payments
+            <button class="hideButton" class="blockUnHaltPayments" id="UnHaltPayments">Un-Halt Payments
             </button>
             <br>
             <button class="blockLeaveTaxi" id="LeaveTaxi">Leave Taxi</button>

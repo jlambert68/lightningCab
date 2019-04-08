@@ -1,21 +1,21 @@
 package main
 
 import (
-	"google.golang.org/grpc"
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 	"os"
+	"errors"
+	"github.com/btcsuite/btcd/rpcclient"
 	//taxoTotollGate_api "jlambert/lightningCab/toll_road_server/toll_road_grpc_api"
 	"github.com/jlambert68/lightningCab/common_config"
 	"github.com/jlambert68/lightningCab/grpc_api/taxi_grpc_api"
-	"strconv"
-	"time"
+	"github.com/markdaws/simple-state-machine"
 	"io"
 	"jlambert/lightningCab/customer_server/lightningConnection"
-	"github.com/markdaws/simple-state-machine"
-	"github.com/btcsuite/btcd/rpcclient"
-	"errors"
 	"os/signal"
+	"strconv"
 	"syscall"
+	"time"
 	//"net"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs/proto/server"
 	//"jlambert/lightningCab/customer_server/customer_html/gopherjs"
@@ -216,6 +216,11 @@ func NewCustomer(title string) *Customer {
 	cfg.OnEnter(func() {
 		//log.Println("*** Entering 'StateCustomerWaitingForCommands' ")
 		customer.logger.Info("*** Entering 'StateCustomerWaitingForCommands' ")
+
+		// Reset variable
+		averagePayment = []averagePayment_struct{}
+
+
 		/*if customer.askTaxiForPrice(true) == nil {
 			_ = customer.askTaxiForPrice(false)
 		}*/
@@ -307,7 +312,14 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerWaitsForCommands, StateCustomerWaitingForCommands)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiKickedOutCustomer' ")
-		customer.logger.Info("*** Entering 'StateTaxiKickedOutCustomer' ")})
+		customer.logger.Info("*** Entering 'StateTaxiKickedOutCustomer' ")
+		// Execute Trigger
+		err := customer.CustomerStateMachine.Fire(TriggerCustomerWaitsForCommands.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, customer.CustomerStateMachine.State(), TriggerCustomerWaitsForCommands, err)
+
+		}
+	})
 	cfg.OnExit(func() {
 		//log.Println("*** Exiting 'StateTaxiKickedOutCustomer' ")
 		customer.logger.Info("*** Exiting 'StateTaxiKickedOutCustomer' ")
@@ -320,7 +332,15 @@ func NewCustomer(title string) *Customer {
 	cfg.Permit(TriggerCustomerWaitsForCommands, StateCustomerWaitingForCommands)
 	cfg.Permit(TriggerCustomerEndsInErrorMode, StateCustomerIsInErrorMode)
 	cfg.OnEnter(func() { //log.Println("*** Entering 'StateCustomerLeftTaxi' ")
-		customer.logger.Info("*** Entering 'StateCustomerLeftTaxi' ")})
+		customer.logger.Info("*** Entering 'StateCustomerLeftTaxi' ")
+
+		// Execute Trigger
+		err := customer.CustomerStateMachine.Fire(TriggerCustomerWaitsForCommands.Key, nil)
+		if err != nil {
+			logTriggerStateError(4, customer.CustomerStateMachine.State(), TriggerCustomerWaitsForCommands, err)
+
+		}
+	})
 	cfg.OnExit(func() {
 		//log.Println("*** Exiting 'StateCustomerLeftTaxi' ")
 		customer.logger.Info("*** Exiting 'StateCustomerLeftTaxi' ")
@@ -855,6 +875,10 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 	// Used for controlling state machine
 	customer.PaymentStreamStarted = true
 	for {
+		if customer.CustomerStateMachine.IsInState(StateCustomerHaltedPayments) {
+			//Quit goroutine
+			break
+		}
 		if customer.CustomerStateMachine.IsInState(StateCustomerWaitingForPaymentRequest) {
 
 			invoiceAndPaymentData, err := stream.Recv()
@@ -873,6 +897,11 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 				os.Exit(0)
 
 			}
+
+			customer.logger.WithFields(logrus.Fields{
+				"New Invoice":    invoiceAndPaymentData,
+			}).Info("Received new Invoice from Taxi")
+
 			customer.paymentStatistics.numbertOfReceivedTransactions = customer.paymentStatistics.numbertOfReceivedTransactions + 1
 			customer.receivedTaxiInvoiceButNotPaid = true
 			customer.invoiceReceivedAtleastOnce = true
@@ -908,7 +937,7 @@ func receiveTaxiInvoices(client taxi_grpc_api.TaxiClient, enviroment *taxi_grpc_
 				customer.logger.Warning("Error, Should be able to change state with Trigger: 'TriggerCustomerReceivesPaymentRequest'")
 			} else {
 
-				if customer.CustomerStateMachine.IsInState(StateCustomerPaymentRequestReceived) {
+				if customer.CustomerStateMachine.IsInState(StateCustomerPaymentRequestReceived) || customer.CustomerStateMachine.IsInState(StateCustomerWaitingForPaymentRequest) {
 					err = lightningConnection.PayReceivedInvoicesFromTaxi(invoicesAndPaymentData)
 					if err != nil {
 						//log.Println("Problem when paying Invoice from Taxi: ", err)

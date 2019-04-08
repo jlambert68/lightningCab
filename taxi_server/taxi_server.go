@@ -275,7 +275,7 @@ func NewTaxi(title string) *Taxi {
 	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiIsReadyToDrive' ")
 		taxi.logger.Info("*** Entering 'StateTaxiIsReadyToDrive' ")
 		// Have Power to Engine
-		taxi.CutPowerToEngine(false)
+		//taxi.CutPowerToEngine(false)
 	})
 	cfg.OnExit(func() {
 		//log.Println("*** Exiting 'StateTaxiIsReadyToDrive' ")
@@ -291,8 +291,7 @@ func NewTaxi(title string) *Taxi {
 	cfg.Permit(TriggerTaxiEndsInErrorMode, StateTaxiIsInErrorMode)
 	cfg.OnEnter(func() { //log.Println("*** Entering 'StateTaxiIsWaitingForPayment' ")
 		taxi.logger.Info("*** Entering 'StateTaxiIsWaitingForPayment' ")
-		// Cut Power to Engine
-		taxi.CutPowerToEngine(false)
+
 	})
 		cfg.OnExit(func() {
 			//log.Println("*** Exiting 'StateTaxiIsWaitingForPayment' ")
@@ -309,8 +308,6 @@ func NewTaxi(title string) *Taxi {
 	cfg.OnEnter(func() {
 		//log.Println("*** Entering 'StateCustomerStoppedPaying' ")
 		taxi.logger.Info("*** Entering 'StateCustomerStoppedPaying' ")
-		// Cut Power to Engine
-		taxi.CutPowerToEngine(true)
 		_ = taxi.TaxiStateMachine.Fire(TriggerCustomerLeavesTaxi.Key, nil)
 	})
 	cfg.OnExit(func() {
@@ -771,29 +768,8 @@ func (taxi *Taxi) PaymentsStopsComing(check bool) (err error) {
 	currentTrigger = TriggerTaxiStopsStreamsAndWaitsforPayment
 
 	// Allways Stop Taxi Engine if we come here
-	PowerCutterMessage := &taxiHW_api.PowerCutterMessage{TollGateServoEnviroment: useEnv,PowerCutterCommand:taxiHW_api.PowerCutterCommand_CutPower}
-	resp, err := taxiHWClient.CutPower(context.Background(), PowerCutterMessage)
-
-	if err != nil {
-		logMessagesWithError(4, "Could not send 'PowerCutterMessage' to address: "+addressToDialToTaxiHWServer+". Error Message:", err)
-		//Set system in Error State due no connection to hardware server for 'PowerCutterMessage'
-		logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-		err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-	} else {
-
-		if resp.GetAcknack() == true {
-			logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Gate is Closed")
-			logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-		} else {
-			logMessagesWithOutError(4, "'PowerCutterMessage' on address "+addressToDialToTaxiHWServer+" says Servo is NOT OK")
-			logMessagesWithOutError(4, "Response Message: "+resp.Comments)
-
-			//Set system in Error State due to malfunctioning hardware
-			logMessagesWithOutError(4, "Putting State machine into Error state and Stop")
-			err = taxi.TaxiStateMachine.Fire(TriggerTaxiEndsInErrorMode.Key, nil)
-
-		}
-	}
+	//Stop Engine
+	//taxi.CutPowerToEngine(true)
 
 
 	switch check {

@@ -77,11 +77,16 @@ func receiveMessurements() {
 		newMessurementForward := <-getPowerMessurementsForward
 		newMessurementReversed := <-getPowerMessurementsReversed
 
+		log.Println("newMessurementForward: ", newMessurementForward)
+		log.Println("newMessurementReversed: ", newMessurementReversed)
 		// Only use the biggest value
 		if newMessurementForward > newMessurementReversed {
 			newMessurement = newMessurementForward
 		} else {
 			newMessurement = newMessurementReversed
+		}
+		if newMessurement < 0 {
+			newMessurement = 0
 		}
 
 
@@ -95,8 +100,19 @@ func receiveMessurements() {
 		powerData.previousPowerMessurement = powerData.currentPowerMessurement
 		powerData.currentPowerMessurement = newMessurement
 		//TODO Fix acceleration calculation
-		powerData.currentAccelaration = int8(math.Abs(float64(powerData.currentAccelaration - powerData.previousPowerMessurement) / (float64(powerData.currentTime - powerData.previousTime) /10000000) ))
-	}
+		currentAccelaration := int8(math.Abs(float64(powerData.currentPowerMessurement - powerData.previousPowerMessurement) / (float64(powerData.currentTime - powerData.previousTime) /1000000000) ))
+		if currentAccelaration > 100 {
+			powerData.currentAccelaration = 100
+		} else {
+			if currentAccelaration < 0 {
+				currentAccelaration = 0
+			}
+			powerData.currentAccelaration = currentAccelaration
+
+		}
+
+		log.Println(powerData)
+		}
 }
 
 func (s *taxiHardwareStreamServer) MessasurePowerConsumption(messasurePowerMessage *taxiHW_stream_api.MessasurePowerMessage, stream taxiHW_stream_api.TaxiStreamHardware_MessasurePowerConsumptionServer) (err error) {

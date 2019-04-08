@@ -183,6 +183,9 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 
 
 		if paymentRequestIsPaid == true || firstTime == true {
+			// Let Engine have power
+			taxi.CutPowerToEngine(false)
+
 			if firstTime == true {
 				//log.Printf("First time creating PaymentRequest")
 				taxi.logger.Info("First time creating PaymentRequest")
@@ -284,6 +287,7 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 				//log.Printf("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
 				taxi.logger.Warning("PaymentRequest not paid in time. Stop Taxi or continue stop and wait for payment")
 				taxi.PaymentsStopsComing(false)
+				taxi.CutPowerToEngine(true)
 			} else {
 				//log.Println("This should not happend for firstTimer")
 				taxi.logger.Error("This should not happend for firstTimer")
@@ -308,6 +312,7 @@ func (s *taxiServiceServer) PaymentRequestStream(enviroment *taxi_api.Enviroment
 				//log.Println("Abort Payment Request Generation and make Taxi ready for next customer")
 				taxi.logger.Warning("Abort Payment Request Generation and make Taxi ready for next customer")
 				taxi.abortPaymentRequestGeneration(false)
+				taxi.CutPowerToEngine(true)
 			} else {
 				//log.Println("This should not happend for lastTimer")
 				taxi.logger.Error("This should not happend for lastTimer")

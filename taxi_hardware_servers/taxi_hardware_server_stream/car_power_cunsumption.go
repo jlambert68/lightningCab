@@ -49,11 +49,12 @@ func messurePowerForward(outgoingChannel chan<- int8)  {
 				// adjust maxPowermessure if greater value found
 				if v > maxPowerMessureForward {
 					maxPowerMessureForward = v
+					fmt.Println("A1", v)
 				}
 				// Calculate percent vlue for power
 				percent := int8(v/ maxPowerMessureForward *100)
-				fmt.Println("A1", v)
-				fmt.Println("Persent", percent)
+				//fmt.Println("A1", v)
+				//fmt.Println("Persent", percent)
 
 				// Write back to channel
 				outgoingChannel <- percent
@@ -110,11 +111,12 @@ func messurePowerRevered(outgoingChannel chan<- int8)  {
 				// adjust maxPowermessure if greater value found
 				if v > maxPowerMessureReversed {
 					maxPowerMessureReversed = v
+					fmt.Println("A0", v)
 				}
 				// Calculate percent vlue for power
 				percent := int8(v/ maxPowerMessureReversed *100)
-				fmt.Println("A0", v)
-				fmt.Println("Persent", percent)
+				//fmt.Println("A0", v)
+				//fmt.Println("Persent", percent)
 
 				// Write back to channel
 				outgoingChannel <- percent
