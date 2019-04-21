@@ -33,8 +33,8 @@ const GrpcCustomerUI_RPC_StreamServer_port = ":50656"
 //
 // Total max: 75 öre per hour [2.700 kr/hour], Constant speed: 45 öre per second [1.620 kr/hour]
 // JL
-const USDSEK = 8.88            //SEK per USD
-const BTCUSD = 5890            //USD per BTC
+const USDSEK = 9.30            //SEK per USD
+const BTCUSD = 5310           //USD per BTC
 const BTCSEK = BTCUSD * USDSEK //SEK per BTC
 
 const MaxSEKPerSecond = 0.1 // SEK
@@ -75,7 +75,7 @@ const TimeForAveragePaymentCalculation = 10
 // Logrus debug level
 
 //const LoggingLevel = logrus.DebugLevel
-const LoggingLevel = logrus.InfoLevel
-//const LoggingLevel = logrus.WarnLevel
+//const LoggingLevel = logrus.InfoLevel
+const LoggingLevel = logrus.WarnLevel
 
 

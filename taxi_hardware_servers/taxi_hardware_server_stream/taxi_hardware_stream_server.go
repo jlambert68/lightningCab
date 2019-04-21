@@ -77,8 +77,8 @@ func receiveMessurements() {
 		newMessurementForward := <-getPowerMessurementsForward
 		newMessurementReversed := <-getPowerMessurementsReversed
 
-		log.Println("newMessurementForward: ", newMessurementForward)
-		log.Println("newMessurementReversed: ", newMessurementReversed)
+		//log.Println("newMessurementForward: ", newMessurementForward)
+		//log.Println("newMessurementReversed: ", newMessurementReversed)
 		// Only use the biggest value
 		if newMessurementForward > newMessurementReversed {
 			newMessurement = newMessurementForward
@@ -111,7 +111,7 @@ func receiveMessurements() {
 
 		}
 
-		log.Println(powerData)
+		//log.Println(powerData)
 		}
 }
 
