@@ -271,7 +271,7 @@ function receiveUIPriceAndStateStream() {
     console.log("UIPriceAndStateStream.onHeaders", headers);
   });
   client.onMessage((message: UIPriceAndStateRespons) => {
-    console.log("UIPriceAndStateStream.onMessage", message.toObject());
+    //console.log("UIPriceAndStateStream.onMessage", message.toObject());
 
 
 

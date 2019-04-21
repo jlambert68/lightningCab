@@ -4,7 +4,7 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee
+# github.com/jlambert68/lightningCab v0.0.0-20190421070004-1c530bfcaf05
 github.com/jlambert68/lightningCab/common_config
 github.com/jlambert68/lightningCab/grpc_api/taxi_hardware_grpc_api
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1

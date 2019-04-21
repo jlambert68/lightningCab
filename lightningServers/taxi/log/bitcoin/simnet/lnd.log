@@ -63013,3 +63013,2126 @@
 2019-04-08 21:00:06.799 [INF] HSWC: ChannelLink(601:1:0) settling e1eacb581da09570401aa488832e85fc84595c7eaf02452409dd089e6b95efbd as exit hop
 2019-04-08 21:10:32.595 [INF] CRTR: Examining Channel Graph for zombie channels
 2019-04-08 21:10:32.626 [INF] CRTR: Pruning 0 Zombie Channels
+2019-04-21 09:29:39.205 [INF] LTND: Version: 0.5.1-beta commit=v0.5.1-beta-624-g5d33d7226c3a88c2fee8d16b6745c94324b9a7b7, build=production, logging=default
+2019-04-21 09:29:39.205 [INF] LTND: Active chain: Bitcoin (network=simnet)
+2019-04-21 09:29:39.209 [INF] CHDB: Checking for schema update: latest_version=7, db_version=7
+2019-04-21 09:29:39.218 [INF] RPCS: password gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:29:39.218 [INF] RPCS: password RPC server listening on 127.0.0.1:10002
+2019-04-21 09:29:39.219 [INF] LTND: Waiting for wallet encryption password. Use `lncli create` to create a wallet, `lncli unlock` to unlock an existing wallet, or `lncli changepassword` to change the password of an existing wallet and unlock it.
+2019-04-21 09:29:48.467 [INF] LNWL: Opened wallet
+2019-04-21 09:29:48.680 [INF] LTND: Primary chain is set to: bitcoin
+2019-04-21 09:29:49.551 [INF] LNWL: The wallet has been unlocked without a time limit
+2019-04-21 09:29:49.609 [INF] LTND: LightningWallet opened
+2019-04-21 09:29:49.615 [WRN] LNWL: Unable to synchronize wallet to chain: -1: Block number out of range
+2019-04-21 09:29:49.627 [INF] HSWC: Restoring in-memory circuit state from disk
+2019-04-21 09:29:49.630 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2019-04-21 09:29:49.633 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-04-21 09:29:49.641 [INF] ATPL: Instantiating autopilot with cfg: (*main.autoPilotConfig)(0xc000030680)({
+ Active: (bool) false,
+ Heuristic: (map[string]float64) (len=1) {
+  (string) (len=12) "preferential": (float64) 1
+ },
+ MaxChannels: (int) 5,
+ Allocation: (float64) 0.6,
+ MinChannelSize: (int64) 20000,
+ MaxChannelSize: (int64) 16777215,
+ Private: (bool) false,
+ MinConfs: (int32) 0
+})
+
+2019-04-21 09:29:49.641 [INF] RPCS: gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:29:49.641 [INF] RPCS: RPC server listening on 127.0.0.1:10002
+2019-04-21 09:29:49.684 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.687 [INF] HSWC: Starting HTLC Switch
+2019-04-21 09:29:49.687 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.691 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.693 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.699 [INF] CNCT: Creating ChannelArbitrators for 1 active channels
+2019-04-21 09:29:49.699 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.700 [INF] NTFN: New spend subscription: spend_id=1, outpoint=67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0, height_hint=601
+2019-04-21 09:29:49.700 [INF] CNCT: Close observer for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) active
+2019-04-21 09:29:49.700 [INF] CNCT: ChannelArbitrator(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): starting state=StateDefault
+2019-04-21 09:29:49.700 [INF] DISC: Authenticated Gossiper is starting
+2019-04-21 09:29:49.700 [INF] BRAR: Starting contract observer, watching for breaches.
+2019-04-21 09:29:49.700 [INF] NTFN: New block epoch subscription
+2019-04-21 09:29:49.704 [INF] CRTR: FilteredChainView starting
+2019-04-21 09:29:49.741 [INF] CRTR: Filtering chain using 1 channels active
+2019-04-21 09:29:49.742 [INF] CRTR: Prune tip for Channel Graph: height=600, hash=4c1cbeb5ca62679179aaaeeaa7e868d29a58ea9a17ed5c67b571ecd97d62a322
+2019-04-21 09:29:49.751 [INF] DISC: Retransmitting 1 outgoing channels
+2019-04-21 09:29:49.752 [INF] CMGR: Server listening on 127.0.0.1:10012
+2019-04-21 09:29:49.756 [INF] SRVR: Auto peer bootstrapping is disabled
+2019-04-21 09:30:21.856 [INF] LTND: Received SIGINT (Ctrl+C).
+2019-04-21 09:30:21.857 [INF] LTND: Shutting down...
+2019-04-21 09:30:21.857 [INF] LTND: Gracefully shutting down.
+2019-04-21 09:30:21.857 [INF] HSWC: Block epoch canceled, decaying hash log shutting down
+2019-04-21 09:30:21.857 [INF] CRTR: Channel Router shutting down
+2019-04-21 09:30:21.859 [INF] CRTR: FilteredChainView stopping
+2019-04-21 09:30:21.859 [INF] HSWC: HTLC Switch shutting down
+2019-04-21 09:30:21.860 [INF] UTXN: UTXO nursery shutting down
+2019-04-21 09:30:21.860 [INF] BRAR: Breach arbiter shutting down
+2019-04-21 09:30:21.860 [INF] DISC: Authenticated Gossiper is stopping
+2019-04-21 09:30:21.860 [INF] CNCT: Stopping ChainArbitrator
+2019-04-21 09:30:21.860 [INF] FNDG: Funding manager shutting down
+2019-04-21 09:30:21.860 [INF] RPCS: Stopping RPC Server
+2019-04-21 09:30:21.861 [INF] LTND: Shutdown complete
+2019-04-21 09:30:29.624 [INF] LTND: Version: 0.5.1-beta commit=v0.5.1-beta-624-g5d33d7226c3a88c2fee8d16b6745c94324b9a7b7, build=production, logging=default
+2019-04-21 09:30:29.624 [INF] LTND: Active chain: Bitcoin (network=simnet)
+2019-04-21 09:30:29.624 [INF] CHDB: Checking for schema update: latest_version=7, db_version=7
+2019-04-21 09:30:29.638 [INF] RPCS: password RPC server listening on 127.0.0.1:10002
+2019-04-21 09:30:29.638 [INF] RPCS: password gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:30:29.638 [INF] LTND: Waiting for wallet encryption password. Use `lncli create` to create a wallet, `lncli unlock` to unlock an existing wallet, or `lncli changepassword` to change the password of an existing wallet and unlock it.
+2019-04-21 09:30:40.136 [INF] LNWL: Opened wallet
+2019-04-21 09:30:40.192 [INF] LTND: Primary chain is set to: bitcoin
+2019-04-21 09:30:41.049 [INF] LNWL: The wallet has been unlocked without a time limit
+2019-04-21 09:32:39.487 [INF] LTND: Received SIGINT (Ctrl+C).
+2019-04-21 09:32:39.487 [INF] LTND: Shutting down...
+2019-04-21 09:32:39.487 [INF] LTND: Gracefully shutting down.
+2019-04-21 09:33:01.122 [INF] LTND: LightningWallet opened
+2019-04-21 09:33:01.135 [WRN] LNWL: Unable to synchronize wallet to chain: -1: Block number out of range
+2019-04-21 09:33:01.137 [INF] HSWC: Restoring in-memory circuit state from disk
+2019-04-21 09:33:01.140 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2019-04-21 09:33:01.142 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-04-21 09:33:01.151 [INF] ATPL: Instantiating autopilot with cfg: (*main.autoPilotConfig)(0xc000030f40)({
+ Active: (bool) false,
+ Heuristic: (map[string]float64) (len=1) {
+  (string) (len=12) "preferential": (float64) 1
+ },
+ MaxChannels: (int) 5,
+ Allocation: (float64) 0.6,
+ MinChannelSize: (int64) 20000,
+ MaxChannelSize: (int64) 16777215,
+ Private: (bool) false,
+ MinConfs: (int32) 0
+})
+
+2019-04-21 09:33:01.152 [INF] RPCS: gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:33:01.152 [INF] RPCS: RPC server listening on 127.0.0.1:10002
+2019-04-21 09:33:01.208 [INF] HSWC: Starting HTLC Switch
+2019-04-21 09:33:01.208 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.208 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.211 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.211 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.214 [INF] CNCT: Creating ChannelArbitrators for 1 active channels
+2019-04-21 09:33:01.214 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.214 [INF] NTFN: New spend subscription: spend_id=1, outpoint=67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0, height_hint=601
+2019-04-21 09:33:01.215 [INF] CNCT: Close observer for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) active
+2019-04-21 09:33:01.215 [INF] CNCT: ChannelArbitrator(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): starting state=StateDefault
+2019-04-21 09:33:01.215 [INF] DISC: Authenticated Gossiper is starting
+2019-04-21 09:33:01.215 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:01.215 [INF] BRAR: Starting contract observer, watching for breaches.
+2019-04-21 09:33:01.215 [INF] CRTR: FilteredChainView starting
+2019-04-21 09:33:01.249 [INF] CRTR: Filtering chain using 1 channels active
+2019-04-21 09:33:01.249 [INF] CRTR: Prune tip for Channel Graph: height=600, hash=4c1cbeb5ca62679179aaaeeaa7e868d29a58ea9a17ed5c67b571ecd97d62a322
+2019-04-21 09:33:01.255 [INF] CMGR: Server listening on 127.0.0.1:10012
+2019-04-21 09:33:01.259 [INF] SRVR: Auto peer bootstrapping is disabled
+2019-04-21 09:33:01.259 [INF] HSWC: Block epoch canceled, decaying hash log shutting down
+2019-04-21 09:33:01.259 [INF] CRTR: Channel Router shutting down
+2019-04-21 09:33:01.259 [INF] CRTR: FilteredChainView stopping
+2019-04-21 09:33:01.259 [INF] HSWC: HTLC Switch shutting down
+2019-04-21 09:33:01.259 [INF] UTXN: UTXO nursery shutting down
+2019-04-21 09:33:01.259 [INF] BRAR: Breach arbiter shutting down
+2019-04-21 09:33:01.259 [INF] DISC: Authenticated Gossiper is stopping
+2019-04-21 09:33:01.259 [INF] CNCT: Stopping ChainArbitrator
+2019-04-21 09:33:01.259 [INF] FNDG: Funding manager shutting down
+2019-04-21 09:33:01.259 [INF] RPCS: Stopping RPC Server
+2019-04-21 09:33:01.259 [INF] LTND: Shutdown complete2019-04-21 09:33:16.933 [INF] LTND: Version: 0.5.1-beta commit=v0.5.1-beta-624-g5d33d7226c3a88c2fee8d16b6745c94324b9a7b7, build=production, logging=default
+2019-04-21 09:33:16.933 [INF] LTND: Active chain: Bitcoin (network=simnet)
+2019-04-21 09:33:16.934 [INF] CHDB: Checking for schema update: latest_version=7, db_version=7
+2019-04-21 09:33:16.942 [INF] RPCS: password gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:33:16.942 [INF] RPCS: password RPC server listening on 127.0.0.1:10002
+2019-04-21 09:33:16.942 [INF] LTND: Waiting for wallet encryption password. Use `lncli create` to create a wallet, `lncli unlock` to unlock an existing wallet, or `lncli changepassword` to change the password of an existing wallet and unlock it.
+2019-04-21 09:33:27.592 [INF] LNWL: Opened wallet
+2019-04-21 09:33:27.660 [INF] LTND: Primary chain is set to: bitcoin
+2019-04-21 09:33:28.536 [INF] LNWL: The wallet has been unlocked without a time limit
+2019-04-21 09:33:28.573 [INF] LTND: LightningWallet opened
+2019-04-21 09:33:28.577 [WRN] LNWL: Unable to synchronize wallet to chain: -1: Block number out of range
+2019-04-21 09:33:28.579 [INF] HSWC: Restoring in-memory circuit state from disk
+2019-04-21 09:33:28.582 [INF] HSWC: Payment circuits loaded: num_pending=0, num_open=0
+2019-04-21 09:33:28.583 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-04-21 09:33:28.590 [INF] ATPL: Instantiating autopilot with cfg: (*main.autoPilotConfig)(0xc0002c44c0)({
+ Active: (bool) false,
+ Heuristic: (map[string]float64) (len=1) {
+  (string) (len=12) "preferential": (float64) 1
+ },
+ MaxChannels: (int) 5,
+ Allocation: (float64) 0.6,
+ MinChannelSize: (int64) 20000,
+ MaxChannelSize: (int64) 16777215,
+ Private: (bool) false,
+ MinConfs: (int32) 0
+})
+
+2019-04-21 09:33:28.591 [INF] RPCS: RPC server listening on 127.0.0.1:10002
+2019-04-21 09:33:28.591 [INF] RPCS: gRPC proxy started at 127.0.0.1:8002
+2019-04-21 09:33:28.640 [INF] HSWC: Starting HTLC Switch
+2019-04-21 09:33:28.640 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.640 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.644 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.646 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.651 [INF] CNCT: Creating ChannelArbitrators for 1 active channels
+2019-04-21 09:33:28.652 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.652 [INF] NTFN: New spend subscription: spend_id=1, outpoint=67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0, height_hint=601
+2019-04-21 09:33:28.652 [INF] CNCT: Close observer for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) active
+2019-04-21 09:33:28.652 [INF] CNCT: ChannelArbitrator(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0): starting state=StateDefault
+2019-04-21 09:33:28.653 [INF] DISC: Authenticated Gossiper is starting
+2019-04-21 09:33:28.653 [INF] NTFN: New block epoch subscription
+2019-04-21 09:33:28.653 [INF] CRTR: FilteredChainView starting
+2019-04-21 09:33:28.654 [INF] BRAR: Starting contract observer, watching for breaches.
+2019-04-21 09:33:28.691 [INF] CRTR: Filtering chain using 1 channels active
+2019-04-21 09:33:28.691 [INF] CRTR: Prune tip for Channel Graph: height=600, hash=4c1cbeb5ca62679179aaaeeaa7e868d29a58ea9a17ed5c67b571ecd97d62a322
+2019-04-21 09:33:28.702 [INF] CMGR: Server listening on 127.0.0.1:10012
+2019-04-21 09:33:28.706 [INF] SRVR: Auto peer bootstrapping is disabled
+2019-04-21 09:36:49.062 [INF] SRVR: New inbound connection from 127.0.0.1:43188
+2019-04-21 09:36:49.062 [INF] SRVR: Finalizing connection to 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa, inbound=true
+2019-04-21 09:36:49.066 [INF] PEER: NodeKey(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa) loading ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-04-21 09:36:49.066 [INF] HSWC: Removing channel link with ChannelID(26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767)
+2019-04-21 09:36:49.066 [INF] HSWC: ChannelLink(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) is starting
+2019-04-21 09:36:49.066 [INF] HSWC: Trimming open circuits for chan_id=601:1:0, start_htlc_id=0
+2019-04-21 09:36:49.066 [INF] HSWC: Adding live link chan_id=26db5df1be3311f68cbfe2deaa8002b9bc9f5d1a3c73a879a6070b6057700767, short_chan_id=601:1:0
+2019-04-21 09:36:49.067 [INF] CNCT: Attempting to update ContractSignals for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-04-21 09:36:49.067 [INF] HSWC: HTLC manager for ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0) started, bandwidth=57826000 mSAT
+2019-04-21 09:36:49.067 [INF] HSWC: Attempting to re-resynchronize ChannelPoint(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-04-21 09:36:49.067 [INF] SRVR: Negotiated chan series queries with 032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-04-21 09:36:49.067 [INF] DISC: Creating new gossipSyncer for peer=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-04-21 09:36:49.067 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): requesting new chans from height=457 and 4294966838 blocks after
+2019-04-21 09:36:49.074 [INF] HSWC: Received re-establishment message from remote side for channel(67077057600b07a679a8733c1a5d9fbcb90280aadee2bf8cf61133bef15ddb26:0)
+2019-04-21 09:36:49.075 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering chan range: start_height=457, num_blocks=4294966838
+2019-04-21 09:36:49.075 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): sending final chan range chunk, size=1
+2019-04-21 09:36:49.076 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): buffering chan range reply of size=1
+2019-04-21 09:36:49.076 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): filtering through 1 chans
+2019-04-21 09:36:49.076 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): remote peer has no new chans
+2019-04-21 09:36:49.076 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying gossipFilter(start=2019-04-21 08:36:49.076328641 +0200 CEST m=-3387.792759791)
+2019-04-21 09:36:49.077 [INF] DISC: gossipSyncer(032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa): applying new update horizon: start=2019-04-21 08:36:49 +0200 CEST, end=2155-05-28 14:05:04 +0100 CET, backlog_size=4
+2019-04-21 09:36:49.077 [INF] DISC: Announcement for chan_id=(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-04-21 09:36:49.077 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-04-21 09:36:49.077 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-04-21 09:36:49.081 [INF] CRTR: Updated vertex data for node=032479691087547b3b57762518c86fc80404a88d916fa9e205761c589941d8c9fa
+2019-04-21 09:37:40.604 [INF] INVC: New invoice subscription client: id=0
+2019-04-21 09:37:58.653 [INF] DISC: Broadcasting batch of 2 new announcements
+2019-04-21 09:38:19.010 [INF] DISC: Update announcement for short_chan_id(660806488358912), is premature: advertises height 601, only height 600 is known
+2019-04-21 09:49:19.705 [WRN] INVC: client=0 for invoice notifications missed an update, add_index=0, new add event index=1640
+2019-04-21 09:49:20.097 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 31 30 6e  31 70 77 74 63 67 72 6c  |lnsb510n1pwtcgrl|
+  00000010  70 70 35 6a 38 38 6a 6b  30 76 72 77 77 75 78 6c  |pp5j88jk0vrwwuxl|
+  00000020  75 6d 30 33 68 66 30 61  63 75 70 38 36 61 74 68  |um03hf0acup86ath|
+  00000030  38 36 6e 65 32 33 79 6c  37 7a 38 67 76 7a 37 6a  |86ne23yl7z8gvz7j|
+  00000040  68 70 34 6d 33 65 71 64  70 38 32 70 73 68 6a 6d  |hp4m3eqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 78 68 6e 79 33  |gcqzysxqztgxhny3|
+  00000080  6e 78 32 79 6e 37 37 38  63 37 67 70 34 73 6b 35  |nx2yn778c7gp4sk5|
+  00000090  73 74 7a 35 74 38 72 33  74 35 6e 6e 38 75 39 70  |stz5t8r3t5nn8u9p|
+  000000a0  39 70 32 65 6a 32 73 37  70 75 78 77 33 63 73 38  |9p2ej2s7puxw3cs8|
+  000000b0  61 6b 6e 33 6b 73 35 79  38 67 71 79 64 7a 6b 78  |akn3ks5y8gqydzkx|
+  000000c0  79 37 64 7a 75 73 6b 61  38 63 30 68 73 63 70 74  |y7dzuska8c0hscpt|
+  000000d0  35 32 30 37 79 32 38 35  68 61 72 70 63 30 77 71  |5207y285harpc0wq|
+  000000e0  79 67 70 6a 67 36 79 77  6e                       |ygpjg6ywn|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:19.65198389 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:20.091399633 +0200 CEST m=+963.222311518,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 5491673b7ac624d2b8acfc6bf9111b8d4057f15efc1b22500e7acb833ffb8784,
+  Value: (lnwire.MilliSatoshi) 51000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1640,
+ SettleIndex: (uint64) 1591,
+ AmtPaid: (lnwire.MilliSatoshi) 51000 mSAT
+})
+
+2019-04-21 09:49:20.097 [INF] HSWC: ChannelLink(601:1:0) settling 91cf2b3d8373b86ff36f8dd2fee3813ebabb9f53caa24ff8474305e95c35dc72 as exit hop
+2019-04-21 09:49:20.097 [WRN] INVC: client=0 for invoice notifications missed an update, settle_index=0, new settle event index=1591
+2019-04-21 09:49:20.961 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0005266c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 36 30  6e 31 70 77 74 63 67 79  |lnsb1060n1pwtcgy|
+  00000010  71 70 70 35 6b 72 6b 6d  6e 70 65 72 6d 65 32 30  |qpp5krkmnperme20|
+  00000020  61 39 73 70 36 74 38 78  71 33 63 75 66 6b 6a 6c  |a9sp6t8xq3cufkjl|
+  00000030  6e 64 34 7a 73 77 38 33  73 32 6e 68 68 6b 6e 66  |nd4zsw83s2nhhknf|
+  00000040  6d 70 76 6a 38 32 35 73  64 70 38 32 70 73 68 6a  |mpvj825sdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 36 70 6c 6a  |6gcqzysxqztg6plj|
+  00000080  36 79 76 67 39 35 33 30  74 37 32 64 72 71 72 71  |6yvg9530t72drqrq|
+  00000090  39 38 79 72 66 34 77 65  32 39 71 7a 75 65 70 6e  |98yrf4we29qzuepn|
+  000000a0  30 72 67 71 61 36 61 66  66 6b 37 6a 65 67 32 33  |0rgqa6affk7jeg23|
+  000000b0  64 72 39 33 39 79 32 76  76 65 7a 78 30 67 34 75  |dr939y2vvezx0g4u|
+  000000c0  79 7a 6a 73 65 34 73 71  78 37 68 32 6e 77 32 71  |yzjse4sqx7h2nw2q|
+  000000d0  79 73 78 73 61 76 32 71  34 74 63 33 68 72 71 34  |ysxsav2q4tc3hrq4|
+  000000e0  6d 78 67 71 67 79 64 63  76 6e                    |mxgqgydcvn|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:20.743829848 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:20.957147824 +0200 CEST m=+964.088059691,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 5b593d0de108f025d4e08f065e441e7ea28e321cec921be43d4810784df780e0,
+  Value: (lnwire.MilliSatoshi) 106000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1641,
+ SettleIndex: (uint64) 1592,
+ AmtPaid: (lnwire.MilliSatoshi) 106000 mSAT
+})
+
+2019-04-21 09:49:20.962 [INF] HSWC: ChannelLink(601:1:0) settling b0edb98723de54fe9601d2ce60471c4da5f9b6a2838f182a77bda69d85923aa9 as exit hop
+2019-04-21 09:49:22.002 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322b40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 31 30 6e  31 70 77 74 63 67 79 70  |lnsb510n1pwtcgyp|
+  00000010  70 70 35 34 76 7a 6a 6a  37 70 64 66 6a 64 6b 6b  |pp54vzjj7pdfjdkk|
+  00000020  65 63 61 65 67 67 6e 6d  37 6a 35 35 36 6e 79 7a  |ecaeggnm7j556nyz|
+  00000030  6e 6d 6e 70 39 75 71 6e  7a 76 36 7a 66 38 63 36  |nmnp9uqnzv6zf8c6|
+  00000040  6b 39 61 39 79 6c 73 64  70 38 32 70 73 68 6a 6d  |k9a9ylsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 67 63 7a 6e 6d  |gcqzysxqztggcznm|
+  00000080  75 30 32 33 77 6a 6d 79  34 76 38 35 70 30 7a 63  |u023wjmy4v85p0zc|
+  00000090  65 6c 6e 68 76 6c 68 36  7a 68 79 6c 6c 72 61 75  |elnhvlh6zhyllrau|
+  000000a0  6e 30 67 36 77 6a 6a 38  35 34 78 6e 35 38 71 30  |n0g6wjj854xn58q0|
+  000000b0  34 32 67 78 36 79 68 35  76 74 30 73 7a 71 66 78  |42gx6yh5vt0szqfx|
+  000000c0  75 6d 79 37 64 34 75 64  72 37 74 63 6b 6e 7a 37  |umy7d4udr7tcknz7|
+  000000d0  66 37 78 33 76 32 36 32  73 68 36 70 70 7a 70 72  |f7x3v262sh6ppzpr|
+  000000e0  39 63 70 7a 77 37 64 64  76                       |9cpzw7ddv|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:21.76542576 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:21.998155471 +0200 CEST m=+965.129067184,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) b2e546fd73e45dffba217cf5a02e5da8e708ff4b5b73297cf0d4d0c503912d84,
+  Value: (lnwire.MilliSatoshi) 51000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1642,
+ SettleIndex: (uint64) 1593,
+ AmtPaid: (lnwire.MilliSatoshi) 51000 mSAT
+})
+
+2019-04-21 09:49:22.003 [INF] HSWC: ChannelLink(601:1:0) settling ab0529782d4c9b6b671dca113dfa54a6a6414f73097809899a124f8d58bd293f as exit hop
+2019-04-21 09:49:23.000 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0107a6840)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 34 30 6e  31 70 77 74 63 67 79 7a  |lnsb840n1pwtcgyz|
+  00000010  70 70 35 68 76 75 65 37  79 73 63 35 38 64 30 74  |pp5hvue7ysc58d0t|
+  00000020  65 33 6a 30 71 35 6c 77  73 78 30 79 32 73 39 71  |e3j0q5lwsx0y2s9q|
+  00000030  7a 30 75 79 74 36 6c 6c  78 75 32 65 6e 6b 67 37  |z0uyt6llxu2enkg7|
+  00000040  67 71 37 75 35 32 73 64  70 38 32 70 73 68 6a 6d  |gq7u52sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 30 7a 70 36 65  |gcqzysxqztg0zp6e|
+  00000080  32 72 73 33 72 76 70 32  39 6b 6a 71 6c 77 33 36  |2rs3rvp29kjqlw36|
+  00000090  36 61 34 70 30 75 33 78  6b 65 34 70 71 65 35 35  |6a4p0u3xke4pqe55|
+  000000a0  70 61 7a 66 74 68 39 68  73 64 6c 39 61 68 33 65  |pazfth9hsdl9ah3e|
+  000000b0  77 71 36 73 70 6c 63 72  61 6a 35 77 32 7a 37 66  |wq6splcraj5w2z7f|
+  000000c0  36 39 72 61 64 6c 71 79  7a 39 64 39 6b 6e 71 37  |69radlqyz9d9knq7|
+  000000d0  75 6d 6c 68 76 64 6c 32  77 6b 68 7a 6d 36 30 6d  |umlhvdl2wkhzm60m|
+  000000e0  6b 71 70 77 77 32 6e 66  35                       |kqpww2nf5|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:22.790787393 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:22.996796539 +0200 CEST m=+966.127708283,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 2f3c4d4959ab290cbf2ad49ebc5dea1d5b352ad566cef312aa1b9d5975ebff38,
+  Value: (lnwire.MilliSatoshi) 84000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1643,
+ SettleIndex: (uint64) 1594,
+ AmtPaid: (lnwire.MilliSatoshi) 84000 mSAT
+})
+
+2019-04-21 09:49:23.002 [INF] HSWC: ChannelLink(601:1:0) settling bb399f1218a1daf5e6327829f740cf22a05009fc22f5ff9b8accec8f201ee515 as exit hop
+2019-04-21 09:49:24.240 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0107a6fc0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 31 30 6e  31 70 77 74 63 67 79 72  |lnsb810n1pwtcgyr|
+  00000010  70 70 35 36 6b 37 6a 72  34 37 70 76 73 36 37 34  |pp56k7jr47pvs674|
+  00000020  33 63 33 76 6b 6e 76 30  6e 6e 70 7a 75 35 7a 36  |3c3vknv0nnpzu5z6|
+  00000030  74 65 37 67 79 61 36 32  72 61 6b 7a 30 63 66 78  |te7gya62rakz0cfx|
+  00000040  39 77 30 6b 78 37 73 64  70 38 32 70 73 68 6a 6d  |9w0kx7sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 34 75 37 79 37  |gcqzysxqztg4u7y7|
+  00000080  38 71 63 6b 68 79 68 6c  72 66 35 30 6e 7a 73 6e  |8qckhyhlrf50nzsn|
+  00000090  75 72 63 38 39 33 38 71  67 65 74 33 68 70 33 74  |urc8938qget3hp3t|
+  000000a0  64 67 66 32 72 38 30 77  33 66 6a 77 34 75 6a 63  |dgf2r80w3fjw4ujc|
+  000000b0  33 71 32 77 6e 37 74 38  63 79 64 70 33 39 79 6b  |3q2wn7t8cydp39yk|
+  000000c0  35 39 35 74 32 66 30 6e  64 63 61 6d 32 70 33 66  |595t2f0ndcam2p3f|
+  000000d0  32 63 73 37 32 33 6c 30  30 6a 61 32 36 38 33 32  |2cs723l00ja26832|
+  000000e0  63 67 71 6c 73 74 33 61  6a                       |cgqlst3aj|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:23.815429609 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:24.236518682 +0200 CEST m=+967.367430415,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 363509e3d550649cacad9f5a0d0464bce0fd1c0aff12d1c5089f770b9c9f63ea,
+  Value: (lnwire.MilliSatoshi) 81000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1644,
+ SettleIndex: (uint64) 1595,
+ AmtPaid: (lnwire.MilliSatoshi) 81000 mSAT
+})
+
+2019-04-21 09:49:24.243 [INF] HSWC: ChannelLink(601:1:0) settling d5bd21d7c16435eac71165a6c7ce6117282d2f3e413ba50fb613f09315cfb1bd as exit hop
+2019-04-21 09:49:25.179 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322a80)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 32 30  6e 31 70 77 74 63 67 79  |lnsb1020n1pwtcgy|
+  00000010  79 70 70 35 74 67 6a 71  64 61 75 30 66 36 79 78  |ypp5tgjqdau0f6yx|
+  00000020  6b 38 73 33 71 76 36 79  77 32 67 63 79 6e 61 6d  |k8s3qv6yw2gcynam|
+  00000030  68 6b 6e 34 37 67 6a 65  6b 38 6b 6e 38 35 61 70  |hkn47gjek8kn85ap|
+  00000040  6e 35 6c 36 78 70 73 71  64 70 38 32 70 73 68 6a  |n5l6xpsqdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 61 7a 70 72  |6gcqzysxqztgazpr|
+  00000080  7a 35 75 39 6d 32 34 33  77 70 71 6e 39 75 64 64  |z5u9m243wpqn9udd|
+  00000090  6c 70 34 7a 61 7a 7a 73  71 35 39 76 66 7a 73 35  |lp4zazzsq59vfzs5|
+  000000a0  30 71 32 70 39 78 77 63  6d 65 64 61 32 6a 66 78  |0q2p9xwcmeda2jfx|
+  000000b0  77 64 30 6a 33 67 74 65  6b 75 37 67 6e 72 77 75  |wd0j3gteku7gnrwu|
+  000000c0  33 75 63 67 35 6c 6b 37  38 36 71 39 32 38 67 74  |3ucg5lk786q928gt|
+  000000d0  6a 77 74 67 75 79 34 77  67 67 71 66 67 66 6b 30  |jwtguy4wggqfgfk0|
+  000000e0  65 37 71 70 7a 7a 61 30  7a 77                    |e7qpzza0zw|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:24.958706491 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:25.175378053 +0200 CEST m=+968.306289826,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d042520a62307c63aeb7f78465ff6b50cd4f756647ba2da36723d9a049c9d5a9,
+  Value: (lnwire.MilliSatoshi) 102000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1645,
+ SettleIndex: (uint64) 1596,
+ AmtPaid: (lnwire.MilliSatoshi) 102000 mSAT
+})
+
+2019-04-21 09:49:25.179 [INF] HSWC: ChannelLink(601:1:0) settling 5a2406f78f4e886b1e11033447291824fbbbda75f2259b1ed33d3a19d3fa3060 as exit hop
+2019-04-21 09:49:26.201 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a480)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 35 30  6e 31 70 77 74 63 67 79  |lnsb1050n1pwtcgy|
+  00000010  39 70 70 35 67 34 65 72  79 37 73 73 77 32 30 73  |9pp5g4ery7ssw20s|
+  00000020  6c 32 30 34 34 61 39 76  66 66 6c 36 6b 37 6b 36  |l2044a9vffl6k7k6|
+  00000030  64 6e 32 38 61 79 6d 6a  6a 32 75 70 7a 35 77 30  |dn28aymjj2upz5w0|
+  00000040  7a 7a 38 76 77 6d 72 73  64 70 38 32 70 73 68 6a  |zz8vwmrsdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 6c 6a 63 38  |6gcqzysxqztgljc8|
+  00000080  6c 33 79 36 77 6d 65 33  64 75 33 75 34 75 32 74  |l3y6wme3du3u4u2t|
+  00000090  71 38 64 32 6d 78 77 39  7a 78 73 6a 6a 64 65 30  |q8d2mxw9zxsjjde0|
+  000000a0  74 70 6d 34 6c 6a 36 76  6d 32 38 63 67 78 6c 38  |tpm4lj6vm28cgxl8|
+  000000b0  64 63 7a 73 39 35 73 38  6a 75 6a 35 7a 6e 61 63  |dczs95s8juj5znac|
+  000000c0  6c 30 6a 67 34 33 64 61  70 36 6d 67 79 6c 61 76  |l0jg43dap6mgylav|
+  000000d0  30 35 75 6a 73 78 38 6e  63 35 37 6a 79 6d 30 78  |05ujsx8nc57jym0x|
+  000000e0  64 61 71 71 73 38 70 63  6b 70                    |daqqs8pckp|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:25.984781428 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:26.195119154 +0200 CEST m=+969.326030922,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 7cee317009a1276c297051015c70a243d53e75eafab80890e50bb2085f3b451d,
+  Value: (lnwire.MilliSatoshi) 105000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1646,
+ SettleIndex: (uint64) 1597,
+ AmtPaid: (lnwire.MilliSatoshi) 105000 mSAT
+})
+
+2019-04-21 09:49:26.201 [INF] HSWC: ChannelLink(601:1:0) settling 4572327a10729f0fa9f5af4ac4a7fab7ada6cd47e937292b81151cf108ec76c7 as exit hop
+2019-04-21 09:49:27.243 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0107a6540)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 30 36 30  6e 31 70 77 74 63 67 79  |lnsb1060n1pwtcgy|
+  00000010  38 70 70 35 38 68 68 61  38 7a 35 77 66 68 63 78  |8pp58hha8z5wfhcx|
+  00000020  63 32 66 68 71 39 61 35  73 71 6c 65 6b 72 77 33  |c2fhq9a5sqlekrw3|
+  00000030  30 67 73 76 77 36 71 33  78 6d 70 33 68 30 35 6d  |0gsvw6q3xmp3h05m|
+  00000040  67 73 77 6a 37 6a 33 73  64 70 38 32 70 73 68 6a  |gswj7j3sdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 79 61 71 38  |6gcqzysxqztgyaq8|
+  00000080  77 63 65 70 36 34 6b 39  6e 7a 63 30 35 34 76 7a  |wcep64k9nzc054vz|
+  00000090  32 7a 38 38 6e 71 68 70  78 6e 6e 38 6a 6a 6e 38  |2z88nqhpxnn8jjn8|
+  000000a0  68 79 70 33 6a 79 67 77  75 35 72 67 77 76 78 6a  |hyp3jygwu5rgwvxj|
+  000000b0  6e 63 68 33 71 33 78 73  66 67 73 73 34 67 79 34  |nch3q3xsfgss4gy4|
+  000000c0  6a 71 39 72 68 6b 67 38  64 6b 6c 77 66 78 71 30  |jq9rhkg8dklwfxq0|
+  000000d0  38 68 6e 70 65 36 37 7a  37 35 7a 71 66 35 35 34  |8hnpe67z75zqf554|
+  000000e0  68 32 63 71 78 6a 67 6a  67 34                    |h2cqxjgjg4|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:27.006739472 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:27.239958086 +0200 CEST m=+970.370869714,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 12c1feeb60b828e3b19b9dd340ae9f309609c29cd3fc1446e18e679d37a5775b,
+  Value: (lnwire.MilliSatoshi) 106000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1647,
+ SettleIndex: (uint64) 1598,
+ AmtPaid: (lnwire.MilliSatoshi) 106000 mSAT
+})
+
+2019-04-21 09:49:27.243 [INF] HSWC: ChannelLink(601:1:0) settling 3defd38a8e4df06c2937017b4803f9b0dd17a20c7681136c31bbe9b441d2f4a3 as exit hop
+2019-04-21 09:49:28.243 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a3c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 32 30 6e  31 70 77 74 63 67 79 67  |lnsb920n1pwtcgyg|
+  00000010  70 70 35 76 32 77 74 38  30 39 6c 34 78 39 79 79  |pp5v2wt809l4x9yy|
+  00000020  65 79 37 79 74 6c 6e 74  63 61 38 6c 39 34 75 64  |ey7ytlntca8l94ud|
+  00000030  70 36 71 35 6e 70 79 61  72 74 77 37 7a 6e 37 70  |p6q5npyartw7zn7p|
+  00000040  63 73 6d 68 30 64 73 64  70 38 32 70 73 68 6a 6d  |csmh0dsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 30 6c 6a 77 71  |gcqzysxqztg0ljwq|
+  00000080  6e 37 75 6d 6b 6b 6c 76  74 68 38 70 68 6e 77 73  |n7umkklvth8phnws|
+  00000090  63 73 36 73 30 34 64 30  7a 64 38 67 39 7a 76 35  |cs6s04d0zd8g9zv5|
+  000000a0  34 6a 67 75 7a 64 75 66  73 64 79 39 64 6b 79 76  |4jguzdufsdy9dkyv|
+  000000b0  36 6c 33 71 68 38 36 67  77 37 79 73 35 72 64 71  |6l3qh86gw7ys5rdq|
+  000000c0  68 78 32 68 67 33 35 6c  30 32 70 7a 6a 6b 74 66  |hx2hg35l02pzjktf|
+  000000d0  6e 70 32 74 74 72 37 6a  34 6b 75 38 75 36 77 34  |np2ttr7j4ku8u6w4|
+  000000e0  65 63 70 74 6a 61 6e 37  74                       |ecptjan7t|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:28.026844274 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:28.238434378 +0200 CEST m=+971.369346160,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 0ac07fae5fad56ff9212a27a62992f661a9916cfe74fb0b7eed2f8e04800f741,
+  Value: (lnwire.MilliSatoshi) 92000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1648,
+ SettleIndex: (uint64) 1599,
+ AmtPaid: (lnwire.MilliSatoshi) 92000 mSAT
+})
+
+2019-04-21 09:49:28.247 [INF] HSWC: ChannelLink(601:1:0) settling 629cb3bcbfa98a42649e22ff35e3a7f96bc68740a4c24e8d6ef0a7e0e21bbbdb as exit hop
+2019-04-21 09:49:29.262 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc01076c3c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 39 30 6e  31 70 77 74 63 67 79 66  |lnsb790n1pwtcgyf|
+  00000010  70 70 35 32 77 35 34 38  39 61 6b 72 34 61 6e 77  |pp52w5489akr4anw|
+  00000020  36 63 64 34 6e 30 35 78  7a 32 30 34 38 7a 77 32  |6cd4n05xz2048zw2|
+  00000030  6c 77 6d 38 6b 6c 74 37  64 78 73 71 34 72 67 39  |lwm8klt7dxsq4rg9|
+  00000040  37 33 6a 63 67 7a 73 64  70 38 32 70 73 68 6a 6d  |73jcgzsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 37 78 6d 67 6c  |gcqzysxqztg7xmgl|
+  00000080  6e 61 6a 7a 6e 76 61 76  74 39 75 63 6c 76 71 71  |najznvavt9uclvqq|
+  00000090  73 6a 34 68 35 63 36 66  65 37 6a 72 79 65 61 36  |sj4h5c6fe7jryea6|
+  000000a0  65 61 6a 6b 78 68 78 30  6b 36 71 76 67 30 79 7a  |eajkxhx0k6qvg0yz|
+  000000b0  61 63 37 67 64 67 6c 6e  74 7a 34 34 64 6a 76 6d  |ac7gdglntz44djvm|
+  000000c0  6a 71 34 37 65 65 79 36  32 79 77 79 64 70 78 79  |jq47eey62ywydpxy|
+  000000d0  30 33 6a 71 65 73 6c 70  39 37 72 32 6e 77 66 7a  |03jqeslp97r2nwfz|
+  000000e0  79 71 71 36 30 39 30 79  36                       |yqq6090y6|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:29.049416901 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:29.258976504 +0200 CEST m=+972.389888096,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 575ebb99a481230308bf396250e5864f2966ce542b30c255b12bb739e3140b43,
+  Value: (lnwire.MilliSatoshi) 79000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1649,
+ SettleIndex: (uint64) 1600,
+ AmtPaid: (lnwire.MilliSatoshi) 79000 mSAT
+})
+
+2019-04-21 09:49:29.262 [INF] HSWC: ChannelLink(601:1:0) settling 53a95397b61d7b376b0dacdf43094fa9c4e57ddb3dbebf34d0054682fa32c205 as exit hop
+2019-04-21 09:49:30.273 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055ac00)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 30 30 6e  31 70 77 74 63 67 79 32  |lnsb700n1pwtcgy2|
+  00000010  70 70 35 66 79 70 73 79  75 66 63 36 71 67 37 64  |pp5fypsyufc6qg7d|
+  00000020  78 38 66 75 74 37 36 6b  72 68 73 76 77 6c 39 68  |x8fut76krhsvwl9h|
+  00000030  35 6e 34 30 35 32 67 6e  6b 74 6c 73 72 68 67 61  |5n4052gnktlsrhga|
+  00000040  71 6e 74 32 74 63 71 64  70 38 32 70 73 68 6a 6d  |qnt2tcqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 79 74 37 67 72  |gcqzysxqztgyt7gr|
+  00000080  38 76 6a 36 75 79 63 36  37 36 78 78 7a 6d 64 79  |8vj6uyc676xxzmdy|
+  00000090  71 6b 65 64 30 32 39 6b  67 67 79 65 70 65 34 75  |qked029kggyepe4u|
+  000000a0  6d 72 75 34 71 64 33 73  77 73 34 79 30 37 6b 66  |mru4qd3sws4y07kf|
+  000000b0  6a 64 36 72 35 67 73 32  6d 37 7a 78 33 77 73 7a  |jd6r5gs2m7zx3wsz|
+  000000c0  7a 33 6a 79 33 64 76 64  32 68 37 61 73 68 7a 6d  |z3jy3dvd2h7ashzm|
+  000000d0  79 70 71 68 30 30 37 64  39 6d 72 36 67 30 6e 71  |ypqh007d9mr6g0nq|
+  000000e0  30 63 70 6c 65 68 61 64  72                       |0cplehadr|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:30.0660726 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:30.268288964 +0200 CEST m=+973.399200667,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a2fd9aab611797773104b7cb1ac6665af7b669f0205379b32fc0f314e4f368fe,
+  Value: (lnwire.MilliSatoshi) 70000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1650,
+ SettleIndex: (uint64) 1601,
+ AmtPaid: (lnwire.MilliSatoshi) 70000 mSAT
+})
+
+2019-04-21 09:49:30.273 [INF] HSWC: ChannelLink(601:1:0) settling 4903027138d011e698e9e2fdab0ef063be5bd2757d1489d97f80ee8e826b52f0 as exit hop
+2019-04-21 09:49:31.311 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a240)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 37 30 6e  31 70 77 74 63 67 79 74  |lnsb570n1pwtcgyt|
+  00000010  70 70 35 61 70 77 75 73  66 79 39 36 76 34 34 67  |pp5apwusfy96v44g|
+  00000020  72 36 35 7a 35 77 76 68  74 73 32 75 79 66 36 79  |r65z5wvhts2uyf6y|
+  00000030  65 77 67 33 71 64 64 65  74 75 72 65 77 74 67 65  |ewg3qddeturewtge|
+  00000040  6e 74 79 6b 37 39 73 64  70 38 32 70 73 68 6a 6d  |ntyk79sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 35 6c 65 34 61  |gcqzysxqztg5le4a|
+  00000080  34 38 39 63 68 68 33 79  6a 76 74 77 35 77 72 35  |489chh3yjvtw5wr5|
+  00000090  6b 34 64 72 39 6c 75 75  33 34 6d 30 72 34 33 77  |k4dr9luu34m0r43w|
+  000000a0  64 33 6e 68 67 34 61 75  65 6a 6c 6b 79 61 6a 70  |d3nhg4auejlkyajp|
+  000000b0  66 63 76 74 72 71 6b 6c  75 79 6c 78 61 30 65 38  |fcvtrqkluylxa0e8|
+  000000c0  70 77 38 78 36 74 72 6b  68 67 39 64 70 79 6d 61  |pw8x6trkhg9dpyma|
+  000000d0  77 6c 36 35 77 7a 75 7a  73 6a 33 71 64 6b 34 71  |wl65wzuzsj3qdk4q|
+  000000e0  72 71 70 68 66 33 67 70  6e                       |rqphf3gpn|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:31.092475695 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:31.307434057 +0200 CEST m=+974.438345948,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a6634cfa58b2b87a0064605ff4611b090fd94c21860be6eae4a69414ecd105d8,
+  Value: (lnwire.MilliSatoshi) 57000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1651,
+ SettleIndex: (uint64) 1602,
+ AmtPaid: (lnwire.MilliSatoshi) 57000 mSAT
+})
+
+2019-04-21 09:49:31.314 [INF] HSWC: ChannelLink(601:1:0) settling e85dc82485d32b540f54151ccbae0ae113a265c8881adcaf83cb968ccd64b78b as exit hop
+2019-04-21 09:49:32.329 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055afc0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 38 30 6e  31 70 77 74 63 67 79 76  |lnsb680n1pwtcgyv|
+  00000010  70 70 35 76 7a 65 73 7a  65 6a 37 76 30 70 6c 72  |pp5vzeszej7v0plr|
+  00000020  61 67 71 6b 75 32 75 63  36 6a 77 30 79 7a 70 72  |agqku2uc6jw0yzpr|
+  00000030  74 6d 78 30 79 35 33 65  63 6b 6b 64 73 35 73 64  |tmx0y53eckkds5sd|
+  00000040  6b 79 71 66 6c 37 71 64  70 38 32 70 73 68 6a 6d  |kyqfl7qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 63 65 34 32 7a  |gcqzysxqztgce42z|
+  00000080  64 6e 32 6c 33 67 6c 68  61 74 75 68 76 74 70 6c  |dn2l3glhatuhvtpl|
+  00000090  67 33 67 77 6a 63 7a 67  6a 38 6a 6d 36 64 78 33  |g3gwjczgj8jm6dx3|
+  000000a0  78 78 79 71 32 33 66 77  75 68 63 6a 71 32 34 65  |xxyq23fwuhcjq24e|
+  000000b0  71 6e 6a 66 36 77 6e 72  67 78 35 6b 79 35 73 78  |qnjf6wnrgx5ky5sx|
+  000000c0  7a 74 6a 33 74 30 38 32  6b 66 67 6d 71 6e 65 76  |ztj3t082kfgmqnev|
+  000000d0  6b 38 75 63 6b 30 79 64  75 70 35 35 35 64 6b 66  |k8uck0ydup555dkf|
+  000000e0  6b 67 71 35 37 78 66 70  32                       |kgq57xfp2|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:32.113571447 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:32.325573449 +0200 CEST m=+975.456485164,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d9aa85945d732411975fd38ef4ed5e75c4f4f9cf51b5e6b5d411a59eced96ad0,
+  Value: (lnwire.MilliSatoshi) 68000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1652,
+ SettleIndex: (uint64) 1603,
+ AmtPaid: (lnwire.MilliSatoshi) 68000 mSAT
+})
+
+2019-04-21 09:49:32.330 [INF] HSWC: ChannelLink(601:1:0) settling 60b301665e63c3f1f500b715cc6a4e790411af6679291ce2d66c2906d8804ffc as exit hop
+2019-04-21 09:49:33.341 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322b40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 35 30 6e  31 70 77 74 63 67 79 64  |lnsb750n1pwtcgyd|
+  00000010  70 70 35 7a 6b 32 6d 72  33 35 30 6d 64 65 37 68  |pp5zk2mr350mde7h|
+  00000020  75 73 61 6c 78 34 70 65  61 72 78 68 76 64 6b 77  |usalx4pearxhvdkw|
+  00000030  65 32 6c 74 34 6d 34 39  33 71 71 39 65 79 35 71  |e2lt4m493qq9ey5q|
+  00000040  7a 30 34 6d 68 64 73 64  70 38 32 70 73 68 6a 6d  |z04mhdsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 70 64 79 37 72  |gcqzysxqztgpdy7r|
+  00000080  7a 72 67 65 6e 65 64 34  66 71 6e 37 70 64 6c 73  |zrgened4fqn7pdls|
+  00000090  30 73 74 73 74 67 39 78  70 6b 6b 33 79 79 64 6d  |0ststg9xpkk3yydm|
+  000000a0  68 38 64 70 74 7a 34 79  70 38 6b 37 68 36 6a 39  |h8dptz4yp8k7h6j9|
+  000000b0  78 7a 6b 35 39 37 67 71  39 74 66 74 73 30 67 7a  |xzk597gq9tfts0gz|
+  000000c0  67 68 6e 66 67 64 32 34  6a 73 6a 6e 71 66 73 37  |ghnfgd24jsjnqfs7|
+  000000d0  72 6c 75 74 33 79 78 68  33 64 75 68 38 77 72 79  |rlut3yxh3duh8wry|
+  000000e0  32 71 70 38 37 64 35 32  78                       |2qp87d52x|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:33.13219958 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:33.337195735 +0200 CEST m=+976.468107997,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 749d98f8552b8a9e4cc3032e752c6d31539e777ab248bf81644a4b6b91207636,
+  Value: (lnwire.MilliSatoshi) 75000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1653,
+ SettleIndex: (uint64) 1604,
+ AmtPaid: (lnwire.MilliSatoshi) 75000 mSAT
+})
+
+2019-04-21 09:49:33.342 [INF] HSWC: ChannelLink(601:1:0) settling 1595b1c68fdb73ebf21df9aa1cf466bb1b67655f5d7752c4002e494009f5dddb as exit hop
+2019-04-21 09:49:34.373 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0003229c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 39 30 6e  31 70 77 74 63 67 79 77  |lnsb690n1pwtcgyw|
+  00000010  70 70 35 33 6c 6a 78 70  68 6a 63 35 6b 39 66 78  |pp53ljxphjc5k9fx|
+  00000020  65 6b 6e 39 38 71 35 67  6d 66 73 65 34 66 76 71  |ekn98q5gmfse4fvq|
+  00000030  78 78 6d 64 35 74 35 32  75 6e 6b 6a 30 79 76 68  |xxmd5t52unkj0yvh|
+  00000040  71 79 68 37 7a 74 71 64  70 38 32 70 73 68 6a 6d  |qyh7ztqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 33 72 35 30 78  |gcqzysxqztg3r50x|
+  00000080  6e 75 6d 7a 76 74 35 35  6c 7a 32 6a 70 78 74 6d  |numzvt55lz2jpxtm|
+  00000090  33 6e 6a 7a 70 71 68 63  34 76 65 35 63 6b 70 33  |3njzpqhc4ve5ckp3|
+  000000a0  32 6a 66 6c 72 6d 30 76  6a 78 68 76 64 63 73 34  |2jflrm0vjxhvdcs4|
+  000000b0  30 70 65 36 39 38 78 77  67 7a 61 73 79 32 77 7a  |0pe698xwgzasy2wz|
+  000000c0  33 33 66 38 38 67 70 6b  38 6d 66 35 6e 67 6a 6d  |33f88gpk8mf5ngjm|
+  000000d0  38 32 64 63 74 71 68 36  61 61 7a 33 65 65 72 73  |82dctqh6aaz3eers|
+  000000e0  6c 63 70 65 36 63 34 6c  71                       |lcpe6c4lq|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:34.157463767 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:34.369977103 +0200 CEST m=+977.500888920,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 5efba9b7a4dae613167d80d0365e01b8c31d409d3e734e91f5e3fad6e914cb32,
+  Value: (lnwire.MilliSatoshi) 69000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1654,
+ SettleIndex: (uint64) 1605,
+ AmtPaid: (lnwire.MilliSatoshi) 69000 mSAT
+})
+
+2019-04-21 09:49:34.374 [INF] HSWC: ChannelLink(601:1:0) settling 8fe460de58a58a9366d329c1446d30cd52c018db6d1745727693c8cb8097f096 as exit hop
+2019-04-21 09:49:35.392 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a900)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 37 30 6e  31 70 77 74 63 67 79 30  |lnsb770n1pwtcgy0|
+  00000010  70 70 35 38 65 75 75 34  6b 61 30 79 34 68 61 38  |pp58euu4ka0y4ha8|
+  00000020  35 38 6d 38 38 79 36 73  72 72 76 6e 33 65 73 6e  |58m88y6srrvn3esn|
+  00000030  64 73 36 7a 68 77 67 6b  64 38 6b 39 6e 39 77 68  |ds6zhwgkd8k9n9wh|
+  00000040  66 35 6c 65 37 38 71 64  70 38 32 70 73 68 6a 6d  |f5le78qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 71 76 33 79 64  |gcqzysxqztgqv3yd|
+  00000080  6b 30 39 72 66 70 70 65  6c 77 75 77 79 6e 66 66  |k09rfppelwuwynff|
+  00000090  39 79 73 79 77 68 35 64  32 64 34 6d 65 6b 78 66  |9ysywh5d2d4mekxf|
+  000000a0  72 61 65 36 66 73 77 6c  78 32 71 30 37 67 73 68  |rae6fswlx2q07gsh|
+  000000b0  36 78 35 7a 7a 38 36 65  61 75 74 64 75 35 35 72  |6x5zz86eautdu55r|
+  000000c0  34 75 6c 34 71 77 68 70  63 71 78 35 6d 38 39 61  |4ul4qwhpcqx5m89a|
+  000000d0  76 70 7a 36 67 75 72 61  64 78 35 76 66 35 33 71  |vpz6guradx5vf53q|
+  000000e0  30 67 71 76 35 79 73 38  6c                       |0gqv5ys8l|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:35.183677997 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:35.388320634 +0200 CEST m=+978.519232349,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a0581aeef50ba5cc1a04d405463273b1c593cd0b2d3bd43ed3f2bf5464429b8f,
+  Value: (lnwire.MilliSatoshi) 77000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1655,
+ SettleIndex: (uint64) 1606,
+ AmtPaid: (lnwire.MilliSatoshi) 77000 mSAT
+})
+
+2019-04-21 09:49:35.394 [INF] HSWC: ChannelLink(601:1:0) settling 3e79cadbaf256fd3d0fb39c9a80c6c9c7309b61a15dc8b34f62ccaeba69fcf8e as exit hop
+2019-04-21 09:49:36.417 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010712480)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 38 30 6e  31 70 77 74 63 67 79 73  |lnsb880n1pwtcgys|
+  00000010  70 70 35 6c 73 68 67 64  61 66 32 6b 36 6a 34 64  |pp5lshgdaf2k6j4d|
+  00000020  7a 76 74 30 6b 7a 39 33  70 72 74 79 73 37 70 6a  |zvt0kz93prtys7pj|
+  00000030  33 78 34 6c 33 64 38 6a  35 33 34 63 6d 37 63 61  |3x4l3d8j534cm7ca|
+  00000040  39 61 78 6e 37 70 73 64  70 38 32 70 73 68 6a 6d  |9axn7psdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6d 78 33 64 6c  |gcqzysxqztgmx3dl|
+  00000080  70 79 66 6b 6d 74 6b 63  72 37 78 64 65 68 30 76  |pyfkmtkcr7xdeh0v|
+  00000090  73 39 65 39 78 64 6b 79  71 75 32 67 32 73 6c 32  |s9e9xdkyqu2g2sl2|
+  000000a0  37 38 6b 32 6b 6a 6d 79  70 79 76 6c 64 68 72 76  |78k2kjmypyvldhrv|
+  000000b0  78 79 30 34 77 68 70 67  38 75 67 6c 67 67 74 37  |xy04whpg8uglggt7|
+  000000c0  6c 79 6e 68 39 78 32 63  66 67 61 30 61 76 77 71  |lynh9x2cfga0avwq|
+  000000d0  78 6a 61 32 67 63 33 74  39 34 74 70 65 33 39 39  |xja2gc3t94tpe399|
+  000000e0  68 67 70 6e 63 39 70 6d  30                       |hgpnc9pm0|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:36.212025977 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:36.414163409 +0200 CEST m=+979.545075162,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 31a3873945f3799f24844edf48ade71413c06cfd6c6b594971e8ff29f76035fb,
+  Value: (lnwire.MilliSatoshi) 88000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1656,
+ SettleIndex: (uint64) 1607,
+ AmtPaid: (lnwire.MilliSatoshi) 88000 mSAT
+})
+
+2019-04-21 09:49:36.417 [INF] HSWC: ChannelLink(601:1:0) settling fc2e86f52ab6a556898b7d8458846b243c1944d5fc5a795235c6fd8e97a69f83 as exit hop
+2019-04-21 09:49:37.479 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0107123c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 30 30 6e  31 70 77 74 63 67 79 33  |lnsb900n1pwtcgy3|
+  00000010  70 70 35 75 66 39 72 64  39 70 6e 38 77 64 68 70  |pp5uf9rd9pn8wdhp|
+  00000020  79 76 34 6e 79 61 32 38  64 64 7a 77 64 39 70 70  |yv4nya28ddzwd9pp|
+  00000030  77 63 79 32 35 66 75 61  35 67 35 71 77 65 6e 38  |wcy25fua5g5qwen8|
+  00000040  78 6d 34 34 78 76 73 64  70 38 32 70 73 68 6a 6d  |xm44xvsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 32 6e 32 32 6a  |gcqzysxqztg2n22j|
+  00000080  67 65 6e 67 32 32 79 63  34 63 6b 78 37 36 37 35  |geng22yc4ckx7675|
+  00000090  7a 76 6c 63 38 70 63 36  6c 76 35 61 6b 6b 39 30  |zvlc8pc6lv5akk90|
+  000000a0  72 33 79 63 6b 78 61 39  76 7a 68 70 32 74 33 65  |r3yckxa9vzhp2t3e|
+  000000b0  6d 65 70 7a 33 79 66 39  6e 76 67 6a 61 37 34 70  |mepz3yf9nvgja74p|
+  000000c0  76 70 33 61 32 70 6c 35  34 38 65 34 6d 72 70 6d  |vp3a2pl548e4mrpm|
+  000000d0  70 32 76 39 6c 65 6c 34  38 75 72 76 79 74 33 72  |p2v9lel48urvyt3r|
+  000000e0  71 73 70 65 67 63 75 75  39                       |qspegcuu9|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:37.23714545 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:37.475214354 +0200 CEST m=+980.606126194,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 8918ae8aec05b72e5fcf549b28a426a922fad121f0c3fcc9b6065b3aa563b428,
+  Value: (lnwire.MilliSatoshi) 90000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1657,
+ SettleIndex: (uint64) 1608,
+ AmtPaid: (lnwire.MilliSatoshi) 90000 mSAT
+})
+
+2019-04-21 09:49:37.481 [INF] HSWC: ChannelLink(601:1:0) settling e24a3694333b9b709195993aa3b5a2734a10bb045513ced11403b3339b75a999 as exit hop
+2019-04-21 09:49:38.480 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010712d80)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 31 30 6e  31 70 77 74 63 67 79 6a  |lnsb910n1pwtcgyj|
+  00000010  70 70 35 7a 67 68 34 6e  6e 63 66 6b 39 78 37 77  |pp5zgh4nncfk9x7w|
+  00000020  34 32 6d 34 6b 79 72 6d  66 65 6b 6a 75 71 6d 6b  |42m4kyrmfekjuqmk|
+  00000030  30 6e 38 70 61 35 33 71  73 75 68 65 75 64 32 78  |0n8pa53qsuheud2x|
+  00000040  7a 38 34 72 78 78 71 64  70 38 32 70 73 68 6a 6d  |z84rxxqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 76 77 30 39 67  |gcqzysxqztgvw09g|
+  00000080  74 78 38 76 6b 6c 64 6c  64 6e 37 38 37 32 74 33  |tx8vkldldn7872t3|
+  00000090  65 72 33 70 30 6e 78 79  6a 38 75 78 37 6e 77 30  |er3p0nxyj8ux7nw0|
+  000000a0  63 65 75 79 6e 35 66 39  67 30 34 70 71 66 70 39  |ceuyn5f9g04pqfp9|
+  000000b0  78 39 73 30 68 34 33 7a  6b 38 76 67 76 34 6a 33  |x9s0h43zk8vgv4j3|
+  000000c0  38 6d 6c 75 6a 78 6c 30  65 33 72 6b 7a 39 65 6a  |8mlujxl0e3rkz9ej|
+  000000d0  6e 68 6d 30 78 6a 63 71  33 32 36 73 61 75 38 61  |nhm0xjcq326sau8a|
+  000000e0  35 63 71 72 72 65 70 36  66                       |5cqrrep6f|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:38.267409972 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:38.473697502 +0200 CEST m=+981.604609257,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d530b16ab79e4f86487e95df93faa019665eeb48d6c7c935a6304cfe8f45a45b,
+  Value: (lnwire.MilliSatoshi) 91000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1658,
+ SettleIndex: (uint64) 1609,
+ AmtPaid: (lnwire.MilliSatoshi) 91000 mSAT
+})
+
+2019-04-21 09:49:38.481 [INF] HSWC: ChannelLink(601:1:0) settling 122f59cf09b14de7555bad883da7369701bb3e670f69104397cf1aa308f5198c as exit hop
+2019-04-21 09:49:39.507 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a840)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 35 30 6e  31 70 77 74 63 67 79 6e  |lnsb850n1pwtcgyn|
+  00000010  70 70 35 68 64 33 33 70  76 72 78 38 65 30 6a 77  |pp5hd33pvrx8e0jw|
+  00000020  71 30 38 36 78 34 6a 7a  30 36 32 6b 77 75 6e 63  |q086x4jz062kwunc|
+  00000030  33 76 65 67 6d 6c 67 65  73 74 74 63 30 6c 79 6e  |3vegmlgesttc0lyn|
+  00000040  71 70 73 38 70 35 73 64  70 38 32 70 73 68 6a 6d  |qps8p5sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6c 6e 79 32 73  |gcqzysxqztglny2s|
+  00000080  76 79 30 6d 70 73 65 72  72 74 79 6b 30 74 32 73  |vy0mpserrtyk0t2s|
+  00000090  66 75 33 71 34 6b 73 67  78 68 39 64 72 70 33 64  |fu3q4ksgxh9drp3d|
+  000000a0  32 71 79 63 6b 73 35 71  6a 68 76 30 75 75 35 6c  |2qycks5qjhv0uu5l|
+  000000b0  33 75 39 72 6e 7a 7a 37  71 70 74 30 36 36 79 70  |3u9rnzz7qpt066yp|
+  000000c0  77 68 76 32 73 66 74 67  73 30 67 7a 71 36 32 65  |whv2sftgs0gzq62e|
+  000000d0  61 6b 37 76 38 6b 6d 74  6c 73 39 67 7a 6a 72 65  |ak7v8kmtls9gzjre|
+  000000e0  35 71 71 75 67 32 34 6d  36                       |5qqug24m6|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:39.284613701 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:39.503139917 +0200 CEST m=+982.634051595,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 2286df43e55b95231b934222f470edea006293f81a6ff016b158aa767567798f,
+  Value: (lnwire.MilliSatoshi) 85000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1659,
+ SettleIndex: (uint64) 1610,
+ AmtPaid: (lnwire.MilliSatoshi) 85000 mSAT
+})
+
+2019-04-21 09:49:39.510 [INF] HSWC: ChannelLink(601:1:0) settling bb6310b0663e5f2701e7d1ab213f4ab3b93c459946fe8cc16bc3fe4980303869 as exit hop
+2019-04-21 09:49:40.587 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a780)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 38 30 6e  31 70 77 74 63 67 79 35  |lnsb780n1pwtcgy5|
+  00000010  70 70 35 6a 6b 6a 77 6d  76 74 61 70 6c 36 73 67  |pp5jkjwmvtapl6sg|
+  00000020  30 37 6e 61 79 36 67 77  36 68 70 65 77 68 6e 65  |07nay6gw6hpewhne|
+  00000030  38 35 75 6d 66 74 35 76  70 6e 6a 79 32 6b 78 39  |85umft5vpnjy2kx9|
+  00000040  66 39 77 78 7a 78 73 64  70 38 32 70 73 68 6a 6d  |f9wxzxsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 33 32 61 78 7a  |gcqzysxqztg32axz|
+  00000080  66 72 6a 6e 35 39 6a 63  77 64 66 33 70 6b 72 35  |frjn59jcwdf3pkr5|
+  00000090  79 6b 36 39 6e 68 79 78  72 66 35 6e 6d 71 6c 74  |yk69nhyxrf5nmqlt|
+  000000a0  33 6c 39 32 76 63 72 64  61 73 34 6d 63 79 38 34  |3l92vcrdas4mcy84|
+  000000b0  6d 36 39 63 6e 33 34 37  6c 68 70 71 73 38 75 65  |m69cn347lhpqs8ue|
+  000000c0  70 78 6c 7a 6e 63 6b 77  67 71 38 33 32 79 76 78  |pxlznckwgq832yvx|
+  000000d0  67 38 75 6c 76 6b 66 38  79 6e 33 66 77 78 32 33  |g8ulvkf8yn3fwx23|
+  000000e0  63 73 71 6a 66 6e 30 78  74                       |csqjfn0xt|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:40.354763555 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:40.582527509 +0200 CEST m=+983.713439356,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 9652268ec43fdd28cfb66ab0146562023f5e76933e3c344b47b321db1723c616,
+  Value: (lnwire.MilliSatoshi) 78000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1660,
+ SettleIndex: (uint64) 1611,
+ AmtPaid: (lnwire.MilliSatoshi) 78000 mSAT
+})
+
+2019-04-21 09:49:40.587 [INF] HSWC: ChannelLink(601:1:0) settling 95a4edb17d0ff5043fd3e934876ae1cbaf3c9e9cda5746067222ac62a4ae308d as exit hop
+2019-04-21 09:49:41.601 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0105e4240)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 32 30 6e  31 70 77 74 63 67 79 34  |lnsb820n1pwtcgy4|
+  00000010  70 70 35 77 66 38 39 63  38 66 34 35 79 65 66 34  |pp5wf89c8f45yef4|
+  00000020  71 66 33 6e 63 76 76 68  76 37 72 39 6a 77 66 7a  |qf3ncvvhv7r9jwfz|
+  00000030  6a 35 36 61 79 79 32 61  30 73 61 64 36 74 71 73  |j56ayy2a0sad6tqs|
+  00000040  38 66 66 64 32 71 71 64  70 38 32 70 73 68 6a 6d  |8ffd2qqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 35 76 72 68 36  |gcqzysxqztg5vrh6|
+  00000080  6e 78 71 79 33 36 64 74  30 30 6d 6a 71 66 35 63  |nxqy36dt00mjqf5c|
+  00000090  6c 78 70 74 64 67 65 65  39 32 35 30 71 30 30 63  |lxptdgee9250q00c|
+  000000a0  61 64 35 77 61 36 6b 36  73 6a 36 71 6a 35 35 67  |ad5wa6k6sj6qj55g|
+  000000b0  61 37 74 39 33 68 74 74  68 78 34 6d 6b 35 35 35  |a7t93htthx4mk555|
+  000000c0  71 78 33 70 79 78 36 67  6e 78 74 78 6c 6d 6b 33  |qx3pyx6gnxtxlmk3|
+  000000d0  34 68 6c 37 75 36 36 76  73 34 64 70 7a 63 6c 6b  |4hl7u66vs4dpzclk|
+  000000e0  79 71 70 6b 70 79 76 6d  32                       |yqpkpyvm2|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:41.384627763 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:41.597809794 +0200 CEST m=+984.728721575,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 7742acbbf3250cb4a1ebf20f04533e0d63f2da7f8541c80bcddabfa223a255d0,
+  Value: (lnwire.MilliSatoshi) 82000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1661,
+ SettleIndex: (uint64) 1612,
+ AmtPaid: (lnwire.MilliSatoshi) 82000 mSAT
+})
+
+2019-04-21 09:49:41.602 [INF] HSWC: ChannelLink(601:1:0) settling 724e5c1d35a1329a81319e18cbb3c32c9c914a9ae908aebe1d6e96081d296a80 as exit hop
+2019-04-21 09:49:42.625 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000323080)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 34 30 6e  31 70 77 74 63 67 79 6b  |lnsb940n1pwtcgyk|
+  00000010  70 70 35 77 73 61 68 71  67 65 6b 76 75 74 79 33  |pp5wsahqgekvuty3|
+  00000020  6d 74 78 6a 6b 6d 6a 30  68 6a 63 6a 7a 66 79 6e  |mtxjkmj0hjcjzfyn|
+  00000030  76 30 65 33 6e 6c 76 64  74 76 34 74 64 76 68 34  |v0e3nlvdtv4tdvh4|
+  00000040  6c 6b 72 76 77 39 71 64  70 38 32 70 73 68 6a 6d  |lkrvw9qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 66 75 74 74 34  |gcqzysxqztgfutt4|
+  00000080  30 73 37 37 32 73 32 64  33 76 6d 7a 36 72 6c 39  |0s772s2d3vmz6rl9|
+  00000090  73 67 67 6e 33 6c 73 6c  6a 73 76 78 70 64 72 76  |sggn3lsljsvxpdrv|
+  000000a0  37 34 65 6d 36 77 32 61  61 61 6b 6c 78 77 39 66  |74em6w2aaaklxw9f|
+  000000b0  64 39 35 78 64 33 35 7a  72 67 38 66 68 34 76 76  |d95xd35zrg8fh4vv|
+  000000c0  32 72 33 37 79 36 65 36  6c 76 66 63 38 67 35 6b  |2r37y6e6lvfc8g5k|
+  000000d0  34 67 36 30 70 38 76 38  6c 6e 65 7a 72 32 79 6b  |4g60p8v8lnezr2yk|
+  000000e0  76 71 71 65 30 61 77 65  35                       |vqqe0awe5|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:42.409593153 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:42.620945987 +0200 CEST m=+985.751857637,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 1c9067a0c5bd8a62917782c1e31a943392c956e122a3725962873efae9e979f2,
+  Value: (lnwire.MilliSatoshi) 94000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1662,
+ SettleIndex: (uint64) 1613,
+ AmtPaid: (lnwire.MilliSatoshi) 94000 mSAT
+})
+
+2019-04-21 09:49:42.626 [INF] HSWC: ChannelLink(601:1:0) settling 743b702336671648ed6695b727de58909249b1f98cfec6ad955b597afec3638a as exit hop
+2019-04-21 09:49:43.643 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0105e43c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 35 30 6e  31 70 77 74 63 67 79 68  |lnsb850n1pwtcgyh|
+  00000010  70 70 35 65 70 38 73 61  63 76 6a 65 6b 66 7a 78  |pp5ep8sacvjekfzx|
+  00000020  6e 76 79 64 73 30 6a 66  34 64 75 68 72 35 37 6d  |nvyds0jf4duhr57m|
+  00000030  35 78 77 68 70 63 79 75  67 74 34 65 6c 76 76 6e  |5xwhpcyugt4elvvn|
+  00000040  61 67 78 6c 33 6b 71 64  70 38 32 70 73 68 6a 6d  |agxl3kqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6a 6b 74 39 38  |gcqzysxqztgjkt98|
+  00000080  38 6e 66 70 30 67 73 36  34 6e 6e 33 73 64 67 70  |8nfp0gs64nn3sdgp|
+  00000090  65 78 39 34 6b 78 32 73  72 79 35 6c 38 77 77 73  |ex94kx2sry5l8wws|
+  000000a0  30 77 79 38 6d 68 37 36  74 37 38 78 66 6c 72 30  |0wy8mh76t78xflr0|
+  000000b0  6b 70 6a 61 78 37 34 32  74 30 36 63 77 73 67 38  |kpjax742t06cwsg8|
+  000000c0  70 66 35 36 30 30 34 77  78 30 30 64 36 37 39 6b  |pf56004wx00d679k|
+  000000d0  7a 76 68 73 75 64 34 72  68 66 6b 6a 74 65 7a 65  |zvhsud4rhfkjteze|
+  000000e0  38 63 70 33 33 6d 6c 63  72                       |8cp33mlcr|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:43.433793582 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:43.639805175 +0200 CEST m=+986.770716871,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a0cd2e23cca29c52567a7e6e204686ff3ffd285970b0cb01b635b6361afca1a2,
+  Value: (lnwire.MilliSatoshi) 85000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1663,
+ SettleIndex: (uint64) 1614,
+ AmtPaid: (lnwire.MilliSatoshi) 85000 mSAT
+})
+
+2019-04-21 09:49:43.644 [INF] HSWC: ChannelLink(601:1:0) settling c84f0ee192cd92234d846c1f24d5bcb8e9edd0ceb8704e2175cfd8c9f506fc6c as exit hop
+2019-04-21 09:49:44.687 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322e40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 39 30 6e  31 70 77 74 63 67 79 63  |lnsb990n1pwtcgyc|
+  00000010  70 70 35 64 6e 65 35 79  68 36 34 65 35 68 79 64  |pp5dne5yh64e5hyd|
+  00000020  79 36 71 32 34 33 35 75  35 79 79 6b 75 6e 38 32  |y6q2435u5yykun82|
+  00000030  76 75 37 6a 30 35 70 33  37 63 79 71 74 77 32 65  |vu7j05p37cyqtw2e|
+  00000040  77 64 6a 68 70 30 71 64  70 38 32 70 73 68 6a 6d  |wdjhp0qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 73 30 6c 66 32  |gcqzysxqztgs0lf2|
+  00000080  77 7a 6d 77 6e 39 7a 7a  36 38 6e 71 72 39 33 76  |wzmwn9zz68nqr93v|
+  00000090  35 64 70 6c 71 76 71 39  36 36 6b 71 76 72 61 79  |5dplqvq966kqvray|
+  000000a0  73 75 7a 73 63 7a 61 76  34 76 73 61 67 68 73 78  |suzsczav4vsaghsx|
+  000000b0  65 6b 66 71 6d 77 66 76  39 64 61 76 32 6d 63 6a  |ekfqmwfv9dav2mcj|
+  000000c0  67 66 67 63 70 74 6e 39  36 30 6b 6b 79 6b 61 61  |gfgcptn960kkykaa|
+  000000d0  64 6a 68 6e 35 6d 74 76  68 61 64 6e 76 71 72 68  |djhn5mtvhadnvqrh|
+  000000e0  74 73 70 6d 77 68 39 33  64                       |tspmwh93d|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:44.457111038 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:44.683389623 +0200 CEST m=+987.814301469,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d9900f1ae735ae47fe3e4796ff0999cd9114f0e98a02609e3b96148a5f9e1bfe,
+  Value: (lnwire.MilliSatoshi) 99000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1664,
+ SettleIndex: (uint64) 1615,
+ AmtPaid: (lnwire.MilliSatoshi) 99000 mSAT
+})
+
+2019-04-21 09:49:44.689 [INF] HSWC: ChannelLink(601:1:0) settling 6cf3425f55cd2e46934055634e5084b72675339e93e818fb0402dcacb9b2b85e as exit hop
+2019-04-21 09:49:45.704 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0003229c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 35 30 6e  31 70 77 74 63 67 79 65  |lnsb750n1pwtcgye|
+  00000010  70 70 35 6d 37 64 6e 67  65 75 37 73 37 38 34 6b  |pp5m7dngeu7s784k|
+  00000020  35 36 37 78 65 77 66 30  63 39 73 74 30 38 61 30  |567xewf0c9st08a0|
+  00000030  73 6c 6e 65 6a 7a 61 7a  6a 72 65 6d 30 32 70 61  |slnejzazjrem02pa|
+  00000040  64 38 75 77 68 32 73 64  70 38 32 70 73 68 6a 6d  |d8uwh2sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 77 64 63 76 71  |gcqzysxqztgwdcvq|
+  00000080  34 33 6b 34 72 73 7a 70  76 6c 79 37 37 79 65 74  |43k4rszpvly77yet|
+  00000090  65 68 76 32 38 6a 67 6d  74 38 61 38 33 65 67 6a  |ehv28jgmt8a83egj|
+  000000a0  70 30 6e 65 6d 7a 78 61  30 32 38 34 6b 38 33 32  |p0nemzxa0284k832|
+  000000b0  34 6e 38 6b 75 63 6d 37  76 38 39 64 6b 63 68 6b  |4n8kucm7v89dkchk|
+  000000c0  76 6d 72 34 76 63 33 38  77 65 36 61 73 68 76 38  |vmr4vc38we6ashv8|
+  000000d0  78 75 39 64 73 30 65 6e  74 75 64 65 33 64 61 71  |xu9ds0entude3daq|
+  000000e0  72 63 71 64 79 38 64 38  34                       |rcqdy8d84|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:45.481704503 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:45.699862887 +0200 CEST m=+988.830774596,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 1a05317bf506718cf46e71e1a37c81f0d58493e401e8ae9bc8d83cdd197a7017,
+  Value: (lnwire.MilliSatoshi) 75000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1665,
+ SettleIndex: (uint64) 1616,
+ AmtPaid: (lnwire.MilliSatoshi) 75000 mSAT
+})
+
+2019-04-21 09:49:45.704 [INF] HSWC: ChannelLink(601:1:0) settling df9b34679e878f5b535e365c97e0b05bcfd7c3f3cc85d14879dbd41eb4fc75d5 as exit hop
+2019-04-21 09:49:46.712 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322f00)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 34 30 6e  31 70 77 74 63 67 79 36  |lnsb840n1pwtcgy6|
+  00000010  70 70 35 38 74 66 35 6a  63 73 65 6d 64 63 38 37  |pp58tf5jcsemdc87|
+  00000020  34 39 33 6c 74 6e 39 33  75 77 33 75 39 65 78 61  |493ltn93uw3u9exa|
+  00000030  35 32 33 74 6d 36 6e 76  37 65 76 36 6a 61 38 76  |523tm6nv7ev6ja8v|
+  00000040  6d 36 67 6e 6a 78 71 64  70 38 32 70 73 68 6a 6d  |m6gnjxqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 7a 77 75 71 79  |gcqzysxqztgzwuqy|
+  00000080  7a 73 74 32 32 35 67 39  30 73 35 32 6b 61 70 39  |zst225g90s52kap9|
+  00000090  7a 33 34 7a 7a 74 72 32  38 34 70 67 6c 61 66 67  |z34zztr284pglafg|
+  000000a0  70 36 65 68 73 36 33 6a  72 75 7a 6b 75 6c 70 78  |p6ehs63jruzkulpx|
+  000000b0  79 6e 73 74 7a 6a 71 33  73 33 66 33 73 6c 37 39  |ynstzjq3s3f3sl79|
+  000000c0  79 6a 70 63 78 71 6a 77  66 70 36 75 34 36 67 78  |yjpcxqjwfp6u46gx|
+  000000d0  75 6d 36 61 71 68 67 79  75 6d 30 33 70 71 63 67  |um6aqhgyum03pqcg|
+  000000e0  66 73 70 68 76 64 39 77  7a                       |fsphvd9wz|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:46.499746156 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:46.708637245 +0200 CEST m=+989.839549045,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 94ca27d63dc7701a5110aab797eb23027a49004f757903b3244101e823aafa16,
+  Value: (lnwire.MilliSatoshi) 84000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1666,
+ SettleIndex: (uint64) 1617,
+ AmtPaid: (lnwire.MilliSatoshi) 84000 mSAT
+})
+
+2019-04-21 09:49:46.713 [INF] HSWC: ChannelLink(601:1:0) settling 3ad3496219db707f54b1fae658f1d1e1726ed1515ef5367b2cd4ba766f489c8c as exit hop
+2019-04-21 09:49:47.745 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0105e4300)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 32 30 6e  31 70 77 74 63 67 79 6d  |lnsb820n1pwtcgym|
+  00000010  70 70 35 33 74 74 72 68  34 70 73 39 73 75 68 77  |pp53ttrh4ps9suhw|
+  00000020  6d 74 39 76 38 6c 32 77  32 30 63 61 63 76 33 7a  |mt9v8l2w20cacv3z|
+  00000030  77 6e 39 6e 63 6b 72 73  71 75 68 38 76 38 74 75  |wn9nckrsquh8v8tu|
+  00000040  39 76 65 6e 63 34 71 64  70 38 32 70 73 68 6a 6d  |9venc4qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 76 70 68 64 7a  |gcqzysxqztgvphdz|
+  00000080  78 34 67 73 38 39 6e 37  77 75 37 77 67 73 6d 78  |x4gs89n7wu7wgsmx|
+  00000090  7a 38 34 74 66 77 79 77  79 70 63 6a 39 73 61 6e  |z84tfwywypcj9san|
+  000000a0  37 33 33 76 38 6d 67 37  6d 76 6a 77 67 75 35 36  |733v8mg7mvjwgu56|
+  000000b0  34 66 75 38 73 6b 63 63  39 74 7a 67 36 39 36 6e  |4fu8skcc9tzg696n|
+  000000c0  6b 63 64 34 6b 39 7a 61  38 66 6d 6e 68 65 65 63  |kcd4k9za8fmnheec|
+  000000d0  6e 63 6b 66 79 77 75 33  73 76 70 77 6c 73 39 67  |nckfywu3svpwls9g|
+  000000e0  6b 71 71 67 74 78 71 36  74                       |kqqgtxq6t|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:47.525771116 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:47.742216072 +0200 CEST m=+990.873127797,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) be3951dabf0a821aee877ba0a6f43c9510e027496e85a5083152d64f47bea3db,
+  Value: (lnwire.MilliSatoshi) 82000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1667,
+ SettleIndex: (uint64) 1618,
+ AmtPaid: (lnwire.MilliSatoshi) 82000 mSAT
+})
+
+2019-04-21 09:49:47.746 [INF] HSWC: ChannelLink(601:1:0) settling 8ad63bd4302c39776d6561fea729f8ee19113a659e2c3803973b0ebe15999e2a as exit hop
+2019-04-21 09:49:48.779 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0105e43c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=234 cap=234) {
+  00000000  6c 6e 73 62 31 31 30 30  6e 31 70 77 74 63 67 79  |lnsb1100n1pwtcgy|
+  00000010  75 70 70 35 6e 38 63 63  79 36 65 61 6d 71 33 35  |upp5n8ccy6eamq35|
+  00000020  6d 32 72 33 38 35 32 75  66 30 79 34 74 76 77 71  |m2r3852uf0y4tvwq|
+  00000030  63 78 64 72 65 36 63 77  67 36 66 6e 6e 64 71 73  |cxdre6cwg6fnndqs|
+  00000040  38 78 32 6d 6b 70 38 71  64 70 38 32 70 73 68 6a  |8x2mkp8qdp82pshj|
+  00000050  6d 74 39 64 65 36 7a 71  35 6e 39 77 39 36 6b 32  |mt9de6zq5n9w96k2|
+  00000060  75 6d 35 79 70 6e 78 37  75 33 71 32 33 73 68 73  |um5ypnx7u3q23shs|
+  00000070  36 67 63 71 7a 79 73 78  71 7a 74 67 6b 75 38 7a  |6gcqzysxqztgku8z|
+  00000080  75 38 39 79 6d 6a 6b 32  35 39 79 30 74 6a 6a 6b  |u89ymjk259y0tjjk|
+  00000090  33 76 73 33 68 63 76 6a  77 6d 78 6a 68 78 38 37  |3vs3hcvjwmxjhx87|
+  000000a0  73 6b 71 30 6a 6d 79 39  64 72 6e 72 68 30 37 68  |skq0jmy9drnrh07h|
+  000000b0  65 34 74 36 38 61 70 76  71 61 70 34 6d 6d 64 34  |e4t68apvqap4mmd4|
+  000000c0  36 75 64 34 78 34 36 39  71 73 32 78 6e 38 63 36  |6ud4x469qs2xn8c6|
+  000000d0  61 39 67 36 71 6e 72 33  61 64 6b 35 67 66 37 68  |a9g6qnr3adk5gf7h|
+  000000e0  65 78 67 71 6b 33 77 70  32 72                    |exgqk3wp2r|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:48.546071678 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:48.775643252 +0200 CEST m=+991.906555199,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 6411718a3f5d30d20678fe37c24aab97f0f23e123dbea2d10756c07e78020f16,
+  Value: (lnwire.MilliSatoshi) 110000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1668,
+ SettleIndex: (uint64) 1619,
+ AmtPaid: (lnwire.MilliSatoshi) 110000 mSAT
+})
+
+2019-04-21 09:49:48.780 [INF] HSWC: ChannelLink(601:1:0) settling 99f1826b3dd8234da8713d15c4bc955b1c0c19a3ceb0e469339b4103995bb04e as exit hop
+2019-04-21 09:49:49.779 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 39 30 6e  31 70 77 74 63 67 79 61  |lnsb690n1pwtcgya|
+  00000010  70 70 35 66 6c 38 63 7a  6d 73 70 7a 70 7a 70 73  |pp5fl8czmspzpzps|
+  00000020  66 6c 64 73 39 72 66 61  6d 37 7a 33 6b 64 74 67  |flds9rfam7z3kdtg|
+  00000030  77 74 74 78 68 37 35 70  71 36 34 75 6a 36 67 70  |wttxh75pq64uj6gp|
+  00000040  66 36 6a 33 68 70 73 64  70 38 32 70 73 68 6a 6d  |f6j3hpsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 33 67 63 72 37  |gcqzysxqztg3gcr7|
+  00000080  37 30 71 6b 78 30 36 61  36 61 6e 72 36 74 37 66  |70qkx06a6anr6t7f|
+  00000090  77 6a 6a 74 39 61 70 74  71 6e 34 74 33 6a 70 30  |wjjt9aptqn4t3jp0|
+  000000a0  64 63 79 68 75 64 78 34  63 6a 61 6c 71 61 7a 67  |dcyhudx4cjalqazg|
+  000000b0  39 64 6c 61 72 6d 73 6d  32 77 30 77 65 37 63 37  |9dlarmsm2w0we7c7|
+  000000c0  7a 79 74 6a 76 7a 34 32  37 34 30 68 6d 77 71 34  |zytjvz42740hmwq4|
+  000000d0  34 39 78 34 64 6b 6c 6c  76 34 7a 72 39 79 36 76  |49x4dkllv4zr9y6v|
+  000000e0  70 63 71 67 64 6b 76 6a  77                       |pcqgdkvjw|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:49.572789162 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:49.776301223 +0200 CEST m=+992.907212928,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) b72276e6906d4ded8ae5b84c896799200a57dcc93e40b9eb6f9b6a631acb6d61,
+  Value: (lnwire.MilliSatoshi) 69000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1669,
+ SettleIndex: (uint64) 1620,
+ AmtPaid: (lnwire.MilliSatoshi) 69000 mSAT
+})
+
+2019-04-21 09:49:49.780 [INF] HSWC: ChannelLink(601:1:0) settling 4fcf816e0110441827ed81469eefc28d9ab4396b35fd408355e4b480a7528dc3 as exit hop
+2019-04-21 09:49:50.806 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a540)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 39 30 6e  31 70 77 74 63 67 79 37  |lnsb590n1pwtcgy7|
+  00000010  70 70 35 32 39 67 77 6d  74 6e 77 65 68 30 74 39  |pp529gwmtnweh0t9|
+  00000020  67 61 61 63 67 61 6e 74  63 6d 79 79 32 67 74 33  |gaacgantcmyy2gt3|
+  00000030  6c 77 77 30 66 6b 72 30  61 72 6d 61 64 34 6d 6e  |lww0fkr0armad4mn|
+  00000040  34 38 39 68 38 68 73 64  70 38 32 70 73 68 6a 6d  |489h8hsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 65 6d 63 77 6a  |gcqzysxqztgemcwj|
+  00000080  74 75 63 36 35 61 70 6b  73 7a 39 30 36 30 72 74  |tuc65apksz9060rt|
+  00000090  63 6c 71 78 36 6a 63 68  74 65 64 34 34 64 64 30  |clqx6jchted44dd0|
+  000000a0  6e 32 79 34 33 74 75 34  39 64 6c 71 36 67 72 73  |n2y43tu49dlq6grs|
+  000000b0  37 74 6e 37 36 36 39 63  66 75 70 79 78 73 73 72  |7tn7669cfupyxssr|
+  000000c0  64 37 70 63 76 63 65 34  38 63 6e 7a 37 75 37 7a  |d7pcvce48cnz7u7z|
+  000000d0  32 32 38 6d 6e 61 6e 6b  70 67 77 6c 6e 30 61 33  |228mnankpgwln0a3|
+  000000e0  67 67 71 30 6b 38 79 68  6b                       |ggq0k8yhk|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:50.594649607 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:50.802489168 +0200 CEST m=+993.933401131,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) e76b5c9ff7a76bf1e724b17752e835c07d50fdc2e9e931dd9c401bec1a6addb3,
+  Value: (lnwire.MilliSatoshi) 59000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1670,
+ SettleIndex: (uint64) 1621,
+ AmtPaid: (lnwire.MilliSatoshi) 59000 mSAT
+})
+
+2019-04-21 09:49:50.807 [INF] HSWC: ChannelLink(601:1:0) settling 5150edae6ecddeb2a3bdc23b35e3642290b8fdce7a6c37f47beb6bb9d4e5b9ef as exit hop
+2019-04-21 09:49:51.822 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0106d2180)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 33 30 6e  31 70 77 74 63 67 79 6c  |lnsb730n1pwtcgyl|
+  00000010  70 70 35 73 7a 7a 36 67  74 32 66 77 38 72 64 39  |pp5szz6gt2fw8rd9|
+  00000020  75 63 7a 61 79 71 76 78  66 35 78 73 72 6b 67 30  |uczayqvxf5xsrkg0|
+  00000030  36 73 67 73 72 6d 34 73  33 67 63 73 70 33 76 61  |6sgsrm4s3gcsp3va|
+  00000040  76 33 76 72 75 77 73 64  70 38 32 70 73 68 6a 6d  |v3vruwsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 76 38 76 7a 6e  |gcqzysxqztgv8vzn|
+  00000080  34 66 38 6e 30 70 67 73  74 38 34 6a 36 67 66 68  |4f8n0pgst84j6gfh|
+  00000090  33 37 73 72 6c 73 6a 7a  71 6d 76 66 64 70 36 71  |37srlsjzqmvfdp6q|
+  000000a0  66 75 74 67 6b 63 66 32  77 61 77 73 35 64 6b 75  |futgkcf2waws5dku|
+  000000b0  77 6b 35 32 76 6d 63 6c  6a 32 73 70 65 76 35 75  |wk52vmclj2spev5u|
+  000000c0  33 33 72 73 67 6c 70 79  36 77 32 6e 68 33 30 37  |33rsglpy6w2nh307|
+  000000d0  6e 77 67 79 78 63 61 73  63 39 70 71 36 75 38 74  |nwgyxcasc9pq6u8t|
+  000000e0  70 71 71 65 61 39 6b 6e  68                       |pqqea9knh|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:51.611713272 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:51.818442861 +0200 CEST m=+994.949354764,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 267a8c5f67fe73660339a4a5ad6604fbbf50ea2a51d7cbbb13f9224053ac0264,
+  Value: (lnwire.MilliSatoshi) 73000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1671,
+ SettleIndex: (uint64) 1622,
+ AmtPaid: (lnwire.MilliSatoshi) 73000 mSAT
+})
+
+2019-04-21 09:49:51.823 [INF] HSWC: ChannelLink(601:1:0) settling 8085a42d4971c6d2f302e900c3268680ec87ea0880f75845188062ceb22c1f1d as exit hop
+2019-04-21 09:49:52.848 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0108b6600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 31 30 6e  31 70 77 74 63 67 39 71  |lnsb710n1pwtcg9q|
+  00000010  70 70 35 35 36 76 71 72  65 7a 66 6c 73 72 6b 66  |pp556vqrezflsrkf|
+  00000020  67 34 36 6c 75 33 76 79  76 34 37 66 32 76 65 66  |g46lu3vyv47f2vef|
+  00000030  70 35 6a 6e 78 38 75 6a  6a 61 6d 77 75 77 73 6d  |p5jnx8ujjamwuwsm|
+  00000040  6a 79 79 77 38 76 73 64  70 38 32 70 73 68 6a 6d  |jyyw8vsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 61 6e 37 35 6a  |gcqzysxqztgan75j|
+  00000080  6b 73 6e 65 66 68 74 38  79 68 73 66 68 78 71 78  |ksnefht8yhsfhxqx|
+  00000090  74 38 79 38 32 6d 33 33  78 6d 66 66 36 36 6d 37  |t8y82m33xmff66m7|
+  000000a0  6c 76 39 32 78 72 6b 6e  6b 6b 79 79 70 6e 39 6b  |lv92xrknkkyypn9k|
+  000000b0  68 6b 70 68 37 6a 6b 34  7a 36 67 35 76 70 36 6a  |hkph7jk4z6g5vp6j|
+  000000c0  63 33 37 33 76 7a 76 35  6b 63 34 78 66 71 6e 68  |c373vzv5kc4xfqnh|
+  000000d0  79 6c 76 33 6a 35 6d 38  66 7a 6b 68 68 72 65 78  |ylv3j5m8fzkhhrex|
+  000000e0  70 63 70 65 73 6a 7a 77  37                       |pcpesjzw7|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:52.641442204 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:52.842301255 +0200 CEST m=+995.973212926,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) bcf8f55f21730e26b1f54decbfc41ec8fc772597a8f9b73270d26e12d9e10f3e,
+  Value: (lnwire.MilliSatoshi) 71000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1672,
+ SettleIndex: (uint64) 1623,
+ AmtPaid: (lnwire.MilliSatoshi) 71000 mSAT
+})
+
+2019-04-21 09:49:52.849 [INF] HSWC: ChannelLink(601:1:0) settling a69801e449fc0764a2baff22c232be4a99948692998fc94bbb771d0dc88471d9 as exit hop
+2019-04-21 09:49:53.879 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322b40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 38 30 6e  31 70 77 74 63 67 39 70  |lnsb780n1pwtcg9p|
+  00000010  70 70 35 63 72 30 64 70  76 67 77 6b 7a 6e 6e 63  |pp5cr0dpvgwkznnc|
+  00000020  6c 74 77 7a 61 64 66 73  7a 33 67 67 6a 75 76 77  |ltwzadfsz3ggjuvw|
+  00000030  6b 32 71 77 33 33 6a 79  74 6b 77 39 36 36 36 61  |k2qw33jytkw9666a|
+  00000040  32 38 78 76 74 64 71 64  70 38 32 70 73 68 6a 6d  |28xvtdqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 7a 70 73 36 66  |gcqzysxqztgzps6f|
+  00000080  37 33 6c 77 75 6e 75 65  65 76 32 36 73 64 35 36  |73lwunueev26sd56|
+  00000090  72 64 77 68 64 76 34 75  61 67 63 38 7a 64 35 70  |rdwhdv4uagc8zd5p|
+  000000a0  35 66 6c 6a 34 64 72 30  35 70 34 36 37 36 72 34  |5flj4dr05p4676r4|
+  000000b0  70 6b 65 6d 79 74 61 79  6a 36 66 6b 6e 6c 68 61  |pkemytayj6fknlha|
+  000000c0  6d 67 73 6e 6e 37 73 6e  6b 36 7a 6c 73 38 6a 65  |mgsnn7snk6zls8je|
+  000000d0  65 79 30 34 65 72 61 70  6c 61 77 77 61 36 39 34  |ey04eraplawwa694|
+  000000e0  76 73 70 63 6b 67 68 63  77                       |vspckghcw|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:53.662230145 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:53.875220957 +0200 CEST m=+997.006132719,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d7a002c67676bd56a75f99ef5d7efe92cf97d231e7592504c7ffc98bcd8b8db7,
+  Value: (lnwire.MilliSatoshi) 78000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1673,
+ SettleIndex: (uint64) 1624,
+ AmtPaid: (lnwire.MilliSatoshi) 78000 mSAT
+})
+
+2019-04-21 09:49:53.880 [INF] HSWC: ChannelLink(601:1:0) settling c0ded0b10eb0a73c7d6e175a980a2844b8c759407463222ece2eb5aea8e662da as exit hop
+2019-04-21 09:49:54.909 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055ab40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 39 30 6e  31 70 77 74 63 67 39 7a  |lnsb690n1pwtcg9z|
+  00000010  70 70 35 32 64 37 70 64  74 77 77 74 65 30 68 66  |pp52d7pdtwwte0hf|
+  00000020  67 68 61 38 6e 61 78 75  38 75 38 71 37 73 32 74  |gha8naxu8u8q7s2t|
+  00000030  61 6a 7a 66 71 65 39 67  65 63 6c 63 37 75 32 33  |ajzfqe9geclc7u23|
+  00000040  6a 73 33 75 61 38 73 64  70 38 32 70 73 68 6a 6d  |js3ua8sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 37 63 6b 67 75  |gcqzysxqztg7ckgu|
+  00000080  74 35 33 74 76 6d 77 33  6a 66 61 65 34 67 39 68  |t53tvmw3jfae4g9h|
+  00000090  68 79 39 63 6a 76 74 7a  32 72 6a 33 36 75 65 74  |hy9cjvtz2rj36uet|
+  000000a0  77 33 34 6b 74 36 74 33  32 74 64 6d 65 68 79 6e  |w34kt6t32tdmehyn|
+  000000b0  76 75 37 70 6c 70 63 65  76 71 37 68 63 35 79 39  |vu7plpcevq7hc5y9|
+  000000c0  32 67 37 61 76 70 36 6b  68 30 65 32 6b 39 66 66  |2g7avp6kh0e2k9ff|
+  000000d0  34 79 65 30 35 6d 7a 38  39 61 32 63 36 32 6b 6d  |4ye05mz89a2c62km|
+  000000e0  34 63 70 77 74 75 34 35  65                       |4cpwtu45e|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:54.691148206 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:54.905162196 +0200 CEST m=+998.036074023,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 3c84ef0343306cd111bf14c59abd97b36a8d3fa62afdf3b88d328c9832dfa15c,
+  Value: (lnwire.MilliSatoshi) 69000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1674,
+ SettleIndex: (uint64) 1625,
+ AmtPaid: (lnwire.MilliSatoshi) 69000 mSAT
+})
+
+2019-04-21 09:49:54.909 [INF] HSWC: ChannelLink(601:1:0) settling 537c16adce5e5f74a2fd3cfa6e1f8707a0a5f642483254671fc7b8a8ca11e74f as exit hop
+2019-04-21 09:49:55.943 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055b500)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 38 30 6e  31 70 77 74 63 67 39 72  |lnsb780n1pwtcg9r|
+  00000010  70 70 35 6a 39 34 72 74  36 78 74 63 33 6d 65 65  |pp5j94rt6xtc3mee|
+  00000020  6a 63 64 79 38 6b 34 67  37 73 66 6d 30 33 78 70  |jcdy8k4g7sfm03xp|
+  00000030  6a 7a 38 72 73 6c 66 71  6d 36 64 70 36 73 74 39  |jz8rslfqm6dp6st9|
+  00000040  37 77 66 6c 6e 33 71 64  70 38 32 70 73 68 6a 6d  |7wfln3qdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 38 68 39 36 75  |gcqzysxqztg8h96u|
+  00000080  76 6c 76 75 32 73 34 7a  79 33 63 6c 36 67 74 32  |vlvu2s4zy3cl6gt2|
+  00000090  79 7a 67 6b 68 68 6c 78  6a 6c 63 70 61 38 63 35  |yzgkhhlxjlcpa8c5|
+  000000a0  30 64 6b 73 7a 67 61 30  78 79 61 32 30 66 78 38  |0dkszga0xya20fx8|
+  000000b0  39 37 76 75 30 67 37 34  6d 79 65 61 61 68 63 6d  |97vu0g74myeaahcm|
+  000000c0  73 77 6b 66 67 7a 6c 35  64 63 74 65 36 61 79 7a  |swkfgzl5dcte6ayz|
+  000000d0  75 78 7a 72 6a 61 37 74  33 63 38 30 70 39 37 38  |uxzrja7t3c80p978|
+  000000e0  64 63 71 6b 34 76 72 79  6c                       |dcqk4vryl|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:55.728688481 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:55.93958468 +0200 CEST m=+999.070496368,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d11c4f1c91587427e3aac2b7f1310b8bb8701511fa3ff0c37d8867364eb0cdb4,
+  Value: (lnwire.MilliSatoshi) 78000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1675,
+ SettleIndex: (uint64) 1626,
+ AmtPaid: (lnwire.MilliSatoshi) 78000 mSAT
+})
+
+2019-04-21 09:49:55.943 [INF] HSWC: ChannelLink(601:1:0) settling 916a35e8cbc4779ccb0d21ed547a09dbe260c8471c3e906f4d0ea0b2f9c9fce2 as exit hop
+2019-04-21 09:49:56.977 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0108b63c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 32 30 6e  31 70 77 74 63 67 39 79  |lnsb820n1pwtcg9y|
+  00000010  70 70 35 37 76 77 30 76  79 38 74 32 79 61 64 66  |pp57vw0vy8t2yadf|
+  00000020  74 32 77 75 66 39 39 72  76 76 65 6b 64 37 78 35  |t2wuf99rvvekd7x5|
+  00000030  68 38 6b 72 7a 33 78 70  36 39 6e 76 70 6b 74 76  |h8krz3xp69nvpktv|
+  00000040  68 65 73 66 6a 33 73 64  70 38 32 70 73 68 6a 6d  |hesfj3sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6b 74 6b 67 6b  |gcqzysxqztgktkgk|
+  00000080  39 61 74 30 37 61 78 72  75 61 6e 6a 37 72 77 79  |9at07axruanj7rwy|
+  00000090  30 77 63 33 37 61 38 61  35 79 64 76 36 79 39 68  |0wc37a8a5ydv6y9h|
+  000000a0  68 79 68 36 38 63 63 6a  61 36 6a 63 6c 35 7a 61  |hyh68ccja6jcl5za|
+  000000b0  71 6a 76 64 33 72 64 61  6b 38 64 6b 75 7a 35 65  |qjvd3rdak8dkuz5e|
+  000000c0  30 6a 32 32 67 73 38 72  64 61 75 6e 78 36 78 6d  |0j22gs8rdaunx6xm|
+  000000d0  6d 64 34 76 33 63 6c 74  39 7a 6b 72 35 72 67 76  |md4v3clt9zkr5rgv|
+  000000e0  76 63 70 6c 35 39 36 65  36                       |vcpl596e6|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:56.753392145 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:56.9733992 +0200 CEST m=+1000.104310928,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 8d0207a5ce2c914ae8fcfa968d32a1a550ebaabd9e11f1987364a78ae1dee492,
+  Value: (lnwire.MilliSatoshi) 82000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1676,
+ SettleIndex: (uint64) 1627,
+ AmtPaid: (lnwire.MilliSatoshi) 82000 mSAT
+})
+
+2019-04-21 09:49:56.980 [INF] HSWC: ChannelLink(601:1:0) settling f31cf610eb513ad4ad4ee24a51b199b37c6a5cf618a260e8b3606cb65f304ca3 as exit hop
+2019-04-21 09:49:58.000 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0108b6b40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 35 30 6e  31 70 77 74 63 67 39 39  |lnsb850n1pwtcg99|
+  00000010  70 70 35 6a 66 71 33 79  32 66 30 71 72 35 71 63  |pp5jfq3y2f0qr5qc|
+  00000020  6b 6e 71 66 32 6a 39 35  72 6a 6b 70 33 35 78 32  |knqf2j95rjkp35x2|
+  00000030  78 71 6a 78 75 64 79 73  71 68 74 61 34 32 6d 78  |xqjxudysqhta42mx|
+  00000040  6a 65 67 70 6e 79 73 64  70 38 32 70 73 68 6a 6d  |jegpnysdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 68 64 72 6c 6a  |gcqzysxqztghdrlj|
+  00000080  61 6d 63 74 39 76 63 79  38 77 39 39 75 72 6c 6e  |amct9vcy8w99urln|
+  00000090  61 74 6c 33 35 35 78 6b  35 64 30 36 33 66 33 32  |atl355xk5d063f32|
+  000000a0  72 66 7a 35 75 6d 72 64  63 35 7a 73 64 38 70 6a  |rfz5umrdc5zsd8pj|
+  000000b0  61 70 6a 32 72 38 7a 68  7a 68 79 32 68 68 38 6b  |apj2r8zhzhy2hh8k|
+  000000c0  7a 77 33 66 32 66 73 75  66 75 68 32 68 33 30 65  |zw3f2fsufuh2h30e|
+  000000d0  61 77 6c 72 71 63 68 61  72 38 67 37 6d 6c 71 75  |awlrqchar8g7mlqu|
+  000000e0  64 73 70 6a 6a 72 65 73  6d                       |dspjjresm|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:57.776522577 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:57.996288003 +0200 CEST m=+1001.127199769,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 9f01395222000cf002bab107513a39b19ed27711ec15ed421ee0b5f72d13c233,
+  Value: (lnwire.MilliSatoshi) 85000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1677,
+ SettleIndex: (uint64) 1628,
+ AmtPaid: (lnwire.MilliSatoshi) 85000 mSAT
+})
+
+2019-04-21 09:49:58.000 [INF] HSWC: ChannelLink(601:1:0) settling 924112292f00e80c5a604aa45a0e560c68651812371a4802ebed55b34b280cc9 as exit hop
+2019-04-21 09:49:59.009 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0108b7380)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 38 30 6e  31 70 77 74 63 67 39 78  |lnsb880n1pwtcg9x|
+  00000010  70 70 35 38 76 7a 68 75  68 78 64 72 67 61 70 71  |pp58vzhuhxdrgapq|
+  00000020  37 38 38 76 77 68 78 67  36 75 33 6d 65 67 61 6b  |788vwhxg6u3megak|
+  00000030  39 6a 6b 32 70 34 7a 79  78 64 38 6a 32 76 72 77  |9jk2p4zyxd8j2vrw|
+  00000040  76 30 66 6e 68 6c 71 64  70 38 32 70 73 68 6a 6d  |v0fnhlqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 63 6d 33 34 70  |gcqzysxqztgcm34p|
+  00000080  38 66 32 6c 6d 78 75 63  65 6a 68 33 34 37 70 75  |8f2lmxucejh347pu|
+  00000090  67 75 67 6a 74 32 38 38  6e 71 79 61 79 75 74 78  |gugjt288nqyayutx|
+  000000a0  78 6b 6c 76 6e 61 75 39  70 70 61 68 65 68 39 34  |xklvnau9ppaheh94|
+  000000b0  6e 6e 38 38 65 73 68 70  32 64 71 39 38 72 71 36  |nn88eshp2dq98rq6|
+  000000c0  36 35 73 32 35 76 67 72  75 72 36 67 38 35 78 78  |65s25vgrur6g85xx|
+  000000d0  73 65 65 66 79 74 75 79  68 6c 71 6b 70 70 71 75  |seefytuyhlqkppqu|
+  000000e0  65 63 70 65 6a 73 6e 32  79                       |ecpejsn2y|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:58.80333067 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:49:59.005218627 +0200 CEST m=+1002.136130381,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) d5be28d4b9dcdb2657108968d0bf85cef7692f003bcbfa59b242c60c6be5a72c,
+  Value: (lnwire.MilliSatoshi) 88000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1678,
+ SettleIndex: (uint64) 1629,
+ AmtPaid: (lnwire.MilliSatoshi) 88000 mSAT
+})
+
+2019-04-21 09:49:59.010 [INF] HSWC: ChannelLink(601:1:0) settling 3b057e5ccd1a3a1078e763ae646b91de51db1656506a2219a792983731e99dfe as exit hop
+2019-04-21 09:50:00.055 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322e40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 32 30 6e  31 70 77 74 63 67 39 38  |lnsb720n1pwtcg98|
+  00000010  70 70 35 71 79 78 7a 32  7a 79 38 6b 30 33 77 66  |pp5qyxz2zy8k03wf|
+  00000020  76 70 76 6a 77 6e 33 65  35 74 68 36 6e 73 39 68  |vpvjwn3e5th6ns9h|
+  00000030  65 68 72 79 79 61 6a 72  6e 72 68 76 6e 79 74 6b  |ehryyajrnrhvnytk|
+  00000040  70 38 34 6b 65 68 71 64  70 38 32 70 73 68 6a 6d  |p84kehqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 72 6e 6e 74 6c  |gcqzysxqztgrnntl|
+  00000080  66 65 66 6e 61 33 36 76  33 61 6b 77 72 67 30 6c  |fefna36v3akwrg0l|
+  00000090  6b 67 70 63 39 32 38 79  7a 77 6e 74 6d 77 32 68  |kgpc928yzwntmw2h|
+  000000a0  63 6b 32 6b 30 65 74 35  63 38 35 6d 30 79 68 30  |ck2k0et5c85m0yh0|
+  000000b0  66 73 6e 77 6b 72 7a 7a  32 6c 32 6c 72 39 64 34  |fsnwkrzz2l2lr9d4|
+  000000c0  7a 66 77 6b 30 64 74 6b  78 76 65 74 74 73 74 6b  |zfwk0dtkxvettstk|
+  000000d0  68 36 6b 75 34 38 79 36  75 38 67 35 63 77 76 7a  |h6ku48y6u8g5cwvz|
+  000000e0  65 73 70 72 61 66 68 34  36                       |esprafh46|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:49:59.830682384 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:00.051865767 +0200 CEST m=+1003.182777657,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 28d8cda9014759e14d745433bad36ed414b73d8082af41eff8d5486e88b54d09,
+  Value: (lnwire.MilliSatoshi) 72000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1679,
+ SettleIndex: (uint64) 1630,
+ AmtPaid: (lnwire.MilliSatoshi) 72000 mSAT
+})
+
+2019-04-21 09:50:00.056 [INF] HSWC: ChannelLink(601:1:0) settling 010c250887b3e2e4b02c93a71cd177d4e05be6e3213b21cc7764c8bb04f5b66e as exit hop
+2019-04-21 09:50:01.070 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 32 30 6e  31 70 77 74 63 67 39 67  |lnsb720n1pwtcg9g|
+  00000010  70 70 35 33 36 6d 78 74  6d 74 34 66 7a 75 67 75  |pp536mxtmt4fzugu|
+  00000020  33 67 77 70 6a 78 6a 33  73 6e 71 37 75 76 6c 64  |3gwpjxj3snq7uvld|
+  00000030  35 78 6a 67 35 63 64 73  75 67 63 74 6b 32 76 75  |5xjg5cdsugctk2vu|
+  00000040  30 75 67 37 36 6c 71 64  70 38 32 70 73 68 6a 6d  |0ug76lqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 30 36 72 65 6b  |gcqzysxqztg06rek|
+  00000080  7a 37 71 71 78 32 66 61  65 38 73 79 7a 36 64 76  |z7qqx2fae8syz6dv|
+  00000090  61 6b 75 32 36 6e 6c 78  65 70 63 71 39 66 6a 74  |aku26nlxepcq9fjt|
+  000000a0  63 61 78 79 32 7a 6b 63  7a 39 32 71 33 6e 39 34  |caxy2zkcz92q3n94|
+  000000b0  35 6c 71 76 64 76 30 35  73 61 36 6d 77 71 37 74  |5lqvdv05sa6mwq7t|
+  000000c0  76 32 6e 61 32 70 6d 74  7a 6c 6e 33 36 6e 33 68  |v2na2pmtzln36n3h|
+  000000d0  72 77 74 6d 73 64 61 34  6a 79 77 66 6a 6c 6e 30  |rwtmsda4jywfjln0|
+  000000e0  68 71 70 71 6b 74 64 65  6e                       |hqpqktden|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:00.855773235 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:01.066146034 +0200 CEST m=+1004.197057791,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 4b673fd3e8844a00367d8bf3434271479102ac4ae5f188889f79495f3a126d2c,
+  Value: (lnwire.MilliSatoshi) 72000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1680,
+ SettleIndex: (uint64) 1631,
+ AmtPaid: (lnwire.MilliSatoshi) 72000 mSAT
+})
+
+2019-04-21 09:50:01.070 [INF] HSWC: ChannelLink(601:1:0) settling 8eb665ed7548b88e450e0c8d28c260f719f6d0d24530d871185d94ce3f88f6be as exit hop
+2019-04-21 09:50:02.098 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010864780)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 34 30 6e  31 70 77 74 63 67 39 66  |lnsb840n1pwtcg9f|
+  00000010  70 70 35 72 7a 65 61 66  67 65 63 74 32 64 64 79  |pp5rzeafgect2ddy|
+  00000020  67 38 6e 73 64 38 6d 38  74 30 34 6c 37 78 79 75  |g8nsd8m8t04l7xyu|
+  00000030  76 38 76 6d 6e 70 64 6e  71 36 6d 63 74 37 6a 6b  |v8vmnpdnq6mct7jk|
+  00000040  74 65 34 6e 72 6e 71 64  70 38 32 70 73 68 6a 6d  |te4nrnqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 38 30 6c 30 32  |gcqzysxqztg80l02|
+  00000080  6c 6b 6d 67 39 65 79 74  75 35 75 6c 33 73 7a 37  |lkmg9eytu5ul3sz7|
+  00000090  70 79 78 6b 64 79 77 6b  36 79 78 77 38 6e 36 74  |pyxkdywk6yxw8n6t|
+  000000a0  38 63 30 64 6d 30 6a 6e  77 6b 37 71 61 33 39 33  |8c0dm0jnwk7qa393|
+  000000b0  36 6e 38 33 6b 36 74 74  77 6a 67 7a 34 39 34 70  |6n83k6ttwjgz494p|
+  000000c0  39 67 34 79 79 72 32 6a  32 78 37 70 6c 63 34 63  |9g4yyr2j2x7plc4c|
+  000000d0  34 66 72 75 76 67 71 34  38 35 65 78 64 39 79 37  |4fruvgq485exd9y7|
+  000000e0  76 71 70 33 38 32 71 72  74                       |vqp382qrt|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:01.882056995 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:02.091828435 +0200 CEST m=+1005.222740128,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 79d9c2f81ee1d5149d4995c9c9575b49a4338310412aad68902900b26d3baca0,
+  Value: (lnwire.MilliSatoshi) 84000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1681,
+ SettleIndex: (uint64) 1632,
+ AmtPaid: (lnwire.MilliSatoshi) 84000 mSAT
+})
+
+2019-04-21 09:50:02.098 [INF] HSWC: ChannelLink(601:1:0) settling 18b3d4a3385a9ad220f3834fb3adf5ff8c4e30ecdcc2d9835bc2fd2b2f3598e6 as exit hop
+2019-04-21 09:50:03.106 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010864180)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 30 30 6e  31 70 77 74 63 67 39 32  |lnsb900n1pwtcg92|
+  00000010  70 70 35 79 6a 64 68 6d  79 36 70 6c 6b 6b 32 6c  |pp5yjdhmy6plkk2l|
+  00000020  68 63 75 36 78 34 36 65  63 79 77 71 6e 66 78 78  |hcu6x46ecywqnfxx|
+  00000030  36 6c 6a 39 76 67 7a 6d  38 75 6a 68 34 6a 74 7a  |6lj9vgzm8ujh4jtz|
+  00000040  71 77 6c 35 6a 64 71 64  70 38 32 70 73 68 6a 6d  |qwl5jdqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 6a 38 39 30 38  |gcqzysxqztgj8908|
+  00000080  71 39 30 68 7a 39 34 78  73 72 6a 70 35 74 6c 77  |q90hz94xsrjp5tlw|
+  00000090  63 75 32 77 38 67 37 32  6a 72 30 37 6e 39 74 65  |cu2w8g72jr07n9te|
+  000000a0  38 32 30 64 61 65 67 72  75 38 65 7a 73 61 34 7a  |820daegru8ezsa4z|
+  000000b0  66 71 66 79 32 39 36 77  70 65 79 66 6b 71 63 38  |fqfy296wpeyfkqc8|
+  000000c0  63 71 70 63 34 6d 6c 73  64 68 75 72 6b 7a 37 33  |cqpc4mlsdhurkz73|
+  000000d0  73 35 71 73 75 34 64 67  36 34 67 38 77 30 78 35  |s5qsu4dg64g8w0x5|
+  000000e0  6c 71 71 71 78 35 61 79  65                       |lqqqx5aye|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:02.90093192 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:03.102077164 +0200 CEST m=+1006.232988883,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 230ebef88b2a188bd7d7fe5876c1395aa159941b4763e3e2942cac44d33b8c7f,
+  Value: (lnwire.MilliSatoshi) 90000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1682,
+ SettleIndex: (uint64) 1633,
+ AmtPaid: (lnwire.MilliSatoshi) 90000 mSAT
+})
+
+2019-04-21 09:50:03.107 [INF] HSWC: ChannelLink(601:1:0) settling 249b7d9341fdacafdf1cd1abace08e04d2636bf22b102d9f92bd64b101dfa49a as exit hop
+2019-04-21 09:50:04.139 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322f00)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 38 30 6e  31 70 77 74 63 67 39 74  |lnsb780n1pwtcg9t|
+  00000010  70 70 35 78 61 66 37 36  38 6e 34 6b 34 66 77 74  |pp5xaf768n4k4fwt|
+  00000020  68 35 38 68 67 35 39 30  66 76 76 66 32 77 73 6c  |h58hg590fvvf2wsl|
+  00000030  35 34 7a 38 70 74 32 68  68 74 32 73 61 36 77 70  |54z8pt2hht2sa6wp|
+  00000040  37 74 7a 72 66 39 73 64  70 38 32 70 73 68 6a 6d  |7tzrf9sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 7a 38 79 66 70  |gcqzysxqztgz8yfp|
+  00000080  37 36 66 64 38 68 33 6e  66 68 38 36 33 70 30 74  |76fd8h3nfh863p0t|
+  00000090  73 37 30 6d 68 74 73 30  6e 7a 6d 79 64 61 75 72  |s70mhts0nzmydaur|
+  000000a0  75 70 68 78 39 65 65 65  36 70 32 70 67 78 7a 63  |uphx9eee6p2pgxzc|
+  000000b0  71 77 39 78 67 6d 61 70  39 65 67 6a 79 67 35 38  |qw9xgmap9egjyg58|
+  000000c0  76 73 72 76 30 63 75 34  30 77 6b 63 65 6a 33 33  |vsrv0cu40wkcej33|
+  000000d0  61 7a 36 39 75 70 30 37  78 6b 66 67 32 6c 38 61  |az69up07xkfg2l8a|
+  000000e0  68 67 70 37 67 65 7a 72  61                       |hgp7gezra|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:03.92054394 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:04.134882302 +0200 CEST m=+1007.265794068,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) f0ef87b390048d1d7e4a4a85d692629d4324b56744eda4b2f99207387d0930e6,
+  Value: (lnwire.MilliSatoshi) 78000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1683,
+ SettleIndex: (uint64) 1634,
+ AmtPaid: (lnwire.MilliSatoshi) 78000 mSAT
+})
+
+2019-04-21 09:50:04.140 [INF] HSWC: ChannelLink(601:1:0) settling 3753ed1e75b552e5de87ba2857a58c4a9d0fd2a23856abdd6a8774e0f9621a4b as exit hop
+2019-04-21 09:50:05.173 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0003229c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 36 30 6e  31 70 77 74 63 67 39 76  |lnsb960n1pwtcg9v|
+  00000010  70 70 35 32 70 36 73 30  6b 70 6c 77 74 72 6d 34  |pp52p6s0kplwtrm4|
+  00000020  63 30 78 6c 35 61 33 68  6c 30 33 32 6d 78 71 37  |c0xl5a3hl032mxq7|
+  00000030  64 63 6c 71 77 61 6c 7a  37 77 30 77 68 72 75 34  |dclqwalz7w0whru4|
+  00000040  6d 66 71 7a 33 6c 71 64  70 38 32 70 73 68 6a 6d  |mfqz3lqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 33 36 65 78 30  |gcqzysxqztg36ex0|
+  00000080  64 6d 32 32 66 6c 76 63  35 37 61 30 7a 74 78 68  |dm22flvc57a0ztxh|
+  00000090  74 74 38 30 6e 77 67 63  6a 77 32 61 70 68 39 36  |tt80nwgcjw2aph96|
+  000000a0  6e 72 39 75 70 78 79 77  77 6e 6d 63 78 78 71 37  |nr9upxywwnmcxxq7|
+  000000b0  74 6c 34 71 6a 6c 75 37  67 65 37 71 35 6e 67 63  |tl4qjlu7ge7q5ngc|
+  000000c0  77 73 6d 68 72 37 79 73  39 6e 75 64 71 6b 65 6c  |wsmhr7ys9nudqkel|
+  000000d0  32 6d 35 71 39 36 7a 66  71 72 7a 37 70 6a 70 33  |2m5q96zfqrz7pjp3|
+  000000e0  74 63 70 78 65 35 35 39  74                       |tcpxe559t|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:04.943139892 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:05.169510103 +0200 CEST m=+1008.300421860,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 2a0c8f2945c540be67afe57e4676fd1a3209cdec5edadd755f854881b23b365b,
+  Value: (lnwire.MilliSatoshi) 96000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1684,
+ SettleIndex: (uint64) 1635,
+ AmtPaid: (lnwire.MilliSatoshi) 96000 mSAT
+})
+
+2019-04-21 09:50:05.174 [INF] HSWC: ChannelLink(601:1:0) settling 507507d83f72c7bae1e6fd3b1bfdf156cc0f371f03bbf179cf75c7caed20147e as exit hop
+2019-04-21 09:50:06.172 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0003232c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 35 30 6e  31 70 77 74 63 67 39 64  |lnsb750n1pwtcg9d|
+  00000010  70 70 35 6e 6c 72 61 6c  76 36 34 7a 68 66 35 6b  |pp5nlralv64zhf5k|
+  00000020  6e 30 6c 39 64 71 36 72  6a 6e 37 64 6a 75 6b 64  |n0l9dq6rjn7djukd|
+  00000030  79 79 75 75 6d 39 79 74  72 33 39 30 76 35 78 78  |yyuum9ytr390v5xx|
+  00000040  64 64 32 33 30 37 73 64  70 38 32 70 73 68 6a 6d  |dd2307sdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 68 34 78 38 34  |gcqzysxqztgh4x84|
+  00000080  38 65 7a 6e 72 73 78 38  68 30 66 65 37 6b 39 68  |8eznrsx8h0fe7k9h|
+  00000090  79 32 63 79 77 30 6c 30  35 6d 6e 33 32 74 61 74  |y2cyw0l05mn32tat|
+  000000a0  37 6d 32 64 6c 6d 78 34  64 65 70 75 6b 65 6b 64  |7m2dlmx4depukekd|
+  000000b0  39 61 79 6d 70 6b 79 77  78 76 6b 65 78 36 6c 38  |9aympkywxvkex6l8|
+  000000c0  78 75 66 63 6d 64 77 30  34 66 72 6e 39 71 33 38  |xufcmdw04frn9q38|
+  000000d0  39 37 37 67 79 66 65 77  30 74 63 7a 6e 61 74 30  |977gyfew0tcznat0|
+  000000e0  63 67 71 39 79 38 72 6b  38                       |cgq9y8rk8|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:05.965560543 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:06.168327417 +0200 CEST m=+1009.299239118,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) e0636b69af768d7389e3da542326bbd34abf8b9757eb7e1e5400a6fcf7b3e546,
+  Value: (lnwire.MilliSatoshi) 75000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1685,
+ SettleIndex: (uint64) 1636,
+ AmtPaid: (lnwire.MilliSatoshi) 75000 mSAT
+})
+
+2019-04-21 09:50:06.172 [INF] HSWC: ChannelLink(601:1:0) settling 9fc7dfb35515d34b4dff2b41a1ca7e6cb966909ce6ca458e257b286335aa8bfd as exit hop
+2019-04-21 09:50:07.194 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc0107763c0)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 39 34 30 6e  31 70 77 74 63 67 39 77  |lnsb940n1pwtcg9w|
+  00000010  70 70 35 65 66 33 75 64  65 35 66 66 71 78 30 78  |pp5ef3ude5ffqx0x|
+  00000020  39 71 76 36 70 78 30 75  64 71 6b 32 65 77 6a 35  |9qv6px0udqk2ewj5|
+  00000030  68 64 36 66 35 6a 76 71  7a 65 30 75 35 35 6c 32  |hd6f5jvqze0u55l2|
+  00000040  34 68 39 35 67 74 73 64  70 38 32 70 73 68 6a 6d  |4h95gtsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 78 63 38 72 30  |gcqzysxqztgxc8r0|
+  00000080  61 65 38 39 6c 61 37 74  38 6d 35 6e 67 77 71 6e  |ae89la7t8m5ngwqn|
+  00000090  74 37 63 36 33 6b 6c 73  67 68 6d 7a 37 75 73 35  |t7c63klsghmz7us5|
+  000000a0  77 64 70 73 6d 73 61 61  35 67 36 6a 78 68 35 76  |wdpsmsaa5g6jxh5v|
+  000000b0  38 76 35 63 64 79 7a 35  6d 6d 6b 6c 63 63 7a 35  |8v5cdyz5mmklccz5|
+  000000c0  30 6b 39 73 61 61 36 71  6c 65 71 33 70 7a 33 63  |0k9saa6qleq3pz3c|
+  000000d0  6c 63 75 79 6c 63 33 39  74 70 34 68 6d 39 65 61  |lcuylc39tp4hm9ea|
+  000000e0  78 71 71 65 64 32 32 64  74                       |xqqed22dt|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:06.990016159 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:07.190167585 +0200 CEST m=+1010.321079494,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 13f11d54d0b00a963dfe166f226eb0b2ec6b311360c242bf4a0285537350b194,
+  Value: (lnwire.MilliSatoshi) 94000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1686,
+ SettleIndex: (uint64) 1637,
+ AmtPaid: (lnwire.MilliSatoshi) 94000 mSAT
+})
+
+2019-04-21 09:50:07.195 [INF] HSWC: ChannelLink(601:1:0) settling ca63c6e689480cf3140cd04cfe3416565d2a5dba4d24c00b2fe529f556e5a217 as exit hop
+2019-04-21 09:50:08.228 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010864240)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 38 35 30 6e  31 70 77 74 63 67 39 73  |lnsb850n1pwtcg9s|
+  00000010  70 70 35 6a 6a 6c 71 35  6d 65 67 37 71 7a 78 75  |pp5jjlq5meg7qzxu|
+  00000020  77 73 38 64 78 76 70 78  67 37 70 6a 65 77 66 39  |ws8dxvpxg7pjewf9|
+  00000030  34 72 74 6e 61 68 67 79  64 30 74 33 33 71 6d 7a  |4rtnahgyd0t33qmz|
+  00000040  66 6b 6e 66 64 6d 71 64  70 38 32 70 73 68 6a 6d  |fknfdmqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 39 73 6a 63 6a  |gcqzysxqztg9sjcj|
+  00000080  64 37 76 6e 35 32 76 39  35 71 6a 39 37 33 78 38  |d7vn52v95qj973x8|
+  00000090  6e 79 30 78 7a 66 33 34  64 77 65 78 7a 76 72 78  |ny0xzf34dwexzvrx|
+  000000a0  6a 78 6b 65 66 39 72 72  72 78 63 61 73 37 6b 74  |jxkef9rrrxcas7kt|
+  000000b0  66 75 6c 6d 7a 35 34 36  32 63 6b 37 38 76 76 30  |fulmz5462ck78vv0|
+  000000c0  6e 76 6d 76 35 78 33 6a  74 65 76 76 75 74 68 6e  |nvmv5x3jtevvuthn|
+  000000d0  78 68 30 71 32 6d 33 7a  72 33 37 77 78 6c 75 38  |xh0q2m3zr37wxlu8|
+  000000e0  6c 67 71 36 66 71 72 75  64                       |lgq6fqrud|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:08.013065232 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:08.223492788 +0200 CEST m=+1011.354404496,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a69a2bca538e86edabbecad3e0c8fc7a4db65c73353846a13028c55097b01bee,
+  Value: (lnwire.MilliSatoshi) 85000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1687,
+ SettleIndex: (uint64) 1638,
+ AmtPaid: (lnwire.MilliSatoshi) 85000 mSAT
+})
+
+2019-04-21 09:50:08.228 [INF] HSWC: ChannelLink(601:1:0) settling 94be0a6f28f0046e3a0769981323c1965c92d46b9f6e8235eb8c41b126d34b76 as exit hop
+2019-04-21 09:50:09.257 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc010864e40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 37 30 30 6e  31 70 77 74 63 67 39 33  |lnsb700n1pwtcg93|
+  00000010  70 70 35 37 37 66 67 6d  63 70 6b 71 30 38 65 76  |pp577fgmcpkq08ev|
+  00000020  72 6b 34 6b 38 61 66 65  34 79 6c 64 66 66 32 68  |rk4k8afe4yldff2h|
+  00000030  6d 63 72 6c 78 37 63 79  64 68 70 39 65 30 35 79  |mcrlx7cydhp9e05y|
+  00000040  38 6a 32 75 6c 7a 73 64  70 38 32 70 73 68 6a 6d  |8j2ulzsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 79 6e 33 30 70  |gcqzysxqztgyn30p|
+  00000080  76 38 30 64 35 30 71 34  30 76 67 38 75 6b 78 72  |v80d50q40vg8ukxr|
+  00000090  38 6a 74 30 64 68 35 77  33 61 37 78 71 6c 68 66  |8jt0dh5w3a7xqlhf|
+  000000a0  6e 70 75 77 70 73 79 35  38 36 36 6a 6c 65 39 6d  |npuwpsy5866jle9m|
+  000000b0  37 67 38 38 70 6c 75 6b  74 6b 39 65 76 63 68 64  |7g88pluktk9evchd|
+  000000c0  72 74 36 33 70 6b 64 39  6c 66 63 65 38 61 79 35  |rt63pkd9lfce8ay5|
+  000000d0  79 67 30 35 6d 63 73 34  67 39 76 73 76 72 6c 74  |yg05mcs4g9vsvrlt|
+  000000e0  68 63 71 67 68 63 78 77  72                       |hcqghcxwr|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:09.037395496 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:09.249131049 +0200 CEST m=+1012.380042818,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 382627b8b0da8440a61861d37a243dbd5d6d7e732659f7b11db2cb44b4b82fb6,
+  Value: (lnwire.MilliSatoshi) 70000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1688,
+ SettleIndex: (uint64) 1639,
+ AmtPaid: (lnwire.MilliSatoshi) 70000 mSAT
+})
+
+2019-04-21 09:50:09.258 [INF] HSWC: ChannelLink(601:1:0) settling f7928de03603cf960ed5b1fa9cd49f6a52abef03f9bd8236e12e5f421e4ae7c5 as exit hop
+2019-04-21 09:50:10.307 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322e40)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 36 35 30 6e  31 70 77 74 63 67 39 6a  |lnsb650n1pwtcg9j|
+  00000010  70 70 35 37 37 68 30 39  75 65 63 34 6b 37 74 67  |pp577h09uec4k7tg|
+  00000020  34 77 64 72 72 79 32 35  38 37 35 73 73 76 6c 78  |4wdrry25875ssvlx|
+  00000030  65 70 65 6e 32 79 64 71  70 78 70 72 65 76 38 37  |epen2ydqpxprev87|
+  00000040  74 6d 6e 61 70 68 71 64  70 38 32 70 73 68 6a 6d  |tmnaphqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 65 79 76 7a 33  |gcqzysxqztgeyvz3|
+  00000080  37 32 77 78 6c 78 36 76  77 6e 39 68 61 30 7a 34  |72wxlx6vwn9ha0z4|
+  00000090  6e 33 35 30 74 38 32 70  72 37 74 73 35 76 34 67  |n350t82pr7ts5v4g|
+  000000a0  65 36 33 6d 61 7a 32 76  63 37 73 70 63 72 6a 65  |e63maz2vc7spcrje|
+  000000b0  66 34 61 6a 72 6e 67 30  33 7a 38 66 6c 6e 37 38  |f4ajrng03z8fln78|
+  000000c0  78 77 68 34 36 73 78 34  6d 63 36 64 35 6a 35 66  |xwh46sx4mc6d5j5f|
+  000000d0  33 34 74 32 77 6c 72 6a  6d 32 36 71 64 76 77 67  |34t2wlrjm26qdvwg|
+  000000e0  79 73 71 74 61 35 32 68  63                       |ysqta52hc|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:10.062797869 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:10.299561235 +0200 CEST m=+1013.430473011,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) c3626a7e54c5d598f70e100be2d2eceae0d07d58b21c6b8c35d2fd8f1d17a5f1,
+  Value: (lnwire.MilliSatoshi) 65000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1689,
+ SettleIndex: (uint64) 1640,
+ AmtPaid: (lnwire.MilliSatoshi) 65000 mSAT
+})
+
+2019-04-21 09:50:10.307 [INF] HSWC: ChannelLink(601:1:0) settling f7aef2f338adbcb455cd18c8aa1fd48419f364399a88d004c11e587f2f73e86e as exit hop
+2019-04-21 09:50:11.309 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc000322a80)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 31 30 6e  31 70 77 74 63 67 39 6e  |lnsb510n1pwtcg9n|
+  00000010  70 70 35 6c 6b 61 68 32  74 6c 77 34 36 37 32 6a  |pp5lkah2tlw4672j|
+  00000020  36 6c 74 67 37 76 6a 36  33 35 74 76 77 64 32 74  |6ltg7vj635tvwd2t|
+  00000030  6c 74 7a 72 36 64 65 6c  74 61 35 6b 75 61 35 75  |ltzr6delta5kua5u|
+  00000040  38 30 67 6d 72 64 71 64  70 38 32 70 73 68 6a 6d  |80gmrdqdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 32 78 6d 39 64  |gcqzysxqztg2xm9d|
+  00000080  6c 67 63 63 65 72 6c 33  38 66 65 7a 71 39 33 6c  |lgccerl38fezq93l|
+  00000090  76 73 63 39 65 33 30 33  38 6c 6d 70 36 76 39 73  |vsc9e3038lmp6v9s|
+  000000a0  72 36 63 77 76 6b 61 33  74 78 71 71 63 76 78 37  |r6cwvka3txqqcvx7|
+  000000b0  6e 37 6e 76 71 78 70 37  63 72 77 61 30 6b 6a 77  |n7nvqxp7crwa0kjw|
+  000000c0  75 37 61 64 74 77 36 79  68 33 65 6b 6d 6a 30 68  |u7adtw6yh3ekmj0h|
+  000000d0  68 6b 6c 77 6d 36 6e 70  32 38 77 34 63 70 6c 35  |hklwm6np28w4cpl5|
+  000000e0  6d 67 70 6a 76 39 33 70  34                       |mgpjv93p4|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:11.088530591 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:11.305536628 +0200 CEST m=+1014.436448568,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) a097a8d2adfeb02875a5a65ce51b6bf46b054a82d0fa15205883be0a3d521ace,
+  Value: (lnwire.MilliSatoshi) 51000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1690,
+ SettleIndex: (uint64) 1641,
+ AmtPaid: (lnwire.MilliSatoshi) 51000 mSAT
+})
+
+2019-04-21 09:50:11.310 [INF] HSWC: ChannelLink(601:1:0) settling fdbb752feeaebca96beb47992d468b639aa5fd621e9b9fafb4b73b4e1de8d8da as exit hop
+2019-04-21 09:50:12.314 [INF] INVC: Payment received: (*channeldb.Invoice)(0xc00055a600)({
+ Memo: ([]uint8) (len=24 cap=24) {
+  00000000  50 61 79 6d 65 6e 74 20  52 65 71 75 65 73 74 20  |Payment Request |
+  00000010  66 6f 72 20 54 61 78 69                           |for Taxi|
+ },
+ Receipt: ([]uint8) {
+ },
+ PaymentRequest: ([]uint8) (len=233 cap=233) {
+  00000000  6c 6e 73 62 35 31 30 6e  31 70 77 74 63 67 39 35  |lnsb510n1pwtcg95|
+  00000010  70 70 35 77 71 6c 32 65  61 65 77 7a 75 32 77 35  |pp5wql2eaewzu2w5|
+  00000020  7a 78 32 30 39 6d 75 33  6a 70 71 72 6d 33 67 73  |zx209mu3jpqrm3gs|
+  00000030  72 7a 76 37 61 6e 37 78  72 79 33 71 36 76 72 75  |rzv7an7xry3q6vru|
+  00000040  64 30 68 67 36 6e 73 64  70 38 32 70 73 68 6a 6d  |d0hg6nsdp82pshjm|
+  00000050  74 39 64 65 36 7a 71 35  6e 39 77 39 36 6b 32 75  |t9de6zq5n9w96k2u|
+  00000060  6d 35 79 70 6e 78 37 75  33 71 32 33 73 68 73 36  |m5ypnx7u3q23shs6|
+  00000070  67 63 71 7a 79 73 78 71  7a 74 67 38 33 6e 75 74  |gcqzysxqztg83nut|
+  00000080  74 6a 78 38 6a 35 74 74  61 33 77 39 6c 73 63 63  |tjx8j5tta3w9lscc|
+  00000090  66 76 76 75 68 71 7a 70  30 76 6d 70 78 35 6d 78  |fvvuhqzp0vmpx5mx|
+  000000a0  6a 6d 33 72 38 67 6b 67  63 65 32 77 74 79 71 65  |jm3r8gkgce2wtyqe|
+  000000b0  73 65 7a 6c 6a 63 68 38  6a 74 71 74 7a 34 7a 61  |sezljch8jtqtz4za|
+  000000c0  76 67 33 6a 6d 72 71 6a  30 74 68 7a 70 76 61 6d  |vg3jmrqj0thzpvam|
+  000000d0  70 33 38 6a 78 64 32 33  79 6d 64 6b 6b 78 6a 33  |p38jxd23ymdkkxj3|
+  000000e0  67 71 71 33 37 33 7a 39  75                       |gqq373z9u|
+ },
+ CreationDate: (time.Time) 2019-04-21 09:50:12.11014108 +0200 CEST,
+ SettleDate: (time.Time) 2019-04-21 09:50:12.311075338 +0200 CEST m=+1015.441986977,
+ Terms: (channeldb.ContractTerm) {
+  PaymentPreimage: (lntypes.Preimage) (len=32 cap=32) 2e394ef95623f0b29ad7c7474152a7b6b1b28613541d30daccf7714411d8701f,
+  Value: (lnwire.MilliSatoshi) 51000 mSAT,
+  State: (channeldb.ContractState) Settled
+ },
+ AddIndex: (uint64) 1691,
+ SettleIndex: (uint64) 1642,
+ AmtPaid: (lnwire.MilliSatoshi) 51000 mSAT
+})
+
+2019-04-21 09:50:12.314 [INF] HSWC: ChannelLink(601:1:0) settling 703eacf72e1714ea08ca7977c8c8201ee2880c4cf767e30c9106983e35f746a7 as exit hop

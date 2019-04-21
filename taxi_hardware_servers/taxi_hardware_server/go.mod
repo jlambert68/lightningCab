@@ -1,7 +1,7 @@
 module jlambert/lightningCab/taxi_hardware_servers/taxi_hardware_server
 
 require (
-	github.com/jlambert68/lightningCab v0.0.0-20190331152201-fdcc3246a2ee
+	github.com/jlambert68/lightningCab v0.0.0-20190421070004-1c530bfcaf05
 	github.com/sirupsen/logrus v1.3.0 // indirect
 	github.com/stianeikeland/go-rpio v4.2.0+incompatible
 	github.com/stretchr/testify v1.3.0 // indirect
