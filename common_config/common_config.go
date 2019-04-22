@@ -12,10 +12,10 @@ const GrpcTollHardwareServer_port = ":50650"
 const GrpcTaxiServer_address = "127.0.0.1"
 const GrpcTaxiServer_port = ":50563"
 
-const GrpcTaxiHardwareServer_address = "192.168.2.51"//"127.0.0.1"
+const GrpcTaxiHardwareServer_address = "192.168.1.93" //"192.168.2.51"//"127.0.0.1"
 const GrpcTaxiHardwareServer_port = ":50652"
 
-const GrpcTaxiHardwareStreamServer_address = "192.168.2.51"//"127.0.0.1"
+const GrpcTaxiHardwareStreamServer_address = "192.168.1.93" //"192.168.2.51"//"127.0.0.1"
 const GrpcTaxiHardwareStreamServer_port = ":50654"
 
 const GrpcCustomerUI_RPC_Server_address = "127.0.0.1"

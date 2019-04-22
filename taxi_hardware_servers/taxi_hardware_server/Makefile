@@ -14,5 +14,5 @@ run:
 	./taxi_hardware_server
 
 move:
-	scp taxi_hardware_server_raspi jlambert@192.168.2.51:/home/jlambert/go_workspace/src/jlambert/lightningCab/
+	scp taxi_hardware_server_raspi jlambert@192.168.1.93:/home/jlambert/go_workspace/src/jlambert/lightningCab/
 
