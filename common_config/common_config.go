@@ -37,7 +37,7 @@ const USDSEK = 9.30            //SEK per USD
 const BTCUSD = 5310           //USD per BTC
 const BTCSEK = BTCUSD * USDSEK //SEK per BTC
 
-const MaxSEKPerSecond = 0.1 // SEK
+const MaxSEKPerSecond = 0.01 // SEK
 const SpeedProcent = 0.25 // %
 const AccelarionProcent = 0.25 // %
 const TimeProcent = 0.5 // %
